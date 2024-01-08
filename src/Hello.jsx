@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 /* Custom Colors */
@@ -53,15 +53,62 @@ const TextCursor = styled.span`
 `;
 
 const HelloText = styled.h1`
-  font-family: 'New York';
   font-size: 5em;
-  font-weight: 600;
-  background: -webkit-linear-gradient(top left, #b5ff56, #0edc91);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 500;
   background-clip: text;
   align-self: center;
   cursor: default;
+
+  font-family: ${(props) => {
+    if (props.$family === 'arabic') {
+      if (props.$font === 0) {
+        return 'SF Arabic';
+      } else if (props.$font === 1) {
+        return 'Courier New';
+      } else {
+        return 'Geeza Arabic';
+      }
+    } else if (props.$family === 'chinese') {
+      if (props.$font === 0) {
+        return 'ZCOOL Chinese';
+      } else if (props.$font === 1) {
+        return 'Noto Sans';
+      } else {
+        return 'Noto Serif Chinese';
+      }
+    } else if (props.$family === 'hindi') {
+      if (props.$font === 0) {
+        return 'Baloo Hindi';
+      } else if (props.$font === 1) {
+        return 'Noto Sans';
+      } else {
+        return 'New York';
+      }
+    } else {
+      if (props.$font === 0) {
+        return 'SF Compact';
+      } else if (props.$font === 1) {
+        return 'SF Mono';
+      } else {
+        return 'New York';
+      }
+    }
+  }};
+
+  background: ${(props) => {
+    switch (props.$gradient) {
+      case 'white':
+        return '-webkit-linear-gradient(top left, #ebf6f9, #b8c8ce)';
+      case 'purple':
+        return '-webkit-linear-gradient(top left, #cf97ff, #375fdc)';
+      case 'orange':
+        return '-webkit-linear-gradient(top left, #ffdc59, #dc5b47)';
+      default:
+        return '-webkit-linear-gradient(top left, #b5ff56, #0edc91)';
+    }
+  }};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
   @media (max-width: 767px) {
     font-size: 4em;
@@ -284,33 +331,107 @@ const ColorSelector = styled.div`
   }
 `;
 
+
 function Hello() {
+
+  const [selectedLanguage, setSelectedLanguage] = useState('EN');
+  const [helloLanguage, setHelloLanguage] = useState('Hello');
+  const [family, setFamily] = useState('romance');
+  const [selectedFont, setSelectedFont] = useState(2);
+  const [selectedColor, setSelectedColor] = useState('green');
+
+  const handleLanguageClick = (language) => {
+    setSelectedLanguage(language);
+
+    switch (language) {
+      case 'AR':
+        setHelloLanguage('مرحبا');
+        setFamily('arabic');
+        break;
+      case 'ES':
+        setHelloLanguage('Hola');
+        setFamily('romance');
+        break;
+      case 'FR':
+        setHelloLanguage('Bonjour');
+        setFamily('romance');
+        break;
+      case 'HI':
+        setHelloLanguage('नमस्ते');
+        setFamily('hindi');
+        break;
+      case 'RU':
+        setHelloLanguage('привет');
+        setFamily('romance');
+        break;
+      case 'ZN':
+        setHelloLanguage('你好');
+        setFamily('chinese');
+        break;
+      default:
+        setHelloLanguage('Hello');
+        setFamily('romance');
+    }
+  }
+
+  const handleFontClick = (font) => {
+    switch (font) {
+      case 0:
+        setSelectedFont(font);
+        break;
+      case 1:
+        setSelectedFont(font);
+        break;
+      default:
+        setSelectedFont(font);
+    }
+  }
+
+  const handleColorClick = (color) => {
+    setSelectedColor(color);
+  }
+
   return (
     <>
       <HelloBackground></HelloBackground>
       <HelloTextContainer>
-        <HelloText $family="romance">Hello</HelloText>
+        <HelloText $family={family} $font={selectedFont} 
+          $gradient={selectedColor}>{helloLanguage}</HelloText>
         <TextCursor></TextCursor>
       </HelloTextContainer>
       <LanguageSelector>
-        <LanguageOption $state="off">AR</LanguageOption>
-        <LanguageOption $state="on">EN</LanguageOption>
-        <LanguageOption $state="off">ES</LanguageOption>
-        <LanguageOption $state="off">FR</LanguageOption>
-        <LanguageOption $state="off">HI</LanguageOption>
-        <LanguageOption $state="off">RU</LanguageOption>
-        <LanguageOption $state="off">ZN</LanguageOption>
+        <LanguageOption $state={selectedLanguage === 'AR' ? 'on' : 'off'} 
+          onClick={() => handleLanguageClick('AR')}>AR</LanguageOption>
+        <LanguageOption $state={selectedLanguage === 'EN' ? 'on' : 'off'}
+          onClick={() => handleLanguageClick('EN')}>EN</LanguageOption>
+        <LanguageOption $state={selectedLanguage === 'ES' ? 'on' : 'off'}
+          onClick={() => handleLanguageClick('ES')}>ES</LanguageOption>
+        <LanguageOption $state={selectedLanguage === 'FR' ? 'on' : 'off'}
+          onClick={() => handleLanguageClick('FR')}>FR</LanguageOption>
+        <LanguageOption $state={selectedLanguage === 'HI' ? 'on' : 'off'}
+          onClick={() => handleLanguageClick('HI')}>HI</LanguageOption>
+        <LanguageOption $state={selectedLanguage === 'RU' ? 'on' : 'off'}
+          onClick={() => handleLanguageClick('RU')}>RU</LanguageOption>
+        <LanguageOption $state={selectedLanguage === 'ZN' ? 'on' : 'off'}
+          onClick={() => handleLanguageClick('ZN')}>ZN</LanguageOption>
       </LanguageSelector>
       <FontSelector>
-        <FontOption $state="off">Aa</FontOption>
-        <FontOption $state="off">Aa</FontOption>
-        <FontOption $state="on">Aa</FontOption>
+        <FontOption $state={selectedFont === 0 ? 'on' : 'off'}
+          onClick={() => handleFontClick(0)}>Aa</FontOption>
+        <FontOption $state={selectedFont === 1 ? 'on' : 'off'}
+          onClick={() => handleFontClick(1)}>Aa</FontOption>
+        <FontOption $state={selectedFont === 2 ? 'on' : 'off'}
+          onClick={() => handleFontClick(2)}>Aa</FontOption>
       </FontSelector>
       <ColorSelector>
-        <ColorOption $state="off"></ColorOption>
-        <ColorOption $state="off"></ColorOption>
-        <ColorOption $state="off"></ColorOption>
-        <ColorOption $state="off"></ColorOption>
+        <ColorOption $state={selectedColor === 'white' ? 'on' : 'off'}
+          onClick={() => handleColorClick('white')}></ColorOption>
+        <ColorOption $state={selectedColor === 'green' ? 'on' : 'off'}
+          onClick={() => handleColorClick('green')}></ColorOption>
+        <ColorOption $state={selectedColor === 'purple' ? 'on' : 'off'}
+          onClick={() => handleColorClick('purple')}></ColorOption>
+        <ColorOption $state={selectedColor === 'orange' ? 'on' : 'off'}
+          onClick={() => handleColorClick('orange')}></ColorOption>
       </ColorSelector> 
     </>
   )
