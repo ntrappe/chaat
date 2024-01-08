@@ -14,20 +14,26 @@ const LanguageOption = styled.button`
   border-radius: 5px;
   padding: 4px 8px;
   margin-bottom: 6px;
+  
   background-color: ${(props) => {
-    if (props.$state === "on") {
+    if (props.$state === 'on') {
       return highlightBlue;
     } else {
       return darkerGrey;
     }
   }};
+  
   color: ${(props) => {
-    if (props.$state === "on") {
+    if (props.$state === 'on') {
       return 'white';
     } else {
       return lightGrey;
     }
   }};
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   &:hover {
     background-color: ${(props) => {
@@ -47,8 +53,8 @@ const LanguageSelector = styled.div`
   top: 251px;
   left: 3em;
   padding: 12px 3.5px;
-  background-color: #1F1F1F;
-  border: 1px solid #444;
+  background-color: ${darkerGrey};
+  border: 1px solid ${borderGrey};
   border-radius: 12px;
 
   @media (max-width: 1068px) {
@@ -66,12 +72,36 @@ const FontOption = styled.button`
   border-radius: 5px;
   padding: 3.5px 6.5px;
   margin-bottom: 6px;
-  background-color: ${(props) => (props.state === 'off' ? '#1f1f1f' : '#388eff')}
-  color: ${(props) => (props.state === 'off' ? '#999' : 'white')}
+  background-color: ${darkerGrey};
   
+  color: ${(props) => {
+    if (props.$state === 'on') {
+      return highlightBlue;
+    } else {
+      return lightGrey;
+    }
+  }};
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   &:hover {
-    background-color: ${(props) => (props.state === 'off' ? '#3d3d3d' : '388eff')}
-    color: ${(props) => (props.state === 'off' ? '#d3d3d3' : 'white')}
+    background-color: ${(props) => {
+      if (props.$state === 'on') {
+        return darkerGrey;
+      } else {
+        return mediumGrey;
+      }
+    }};
+
+    color: ${(props) => {
+      if (props.$state === 'on') {
+        return highlightBlue;
+      } else {
+        return 'white';
+      }
+    }};
   }
   
   &:first-child {
@@ -86,7 +116,7 @@ const FontOption = styled.button`
   
   &:last-child {
     font-family: 'New York';
-    font-weight: 400;
+    font-weight: 500;
   }
 `;
 
@@ -96,13 +126,80 @@ const FontSelector = styled.div`
   position: absolute;
   top: 310px;
   right: 6.25em;
-  padding: 10px 3px;
-  background-color: #1F1F1F;
-  border: 1px solid #444;
+  padding: 10px 4px;
+  background-color: ${darkerGrey};
+  border: 1px solid ${borderGrey};
   border-radius: 12px;
 
   @media (max-width: 1068px) {
     top: 250px;
+  }
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
+
+const ColorOption = styled.button`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  margin-right: 0;
+
+  border: ${(props) => {
+    if (props.$state === 'on') {
+      return '2px solid #388eff';
+    } else {
+      return '1.5px solid #727578';
+    }
+  }};
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:nth-child(1) {
+    background: -webkit-linear-gradient(top left, #ebf6f9, #b8c8ce);
+  }
+
+  &:nth-child(2) {
+    background: -webkit-linear-gradient(top left, #b5ff56, #0edc91);
+  }
+
+  &:nth-child(3) {
+    background: -webkit-linear-gradient(top left, #cf97ff, #375fdc);
+  }
+
+  &:last-child {
+    background: -webkit-linear-gradient(top left, #ffdc59, #dc5b47);
+  }
+
+  &:hover {
+    border: ${(props) => {
+      if (props.$state === 'on') {
+        return '2px solid #388eff';
+      } else {
+        return '2.25px solid white';
+      }
+    }};
+  }
+`;
+
+const ColorSelector = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 270px;
+  right: 3em;
+  padding: 10px 6px;
+  align-items: center;
+  background-color: ${darkerGrey};
+  border: 1px solid ${borderGrey};
+  border-radius: 12px;
+
+  @media (max-width: 1068px) {
+    top: 210px;
   }
 
   @media (max-width: 767px) {
@@ -122,11 +219,17 @@ function Hello() {
         <LanguageOption $state="off">RU</LanguageOption>
         <LanguageOption $state="off">ZN</LanguageOption>
       </LanguageSelector>
-      {/* <FontSelector>
-        <FontOption state="off">Aa</FontOption>
-        <FontOption state="off">Aa</FontOption>
-        <FontOption state="on">Aa</FontOption>
-      </FontSelector> */}
+      <FontSelector>
+        <FontOption $state="off">Aa</FontOption>
+        <FontOption $state="off">Aa</FontOption>
+        <FontOption $state="on">Aa</FontOption>
+      </FontSelector>
+      <ColorSelector>
+        <ColorOption $state="off"></ColorOption>
+        <ColorOption $state="off"></ColorOption>
+        <ColorOption $state="off"></ColorOption>
+        <ColorOption $state="off"></ColorOption>
+      </ColorSelector> 
     </>
   )
   // return (
