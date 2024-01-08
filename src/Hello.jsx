@@ -39,16 +39,16 @@ const TextCursor = styled.span`
   height: 125px;
   animation: blinker 1.4s step-start infinite;
 
+  @media (max-width: 767px) {
+    border-left: 2.5px solid ${highlightBlue};
+    margin-left: 5px;
+    height: 95px;
+  }
+
   @keyframes blinker {
     50% {
       opacity: 0;
     }
-  }
-
-  @media (max-width: 767px) {
-    border-left: 2.5px solid var(--highlight-blue);
-    margin-left: 5px;
-    height: 95px;
   }
 `;
 
