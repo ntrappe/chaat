@@ -1,0 +1,175 @@
+/* Define custom fonts for the application */
+@font-face {
+  font-family: 'SF Compact';
+  font-weight: 200;
+  src: url('./SF-Compact-Light.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Compact';
+  font-weight: 300;
+  src: url('./SF-Compact-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Compact';
+  font-weight: 400;
+  src: url('./SF-Compact-Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Compact';
+  font-weight: 500;
+  src: url('./SF-Compact-Semibold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Compact';
+  font-weight: 600;
+  src: url('./SF-Compact-Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Mono';
+  font-weight: 200;
+  src: url('./SF-Mono-Light.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Mono';
+  font-weight: 300;
+  src: url('./SF-Mono-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Mono';
+  font-weight: 400;
+  src: url('./SF-Mono-Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Mono';
+  font-weight: 500;
+  src: url('./SF-Mono-Semibold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Mono';
+  font-weight: 600;
+  src: url('./SF-Mono-Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Pro';
+  font-weight: 100;
+  src: url('./SF-Pro-Text-Thin.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Pro';
+  font-weight: 200;
+  src: url('./SF-Pro-Text-Light.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Pro';
+  font-weight: 300;
+  src: url('./SF-Pro-Text-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Pro';
+  font-weight: 400;
+  src: url('./SF-Pro-Text-Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Pro';
+  font-weight: 500;
+  src: url('./SF-Pro-Text-Semibold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Pro';
+  font-weight: 600;
+  src: url('./SF-Pro-Text-Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF Pro';
+  font-weight: 700;
+  src: url('./SF-Pro-Text-Black.otf') format('opentype');
+}
+
+/* @font-face {
+  font-family: 'New York';
+  font-weight: 300;
+  src: url('./New-York-M-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'New York';
+  font-weight: 400;
+  src: url('./New-York-M-Semibold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'New York';
+  font-weight: 500;
+  src: url('./New-York-M-Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'New York';
+  font-weight: 600;
+  src: url('./New-York-M-Heavy.otf') format('opentype');
+} */
+
+@font-face {
+  font-family: 'New York';
+  src: url('./New-York.ttf') format('truetype');
+}
+
+/* Language-Specific Fonts */
+@font-face {
+  font-family: 'SF Arabic';
+  src: url('./SF-Pro-Arabic.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Geeza Arabic';
+  src: url('./Geeza-Arabic.ttc') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Courier New'; /* works with Arabic */
+  src: url('./Courier-New-Bold.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Noto Sans'; /* works for Hindi and Arabic */
+  src: url('./Noto-Sans-Chinese.ttf') format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'ZCOOL Chinese';
+  src: url('./ZCOOL-Chinese.ttf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Noto Serif Chinese'; /* works with Chinese */
+  src: url('./Noto-Serif-Semibold.otf') format('opentype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Baloo Hindi'; /* works with Hindi */
+  src: url('./Baloo-Hindi.ttf') format('truetype');
+  font-weight: 700;
+}
+

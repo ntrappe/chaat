@@ -1,0 +1,111 @@
+#hello-background {
+  display: block;
+  background-image: url(assets/dotted-background.jpeg);
+  position: absolute;
+  top: var(--nav-height);
+  width: 100%;
+  background-repeat: no-repeat;
+  max-width: var(--bg-width-max);    
+  background-position: center bottom;
+  /* constrain so width only expands */
+  height: var(--bg-height-big); 
+  /* 1/2.5 of original image size */
+  background-size: var(--bg-width-big) var(--bg-height-big);
+}
+
+#hello-text-container {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  top: var(--hello-middle-big);
+  align-items: center;
+}
+
+#hello-text {
+  font-family: 'New York';
+  font-size: 5em;
+  font-weight: 500;
+  background: -webkit-linear-gradient(top left, #b5ff56, #0edc91);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  align-self: center;
+  cursor: default;
+}
+
+#text-cursor {
+  display: inline-block;
+  border-left: 3px solid var(--highlight-blue);
+  margin-left: 10px;
+  height: var(--cursor-height-big);
+  animation: blinker 1.4s step-start infinite;
+}
+
+@media only screen and (max-width: 1068px) {
+  #hello-section {
+    min-height: var(--bg-opening-med);
+  }
+
+  #hello-background {
+    height: var(--bg-height-med);
+    background-size: var(--bg-width-med) var(--bg-height-med);
+  }
+
+  #hello-text-container {
+    top: var(--hello-middle-med);
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #hello-section {
+    min-height: var(--bg-opening-small);
+  }
+
+  #hello-background {
+    height: var(--bg-height-small);
+    background-size: var(--bg-width-small) var(--bg-height-small);
+  }
+
+  #hello-text-container {
+    top: var(--hello-middle-small);
+  }
+
+  #hello-text {
+    font-size: 4em;
+  }
+
+  #text-cursor {
+    border-left: 2.5px solid var(--highlight-blue);
+    margin-left: 5px;
+    height: var(--cursor-height-small);
+  }
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+:root {
+  --bg-width-max: 2400px;
+  --bg-width-big: 1632px;
+  --bg-height-big: 700px;
+  --bg-width-med: 1360px;
+  --bg-height-med: 584px;
+  --bg-opening-med: 550px;
+  --bg-width-small: 1020.5px;
+  --bg-height-small: 438px;
+  --bg-opening-small: 400px;
+
+  --hello-middle-big: 342px;
+  --hello-middle-med: 285px;
+  --hello-middle-small: 210px;
+  --nav-height: 2.75rem;
+
+  --cursor-height-big: 125px;
+  --cursor-height-small: 95px;
+
+  --highlight-blue: rgb(56, 142, 255);
+}

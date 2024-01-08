@@ -1,12 +1,25 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content-type="application/javascript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicole Trappe</title>
+    <link rel="stylesheet" href="./src/index.css">
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HK84DHTF73"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HK84DHTF73');
+  </script>
+  <body id="body">
+    <header></header>
+    <main id="main" mode="all">
+      <section id="hello-section"></section>
+    </main>
   </body>
+  <script type="module" src="./src/index.jsx"></script>
 </html>
