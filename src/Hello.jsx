@@ -8,6 +8,83 @@ const mediumGrey = '#3d3d3d';
 const borderGrey = '#444';
 const lightGrey = '#999';
 
+const HelloBackground = styled.figure`
+  background-image: url("/src/assets/dotted-background.jpeg");
+  position: absolute;
+  width: 100%;
+  height: 640px;
+  background-repeat: no-repeat;
+  background-size: 1632px 700px;
+  max-width: 2400px;    
+  background-position: center bottom;
+  top: 2.75rem;
+
+  @media (max-width: 1068px) {
+    height: 510px;
+    /* 1/3 of original image size */
+    background-size: 1360px 584px;
+  }
+
+  @media (max-width: 767px) {
+    height: 350px;
+    /* 1/4 of original image size */
+    background-size: 1020.5px 438px;
+  }
+`;
+
+const TextCursor = styled.span`
+  display: inline-block;
+  border-left: 3px solid ${highlightBlue};
+  margin-left: 10px;
+  height: 125px;
+  animation: blinker 1.4s step-start infinite;
+
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    border-left: 2.5px solid var(--highlight-blue);
+    margin-left: 5px;
+    height: 95px;
+  }
+`;
+
+const HelloText = styled.h1`
+  font-family: 'New York';
+  font-size: 5em;
+  font-weight: 600;
+  background: -webkit-linear-gradient(top left, #b5ff56, #0edc91);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  align-self: center;
+  cursor: default;
+
+  @media (max-width: 767px) {
+    font-size: 4em;
+  }
+`;
+
+const HelloTextContainer = styled.div`
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  top: 310px;
+  align-items: center;
+
+  @media (max-width: 1068px) {
+    top: 252px;
+  }
+
+  @media (max-width: 767px) {
+    top: 180px;
+  }
+`;
+
 const LanguageOption = styled.button`
   font-size: 0.8em;
   font-weight: 600;
@@ -210,6 +287,11 @@ const ColorSelector = styled.div`
 function Hello() {
   return (
     <>
+      <HelloBackground></HelloBackground>
+      <HelloTextContainer>
+        <HelloText $family="romance">Hello</HelloText>
+        <TextCursor></TextCursor>
+      </HelloTextContainer>
       <LanguageSelector>
         <LanguageOption $state="off">AR</LanguageOption>
         <LanguageOption $state="on">EN</LanguageOption>
@@ -232,35 +314,6 @@ function Hello() {
       </ColorSelector> 
     </>
   )
-  // return (
-  //   <>
-  //     <figure id="hello-background"></figure>
-  //     <div id="hello-text-container">
-  //       <h1 id="hello-text" family="romance">Hello</h1>
-  //       <span id="text-cursor"></span>
-  //     </div>
-  //     <div id="language-selector" className="hello-text-selector" state="visible">
-  //       <button className="lang-opt" state="off">AR</button>
-  //       <button className="lang-opt" state="on">EN</button>
-  //       <button className="lang-opt" state="off">ES</button>
-  //       <button className="lang-opt" state="off">FR</button>
-  //       <button className="lang-opt" state="off">HI</button>
-  //       <button className="lang-opt" state="off">RU</button>
-  //       <button className="lang-opt" state="off">ZN</button>
-  //     </div>
-  //     <div id="font-selector" className="hello-text-selector" state="visible">
-  //       <button className="font-opt" state="off">Aa</button>
-  //       <button className="font-opt" state="off">Aa</button>
-  //       <button className="font-opt" state="on">Aa</button>
-  //     </div>
-  //     <div id="color-selector" className="hello-text-selector" state="visible">
-  //       <button class="color-opt" state="off"></button>
-  //       <button class="color-opt" state="on"></button>
-  //       <button class="color-opt" state="off"></button>
-  //       <button class="color-opt" state="off"></button>
-  //     </div>
-  //   </>
-  // )
 }
   
 export default Hello;
