@@ -1,5 +1,29 @@
 @import './assets/fonts/fonts.css';
 
+header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex; /* maybe remove? */
+  width: 100%;
+  height: var(--nav-height);
+  z-index: 99;
+  /* border-bottom: 0.8px solid var(--border-grey); */
+  border-bottom: 0.8px solid #444444;
+}
+
+@media screen and (max-width:767px) {
+  header {
+    min-width: 320px;
+    height: 2.8rem;
+  }
+}
+
+body {
+  background-color: #0D0D0D;
+  height: 30em;
+}
+
 #hello-section {
   display: flex;
   flex-direction: column;
@@ -8,8 +32,8 @@
   min-height: var(--bg-height-big);
 }
 
-body {
-  background-color: #0d0d0d;
+main {
+  overflow: hidden;
 }
 
 ol, ul {
@@ -25,6 +49,14 @@ a, li {
 li {
   display: list-item;
   text-align: match-parent;
+}
+
+svg {
+  display: inline-block;
+  vertical-align: middle;
+  fill: currentColor;
+  --webkit-transform: scale(1);
+  overflow: visible;
 }
 
 button {
@@ -50,6 +82,7 @@ html {
 
   --nav-height: 2.75rem;
   --bg-height-big: 700px;
+  --nav-height: 2.75rem;
 }
 
 * {
