@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 /* Custom Colors */
-const borderGrey = '#d2d2d2';
+const borderGrey = '#444';
 const navHeight = '2.75rem'
 const asphalt = '#232128';
 const concrete = '#999';
@@ -31,12 +31,20 @@ const NavBackground = styled.div`
   background-color: rgba(13,13,13,0.6);
   transition: background-color .5s ease;
   transition-property: background-color,backdrop-filter,-webkit-backdrop-filter;
+  border-bottom: 0.8px solid #444;
+  // border-bottom: ${(props) => (props.$status === 'open' ? 'none' : '0.8px solid #444')};
 
   @supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: saturate(180%) blur(20px);
     transition: background-color .5s ease;
     transition-property: background-color,backdrop-filter,-webkit-backdrop-filter;
+  }
+
+  @media (max-width: 767px) {
+    min-height: ${(props) => (props.$status === 'open' ? '17em' : '100%')};
+    background-color: rgb(13,13,13);
+    // border-bottom: ${(props) => (props.$status === 'open' ? '0.8px solid #444' : 'none')};
   }
 }
 `;
@@ -120,7 +128,7 @@ const NavMenu = styled.div`
   flex: 1 1 auto;
   min-width: 0;
   font-size: .7rem;
-  line-height: 1;
+  line-height: 1.1;
   font-weight: 400;
   letter-spacing: -0.12px;
   color: ${mutedGrey};
@@ -165,14 +173,7 @@ const NavMenuOptions = styled.ul`
     padding: 0.88rem 1.88rem 1rem 1.88rem;
     opacity: ${(props) => (props.$status === 'open' ? '1' : '0')};
     transform: ${(props) => (props.$status === 'open' ? 'translateZ(0)' : 'translate3d(0,-150px,0)')};
-    transition-delay: ${(props) => (props.$status === 'open' ? '.2s,.4s' : '0s,0s')};
-  
-    li {
-      opacity: ${(props) => (props.status === 'open' ? '1' : '0')};
-      transform: ${(props) => (props.status === 'open' ? 'translateZ(0)' : 'translate3d(0,-25px,0)')};
-      visibility: ${(props) => (props.status === 'open' ? 'visible' : 'hidden')};
-      transition: opacity 0.3s, transform 0.3s, visibility 0.3s; /* TODO maybe remove */
-    }
+    // transition-delay: ${(props) => (props.$status === 'open' ? '.2s,.4s' : '0s,0s')};
   }
 `;
 
@@ -189,9 +190,22 @@ const NavOption = styled.li`
   @media screen and (max-width:767px) {
     margin-left: 0;
     width: 100%;
-    transition: .5s ease;
+    transition: .5 ease;
     transition-property: transform, opacity;
     padding: 0;
+    line-height: 46px;
+    border-bottom: 1px solid;
+    border-color: rgba(81,81,84,0.7);
+    white-space: no-wrap;
+    font-weight: 300;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    opacity: ${(props) => (props.$status === 'open' ? '1' : '0')};
+    transform: ${(props) => (props.$status === 'open' ? 'translateZ(0)' : 'translate3d(0,-25px,0)')};
+    visibility: ${(props) => (props.$status === 'open' ? 'visible' : 'hidden')};
   }
 `;
 
@@ -303,18 +317,14 @@ const SideNavToggleSeparator = styled.span`
 function GlassHeader() {
 
   const [selectedColor, setSelectedColor] = useState('green');
-   const handleColorClick = (color) => {
-    setSelectedColor(color);
-  }
-
   const [navStatus, setNavStatus] = useState('closed');
   const [sideBarStatus, setSideBarStatus] = useState('closed');
-  const [chevronDir, setChevronDir] = useState('down');
   const [sideBarOpen, setSideBarOpen] = useState('closed');
-
-  const handleChevronClick = () => {
-    setNavStatus((prevState) => (prevState === 'up' ? 'closed' : 'open'));
-    setChevronDir((prevState) => (prevState === 'up' ? 'down' : 'up'));
+  const [direction, setDirection] = useState('down');
+  const [status, setStatus] = useState('closed');
+  
+  const handleColorClick = (color) => {
+    setSelectedColor(color);
   }
 
   const handleSideBarClick = () => {
@@ -322,11 +332,35 @@ function GlassHeader() {
     setSideBarOpen((prevState) => (prevState === 'closed' ? 'open' : 'closed'));
   }
 
+  const handleChevronClick = () => {
+    const newDirection = direction === 'up' ? 'down' : 'up';
+    console.log('click on ' + direction + ' --> ' + newDirection);
+    setDirection(newDirection);
+    setStatus(newDirection === 'down' ? 'closed' : 'open');
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1023) {
+        setDirection('down');
+        setStatus('closed');
+      }
+    };
+
+    // Attach the event listener when the component mounts
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  }, []); // Empty dependency array ensures that this effect runs once on mount
+
   return (
     <>
-      <NavWrapper>
-        <NavBackground></NavBackground>
-        <NavContent $status={navStatus}>
+      <NavWrapper $status={status}>
+        <NavBackground id="nav-background" $status={status}></NavBackground>
+        <NavContent id="nav-content" $status={status}>
           <NavPre id="nav-pre">
             <SideNavToggleWrapper>
               <SideNavToggle id="sidenav-toggle" $status={sideBarOpen === 'closed' ? 'closed' : 'open'} onClick={handleSideBarClick}>
@@ -345,23 +379,23 @@ function GlassHeader() {
               <SideNavToggleSeparator className="separator"></SideNavToggleSeparator>
             </SideNavToggleWrapper>
           </NavPre>
-          <NavTitle $status={navStatus}>
+          <NavTitle id="nav-title" $status={status}>
             <LinkTitle href="nicoletrappe.com">Nicole Trappe</LinkTitle>
           </NavTitle>
-          <NavMenu $status={navStatus}>
-            <NavMenuTray $status={navStatus}>
-              <NavMenuOptions $status={navStatus}>
-                <NavOption>About</NavOption>
-                <NavOption>Projects</NavOption>
-                <NavOption>Career</NavOption>
-                <NavOption>Art</NavOption>
-                <NavOption>Resume</NavOption>
+          <NavMenu id="nav-menu" $status={status}>
+            <NavMenuTray id="nav-menu-tray" $status={status}>
+              <NavMenuOptions id="nav-menu-options" $status={status}>
+                <NavOption $status={status}>About</NavOption>
+                <NavOption $status={status}>Projects</NavOption>
+                <NavOption $status={status}>Career</NavOption>
+                <NavOption $status={status}>Art</NavOption>
+                <NavOption $status={status}>Resume</NavOption>
               </NavMenuOptions>
             </NavMenuTray>
           </NavMenu>
-          <NavActions>
+          <NavActions id="nav-actions">
             <NavMenuMobile>
-              <NavMenuChevron $direction={chevronDir === 'up' ? 'up' : 'down'} onClick={handleChevronClick}>
+              <NavMenuChevron id="chevron" $direction={direction} onClick={handleChevronClick}>
               </NavMenuChevron>
             </NavMenuMobile>
           </NavActions>

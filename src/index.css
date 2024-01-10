@@ -9,7 +9,6 @@ header {
   height: var(--nav-height);
   z-index: 99;
   /* border-bottom: 0.8px solid var(--border-grey); */
-  border-bottom: 0.8px solid #444444;
 }
 
 @media screen and (max-width:767px) {
