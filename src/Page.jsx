@@ -1,23 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Hello from './Hello.jsx';
-import DarkGlassHeader from './DarkGlassHeader.jsx';
+import LightGlassHeader from './LightGlassHeader.jsx';
+import FloatingAside from './FloatingAside.jsx';
 import './assets/fonts/fonts.css';
 
 const header = document.getElementById('header');
 const main = document.getElementById('main');
-const helloSection = document.createElement('div');
+document.getElementById('body').style.backgroundColor = 'white';
 
 ReactDOM.createRoot(header).render(
   <React.StrictMode>
-    <DarkGlassHeader/>
+    <LightGlassHeader/>
   </React.StrictMode>,
 );
 
 ReactDOM.createRoot(main).render(
   <React.StrictMode>
-    <section id="hello-section">
-      <Hello/>
-    </section>
+    <FloatingAside/>
   </React.StrictMode>,
 );
+

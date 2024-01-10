@@ -7,6 +7,7 @@ const darkerGrey = '#1f1f1f';
 const mediumGrey = '#3d3d3d';
 const borderGrey = '#444';
 const lightGrey = '#999';
+const snow = 'rgb(232, 232, 237)';
 
 const HelloBackground = styled.figure`
   background-image: url("/src/assets/dotted-background.jpeg");
@@ -166,6 +167,14 @@ const LanguageOption = styled.button`
       } else {
         return mediumGrey;
       }
+    }};
+
+    color: ${(props) => {
+      if (props.$state === 'on') {
+        return 'white';
+      } else {
+        return snow;
+      }
     }}
   }
 `;
@@ -223,7 +232,7 @@ const FontOption = styled.button`
       if (props.$state === 'on') {
         return highlightBlue;
       } else {
-        return 'white';
+        return snow;
       }
     }};
   }
