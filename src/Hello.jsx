@@ -337,7 +337,7 @@ function Hello() {
   const [selectedLanguage, setSelectedLanguage] = useState('EN');
   const [helloLanguage, setHelloLanguage] = useState('Hello');
   const [family, setFamily] = useState('romance');
-  const [selectedFont, setSelectedFont] = useState(2);
+  const [selectedFont, setSelectedFont] = useState(0);
   const [selectedColor, setSelectedColor] = useState('green');
 
   const handleLanguageClick = (language) => {
