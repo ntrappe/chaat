@@ -82,8 +82,8 @@ const NavBackground = styled.div`
   }
 
   @media (max-width: ${mobileWidth}) {
-    min-height: ${(props) => (props.$status === 'open' ? '17em' : '100%')};
-    background-color: ${(props) => (props.$status === 'open' ? 'rgb(255,255,255)' : 'rgba(255,255,255,0.6)')};
+    min-height: ${(props) => (props.$navOpen ? '17em' : '100%')};
+    background-color: ${(props) => (props.$navOpen ? 'rgb(255,255,255)' : 'rgba(255,255,255,0.6)')};
   }
 }
 `;
@@ -134,7 +134,7 @@ const NavTitle = styled.div`
   font-weight: 500;
   letter-spacing: -0.152px;
   color: ${(props) => (props.$colorScheme === 'dark' ? darkTitle : lightTitle)};
-  grid-area: ${(props) => (props.$status === 'open' ? 'title' : 'unset')}; /* TODO check */
+  grid-area: ${(props) => (props.$navOpen ? 'title' : 'unset')}; /* TODO check */
 
   @media (max-width: ${mobileWidth}) {
     padding-top: 0;
@@ -175,9 +175,9 @@ const NavMenu = styled.div`
   @media (max-width: ${mobileWidth}) {
     overflow: hidden;
     letter-spacing: -0.28px;
-    display: ${(props) => (props.$status === 'open' ? 'flex' : 'none')};
-    grid-area: ${(props) => (props.$status === 'open' ? 'menu' : 'unset')};
-    font-size: ${(props) => (props.$status === 'open' ? '14px' : '.7rem')};
+    display: ${(props) => (props.$navOpen ? 'flex' : 'none')};
+    grid-area: ${(props) => (props.$navOpen ? 'menu' : 'unset')};
+    font-size: ${(props) => (props.$navOpen ? '14px' : '.7rem')};
   }
 `;
 
@@ -191,15 +191,15 @@ const NavMenuTray = styled.div`
 
   @media (max-width: ${mobileWidth}) {
     /* hide list of options to have chevron */
-    pointer-events: ${(props) => (props.$status === 'open' ? 'auto' : 'none')};
-    visibility: ${(props) => (props.$status === 'open' ? 'visible' : 'hidden')};
-    max-height: ${(props) => (props.$status === 'open' ? '(100vh - 42px)' : '0')};
-    display: ${(props) => (props.$status === 'open' ? 'block' : 'flex')};
+    pointer-events: ${(props) => (props.$navOpen ? 'auto' : 'none')};
+    visibility: ${(props) => (props.$navOpen ? 'visible' : 'hidden')};
+    max-height: ${(props) => (props.$navOpen ? '(100vh - 42px)' : '0')};
+    display: ${(props) => (props.$navOpen ? 'block' : 'flex')};
   }
 
   @media (max-width: 300px) { /* TODO check auto */
-    max-height: ${(props) => (props.$status === 'open' ? '100vh' : 'auto')};
-    overflow-y: ${(props) => (props.$status === 'open' ? 'auto' : 'hidden')};
+    max-height: ${(props) => (props.$navOpen ? '100vh' : 'auto')};
+    overflow-y: ${(props) => (props.$navOpen ? 'auto' : 'hidden')};
   }
 `;
 
@@ -210,9 +210,9 @@ const NavMenuOptions = styled.ul`
   @media (max-width: ${mobileWidth}) {
     display: block;
     padding: 0.88rem 1.88rem 1rem 1.88rem;
-    opacity: ${(props) => (props.$status === 'open' ? '1' : '0')};
-    transform: ${(props) => (props.$status === 'open' ? 'translateZ(0)' : 'translate3d(0,-150px,0)')};
-    // transition-delay: ${(props) => (props.$status === 'open' ? '.2s,.4s' : '0s,0s')};
+    opacity: ${(props) => (props.$navOpen ? '1' : '0')};
+    transform: ${(props) => (props.$navOpen ? 'translateZ(0)' : 'translate3d(0,-150px,0)')};
+    // transition-delay: ${(props) => (props.$navOpen ? '.2s,.4s' : '0s,0s')};
   }
 `;
 
@@ -243,9 +243,9 @@ const NavOption = styled.li`
       border-bottom: none;
     }
 
-    opacity: ${(props) => (props.$status === 'open' ? '1' : '0')};
-    transform: ${(props) => (props.$status === 'open' ? 'translateZ(0)' : 'translate3d(0,-25px,0)')};
-    visibility: ${(props) => (props.$status === 'open' ? 'visible' : 'hidden')};
+    opacity: ${(props) => (props.$navOpen ? '1' : '0')};
+    transform: ${(props) => (props.$navOpen ? 'translateZ(0)' : 'translate3d(0,-25px,0)')};
+    visibility: ${(props) => (props.$navOpen ? 'visible' : 'hidden')};
   }
 `;
 
@@ -358,7 +358,7 @@ function GlassHeader({ colorScheme, showSideBar }) {
 
   const [sideBarOpen, setSideBarOpen] = useState('closed');
   const [direction, setDirection] = useState('down');
-  const [status, setStatus] = useState('closed');
+  const [navOpen, setNavOpen] = useState(false);
 
   const handleSideBarClick = () => {
     setSideBarOpen((prevState) => (prevState === 'closed' ? 'open' : 'closed'));
@@ -368,14 +368,14 @@ function GlassHeader({ colorScheme, showSideBar }) {
     const newDirection = direction === 'up' ? 'down' : 'up';
     console.log('click on ' + direction + ' --> ' + newDirection);
     setDirection(newDirection);
-    setStatus(newDirection === 'down' ? 'closed' : 'open');
+    setNavOpen(newDirection === 'down' ? false : true);
   };
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > mobileWidthVar) {
         setDirection('down');
-        setStatus('closed');
+        setNavOpen(false);
       }
     };
 
@@ -391,13 +391,13 @@ function GlassHeader({ colorScheme, showSideBar }) {
   return (
     <>
       <NavHeader $colorScheme={colorScheme}>
-        <NavWrapper $status={status}>
-          <NavBackground id="nav-background" $status={status} $colorScheme={colorScheme}></NavBackground>
-          <NavContent id="nav-content" $status={status}>
+        <NavWrapper $navOpen={navOpen}>
+          <NavBackground id="nav-background" $navOpen={navOpen} $colorScheme={colorScheme}></NavBackground>
+          <NavContent id="nav-content" $navOpen={navOpen}>
             <NavPre id="nav-pre" $showSideBar={showSideBar}>
               {showSideBar && (
                 <SideNavToggleWrapper>
-                  <SideNavToggle id="sidenav-toggle" $status={sideBarOpen === 'closed' ? 'closed' : 'open'} onClick={handleSideBarClick} $colorScheme={colorScheme}>
+                  <SideNavToggle id="sidenav-toggle" $navOpen={sideBarOpen === 'closed' ? 'closed' : 'open'} onClick={handleSideBarClick} $colorScheme={colorScheme}>
                     <SideNavIconWrapper id="sidenav-icon-wrapper">
                       <svg 
                         aria-hidden="true" 
@@ -414,17 +414,17 @@ function GlassHeader({ colorScheme, showSideBar }) {
                 </SideNavToggleWrapper>
               )}
             </NavPre>
-            <NavTitle id="nav-title" $status={status} $colorScheme={colorScheme}>
+            <NavTitle id="nav-title" $navOpen={navOpen} $colorScheme={colorScheme}>
               <LinkTitle href="nicoletrappe.com" $colorScheme={colorScheme}>Nicole Trappe</LinkTitle>
             </NavTitle>
-            <NavMenu id="nav-menu" $status={status} $colorScheme={colorScheme}>
-              <NavMenuTray id="nav-menu-tray" $status={status}>
-                <NavMenuOptions id="nav-menu-options" $status={status}>
-                  <NavOption $status={status} $colorScheme={colorScheme}>About</NavOption>
-                  <NavOption $status={status} $colorScheme={colorScheme}>Projects</NavOption>
-                  <NavOption $status={status} $colorScheme={colorScheme}>Career</NavOption>
-                  <NavOption $status={status} $colorScheme={colorScheme}>Art</NavOption>
-                  <NavOption $status={status} $colorScheme={colorScheme}>Resume</NavOption>
+            <NavMenu id="nav-menu" $navOpen={navOpen} $colorScheme={colorScheme}>
+              <NavMenuTray id="nav-menu-tray" $navOpen={navOpen}>
+                <NavMenuOptions id="nav-menu-options" $navOpen={navOpen}>
+                  <NavOption $navOpen={navOpen} $colorScheme={colorScheme}>About</NavOption>
+                  <NavOption $navOpen={navOpen} $colorScheme={colorScheme}>Projects</NavOption>
+                  <NavOption $navOpen={navOpen} $colorScheme={colorScheme}>Career</NavOption>
+                  <NavOption $navOpen={navOpen} $colorScheme={colorScheme}>Art</NavOption>
+                  <NavOption $navOpen={navOpen} $colorScheme={colorScheme}>Resume</NavOption>
                 </NavMenuOptions>
               </NavMenuTray>
             </NavMenu>

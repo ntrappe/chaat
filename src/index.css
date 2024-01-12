@@ -19,8 +19,44 @@ header {
 }
 
 body {
-  background-color: #0D0D0D;
+  /* background-color: #0D0D0D; */
+  background-color: white;
   height: 30em;
+}
+
+main {
+  display: flex;
+  background-color: aqua;
+  width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (max-width: 1023px) {
+  main[mode="all"] {
+    width: 692px;
+  }
+
+  main[mode="sidebar"] {
+    width: 100%;
+    position: fixed;
+    top: 2.75rem;
+    overflow: hidden;
+  }
+}
+
+#adjustable-sidebar {
+  background-color: teal;
+  display: flex;
+  min-width: 0;
+  flex: 1;
+}
+
+@media only screen and (max-width: 1023px) {
+  #adjustable-sidebar[mode="all"] {
+    display: block;
+    position: relative;
+  }
 }
 
 #hello-section {
