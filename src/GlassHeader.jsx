@@ -27,6 +27,8 @@ const lightNavBack = 'rgba(255,255,255,0.6)';
 /* General Style Variables */
 const navHeight = '2.75rem'
 const navCompactHeight = '2.8rem';
+const mobileWidth = '767px';
+const mobileWidthVar = 767;
 const asphalt = '#1D1D1F';
 const concrete = '#515154';
 const mutedGrey = '#515154';
@@ -42,7 +44,7 @@ const NavHeader = styled.header`
   height: ${navHeight};
   border-bottom: ${(props) => (props.$colorScheme === 'dark' ? darkBorder : lightBorder)};
 
-  @media and (max-width: 767px) {
+  @media and (max-width: ${mobileWidth}) {
     min-width: 320px;
     height: ${navCompactHeight};
   }
@@ -79,7 +81,7 @@ const NavBackground = styled.div`
     transition-property: background-color,backdrop-filter,-webkit-backdrop-filter;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: ${mobileWidth}) {
     min-height: ${(props) => (props.$status === 'open' ? '17em' : '100%')};
     background-color: ${(props) => (props.$status === 'open' ? 'rgb(255,255,255)' : 'rgba(255,255,255,0.6)')};
   }
@@ -96,7 +98,7 @@ const NavContent = styled.div`
   z-index: 2;
   justify-content: space-between;
 
-  @media (max-width: 767px) {
+  @media (max-width: ${mobileWidth}) {
     display: grid;
     padding: 0 0 0 .94rem;
     grid-template-columns: auto 1fr auto;
@@ -134,7 +136,7 @@ const NavTitle = styled.div`
   color: ${(props) => (props.$colorScheme === 'dark' ? darkTitle : lightTitle)};
   grid-area: ${(props) => (props.$status === 'open' ? 'title' : 'unset')}; /* TODO check */
 
-  @media (max-width: 767px) {
+  @media (max-width: ${mobileWidth}) {
     padding-top: 0;
     height: ${navCompactHeight};
     width: 90%;
@@ -151,7 +153,7 @@ const LinkTitle = styled.a`
   font-weight: inherit;
   cursor: pointer;
 
-  @media (max-width:767px) {
+  @media (max-width: ${mobileWidth}) {
     display: flex;
   }
 
@@ -170,7 +172,7 @@ const NavMenu = styled.div`
   letter-spacing: -0.12px;
   color: ${(props) => (props.$colorScheme === 'dark' ? darkActions : lightActions)};
 
-  @media (max-width:767px) {
+  @media (max-width: ${mobileWidth}) {
     overflow: hidden;
     letter-spacing: -0.28px;
     display: ${(props) => (props.$status === 'open' ? 'flex' : 'none')};
@@ -187,7 +189,7 @@ const NavMenuTray = styled.div`
   align-items: center;
   visibility: visible;
 
-  @media (max-width: 767px) {
+  @media (max-width: ${mobileWidth}) {
     /* hide list of options to have chevron */
     pointer-events: ${(props) => (props.$status === 'open' ? 'auto' : 'none')};
     visibility: ${(props) => (props.$status === 'open' ? 'visible' : 'hidden')};
@@ -205,7 +207,7 @@ const NavMenuOptions = styled.ul`
   display: flex;
   justify-content: flex-end;
 
-  @media (max-width:767px) {
+  @media (max-width: ${mobileWidth}) {
     display: block;
     padding: 0.88rem 1.88rem 1rem 1.88rem;
     opacity: ${(props) => (props.$status === 'open' ? '1' : '0')};
@@ -225,7 +227,7 @@ const NavOption = styled.li`
     font-weight: 400;
   }
 
-  @media screen and (max-width:767px) {
+  @media screen and (max-width: ${mobileWidth}) {
     margin-left: 0;
     width: 100%;
     transition: .5 ease;
@@ -252,7 +254,7 @@ const NavActions = styled.div`
   justify-content: flex-end;
   align-items: center;
 
-  @media (max-width: 767px) {
+  @media (max-width: ${mobileWidth}) {
     padding-right: .9rem;
     grid-area: actions;
     padding-right: .94rem;
@@ -267,7 +269,7 @@ const NavMenuMobile = styled.a`
   width: 1.17rem;
   height: 2.8rem;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: ${mobileWidth}) {
     display: flex;
   }
 `;
@@ -358,7 +360,6 @@ function GlassHeader({ colorScheme, showSideBar }) {
   const [direction, setDirection] = useState('down');
   const [status, setStatus] = useState('closed');
 
-
   const handleSideBarClick = () => {
     setSideBarOpen((prevState) => (prevState === 'closed' ? 'open' : 'closed'));
   }
@@ -372,7 +373,7 @@ function GlassHeader({ colorScheme, showSideBar }) {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 1023) {
+      if (window.innerWidth > mobileWidthVar) {
         setDirection('down');
         setStatus('closed');
       }
