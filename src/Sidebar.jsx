@@ -142,11 +142,21 @@ function Sidebar({ $mode }) {
           <CaseTopic $mode={$mode} id="design-cases">
             <summary>Design</summary>
             <CaseContent $mode={$mode} id="case-content">
-              <img src="./src/assets/project-icons/book-inactive.png"></img>
-              <p>Bookify App</p>
+              <img src="/src/assets/project-icons/book-inactive.png"></img>
+              <p>Book App</p>
+            </CaseContent>
+            <CaseContent $mode={$mode} id="case-content">
+              <img src="/src/assets/project-icons/pomodoro-inactive.png"></img>
+              <p>Pomodoro App</p>
+            </CaseContent>
+            <CaseContent $mode={$mode} id="case-content">
+              <img src="/src/assets/project-icons/mountain-inactive.png"></img>
+              <p>National Park App</p>
             </CaseContent>
           </CaseTopic>
-          <CaseTopic $mode={$mode} id="engineering-cases"></CaseTopic>
+          <CaseTopic $mode={$mode} id="engineering-cases">
+            <summary>Engineering</summary>
+          </CaseTopic>
         </ScrollableAside>
       </SidebarAside>
     </SidebarWrapper>
