@@ -14,12 +14,12 @@ const darkNavBack = 'rgba(13,13,13,0.6)';
 
 /* Light Scheme Colors */
 const lightBorder = '#d2d2d2';
-const lightTitle = '#515154';
+const lightTitle = '#333437';
 const lightTitleHover = 'black';
-const lightActions = lightTitle;
+const lightActions = '#515154';
 const lightHighBlue = '#0066cc';
 const lightActionBorder = 'rgba(185,186,187,0.3)';
-const lightChevron = lightTitle;
+const lightChevron = lightActions;
 const lightHoverBack = '#f1f2f5';
 const lightSideHover = '#1d1d1f';
 const lightNavBack = 'rgba(255,255,255,0.6)';
@@ -169,7 +169,7 @@ const NavMenu = styled.div`
   min-width: 0;
   font-size: .7rem;
   line-height: 1.1;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: -0.12px;
   color: ${(props) => (props.$colorScheme === 'dark' ? darkActions : lightActions)};
 

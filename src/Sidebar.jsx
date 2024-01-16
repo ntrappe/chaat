@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const EXP = 'expanded';
@@ -6,12 +6,18 @@ const COL = 'collapsed';
 const HID = 'hidden';
 
 const navHeight = '2.75rem';
-const lightGrey = 'rgb(110, 110, 115)';
+const lightGrey = '#86868b';
+const darkGrey = '#333437';
+const backgroundBlue = '#d4edf9';
+const highlightBlue = '#0066cc';
+const stone = '#e8e8ed';
+const concrete = '#6e6e73';
+const asphalt = '#1d1d1f';
 
 const SidebarWrapper = styled.div`
   display: block;
   position: relative;
-  background-color: forestgreen;
+  top: 0.5rem;
 
   @media (max-width: 1023px) {
     width: ${(props) => (props.$mode === EXP ? '100%' : 'auto')};
@@ -26,7 +32,6 @@ const SidebarAside = styled.div`
   height: 100%;
   width: 200px;
   max-width: 100vw;
-  background-color: darkblue;
 
   @media (max-width: 1023px) {
     display: ${(props) => (props.$mode === EXP ? 'flex' : 'none')};
@@ -40,11 +45,9 @@ const ScrollableAside = styled.nav`
   position: sticky;
   position: -webkit-sticky;
   top: ${navHeight};
-  background-color: skyblue;
   width: 195px;
   transform: translateZ(0);
   margin-top: 10px;
-  background-color: skyblue;
 
   @media (max-width: 1023px) {
     width: 100%;
@@ -53,9 +56,6 @@ const ScrollableAside = styled.nav`
 
 const CaseTopic = styled.details`
   width: 100%
-  font-size: 14px;
-  color: ${lightGrey};
-  font-weight: 400;
   padding: 5px 0 5px 0;
   margin: 0 !important;
 
@@ -67,20 +67,36 @@ const CaseTopic = styled.details`
     cursor: pointer;
     list-style-type: none;
     margin: 0;
+    padding: ${(props) => (props.$mode === COL ? '7px 0' : 'inherit')};
+    font-size: 14px;
+    font-weight: ${(props) => (props.$active ? '500' : '300')};
+    color: ${(props) => {
+      if (props.$mode === EXP) {
+        return asphalt;
+      } else {
+        if (props.$active) {
+          return asphalt;
+        } else {
+          return concrete;
+        }
+      }
+    }};
 
     @media (max-width: 1023px) {
-      padding: ${(props) => (props.$mode === EXP ? '7px 0 7px 0' : '0')};
+      padding: ${(props) => (props.$mode === EXP ? '6px 0 6px 17px' : '0')};
     }
 
     &:hover {
-      background-color: ${(props) => (props.$mode === EXP ? 'blueviolet' : 'inherit')};
+      background-color: ${(props) => (props.$mode === EXP ? backgroundBlue : 'inherit')};
+      color: ${(props) => (props.$mode === COL ? highlightBlue : 'inherit')};
     }
     
     &::before {
       content: '＋ ';
-      color: ${lightGrey};
+      color: ${concrete};
       font-size: 14px;
       font-weight: 500;
+      margin-right: 2.5px;
     }
   }
 
@@ -89,11 +105,11 @@ const CaseTopic = styled.details`
   }
 
   &[open] summary {
-    margin-bottom: 7px;
-
     &::before {
       content: '－ ';
+      color: ${concrete};
       font-weight: 600;
+      margin-right: 2px;
     }
   }
 `;
@@ -103,20 +119,22 @@ const CaseContent = styled.div`
   flex: 1;
   align-items: center;
   padding: 7px 0 7px 0;
+  cursor: pointer;
+  background-color: ${(props) => (props.$mode === EXP && props.$active ? stone : 'inherit')};
 
   @media (max-width: 1023px) {
-    padding: ${(props) => (props.$mode === EXP ? '8px 40px 8px 20px' : '7px 0 7px 0')};
+    padding: ${(props) => (props.$mode === EXP ? '8px 40px 8px 10px' : '7px 0 7px 0')};
   }
 
   &:hover {
-    background-color: ${(props) => (props.$mode === EXP ? 'blueviolet' : 'inherit')};
+    background-color: ${(props) => (props.$mode === EXP ? backgroundBlue : 'inherit')};
   }
 
   img {
     display: block;
     width: 17px;  
     height: 17px;
-    margin-right: 7px;
+    margin-right: 9px;
     margin-left: 29px;
   }
 
@@ -127,34 +145,68 @@ const CaseContent = styled.div`
     vertical-align: middle;
     line-height: 1.28;
     font-size: 14px;
-    font-weight: 400;
     letter-spacing: -.224px;
+    font-weight: ${(props) => (props.$active ? '500' : '300')};
+    color: ${(props) => {
+      if (props.$mode === EXP) {
+        return asphalt;
+      } else {
+        if (props.$active) {
+          return asphalt;
+        } else {
+          return concrete;
+        }
+      }
+    }};
+  }
+
+  p:hover {
+    color: ${(props) => (props.$mode === COL ? highlightBlue : 'inherit')};
+    font-weight: ${(props) => (props.$active ? '500' : '300')};
   }
 `;
 
 function Sidebar({ $mode }) {
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedParent, setSelectedParent] = useState(null);
+
+  const handleItemClick = (index) => {
+    setSelectedItem(index);
+    if (index < 3) {
+      setSelectedParent(0);
+    }
+  }
 
   return (
     <>
     <SidebarWrapper id="sidebar" $mode={$mode}>
        <SidebarAside id="sidebar-aside" $mode={$mode}>
         <ScrollableAside $mode={$mode} id="scrollable-aside">
-          <CaseTopic $mode={$mode} id="design-cases">
+          <CaseTopic $mode={$mode} id="design-cases" $active={selectedParent === 0}>
             <summary>Design</summary>
-            <CaseContent $mode={$mode} id="case-content">
-              <img src="/src/assets/project-icons/book-inactive.png"></img>
+            <CaseContent $mode={$mode} $active={selectedItem === 0} onClick={() => handleItemClick(0)}>
+              <img
+                src={selectedItem === 0 ? "/src/assets/project-icons/book-active.png" : "/src/assets/project-icons/book-inactive.png"}
+                alt="Book Icon"
+              />
               <p>Book App</p>
             </CaseContent>
-            <CaseContent $mode={$mode} id="case-content">
-              <img src="/src/assets/project-icons/pomodoro-inactive.png"></img>
+            <CaseContent $mode={$mode} $active={selectedItem === 1} onClick={() => handleItemClick(1)}>
+              <img
+                src={selectedItem === 1 ? "/src/assets/project-icons/pomodoro-active.png" : "/src/assets/project-icons/pomodoro-inactive.png"}
+                alt="Tomato Pomodoro Icon"
+              />
               <p>Pomodoro App</p>
             </CaseContent>
-            <CaseContent $mode={$mode} id="case-content">
-              <img src="/src/assets/project-icons/mountain-inactive.png"></img>
+            <CaseContent $mode={$mode} $active={selectedItem === 2} onClick={() => handleItemClick(2)}>
+              <img
+                src={selectedItem === 2 ? "/src/assets/project-icons/mountain-active.png" : "/src/assets/project-icons/mountain-inactive.png"}
+                alt="Mountain Icon"
+              />
               <p>National Park App</p>
             </CaseContent>
           </CaseTopic>
-          <CaseTopic $mode={$mode} id="engineering-cases">
+          <CaseTopic $mode={$mode} id="engineering-cases" $active={selectedParent === 1}>
             <summary>Engineering</summary>
           </CaseTopic>
         </ScrollableAside>

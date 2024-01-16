@@ -2,15 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 
 const HID = 'hidden';
+const lighterGrey = '#d3d3d8';
+const lightGrey = '#86868b';
+const darkGrey = '#333437';
 
 const FloatingAsideWrapper = styled.div`
   position: sticky;
   position: -webkit-sticky;
   top: 4.23rem;
   align-self: flex-start;
-  width: 140px;
+  width: 100px;
   padding-left: 32px;
-  margin-top: 120px;
+  margin-top: 60px; /* match this with case study text */
 
   @media (max-width: 1023px) {
     display: ${(props) => (props.$mode === HID ? 'none' : 'flex')};
@@ -27,10 +30,10 @@ const AsideSections = styled.ul`
     line-height: 1.33;
     letter-spacing: -.01em;
     margin: 0;
-    padding-left: 10px;
-    padding-top: 2.5px;
-    padding-bottom: 2.5px;
-    border-left: 1px solid rgb(210,210,215);
+    /* top right bottom left */
+    padding: 3px 0 3px 10px;
+    border-left: 1.2px solid ${lighterGrey};
+    color: ${lightGrey};
   }
 
   li:first-child {

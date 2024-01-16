@@ -11,16 +11,14 @@ const HID = 'hidden';
 
 const MainWrapper = styled.main`
   display: flex;
-  background-color: aqua;
   width: 980px;
   margin-left: auto;
   margin-right: auto;
 
   @media (max-width: 1023px) {
     width: ${(props) => props.$sidebarMode === EXP ? '100%' : '692px'};
-    // width: ${(props) => (props.$mode === COL ? '692px' : '100%')};
     position: ${(props) => (props.$mode === 'HID' ? 'fixed' : 'relative')};
-    top: ${(props) => (props.$mode === HID ? '2.75rem' : '0')};
+    top: ${(props) => (props.$mode === HID ? '1rem' : '0')};
     overflow: ${(props) => (props.$mode === HID ? 'hidden' : 'auto')};
   }
 
@@ -30,7 +28,6 @@ const MainWrapper = styled.main`
 `;
 
 const AdjustableSidebar = styled.div`
-  background-color: teal;
   display: flex;
   min-width: 0;
   flex: 1;
