@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const navCompactHeight = '2.8rem';
@@ -16,7 +16,7 @@ const NavTitleWrapper = styled.div`
   color: ${(props) => (props.$colorScheme === 'dark' ? `var(--stone)` : `var(--asphalt)`)};
   grid-area: ${(props) => (props.$navOpen ? 'title' : 'unset')}; /* TODO check */
 
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 767px) {
     padding-top: 0;
     height: ${navCompactHeight};
     width: 90%;
@@ -33,7 +33,7 @@ const LinkTitle = styled.a`
   font-weight: inherit;
   cursor: pointer;
 
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 767px) {
     display: flex;
   }
 
@@ -42,10 +42,10 @@ const LinkTitle = styled.a`
   }
 `;
 
-function NavTitle({ colorScheme, navOpen }) {
+function NavTitle({ $colorScheme, $navOpen }) {
   return (
-    <NavTitleWrapper $navOpen={navOpen} $colorScheme={colorScheme}>
-      <LinkTitle href="nicoletrappe.com" $colorScheme={colorScheme}>Nicole Trappe</LinkTitle>
+    <NavTitleWrapper id="nav-title" $navOpen={$navOpen} $colorScheme={$colorScheme}>
+      <LinkTitle href="nicoletrappe.com" $colorScheme={$colorScheme}>Nicole Trappe</LinkTitle>
     </NavTitleWrapper>
   )
 }
