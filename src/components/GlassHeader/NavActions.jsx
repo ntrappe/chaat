@@ -61,14 +61,16 @@ const NavMenuChevron = styled.span`
   }
 `;
 
-function NavActions({ $direction, handleChevronClick }) {
+function NavActions({ $direction, handleChevronClick, $showChevron }) {
   return (
     <NavActionsWrapper id="nav-actions">
       <NavMenuMobile>
-        <NavMenuChevron id="chevron" 
-          $direction={$direction} 
-          onClick={handleChevronClick} 
-        ></NavMenuChevron>
+        {$showChevron && (
+          <NavMenuChevron id="chevron" 
+            $direction={$direction} 
+            onClick={handleChevronClick} 
+          ></NavMenuChevron>
+        )}
       </NavMenuMobile>
     </NavActionsWrapper>
   )

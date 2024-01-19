@@ -2,38 +2,20 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import NavTitle from './components/GlassHeader/NavTitle.jsx';
 import NavActions from './components/GlassHeader/NavActions.jsx';
+import NavMenu from './components/GlassHeader/NavMenu.jsx';
+import NavPre from './components/GlassHeader/NavPre.jsx';
 
 /* Dark Scheme Colors */
-const darkBorder = '#383838';
-const darkTitle = '#b0b0b0';
-const darkTitleHover = 'white';
-const darkActions = '#77787d';
-const darkHighBlue = '#388eff';
-const darkActionBorder = 'rgba(81,81,84,0.7)';
-const darkHoverBack = '#515154';
-const darkSideHover = '#e8e8ed';
 const darkNavBack = 'rgba(13,13,13,0.6)';
 
 /* Light Scheme Colors */
-const lightBorder = '#d2d2d2';
-const lightTitle = '#333437';
-const lightTitleHover = 'black';
-const lightActions = '#515154';
-const lightHighBlue = '#0066cc';
-const lightActionBorder = 'rgba(185,186,187,0.3)';
-const lightChevron = lightActions;
-const lightHoverBack = '#f1f2f5';
-const lightSideHover = '#1d1d1f';
 const lightNavBack = 'rgba(255,255,255,0.6)';
 
 /* General Style Variables */
 const navHeight = '2.75rem'
 const navCompactHeight = '2.8rem';
-const mobileWidth = '767px';
 const mobileWidthVar = 767;
 const wideWidthVar = 1023;
-const highlightRed = '#ce4746';
-const brightHighRed = '#ff595b';
 
 const NavHeader = styled.header`
   display: flex;
@@ -42,9 +24,9 @@ const NavHeader = styled.header`
   left: 0;
   width: 100%;
   height: ${navHeight};
-  border-bottom: ${(props) => (props.$colorScheme === 'dark' ? darkBorder : lightBorder)};
+  border-bottom: ${(props) => (props.$colorScheme === 'dark' ? `var(--asphalt)` : `var(--cloud)`)};
 
-  @media and (max-width: ${mobileWidth}) {
+  @media and (max-width: 767px) {
     min-width: 320px;
     height: ${navCompactHeight};
   }
@@ -72,7 +54,7 @@ const NavBackground = styled.div`
   transition: background-color .5s ease;
   transition-property: background-color,backdrop-filter,-webkit-backdrop-filter;
   border-bottom: 0.8px solid;
-  border-color: ${(props) => (props.$colorScheme === 'dark' ? darkBorder : lightBorder)};
+  border-color: ${(props) => (props.$colorScheme === 'dark' ? `nav(--asphalt)` : `var(--cloud)`)};
 
   @supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
     -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -81,7 +63,7 @@ const NavBackground = styled.div`
     transition-property: background-color,backdrop-filter,-webkit-backdrop-filter;
   }
 
-  @media (max-width: ${mobileWidth}) {
+  @media (max-width: 767px) {
     min-height: ${(props) => (props.$navOpen ? '17em' : '100%')};
     background-color: ${(props) => (props.$navOpen ? 'rgb(255,255,255)' : 'rgba(255,255,255,0.6)')};
   }
@@ -98,7 +80,7 @@ const NavContent = styled.div`
   z-index: 2;
   justify-content: space-between;
 
-  @media (max-width: ${mobileWidth}) {
+  @media (max-width: 767px) {
     display: grid;
     padding: 0 0 0 .94rem;
     grid-template-columns: auto 1fr auto;
@@ -107,165 +89,19 @@ const NavContent = styled.div`
   }
 `;
 
-const NavPre = styled.div`
-  display: flex;
-  overflow: hidden;
-  padding-left: 0;
-  margin-left: -0.8rem;
-
-  @media (max-width: 1023px) {
-    padding-left: 1.3rem;
-    margin-left: -1.3rem;
-  }
-
-  @media (max-width: 767) {
-    overflow: visible;
-  }
-`;
-
-const NavMenu = styled.div`
-  display: flex;
-  flex: 1 1 auto;
-  min-width: 0;
-  font-size: .7rem;
-  line-height: 1.1;
-  font-weight: 300;
-  letter-spacing: -0.12px;
-  color: ${(props) => (props.$colorScheme === 'dark' ? darkActions : lightActions)};
-
-  @media (max-width: ${mobileWidth}) {
-    overflow: hidden;
-    letter-spacing: -0.28px;
-    display: ${(props) => (props.$navOpen ? 'flex' : 'none')};
-    grid-area: ${(props) => (props.$navOpen ? 'menu' : 'unset')};
-    font-size: ${(props) => (props.$navOpen ? '14px' : '.7rem')};
-  }
-`;
-
-const NavMenuTray = styled.div`
-  display: flex;
-  width: 100%;
-  max-width: 100%;
-  justify-content: flex-end;
-  align-items: center;
-  visibility: visible;
-
-  @media (max-width: ${mobileWidth}) {
-    /* hide list of options to have chevron */
-    pointer-events: ${(props) => (props.$navOpen ? 'auto' : 'none')};
-    visibility: ${(props) => (props.$navOpen ? 'visible' : 'hidden')};
-    max-height: ${(props) => (props.$navOpen ? '(100vh - 42px)' : '0')};
-    display: ${(props) => (props.$navOpen ? 'block' : 'flex')};
-  }
-
-  @media (max-width: 300px) { /* TODO check auto */
-    max-height: ${(props) => (props.$navOpen ? '100vh' : 'auto')};
-    overflow-y: ${(props) => (props.$navOpen ? 'auto' : 'hidden')};
-  }
-`;
-
-const NavMenuOptions = styled.ul`
-  display: flex;
-  justify-content: flex-end;
-
-  @media (max-width: ${mobileWidth}) {
-    display: block;
-    padding: 0.88rem 1.88rem 1rem 1.88rem;
-    opacity: ${(props) => (props.$navOpen ? '1' : '0')};
-    transform: ${(props) => (props.$navOpen ? 'translateZ(0)' : 'translate3d(0,-150px,0)')};
-    // transition-delay: ${(props) => (props.$navOpen ? '.2s,.4s' : '0s,0s')};
-  }
-`;
-
-const NavOption = styled.li`
-  margin-left: 1.4rem;
-  min-width: 0;
-  cursor: pointer;
-  color: inherit;
-
-  &:hover {
-    color: ${(props) => (props.$colorScheme === 'dark' ? highlightRed : lightHighBlue)};
-    font-weight: 500;
-  }
-
-  @media screen and (max-width: ${mobileWidth}) {
-    margin-left: 0;
-    width: 100%;
-    transition: .5 ease;
-    transition-property: transform, opacity;
-    padding: 0;
-    line-height: 46px;
-    border-bottom: 1px solid;
-    border-color: ${(props) => (props.$colorScheme === 'dark' ? darkActionBorder : lightActionBorder)};
-    white-space: no-wrap;
-    font-weight: 300;
-
-    &:last-child {
-      border-bottom: none;
-    }
-
-    opacity: ${(props) => (props.$navOpen ? '1' : '0')};
-    transform: ${(props) => (props.$navOpen ? 'translateZ(0)' : 'translate3d(0,-25px,0)')};
-    visibility: ${(props) => (props.$navOpen ? 'visible' : 'hidden')};
-  }
-`;
-
-const SideNavToggleWrapper = styled.div`
-  display: none;
-  margin-top: 1px;
-
-  @media (max-width: 1023px) {
-    display: flex;
-    margin-top: 1px;
-  }
-`;
-
-const SideNavToggle = styled.button`
-  position: relative;
-  align-self: center;
-  margin: 0 -5px;
-  color: ${(props) => (props.$colorScheme === 'dark' ? darkActions : lightActions)};
-  direction: ltr;
-  text-align: left;
-
-  &:hover #sidenav-icon-wrapper {
-    background-color: ${(props) => (props.$colorScheme === 'dark' ? darkHoverBack : lightHoverBack)};
-    color: ${(props) => (props.$colorScheme === 'dark' ? darkSideHover : lightSideHover)};
-  }
-`;
-
-const SideNavIconWrapper = styled.span`
-  display: flex;
-  padding: 5px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-
-  #sidenav-icon {
-    width: 20px;
-    height: 20px;
-  }
-`;
-
-const SideNavToggleSeparator = styled.span`
-  height: 0.8em;
-  width: 1px;
-  background: ${(props) => (props.$colorScheme === 'dark' ? darkTitle : lightTitle)};
-  align-self: center;
-  margin: 0 1.3rem;
-`;
-
 function GlassHeader({ $colorScheme, $showSideBar, passSidebarClick }) {
 
   const [sideBarOpen, setSideBarOpen] = useState('closed');
   const [direction, setDirection] = useState('down');
   const [navOpen, setNavOpen] = useState(false);
+  const [showChevron, setShowChevron] = useState(true);
 
   const handleSideBarClick = () => {
     const newState = sideBarOpen === 'closed' ? 'open' : 'closed';
     // setSideBarOpen((prevState) => (prevState === 'closed' ? 'open' : 'closed'));
     setSideBarOpen(newState);
     passSidebarClick(newState);
+    setShowChevron(newState != 'open');
   }
 
   const handleChevronClick = () => {
@@ -302,43 +138,23 @@ function GlassHeader({ $colorScheme, $showSideBar, passSidebarClick }) {
         <NavWrapper $navOpen={navOpen}>
           <NavBackground id="nav-background" $navOpen={navOpen} $colorScheme={$colorScheme}></NavBackground>
           <NavContent id="nav-content" $navOpen={navOpen}>
-            <NavPre id="nav-pre" $showSideBar={true}>
-              {$showSideBar && (
-                <SideNavToggleWrapper>
-                  <SideNavToggle id="sidenav-toggle" $navOpen={sideBarOpen} onClick={handleSideBarClick} $colorScheme={$colorScheme}>
-                    <SideNavIconWrapper id="sidenav-icon-wrapper">
-                      <svg 
-                        aria-hidden="true" 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        xmlnsXlink="http://www.w3.org/1999/xlink" 
-                        id="sidenav-icon" 
-                        viewBox="0 0 14 14" 
-                        height="14" 
-                        data-v-9b3da902=""
-                        ><path data-v-b5c5049e="" d="M11.632 11.991c0.577 0 1.010-0.143 1.299-0.43 0.287-0.286 0.432-0.713 0.432-1.278v-6.562c0-0.565-0.145-0.991-0.433-1.28s-0.721-0.433-1.298-0.433h-9.264c-0.569 0-1 0.144-1.292 0.43s-0.439 0.714-0.439 1.283v6.562c0 0.569 0.147 0.996 0.439 1.28s0.723 0.427 1.292 0.427h9.264zM4.837 11.030h-2.43c-0.258 0-0.455-0.068-0.591-0.205s-0.206-0.34-0.206-0.609v-6.425c0-0.269 0.068-0.472 0.205-0.609s0.335-0.205 0.592-0.205h2.43v8.053zM11.593 11.030h-5.828v-8.053h5.827c0.258 0 0.458 0.068 0.598 0.205s0.211 0.34 0.211 0.609v6.425c0 0.27-0.070 0.473-0.211 0.609s-0.339 0.205-0.597 0.205zM3.791 4.963c0.091 0 0.168-0.033 0.233-0.1 0.060-0.057 0.097-0.138 0.097-0.228s-0.037-0.17-0.097-0.228l-0-0c-0.058-0.058-0.139-0.094-0.228-0.094-0.002 0-0.004 0-0.005 0h-1.132c-0.001-0-0.002-0-0.003-0-0.088 0-0.168 0.036-0.225 0.094l-0 0c-0.060 0.057-0.097 0.138-0.097 0.228s0.037 0.17 0.097 0.228l0 0c0.064 0.067 0.14 0.1 0.227 0.1h1.132zM3.791 6.379c0.091 0 0.168-0.032 0.233-0.097 0.060-0.057 0.098-0.137 0.098-0.226s-0.037-0.17-0.098-0.226l-0-0c-0.058-0.058-0.139-0.094-0.228-0.094-0.002 0-0.004 0-0.005 0h-1.132c-0.001-0-0.002-0-0.003-0-0.088 0-0.168 0.036-0.225 0.094l-0 0c-0.060 0.057-0.097 0.137-0.097 0.226s0.037 0.169 0.097 0.226l0 0c0.057 0.060 0.137 0.097 0.226 0.097 0 0 0.001 0 0.001 0h1.132zM3.791 7.796c0.091 0 0.168-0.032 0.233-0.097 0.059-0.056 0.096-0.135 0.097-0.222v-0c0-0.002 0-0.004 0-0.007 0-0.088-0.037-0.168-0.096-0.224l-0-0c-0.058-0.058-0.139-0.094-0.228-0.094-0.002 0-0.004 0-0.005 0h-1.132c-0.001-0-0.002-0-0.003-0-0.088 0-0.168 0.036-0.225 0.094l-0 0c-0.060 0.056-0.097 0.136-0.097 0.224 0 0.002 0 0.005 0 0.007l-0-0c0 0.083 0.032 0.158 0.097 0.222 0.057 0.060 0.137 0.097 0.225 0.097 0.001 0 0.001 0 0.002-0h1.132z"></path></svg>
-                    </SideNavIconWrapper>
-                  </SideNavToggle>
-                  <SideNavToggleSeparator className="separator" $colorScheme={$colorScheme}></SideNavToggleSeparator>
-                </SideNavToggleWrapper>
-              )}
-            </NavPre>
+            <NavPre 
+              $colorScheme={$colorScheme} 
+              handleSideBarClick={handleSideBarClick}
+              $showSideBar={$showSideBar}
+            />
             <NavTitle 
               $colorScheme={$colorScheme} 
-              $navOpen={navOpen} />
-            <NavMenu id="nav-menu" $navOpen={navOpen} $colorScheme={$colorScheme}>
-              <NavMenuTray id="nav-menu-tray" $navOpen={navOpen}>
-                <NavMenuOptions id="nav-menu-options" $navOpen={navOpen}>
-                  <NavOption $navOpen={navOpen} $colorScheme={$colorScheme}>About</NavOption>
-                  <NavOption $navOpen={navOpen} $colorScheme={$colorScheme}>Projects</NavOption>
-                  <NavOption $navOpen={navOpen} $colorScheme={$colorScheme}>Career</NavOption>
-                  <NavOption $navOpen={navOpen} $colorScheme={$colorScheme}>Art</NavOption>
-                  <NavOption $navOpen={navOpen} $colorScheme={$colorScheme}>Resume</NavOption>
-                </NavMenuOptions>
-              </NavMenuTray>
-            </NavMenu>
+              $navOpen={navOpen}
+            />
+            <NavMenu 
+              $colorScheme={$colorScheme}
+              $navOpen={navOpen}
+            />
             <NavActions
               $direction={direction} 
               handleChevronClick={handleChevronClick}
+              $showChevron={showChevron}
             />
           </NavContent>
         </NavWrapper>

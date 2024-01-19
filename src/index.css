@@ -90,6 +90,15 @@ html {
   --nav-height: 2.75rem;
   --bg-height-big: 700px;
   --nav-height: 2.75rem;
+  --mobile-width: 767px;
+
+  --snow: #e8e8e8;
+  --cloud: #d2d2d2;
+  --stone: #a5a5a5;
+  --concrete: #6e6e73;
+  --wet-concrete: #515154;
+  --asphalt: #383838;
+  --midnight: #1d1d1f;
 }
 
 * {
