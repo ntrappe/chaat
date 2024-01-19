@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import NavTitle from './components/GlassHeader/NavTitle.jsx';
 
 /* Dark Scheme Colors */
-const darkBorder = '#444';
-const darkTitle = '#999';
+const darkBorder = '#383838';
+const darkTitle = '#b0b0b0';
 const darkTitleHover = 'white';
-const darkActions = '#515154';
+const darkActions = '#77787d';
 const darkHighBlue = '#388eff';
 const darkActionBorder = 'rgba(81,81,84,0.7)';
 const darkHoverBack = '#515154';
@@ -30,11 +31,8 @@ const navCompactHeight = '2.8rem';
 const mobileWidth = '767px';
 const mobileWidthVar = 767;
 const wideWidthVar = 1023;
-const asphalt = '#1D1D1F';
-const concrete = '#515154';
-const mutedGrey = '#515154';
-const highlightBlue = 'rgb(0,102,204)';
-const lightGrey = '#f1f2f5';
+const highlightRed = '#ce4746';
+const brightHighRed = '#ff595b';
 
 const NavHeader = styled.header`
   display: flex;
@@ -124,45 +122,6 @@ const NavPre = styled.div`
   }
 `;
 
-const NavTitle = styled.div`
-  display: flex;
-  height: ${navHeight});
-  align-items: center;
-  cursor: default;
-  line-height: 1.2;
-  font-family: 'SF Pro';
-  font-size: 1.2rem;
-  font-weight: 500;
-  letter-spacing: -0.152px;
-  color: ${(props) => (props.$colorScheme === 'dark' ? darkTitle : lightTitle)};
-  grid-area: ${(props) => (props.$navOpen ? 'title' : 'unset')}; /* TODO check */
-
-  @media (max-width: ${mobileWidth}) {
-    padding-top: 0;
-    height: ${navCompactHeight};
-    width: 90%;
-  }
-`;
-
-const LinkTitle = styled.a`
-  display: inline-block;
-  margin: 0;
-  white-space: nowrap;
-  color: inherit;
-  font-family: 'SF Pro';
-  font-size: inherit;
-  font-weight: inherit;
-  cursor: pointer;
-
-  @media (max-width: ${mobileWidth}) {
-    display: flex;
-  }
-
-  &:hover {
-    color: ${(props) => (props.$colorScheme === 'dark' ? darkTitleHover : lightTitleHover)};
-  }
-`;
-
 const NavMenu = styled.div`
   display: flex;
   flex: 1 1 auto;
@@ -224,8 +183,8 @@ const NavOption = styled.li`
   color: inherit;
 
   &:hover {
-    color: ${(props) => (props.$colorScheme === 'dark' ? darkHighBlue : lightHighBlue)};
-    font-weight: 400;
+    color: ${(props) => (props.$colorScheme === 'dark' ? highlightRed : lightHighBlue)};
+    font-weight: 500;
   }
 
   @media screen and (max-width: ${mobileWidth}) {
@@ -422,9 +381,9 @@ function GlassHeader({ $colorScheme, $showSideBar, passSidebarClick }) {
                 </SideNavToggleWrapper>
               )}
             </NavPre>
-            <NavTitle id="nav-title" $navOpen={navOpen} $colorScheme={$colorScheme}>
-              <LinkTitle href="nicoletrappe.com" $colorScheme={$colorScheme}>Nicole Trappe</LinkTitle>
-            </NavTitle>
+            <NavTitle
+              $colorScheme={$colorScheme} 
+              $navOpen={navOpen} />
             <NavMenu id="nav-menu" $navOpen={navOpen} $colorScheme={$colorScheme}>
               <NavMenuTray id="nav-menu-tray" $navOpen={navOpen}>
                 <NavMenuOptions id="nav-menu-options" $navOpen={navOpen}>

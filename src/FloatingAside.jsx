@@ -13,7 +13,7 @@ const FloatingAsideWrapper = styled.div`
   align-self: flex-start;
   width: 100px;
   padding-left: 32px;
-  margin-top: 60px; /* match this with case study text */
+  margin-top: 130px; /* match this with case study text */
 
   @media (max-width: 1023px) {
     display: ${(props) => (props.$mode === HID ? 'none' : 'flex')};
