@@ -3,11 +3,8 @@ import styled from 'styled-components';
 
 const EXP = 'expanded';
 const COL = 'collapsed';
-const HID = 'hidden';
 
 const navHeight = '2.75rem';
-const lightGrey = '#86868b';
-const darkGrey = '#333437';
 const backgroundBlue = '#d4edf9';
 const highlightBlue = '#0066cc';
 const stone = '#e8e8ed';
@@ -48,6 +45,7 @@ const ScrollableAside = styled.nav`
   width: 195px;
   transform: translateZ(0);
   margin-top: 10px;
+  padding-top: ${(props) => (props.$mode === COL ? '21px' : '0')};
 
   @media (max-width: 1023px) {
     width: 100%;
@@ -57,7 +55,7 @@ const ScrollableAside = styled.nav`
 const CaseTopic = styled.details`
   width: 100%
   padding: 5px 0 5px 0;
-  margin: 0 !important;
+  margin-bottom: ${(props) => (props.$mode === EXP ? '4px' : '0')};
 
   @media (max-width: 1023px) {
     padding: ${(props) => (props.$mode === EXP ? '0 !important' : '5px 0 5px 0')};
@@ -189,14 +187,14 @@ function Sidebar({ $mode }) {
                 src={selectedItem === 0 ? "/src/assets/project-icons/book-active.png" : "/src/assets/project-icons/book-inactive.png"}
                 alt="Book Icon"
               />
-              <p>Book App</p>
+              <p>Bookify</p>
             </CaseContent>
             <CaseContent $mode={$mode} $active={selectedItem === 1} onClick={() => handleItemClick(1)}>
               <img
                 src={selectedItem === 1 ? "/src/assets/project-icons/pomodoro-active.png" : "/src/assets/project-icons/pomodoro-inactive.png"}
                 alt="Tomato Pomodoro Icon"
               />
-              <p>Pomodoro App</p>
+              <p>Pomodoro Timer</p>
             </CaseContent>
             <CaseContent $mode={$mode} $active={selectedItem === 2} onClick={() => handleItemClick(2)}>
               <img

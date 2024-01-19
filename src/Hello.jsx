@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 /* Custom Colors */
 const highlightBlue = '#388eff';
+const highlightRed = '#ce4746';
+const brightHighRed = '#ff595b';
 const darkerGrey = '#1f1f1f';
 const mediumGrey = '#3d3d3d';
 const borderGrey = '#444';
@@ -35,13 +37,13 @@ const HelloBackground = styled.figure`
 
 const TextCursor = styled.span`
   display: inline-block;
-  border-left: 3px solid ${highlightBlue};
+  border-left: 3px solid ${highlightRed};
   margin-left: 10px;
   height: 125px;
   animation: blinker 1.4s step-start infinite;
 
   @media (max-width: 767px) {
-    border-left: 2.5px solid ${highlightBlue};
+    border-left: 2.5px solid ${highlightRed};
     margin-left: 5px;
     height: 95px;
   }
@@ -142,7 +144,7 @@ const LanguageOption = styled.button`
   
   background-color: ${(props) => {
     if (props.$state === 'on') {
-      return highlightBlue;
+      return highlightRed;
     } else {
       return darkerGrey;
     }
@@ -163,7 +165,7 @@ const LanguageOption = styled.button`
   &:hover {
     background-color: ${(props) => {
       if (props.$state === 'on') {
-        return highlightBlue;
+        return highlightRed;
       } else {
         return mediumGrey;
       }
@@ -209,7 +211,7 @@ const FontOption = styled.button`
   
   color: ${(props) => {
     if (props.$state === 'on') {
-      return highlightBlue;
+      return highlightRed;
     } else {
       return lightGrey;
     }
@@ -230,7 +232,7 @@ const FontOption = styled.button`
 
     color: ${(props) => {
       if (props.$state === 'on') {
-        return highlightBlue;
+        return highlightRed;
       } else {
         return snow;
       }
@@ -282,7 +284,7 @@ const ColorOption = styled.button`
 
   border: ${(props) => {
     if (props.$state === 'on') {
-      return '2px solid #388eff';
+      return '2px solid ' + highlightRed;
     } else {
       return '1.5px solid #727578';
     }
@@ -311,7 +313,7 @@ const ColorOption = styled.button`
   &:hover {
     border: ${(props) => {
       if (props.$state === 'on') {
-        return '2px solid #388eff';
+        return '2px solid ' + brightHighRed;
       } else {
         return '2.25px solid white';
       }

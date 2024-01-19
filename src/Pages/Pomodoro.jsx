@@ -14,6 +14,13 @@ const CaseStudyWrapper = styled.div`
   @media (max-width: 1023px) {
     display: ${(props) => (props.$mode === HID ? 'none' : 'flex')};
   }
+
+  p {
+    font-family: 'SF Pro Display';
+    font-size: 17px;
+    line-height: 25px;
+    font-weight: 400;
+  }
 `;
 
 const CaseStudyTitle = styled.h1`
@@ -40,6 +47,7 @@ const CaseStudyPreview = styled.div`
   justify-content: center;
   min-width: 0;
   width: 100%;
+  margin-bottom: 30px;
 
   img {
     display: block;
@@ -50,7 +58,7 @@ const CaseStudyPreview = styled.div`
   }  
 `;
 
-function CaseStudy({ $mode }) {
+function Pomodoro({ $mode }) {
   
   return (
     <>
@@ -63,10 +71,10 @@ function CaseStudy({ $mode }) {
             alt="Tomato Pomodoro Icon"
           />
         </CaseStudyPreview>
-        <h3>The HIG contains guidance and best practices that can help you design a great experience for any Apple platform.</h3>
+        <p>The HIG contains guidance and best practices that can help you design a great experience for any Apple platform.</p>
       </CaseStudyWrapper>
     </>
   )
 }
   
-export default CaseStudy;
+export default Pomodoro;

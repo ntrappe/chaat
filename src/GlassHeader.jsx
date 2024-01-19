@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 /* Dark Scheme Colors */
-const darkBorder = '#444';
-const darkTitle = '#999';
+const darkBorder = '#383838';
+const darkTitle = '#b0b0b0';
 const darkTitleHover = 'white';
-const darkActions = '#515154';
+const darkActions = '#77787d';
 const darkHighBlue = '#388eff';
 const darkActionBorder = 'rgba(81,81,84,0.7)';
 const darkHoverBack = '#515154';
@@ -30,11 +30,8 @@ const navCompactHeight = '2.8rem';
 const mobileWidth = '767px';
 const mobileWidthVar = 767;
 const wideWidthVar = 1023;
-const asphalt = '#1D1D1F';
-const concrete = '#515154';
-const mutedGrey = '#515154';
-const highlightBlue = 'rgb(0,102,204)';
-const lightGrey = '#f1f2f5';
+const highlightRed = '#ce4746';
+const brightHighRed = '#ff595b';
 
 const NavHeader = styled.header`
   display: flex;
@@ -224,8 +221,8 @@ const NavOption = styled.li`
   color: inherit;
 
   &:hover {
-    color: ${(props) => (props.$colorScheme === 'dark' ? darkHighBlue : lightHighBlue)};
-    font-weight: 400;
+    color: ${(props) => (props.$colorScheme === 'dark' ? highlightRed : lightHighBlue)};
+    font-weight: 500;
   }
 
   @media screen and (max-width: ${mobileWidth}) {
