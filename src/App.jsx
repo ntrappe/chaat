@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import GlassHeader from './GlassHeader.jsx';
+import Hello from './components/Home/Hello.jsx';
+import GlassHeader from './components/GlassHeader/GlassHeader.jsx';
 import FloatingAside from './FloatingAside.jsx';
 import Sidebar from './Sidebar.jsx';
 import CaseStudy from './CaseStudy.jsx';
@@ -101,6 +102,11 @@ function App() {
         </AdjustableSidebar>
         <FloatingAside $mode={mode}/>
       </MainWrapper>
+      {/* <main id="main">
+        <section id="hello-section">
+          <Hello />
+        </section>
+      </main> */}
     </>
   )
 }

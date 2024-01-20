@@ -97,8 +97,19 @@ html {
   --stone: #a5a5a5;
   --concrete: #6e6e73;
   --wet-concrete: #515154;
+  --pavement: #444;
   --asphalt: #383838;
   --midnight: #1d1d1f;
+  --coral: #ff595b;
+  --scarlet: #ce4746;
+  --dust: #fce6e6;
+
+  --lime: #88ff49;
+  --cyan: #0eefd7;
+  --grape: #a67bff;
+  --cornflower: #2f80ef;
+  --lemon: #ffe75c;
+  --strawberry: #ef5a60;
 }
 
 * {

@@ -5,11 +5,6 @@ const EXP = 'expanded';
 const COL = 'collapsed';
 
 const navHeight = '2.75rem';
-const backgroundBlue = '#d4edf9';
-const highlightBlue = '#0066cc';
-const stone = '#e8e8ed';
-const concrete = '#6e6e73';
-const asphalt = '#1d1d1f';
 
 const SidebarWrapper = styled.div`
   display: block;
@@ -41,7 +36,7 @@ const SidebarAside = styled.div`
 const ScrollableAside = styled.nav`
   position: sticky;
   position: -webkit-sticky;
-  top: ${navHeight};
+  top: var(--nav-height);
   width: 195px;
   transform: translateZ(0);
   margin-top: 10px;
@@ -70,31 +65,31 @@ const CaseTopic = styled.details`
     font-weight: ${(props) => (props.$active ? '500' : '300')};
     color: ${(props) => {
       if (props.$mode === EXP) {
-        return asphalt;
+        return `{var(--midnight)}`;
       } else {
         if (props.$active) {
-          return asphalt;
+          return `{var(--midnight)}`;
         } else {
-          return concrete;
+          return `{var(--concrete)}`;
         }
       }
     }};
 
     @media (max-width: 1023px) {
-      padding: ${(props) => (props.$mode === EXP ? '6px 0 6px 17px' : '0')};
+      padding: ${(props) => (props.$mode === EXP ? '8.5px 0 8.5px 17px' : '0')};
     }
 
     &:hover {
-      background-color: ${(props) => (props.$mode === EXP ? backgroundBlue : 'inherit')};
-      color: ${(props) => (props.$mode === COL ? highlightBlue : 'inherit')};
+      background-color: ${(props) => (props.$mode === EXP ? `var(--dust)` : 'inherit')};
+      color: ${(props) => (props.$mode === COL ? 'red' : 'inherit')};
     }
     
     &::before {
-      content: '＋ ';
-      color: ${concrete};
-      font-size: 14px;
-      font-weight: 500;
-      margin-right: 2.5px;
+      content: url("data:image/svg+xml,%3Csvg data-v-b5c5049e='' data-v-1ab7c05f='' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svg-icon inline-chevron-right-icon icon-inline chevron' viewBox='0 0 14 14' data-v-8029502c=''%3E%3Cpath data-v-b5c5049e='' d='m4.81347656 13.1269531c.22558594 0 .41015625-.0820312.56738282-.2324219l5.31835942-5.19531245c.1845703-.19140625.2802734-.38964844.2802734-.63574219 0-.23925781-.0888672-.45117187-.2802734-.62890625l-5.31835942-5.20214843c-.15722657-.15039063-.34179688-.23242188-.56738282-.23242188-.45800781 0-.81347656.35546875-.81347656.80664062 0 .21875.09570312.43066407.24609375.58789063l4.79199219 4.67578125-4.79199219 4.6621094c-.15722656.1640625-.24609375.3623047-.24609375.5878906 0 .4511719.35546875.8066406.81347656.8066406z'%3E%3C/path%3E%3C/svg%3E");
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 5px;
     }
   }
 
@@ -104,28 +99,28 @@ const CaseTopic = styled.details`
 
   &[open] summary {
     &::before {
-      content: '－ ';
-      color: ${concrete};
-      font-weight: 600;
-      margin-right: 2px;
+      vertical-align: middle;
+      transform: rotate(90deg);
+      margin-left: 2.5px;
+      margin-right: 2.5px;
     }
   }
 `;
 
-const CaseContent = styled.div`
+const CasePreview = styled.div`
   display: flex;
   flex: 1;
   align-items: center;
   padding: 7px 0 7px 0;
   cursor: pointer;
-  background-color: ${(props) => (props.$mode === EXP && props.$active ? stone : 'inherit')};
+  background-color: ${(props) => (props.$mode === EXP && props.$active ? `var(--snow)` : 'inherit')};
 
   @media (max-width: 1023px) {
     padding: ${(props) => (props.$mode === EXP ? '8px 40px 8px 10px' : '7px 0 7px 0')};
   }
 
   &:hover {
-    background-color: ${(props) => (props.$mode === EXP ? backgroundBlue : 'inherit')};
+    background-color: ${(props) => (props.$mode === EXP ? `var(--dust)` : 'inherit')};
   }
 
   img {
@@ -147,22 +142,23 @@ const CaseContent = styled.div`
     font-weight: ${(props) => (props.$active ? '500' : '300')};
     color: ${(props) => {
       if (props.$mode === EXP) {
-        return asphalt;
+        return `var(--midnight)`;
       } else {
         if (props.$active) {
-          return asphalt;
+          return `var(--midnight)`;
         } else {
-          return concrete;
+          return `var(--concrete)`;
         }
       }
     }};
   }
 
   p:hover {
-    color: ${(props) => (props.$mode === COL ? highlightBlue : 'inherit')};
+    color: ${(props) => (props.$mode === COL ? 'red' : 'inherit')};
     font-weight: ${(props) => (props.$active ? '500' : '300')};
   }
 `;
+
 
 function Sidebar({ $mode }) {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -175,6 +171,12 @@ function Sidebar({ $mode }) {
     }
   }
 
+  const bookCase = {
+    title: 'Bookify',
+    id: 0,
+    alt: 'Open book in grey'
+  };
+
   return (
     <>
     <SidebarWrapper id="sidebar" $mode={$mode}>
@@ -182,27 +184,27 @@ function Sidebar({ $mode }) {
         <ScrollableAside $mode={$mode} id="scrollable-aside">
           <CaseTopic $mode={$mode} id="design-cases" $active={selectedParent === 0}>
             <summary>Design</summary>
-            <CaseContent $mode={$mode} $active={selectedItem === 0} onClick={() => handleItemClick(0)}>
+            <CasePreview $mode={$mode} $active={selectedItem === 0} onClick={() => handleItemClick(0)}>
               <img
                 src={selectedItem === 0 ? "/src/assets/project-icons/book-active.png" : "/src/assets/project-icons/book-inactive.png"}
                 alt="Book Icon"
               />
               <p>Bookify</p>
-            </CaseContent>
-            <CaseContent $mode={$mode} $active={selectedItem === 1} onClick={() => handleItemClick(1)}>
+            </CasePreview>
+            <CasePreview $mode={$mode} $active={selectedItem === 1} onClick={() => handleItemClick(1)}>
               <img
                 src={selectedItem === 1 ? "/src/assets/project-icons/pomodoro-active.png" : "/src/assets/project-icons/pomodoro-inactive.png"}
                 alt="Tomato Pomodoro Icon"
               />
               <p>Pomodoro Timer</p>
-            </CaseContent>
-            <CaseContent $mode={$mode} $active={selectedItem === 2} onClick={() => handleItemClick(2)}>
+            </CasePreview>
+            <CasePreview $mode={$mode} $active={selectedItem === 2} onClick={() => handleItemClick(2)}>
               <img
                 src={selectedItem === 2 ? "/src/assets/project-icons/mountain-active.png" : "/src/assets/project-icons/mountain-inactive.png"}
                 alt="Mountain Icon"
               />
               <p>National Park App</p>
-            </CaseContent>
+            </CasePreview>
           </CaseTopic>
           <CaseTopic $mode={$mode} id="engineering-cases" $active={selectedParent === 1}>
             <summary>Engineering</summary>
@@ -210,7 +212,6 @@ function Sidebar({ $mode }) {
         </ScrollableAside>
       </SidebarAside>
     </SidebarWrapper>
-     
     </>
   )
 }
