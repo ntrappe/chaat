@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Hello from './components/Home/Hello.jsx';
 import GlassHeader from './components/GlassHeader/GlassHeader.jsx';
-import FloatingAside from './FloatingAside.jsx';
-import Sidebar from './Sidebar.jsx';
-import CaseStudy from './CaseStudy.jsx';
+import FloatingAside from './components/CaseStudy/FloatingAside.jsx';
+import Sidebar from './components/Sidebar/Sidebar.jsx';
+import CaseStudy from './components/CaseStudy/CaseStudy.jsx';
 
 const EXP = 'expanded';
 const COL = 'collapsed';
@@ -20,7 +20,7 @@ const MainWrapper = styled.main`
     width: ${(props) => props.$sidebarMode === EXP ? '100%' : '692px'};
     position: ${(props) => (props.$mode === 'HID' ? 'fixed' : 'relative')};
     top: ${(props) => (props.$mode === HID ? '1rem' : '0')};
-    overflow: ${(props) => (props.$mode === HID ? 'hidden' : 'auto')};
+    overflow: ${(props) => (props.$mode === HID ? 'hidden' : 'none')};
   }
 
   @media (max-width: 735px) {
@@ -89,6 +89,10 @@ function App() {
     }
   }
 
+  const offsetCaseStudy = (index) => {
+    console.log('sup');
+  }
+
   return (
     <>
       <GlassHeader 
@@ -100,7 +104,7 @@ function App() {
           <Sidebar $mode={sidebarMode}/>
           <CaseStudy $mode={mode}/>
         </AdjustableSidebar>
-        <FloatingAside $mode={mode}/>
+        <FloatingAside $mode={mode} offsetCaseStudy={offsetCaseStudy}/>
       </MainWrapper>
       {/* <main id="main">
         <section id="hello-section">

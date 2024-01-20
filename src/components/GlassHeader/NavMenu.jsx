@@ -65,8 +65,9 @@ const NavOption = styled.li`
   color: inherit;
 
   &:hover {
-    color: ${(props) => (props.$colorScheme === 'dark' ? `var(--coral)` : `var(--scarlet)`)};
-    font-weight: 500;
+    // color: ${(props) => (props.$colorScheme === 'dark' ? `var(--coral)` : `var(--scarlet)`)};
+    // font-weight: 500;
+    text-decoration: underline;
   }
 
   @media screen and (max-width: 767px) {
