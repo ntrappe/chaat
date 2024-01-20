@@ -5,12 +5,6 @@ import NavActions from './NavActions.jsx';
 import NavMenu from './NavMenu.jsx';
 import NavPre from './NavPre.jsx';
 
-/* Dark Scheme Colors */
-const darkNavBack = 'rgba(13,13,13,0.6)';
-
-/* Light Scheme Colors */
-const lightNavBack = 'rgba(255,255,255,0.6)';
-
 /* General Style Variables */
 const navHeight = '2.75rem'
 const navCompactHeight = '2.8rem';
@@ -24,7 +18,7 @@ const NavHeader = styled.header`
   left: 0;
   width: 100%;
   height: ${navHeight};
-  border-bottom: ${(props) => (props.$colorScheme === 'dark' ? `var(--asphalt)` : `var(--cloud)`)};
+  border-bottom: ${(props) => (props.$colorScheme === 'dark' ? 'green' : `var(--cloud)`)};
 
   @media and (max-width: 767px) {
     min-width: 320px;
@@ -50,11 +44,11 @@ const NavBackground = styled.div`
   z-index: 1;
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
-  background-color: ${(props) => (props.$colorScheme === 'dark' ? darkNavBack : lightNavBack)};
+  background-color: ${(props) => (props.$colorScheme === 'dark' ? `var(--obsidian-glassy)` : `var(--white-glassy)`)};
   transition: background-color .5s ease;
   transition-property: background-color,backdrop-filter,-webkit-backdrop-filter;
   border-bottom: 0.8px solid;
-  border-color: ${(props) => (props.$colorScheme === 'dark' ? `nav(--asphalt)` : `var(--cloud)`)};
+  border-color: ${(props) => (props.$colorScheme === 'dark' ? `var(--pavement)` : `var(--cloud)`)};
 
   @supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
     -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -65,10 +59,17 @@ const NavBackground = styled.div`
 
   @media (max-width: 767px) {
     min-height: ${(props) => (props.$navOpen ? '17em' : '100%')};
-    background-color: ${(props) => (props.$navOpen ? 'rgb(255,255,255)' : 'rgba(255,255,255,0.6)')};
+    background-color: ${(props) => {
+      if (props.$colorScheme === 'dark') {
+        return props.$navOpen ? `var(--obsidian)` : `var(--obsidian-glassy)`;
+      } else {
+        return props.$navOpen ? 'white' : `var(--white-glassy)`;
+      }
+    }};
   }
 }
 `;
+
 
 const NavContent = styled.div`
   display: flex;

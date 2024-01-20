@@ -36,9 +36,9 @@ const AsideItem = styled.li`
   cursor: pointer;
   padding: 3px 0 3px 10px;
   border-left: 1.5px solid;
-  color: ${(props) => (props.selected? `var(--asphalt)` : `var(--concrete)`)};
+  color: ${(props) => (props.selected? `var(--wet-concrete)` : `var(--concrete)`)};
   font-weight: ${(props) => (props.selected ? '400' : '300')};
-  border-color: ${(props) => (props.selected ? `var(--asphalt)` : `var(--cloud)`)};
+  border-color: ${(props) => (props.selected ? `var(--wet-concrete)` : `var(--cloud)`)};
 
   &:hover {
     text-decoration: underline;

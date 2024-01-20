@@ -24,6 +24,14 @@ body {
   height: 30em;
 }
 
+body[page="home"] {
+  background-color: var(--obsidian);
+}
+
+body[page="projects"] {
+  background-color: white;
+}
+
 body[mode="sidebar"] {
   position: fixed;
   top: 0;
@@ -33,14 +41,6 @@ body[mode="sidebar"] {
 
 #root {
   background-color: inherit;
-}
-
-#hello-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  min-height: var(--bg-height-big);
 }
 
 ol, ul {
@@ -95,11 +95,19 @@ html {
   --snow: #e8e8e8;
   --cloud: #d2d2d2;
   --stone: #a5a5a5;
+  --shark: #89898c;
   --concrete: #6e6e73;
   --wet-concrete: #515154;
   --pavement: #444;
   --asphalt: #383838;
   --midnight: #1d1d1f;
+  --obsidian: #0d0d0d;
+  
+  --obsidian-glassy: rgba(13,13,13,0.6);
+  --white-glassy: rgba(255,255,255,0.6);
+  --dark-nav-border: rgba(81,81,84,0.4);
+  --light-nav-border: rgba(185,186,187,0.3);
+  
   --coral: #ff595b;
   --scarlet: #ce4746;
   --dust: #fce6e6;

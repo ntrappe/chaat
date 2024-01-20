@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const darkActionBorder = 'rgba(81,81,84,0.7)';
-const lightActionBorder = 'rgba(185,186,187,0.3)';
-
 const NavMenuWrapper = styled.div`
   display: flex;
   flex: 1 1 auto;
@@ -12,7 +9,7 @@ const NavMenuWrapper = styled.div`
   line-height: 1.1;
   font-weight: 300;
   letter-spacing: -0.12px;
-  color: ${(props) => (props.$colorScheme === 'dark' ? `var(--concrete)` : `var(--wet-concrete)`)};
+  color: ${(props) => (props.$colorScheme === 'dark' ? `var(--shark)` : `var(--wet-concrete)`)};
 
   @media (max-width: 767px) {
     overflow: hidden;
@@ -65,8 +62,6 @@ const NavOption = styled.li`
   color: inherit;
 
   &:hover {
-    // color: ${(props) => (props.$colorScheme === 'dark' ? `var(--coral)` : `var(--scarlet)`)};
-    // font-weight: 500;
     text-decoration: underline;
   }
 
@@ -78,12 +73,17 @@ const NavOption = styled.li`
     padding: 0;
     line-height: 46px;
     border-bottom: 1px solid;
-    border-color: ${(props) => (props.$colorScheme === 'dark' ? darkActionBorder : lightActionBorder)};
+    border-color: ${(props) => (props.$colorScheme === 'dark' ? `var(--dark-nav-border)` : `var(--light-nav-border)`)};
     white-space: no-wrap;
     font-weight: 300;
 
     &:last-child {
       border-bottom: none;
+    }
+
+    &:hover {
+      text-decoration: none;
+      color: ${(props) => (props.$colorScheme === 'dark' ? `var(--coral)` : `var(--scarlet)`)};
     }
 
     opacity: ${(props) => (props.$navOpen ? '1' : '0')};
