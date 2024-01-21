@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Projects from './pages/Projects.jsx';
 import Home from './pages/Home.jsx';
 import Photography from './pages/Photography.jsx';
+import Art from './pages/Art.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
   {
     path: '/photography',
     element: <Photography />,
+    errorElement: <Error />
+  },
+  {
+    path: '/art',
+    element: <Art />,
     errorElement: <Error />
   },
 ]);
