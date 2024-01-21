@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
+import { Link } from 'react-router-dom';
 
 const MainWrapper = styled.main`
   display: flex;
@@ -17,7 +17,7 @@ const MainWrapper = styled.main`
     width: 87.5%;
 `;
 
-const ArtWrapper = styled.div`
+const CareerWrapper = styled.div`
   display: flex;
   flex-flow: column;
   flex: 1 1 auto;
@@ -26,7 +26,7 @@ const ArtWrapper = styled.div`
   padding-top: 2.35rem;
 `;
 
-const ArtTitle = styled.h1`
+const CareerTitle = styled.h1`
   margin-bottom: 32px;
   color: var(--midnight);
 
@@ -35,17 +35,17 @@ const ArtTitle = styled.h1`
   }
 `;
 
-const Note = styled.div`
+const Error = styled.div`
   width: fit-content;
-  border: 1px solid var(--violet);
+  border: 1px solid var(--scarlet);
   border-radius: 12px;
-  background-color: var(--lilac);
+  background-color: var(--dust);
   padding: 17px 15px;
   
-  h5 {
+  h3 {
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--violet);
+    color: var(--scarlet);
     padding-bottom: 10px;
 
     @media (max-width: 767px) {
@@ -73,28 +73,24 @@ const Note = styled.div`
   }
 `;
 
-function Art() {
+function PageNotFound() {
   const body = document.getElementById('body');
   body.setAttribute('page', 'projects');
 
   return (
     <>
-      <GlassHeader 
-        $colorScheme={'light'} 
-        $showSideBar={false} 
-        passSidebarClick={() => console.log('no sidebar')}
-      />
       <MainWrapper id="main">
-        <ArtWrapper>
-          <ArtTitle>Art</ArtTitle>
-          <Note>
-            <h5>Note</h5>
-            <p>This page is currently under construction. Please check out the old site <a href='https://13trappen.wixsite.com/portfolio'>here</a>.</p>
-          </Note>
-        </ArtWrapper>
+        <CareerWrapper>
+          <CareerTitle>Page Not Found</CareerTitle>
+          <Error>
+            <h3>Error 404</h3>
+            <p>Oops! Looks like you wandered off the beaten path. Don't worry, we're sending a search party 
+              to recover the lost page. Feel free to navigate back <Link to={`/`}>Home</Link>.</p>
+          </Error>
+        </CareerWrapper>
       </MainWrapper>
     </>
   )
 }
 
-export default Art;
+export default PageNotFound;

@@ -6,27 +6,38 @@ import Projects from './pages/Projects.jsx';
 import Home from './pages/Home.jsx';
 import Photography from './pages/Photography.jsx';
 import Art from './pages/Art.jsx';
+import Career from './pages/Career.jsx';
+import PageNotFound from './pages/PageNotFound.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
-    errorElement: <Error />
+    errorElement: <PageNotFound />
   },
   {
     path: '/projects',
     element: <Projects />,
-    errorElement: <Error />
+    errorElement: <PageNotFound />
   },
   {
     path: '/photography',
     element: <Photography />,
-    errorElement: <Error />
+    errorElement: <PageNotFound />
   },
   {
     path: '/art',
     element: <Art />,
-    errorElement: <Error />
+    errorElement: <PageNotFound />
+  },
+  {
+    path: '/career',
+    element: <Career />,
+    errorElement: <PageNotFound />
+  },
+  {
+    path: '*',
+    element: <PageNotFound />
   },
 ]);
 

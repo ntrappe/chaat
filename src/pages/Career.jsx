@@ -17,7 +17,7 @@ const MainWrapper = styled.main`
     width: 87.5%;
 `;
 
-const ArtWrapper = styled.div`
+const CareerWrapper = styled.div`
   display: flex;
   flex-flow: column;
   flex: 1 1 auto;
@@ -26,7 +26,7 @@ const ArtWrapper = styled.div`
   padding-top: 2.35rem;
 `;
 
-const ArtTitle = styled.h1`
+const CareerTitle = styled.h1`
   margin-bottom: 32px;
   color: var(--midnight);
 
@@ -62,18 +62,9 @@ const Note = styled.div`
       font-size: 0.8rem;
     }
   }
-
-  a {
-    color: var(--midnight);
-    font-weight: 400;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
 `;
 
-function Art() {
+function Career() {
   const body = document.getElementById('body');
   body.setAttribute('page', 'projects');
 
@@ -85,16 +76,16 @@ function Art() {
         passSidebarClick={() => console.log('no sidebar')}
       />
       <MainWrapper id="main">
-        <ArtWrapper>
-          <ArtTitle>Art</ArtTitle>
+        <CareerWrapper>
+          <CareerTitle>Career</CareerTitle>
           <Note>
             <h5>Note</h5>
-            <p>This page is currently under construction. Please check out the old site <a href='https://13trappen.wixsite.com/portfolio'>here</a>.</p>
+            <p>This page is currently under construction. Please check back later.</p>
           </Note>
-        </ArtWrapper>
+        </CareerWrapper>
       </MainWrapper>
     </>
   )
 }
 
-export default Art;
+export default Career;

@@ -110,7 +110,9 @@ function NavMenu({ $colorScheme, $navOpen }) {
           <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>
             <Link to={`/projects`}>Projects</Link>
           </NavOption>
-          <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>Career</NavOption>
+          <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>
+            <Link to={`/career`}>Career</Link>
+          </NavOption>
           <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>
             <Link to={`/art`}>Art</Link>
           </NavOption>
