@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Outlet, Link } from 'react-router-dom';
 
 const NavMenuWrapper = styled.div`
   display: flex;
@@ -56,13 +57,17 @@ const NavMenuOptions = styled.ul`
 `;
 
 const NavOption = styled.li`
-  margin-left: 1.4rem;
+  margin-left: 1.2rem;
   min-width: 0;
   cursor: pointer;
   color: inherit;
 
   &:hover {
     text-decoration: underline;
+  }
+
+  a:visited {
+    color: inherit; /* dont fade clicked links */
   }
 
   @media screen and (max-width: 767px) {
@@ -73,9 +78,12 @@ const NavOption = styled.li`
     padding: 0;
     line-height: 46px;
     border-bottom: 1px solid;
-    border-color: ${(props) => (props.$colorScheme === 'dark' ? `var(--dark-nav-border)` : `var(--light-nav-border)`)};
     white-space: no-wrap;
     font-weight: 300;
+    border-color: ${(props) => (props.$colorScheme === 'dark' ? `var(--dark-nav-border)` : `var(--light-nav-border)`)};
+    opacity: ${(props) => (props.$navOpen ? '1' : '0')};
+    transform: ${(props) => (props.$navOpen ? 'translateZ(0)' : 'translate3d(0,-25px,0)')};
+    visibility: ${(props) => (props.$navOpen ? 'visible' : 'hidden')};
 
     &:last-child {
       border-bottom: none;
@@ -84,11 +92,10 @@ const NavOption = styled.li`
     &:hover {
       text-decoration: none;
       color: ${(props) => (props.$colorScheme === 'dark' ? `var(--coral)` : `var(--scarlet)`)};
+      a, a:visited {
+        color: ${(props) => (props.$colorScheme === 'dark' ? `var(--coral)` : `var(--scarlet)`)};
+      }
     }
-
-    opacity: ${(props) => (props.$navOpen ? '1' : '0')};
-    transform: ${(props) => (props.$navOpen ? 'translateZ(0)' : 'translate3d(0,-25px,0)')};
-    visibility: ${(props) => (props.$navOpen ? 'visible' : 'hidden')};
   }
 `;
 
@@ -97,11 +104,15 @@ function NavMenu({ $colorScheme, $navOpen }) {
     <NavMenuWrapper id="nav-menu" $navOpen={$navOpen} $colorScheme={$colorScheme}>
       <NavMenuTray id="nav-menu-tray" $navOpen={$navOpen}>
         <NavMenuOptions id="nav-menu-options" $navOpen={$navOpen}>
-          <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>About</NavOption>
-          <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>Projects</NavOption>
+          <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>
+            <Link to={`/`}>About</Link>
+          </NavOption>
+          <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>
+            <Link to={`/projects`}>Projects</Link>
+          </NavOption>
           <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>Career</NavOption>
           <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>Art</NavOption>
-          <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>Resume</NavOption>
+          <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>Photography</NavOption>
         </NavMenuOptions>
       </NavMenuTray>
     </NavMenuWrapper>

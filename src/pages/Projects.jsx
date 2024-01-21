@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
-import FloatingAside from '../components/CaseStudy/FloatingAside.jsx';
+import FloatingAside from '../components/Core/FloatingAside.jsx';
 import Sidebar from '../components/Sidebar/Sidebar.jsx';
-import CaseStudy from '../components/CaseStudy/CaseStudy.jsx';
+import CaseStudy from '../components/Core/CaseStudy.jsx';
 
 const EXP = 'expanded';
 const COL = 'collapsed';

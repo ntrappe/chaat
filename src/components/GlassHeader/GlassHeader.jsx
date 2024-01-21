@@ -6,7 +6,7 @@ import NavMenu from './NavMenu.jsx';
 import NavPre from './NavPre.jsx';
 
 /* General Style Variables */
-const navHeight = '2.75rem'
+const navHeight = '2.8rem'
 const navCompactHeight = '2.8rem';
 const mobileWidthVar = 767;
 const wideWidthVar = 1023;
@@ -18,7 +18,7 @@ const NavHeader = styled.header`
   left: 0;
   width: 100%;
   height: ${navHeight};
-  border-bottom: ${(props) => (props.$colorScheme === 'dark' ? 'green' : `var(--cloud)`)};
+  // border-bottom: ${(props) => (props.$colorScheme === 'dark' ? 'green' : `var(--cloud)`)};
 
   @media and (max-width: 767px) {
     min-width: 320px;
