@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
 import FloatingAside from '../components/Core/FloatingAside.jsx';
 import Sidebar from '../components/Sidebar/Sidebar.jsx';
-import CaseStudy from '../components/Core/CaseStudy.jsx';
 
 const EXP = 'expanded';
 const COL = 'collapsed';
@@ -39,7 +38,7 @@ const AdjustableSidebar = styled.div`
   }
 `;
 
-function Projects() {
+function Project({ customComponent: CaseStudy }) {
   const body = document.getElementById('body');
   body.setAttribute('page', 'projects');
 
@@ -99,7 +98,8 @@ function Projects() {
       <MainWrapper id="main" $mode={mode} $sidebarMode={sidebarMode}>
         <AdjustableSidebar id="adjustable-sidebar" $mode={mode}>
           <Sidebar $mode={sidebarMode} />
-          <CaseStudy $mode={mode} />
+          {/* Render the specific case study if provided */}
+          {CaseStudy && <CaseStudy />}
         </AdjustableSidebar>
         <FloatingAside $mode={mode} offsetCaseStudy={offsetCaseStudy} />
       </MainWrapper>
@@ -107,4 +107,4 @@ function Projects() {
   )
 }
 
-export default Projects;
+export default Project;

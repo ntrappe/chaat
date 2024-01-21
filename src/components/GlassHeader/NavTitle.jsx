@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const navCompactHeight = '2.8rem';
 
@@ -13,7 +14,7 @@ const NavTitleWrapper = styled.div`
   font-size: 1.2rem;
   font-weight: 500;
   letter-spacing: -0.152px;
-  color: ${(props) => (props.$colorScheme === 'dark' ? `var(--stone)` : `var(--asphalt)`)};
+  color: ${(props) => (props.$colorScheme === 'dark' ? `var(--stone)` : `var(--wet-concrete)`)};
   grid-area: ${(props) => (props.$navOpen ? 'title' : 'unset')}; /* TODO check */
 
   @media (max-width: 767px) {
@@ -40,12 +41,17 @@ const LinkTitle = styled.a`
   &:hover {
     color: ${(props) => (props.$colorScheme === 'dark' ? 'white' : 'black')};
   }
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
 `;
 
 function NavTitle({ $colorScheme, $navOpen }) {
   return (
     <NavTitleWrapper id="nav-title" $navOpen={$navOpen} $colorScheme={$colorScheme}>
-      <LinkTitle href="nicoletrappe.com" $colorScheme={$colorScheme}>Nicole Trappe</LinkTitle>
+      <LinkTitle $colorScheme={$colorScheme}><Link to={`/`}>Nicole Trappe</Link></LinkTitle>
     </NavTitleWrapper>
   )
 }

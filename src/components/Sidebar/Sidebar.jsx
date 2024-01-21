@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const EXP = 'expanded';
 const COL = 'collapsed';
@@ -154,10 +155,19 @@ const CasePreview = styled.div`
     }};
   }
 
+  a {
+    color: inherit;
+  }
+
   p:hover {
     // color: ${(props) => (props.$mode === COL ? 'red' : 'inherit')};
     font-weight: ${(props) => (props.selected ? '500' : '300')};
     text-decoration: ${(props) => (props.$mode === COL ? 'underline' : 'none')};
+  }
+
+  a:hover {
+    color: inherit;
+    text-decoration: inherit;
   }
 `;
 
@@ -184,14 +194,14 @@ function Sidebar({ $mode }) {
                 src={selectedItem === 0 ? "/src/assets/project-icons/book-active.png" : "/src/assets/project-icons/book-inactive.png"}
                 alt="Book Icon"
               />
-              <p>Bookify</p>
+              <p><Link to={`/projects/bookify`}>Bookify</Link></p>
             </CasePreview>
             <CasePreview $mode={$mode} selected={selectedItem === 1} onClick={() => handleItemClick(1)}>
               <img
                 src={selectedItem === 1 ? "/src/assets/project-icons/pomodoro-active.png" : "/src/assets/project-icons/pomodoro-inactive.png"}
                 alt="Tomato Pomodoro Icon"
               />
-              <p>Pomodoro Timer</p>
+              <p><Link to={`/projects/pomodoro`}>Pomodoro Timer</Link></p>
             </CasePreview>
             <CasePreview $mode={$mode} selected={selectedItem === 2} onClick={() => handleItemClick(2)}>
               <img

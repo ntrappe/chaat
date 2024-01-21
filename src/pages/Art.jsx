@@ -4,13 +4,13 @@ import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
 
 const MainWrapper = styled.main`
   display: flex;
-  width: 980px;
+  width: 800px;
   margin-left: auto;
   margin-right: auto;
   align-self: center;
 
   @media (max-width: 1023px) {
-    width: 692px;
+    width: 600px;
   }
 
   @media (max-width: 767px) {

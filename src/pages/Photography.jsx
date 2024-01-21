@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
-import Grid from '../components/Core/Grid.jsx';
-
-const EXP = 'expanded';
-const COL = 'collapsed';
-const HID = 'hidden';
+import PhotoGrid from '../components/Core/PhotoGrid.jsx';
 
 const MainWrapper = styled.main`
   display: flex;
@@ -35,7 +31,7 @@ function Projects() {
         passSidebarClick={() => console.log('no sidebar')}
       />
       <MainWrapper id="main">
-        <Grid />
+        <PhotoGrid />
       </MainWrapper>
     </>
   )

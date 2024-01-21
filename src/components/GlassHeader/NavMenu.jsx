@@ -57,7 +57,7 @@ const NavMenuOptions = styled.ul`
 `;
 
 const NavOption = styled.li`
-  margin-left: 1.2rem;
+  margin-left: 1.3rem;
   min-width: 0;
   cursor: pointer;
   color: inherit;

@@ -90,6 +90,7 @@ const CardImage = styled.div`
     object-position: center;
     object-fit: cover;
     margin: 0;
+    width: 100%;
   }
 
   @media (max-width: 735px) {

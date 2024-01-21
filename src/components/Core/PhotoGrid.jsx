@@ -83,6 +83,7 @@ const CardImage = styled.div`
     object-position: center;
     object-fit: cover;
     margin: 0;
+    width: 100%;
   }
 
   @media (max-width: 735px) {
@@ -166,7 +167,7 @@ function PhotoGrid() {
             <CardLabel>Angel's Landing, Nov 2021</CardLabel>
           </Card>
           </GridCards>
-        <GridCardsTitle>Arctic</GridCardsTitle>
+        <GridCardsTitle>The Arctic</GridCardsTitle>
         <GridCards>
           <Card>
             <CardImage>
