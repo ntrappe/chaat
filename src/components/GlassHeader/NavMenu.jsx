@@ -105,7 +105,7 @@ function NavMenu({ $colorScheme, $navOpen }) {
       <NavMenuTray id="nav-menu-tray" $navOpen={$navOpen}>
         <NavMenuOptions id="nav-menu-options" $navOpen={$navOpen}>
           <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>
-            <Link to={`/`}>About</Link>
+            <Link to={`/`}>Home</Link>
           </NavOption>
           <NavOption $navOpen={$navOpen} $colorScheme={$colorScheme}>
             <Link to={`/projects`}>Projects</Link>

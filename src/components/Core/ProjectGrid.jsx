@@ -14,6 +14,13 @@ const GridWrapper = styled.div`
   @media (max-width: 1023px) {
     display: ${(props) => (props.$mode === HID ? 'none' : 'flex')};
   }
+
+  @media (max-width: 767px) {
+    position: ${(props) => (props.$navOpen === 'open' ? 'fixed' : 'relative')};
+    left: ${(props) => (props.$navOpen === 'open' ? '0' : 'unset')};
+    margin-left: ${(props) => (props.$navOpen === 'open' ? '6.25%' : 'auto')};
+    margin-right: ${(props) => (props.$navOpen === 'open' ? '6.25%' : 'auto')};
+  }
 `;
 
 const GridTitle = styled.h1`
@@ -98,11 +105,23 @@ const CardImage = styled.div`
   }
 `;
 
-function ProjectGrid({ $mode }) {
-  
+const DarkOverlay = styled.div`
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(13,13,13,0.25);
+  z-index: 1000;
+`;
+
+function ProjectGrid({ $mode, $navOpen }) {
   return (
     <>
-      <GridWrapper $mode={$mode}>
+      <GridWrapper id="project-grid" $mode={$mode} $navOpen={$navOpen}>
+        {$navOpen === 'open' && (
+          <DarkOverlay />
+        )}
         <GridTitle>Projects</GridTitle>
         <GridTag>Dive into case studies unveiling creative problem-solving journeys.</GridTag>
         <GridCardsTitle>Recently Updated</GridCardsTitle>

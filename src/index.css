@@ -1,7 +1,7 @@
 @import './assets/fonts/fonts.css';
 
 header {
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   left: 0;
   display: flex; /* maybe remove? */
@@ -18,20 +18,11 @@ header {
   }
 }
 
-body {
-  /* background-color: #0D0D0D; */
-  /* background-color: white; */
-  height: 30em;
-}
-
 body[page="home"] {
   background-color: var(--obsidian);
 }
 
-body[page="photography"] {
-  background-color: white;
-}
-
+body[page="photography"],
 body[page="projects"] {
   background-color: white;
 }
@@ -45,6 +36,11 @@ body[mode="sidebar"] {
 
 #root {
   background-color: inherit;
+}
+
+body, #root {
+  margin: 0;
+  width: 100%;
 }
 
 ol, ul {
@@ -111,6 +107,7 @@ h4 {
 
 html {
   scroll-behavior: smooth;
+  margin: 0;
 }
 
 :root {
@@ -128,7 +125,9 @@ html {
   --bg-height-big: 700px;
   --nav-height: 2.75rem;
   --mobile-width: 767px;
+  --proj-sect-gap: 30px;
 
+  --paper: #f8f8fa;
   --snow: #e8e8e8;
   --cloud: #d2d2d2;
   --stone: #a5a5a5;
@@ -160,7 +159,7 @@ html {
 }
 
 * {
-  box-sizing: inherit;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }

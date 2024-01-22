@@ -42,8 +42,8 @@ const NoteWrapper = styled.div`
 function Note({ content }) {
   return (
     <NoteWrapper>
-        <h5>Note</h5>
-        <p>{content}</p>
+      <h5>Note</h5>
+      <p>{content}</p>
     </NoteWrapper>
   )
 }

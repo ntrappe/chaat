@@ -42,6 +42,24 @@ const PomodoroPreview = styled.div`
   }  
 `;
 
+const PomodoroSection = styled.section`
+  margin-top: var(--proj-sect-gap);
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    font-family: 'SF Pro';
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.47;
+    letter-spacing: -0.022px;
+    margin-top: 0.8em;
+    color: var(--asphalt);
+  }
+`;
+
 function Pomodoro({ $mode }) {
   
   return (
@@ -55,7 +73,10 @@ function Pomodoro({ $mode }) {
             alt="Tomato Pomodoro Icon"
           />
         </PomodoroPreview>
-        <h3>The HIG contains guidance and best practices that can help you design a great experience for any Apple platform.</h3>
+        <PomodoroSection>
+          <h3>Problem</h3>
+          <p>Engineering students need to complete giant programming assignments without getting overwhelmed or burnt out. Without a way to break up work into smaller tasks and work for shorter periods of time, engineering students will suffer from a lack of productivity and, potentially, fail to complete assignments.</p>
+        </PomodoroSection>
       </PomodoroWrapper>
     </>
   )

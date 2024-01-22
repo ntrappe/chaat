@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
+import ThickFooter from '../components/Footer/ThickFooter.jsx';
 
 const MainWrapper = styled.main`
   display: flex;
@@ -8,6 +9,7 @@ const MainWrapper = styled.main`
   margin-left: auto;
   margin-right: auto;
   align-self: center;
+  height: 100vh; /* maybe change later, force footer below page end */
 
   @media (max-width: 1023px) {
     width: 600px;
@@ -93,6 +95,7 @@ function Art() {
           </Note>
         </ArtWrapper>
       </MainWrapper>
+      <ThickFooter $colorScheme={'light'} />
     </>
   )
 }

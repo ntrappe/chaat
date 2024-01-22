@@ -24,7 +24,7 @@ const NavTitleWrapper = styled.div`
   }
 `;
 
-const LinkTitle = styled.a`
+const LinkTitle = styled.p`
   display: inline-block;
   margin: 0;
   white-space: nowrap;

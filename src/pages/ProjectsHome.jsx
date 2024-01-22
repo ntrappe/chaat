@@ -106,7 +106,7 @@ function ProjectsHome() {
       </MainWrapper>
       {/* Only show footer if sidebar isn't open */}
       {(navOpen !== 'open' && mode !== HID) && (
-        <ThickFooter $colorScheme={'light'} />
+        <ThickFooter $colorScheme={'light'} $temp={'finished'} />
       )}
     </>
   )

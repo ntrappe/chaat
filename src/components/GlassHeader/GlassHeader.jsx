@@ -17,6 +17,7 @@ const NavHeader = styled.header`
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 1001;
   height: ${navHeight};
   // border-bottom: ${(props) => (props.$colorScheme === 'dark' ? 'green' : `var(--cloud)`)};
 
@@ -70,7 +71,6 @@ const NavBackground = styled.div`
 }
 `;
 
-
 const NavContent = styled.div`
   display: flex;
   padding: 0 1.3rem;
@@ -90,7 +90,7 @@ const NavContent = styled.div`
   }
 `;
 
-function GlassHeader({ $colorScheme, $showSideBar, passSidebarClick }) {
+function GlassHeader({ $colorScheme, $showSideBar, passSidebarClick, passNavClick }) {
 
   const [sideBarOpen, setSideBarOpen] = useState('closed');
   const [direction, setDirection] = useState('down');
@@ -99,10 +99,13 @@ function GlassHeader({ $colorScheme, $showSideBar, passSidebarClick }) {
 
   const handleSideBarClick = () => {
     const newState = sideBarOpen === 'closed' ? 'open' : 'closed';
-    // setSideBarOpen((prevState) => (prevState === 'closed' ? 'open' : 'closed'));
+     /* if user wants sidebar to open while nav is open, close nav first */
+    setNavOpen(false);
+    setDirection('down');
+    /* now open sidebar */
     setSideBarOpen(newState);
     passSidebarClick(newState);
-    setShowChevron(newState != 'open');
+    setShowChevron(newState != 'open'); 
   }
 
   const handleChevronClick = () => {
@@ -110,6 +113,7 @@ function GlassHeader({ $colorScheme, $showSideBar, passSidebarClick }) {
     console.log('click on ' + direction + ' --> ' + newDirection);
     setDirection(newDirection);
     setNavOpen(newDirection === 'down' ? false : true);
+    passNavClick(!navOpen);
   };
 
   useEffect(() => {
@@ -117,6 +121,7 @@ function GlassHeader({ $colorScheme, $showSideBar, passSidebarClick }) {
       if (window.innerWidth > mobileWidthVar) {
         setDirection('down');
         setNavOpen(false);
+        passNavClick(false);
       }
 
       if (window.innerWidth > wideWidthVar) {

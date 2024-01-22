@@ -8,6 +8,13 @@ const GridWrapper = styled.div`
   min-width: 0;
   height: 100%;
   padding-top: 2.35rem;
+
+  @media (max-width: 767px) {
+    position: ${(props) => (props.$navOpen === 'open' ? 'fixed' : 'relative')};
+    left: ${(props) => (props.$navOpen === 'open' ? '0' : 'unset')};
+    margin-left: ${(props) => (props.$navOpen === 'open' ? '6.25%' : 'auto')};
+    margin-right: ${(props) => (props.$navOpen === 'open' ? '6.25%' : 'auto')};
+  }
 `;
 
 const GridTitle = styled.h1`
@@ -91,11 +98,24 @@ const CardImage = styled.div`
   }
 `;
 
-function PhotoGrid() {
+const DarkOverlay = styled.div`
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(13,13,13,0.25);
+  z-index: 1000;
+`;
+
+function PhotoGrid({ $navOpen }) {
   
   return (
     <>
-      <GridWrapper>
+      <GridWrapper id="photo-grid" $navOpen={$navOpen}>
+        {$navOpen === 'open' && (
+          <DarkOverlay />
+        )}
         <GridTitle>Photography</GridTitle>
         <GridTag>Exploring the great outdoors through my lens. Captured on an iPhone SE.</GridTag>
         <GridCardsTitle>Glacier National Park</GridCardsTitle>
@@ -151,7 +171,7 @@ function PhotoGrid() {
             </CardImage>
             <CardLabel>High Peaks Trail, Jul 2021</CardLabel>
           </Card>
-          </GridCards>
+        </GridCards>
         <GridCardsTitle>Zion National Park</GridCardsTitle>
         <GridCards>
           <Card>
@@ -166,7 +186,7 @@ function PhotoGrid() {
             </CardImage>
             <CardLabel>Angel's Landing, Nov 2021</CardLabel>
           </Card>
-          </GridCards>
+        </GridCards>
         <GridCardsTitle>The Arctic</GridCardsTitle>
         <GridCards>
           <Card>
@@ -181,7 +201,7 @@ function PhotoGrid() {
             </CardImage>
             <CardLabel>Nordenskiöldbreen, Sep 2022</CardLabel>
           </Card>
-          </GridCards>
+        </GridCards>
         <GridCardsTitle>Redwood National Park</GridCardsTitle>
         <GridCards>
           <Card>
@@ -196,8 +216,8 @@ function PhotoGrid() {
             </CardImage>
             <CardLabel>Jedediah Smith Redwoods, Sep 2021</CardLabel>
           </Card>
-          </GridCards>
-          <GridCardsTitle>Bryce Canyon National Park</GridCardsTitle>
+        </GridCards>
+        <GridCardsTitle>Bryce Canyon National Park</GridCardsTitle>
         <GridCards>
           <Card>
             <CardImage>
@@ -223,7 +243,52 @@ function PhotoGrid() {
             </CardImage>
             <CardLabel>Peek-a-Boo Loop Trail, Mar '21</CardLabel>
           </Card>
-          </GridCards>
+        </GridCards>
+        <GridCardsTitle>Redwood National Park</GridCardsTitle>
+        <GridCards>
+          <Card>
+            <CardImage>
+              <img src="/src/assets/photos/redwood.png"/>
+            </CardImage>
+            <CardLabel>Boy Scott Tree Trail, Sep 2021</CardLabel>
+          </Card>
+          <Card>
+            <CardImage>
+              <img src="/src/assets/photos/leaf-light.png"/>
+            </CardImage>
+            <CardLabel>Jedediah Smith Redwoods, Sep 2021</CardLabel>
+          </Card>
+        </GridCards>
+        <GridCardsTitle>North Cascades National Park</GridCardsTitle>
+        <GridCards>
+          <Card>
+            <CardImage>
+              <img src="/src/assets/photos/sahale-meadow.png"/>
+            </CardImage>
+            <CardLabel>Sahale Arm, Sep 2023</CardLabel>
+          </Card>
+          <Card>
+            <CardImage>
+              <img src="/src/assets/photos/cascades.png"/>
+            </CardImage>
+            <CardLabel>Sahale Glacier Trail, Sep 2023</CardLabel>
+          </Card>
+        </GridCards>
+        <GridCardsTitle>Iceland</GridCardsTitle>
+        <GridCards>
+          <Card>
+            <CardImage>
+              <img src="/src/assets/photos/reynisfjara.png"/>
+            </CardImage>
+            <CardLabel>Reynisfjara Beach, Sep 2022</CardLabel>
+          </Card>
+          <Card>
+            <CardImage>
+              <img src="/src/assets/photos/atlantic.png"/>
+            </CardImage>
+            <CardLabel>North Atlantic Ocean, Sep 2022</CardLabel>
+          </Card>
+        </GridCards>
       </GridWrapper>
     </>
   )
