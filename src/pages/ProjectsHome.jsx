@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
 import Sidebar from '../components/Sidebar/Sidebar.jsx';
 import ProjectGrid from '../components/Core/ProjectGrid.jsx';
+import ThickFooter from '../components/Footer/ThickFooter.jsx';
 
 const EXP = 'expanded';
 const COL = 'collapsed';
@@ -13,6 +14,7 @@ const MainWrapper = styled.main`
   width: 980px;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 3em;
 
   @media (max-width: 1023px) {
     width: ${(props) => props.$sidebarMode === EXP ? '100%' : '692px'};
@@ -21,7 +23,7 @@ const MainWrapper = styled.main`
     overflow: ${(props) => (props.$mode === HID ? 'hidden' : 'none')};
   }
 
-  @media (max-width: 735px) {
+  @media (max-width: 767px) {
     width: ${(props) => (props.$mode === HID ? '100%' : '87.5%')};
   }
 `;
@@ -46,17 +48,24 @@ function ProjectsHome() {
   const [mode, setMode] = useState(window.innerWidth > 1023 ? EXP : COL);
   /* by default sidebar is either attached to main page or hidden */
   const [sidebarMode, setSidebarMode] = useState(window.innerWidth > 1023 ? COL : HID);
+  /* need to know if nav is open to freeze content below it */
+  const [navOpen, setNavOpen] = useState(null);
 
   const verifySidebarClick = (signal) => {
     if (signal === 'open') {
       setMode(HID);
       setSidebarMode(EXP);
       body.setAttribute('mode', 'sidebar');
+      setNavOpen('closed');
     } else {
       setMode(COL);
       setSidebarMode(HID);
       body.setAttribute('mode', 'all');
     }
+  }
+
+  const verifyNavOpen = (signal) => {
+    setNavOpen(signal ? 'open' : 'closed');
   }
 
   useEffect(() => {
@@ -87,13 +96,18 @@ function ProjectsHome() {
         $colorScheme={'light'} 
         $showSideBar={true} 
         passSidebarClick={verifySidebarClick}
+        passNavClick={verifyNavOpen}
       />
       <MainWrapper id="main" $mode={mode} $sidebarMode={sidebarMode}>
         <AdjustableSidebar id="adjustable-sidebar" $mode={mode}>
           <Sidebar $mode={sidebarMode} />
-          <ProjectGrid $mode={mode} />
+          <ProjectGrid $mode={mode} $navOpen={navOpen} />
         </AdjustableSidebar>
       </MainWrapper>
+      {/* Only show footer if sidebar isn't open */}
+      {(navOpen !== 'open' && mode !== HID) && (
+        <ThickFooter $colorScheme={'light'} />
+      )}
     </>
   )
 }
