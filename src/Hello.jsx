@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import BackImg from './assets/backdrops/dotted-background.png';
 
 const HelloBackground = styled.figure`
-  background-image: url('./assets/dotted-background.png');
+  background-image: url(${BackImg});
   position: absolute;
   width: 100%;
   height: 640px;
