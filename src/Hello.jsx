@@ -1,18 +1,10 @@
+/// <reference types="vite/client" />
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-/* Custom Colors */
-const highlightBlue = '#388eff';
-const highlightRed = '#ce4746';
-const brightHighRed = '#ff595b';
-const darkerGrey = '#1f1f1f';
-const mediumGrey = '#3d3d3d';
-const borderGrey = '#444';
-const lightGrey = '#999';
-const snow = 'rgb(232, 232, 237)';
-
 const HelloBackground = styled.figure`
-  background-image: url("./assets/dotted-background.jpeg");
+  background-image: url('./assets/dotted-background.png');
   position: absolute;
   width: 100%;
   height: 640px;
@@ -37,13 +29,13 @@ const HelloBackground = styled.figure`
 
 const TextCursor = styled.span`
   display: inline-block;
-  border-left: 3px solid ${highlightRed};
+  border-left: 3px solid var(--scarlet);
   margin-left: 10px;
   height: 125px;
   animation: blinker 1.4s step-start infinite;
 
   @media (max-width: 767px) {
-    border-left: 2.5px solid ${highlightRed};
+    border-left: 2.5px solid var(--scarlet);
     margin-left: 5px;
     height: 95px;
   }
@@ -144,9 +136,9 @@ const LanguageOption = styled.button`
   
   background-color: ${(props) => {
     if (props.$state === 'on') {
-      return highlightRed;
+      return `var(--scarlet)`;
     } else {
-      return darkerGrey;
+      return `var(--midnight)`;
     }
   }};
   
@@ -154,7 +146,7 @@ const LanguageOption = styled.button`
     if (props.$state === 'on') {
       return 'white';
     } else {
-      return lightGrey;
+      return `var(--stone)`;
     }
   }};
 
@@ -165,9 +157,9 @@ const LanguageOption = styled.button`
   &:hover {
     background-color: ${(props) => {
       if (props.$state === 'on') {
-        return highlightRed;
+        return `var(--scarlet)`;
       } else {
-        return mediumGrey;
+        return `var(--pavement)`;
       }
     }};
 
@@ -175,7 +167,7 @@ const LanguageOption = styled.button`
       if (props.$state === 'on') {
         return 'white';
       } else {
-        return snow;
+        return `var(--snow)`;
       }
     }}
   }
@@ -188,8 +180,8 @@ const LanguageSelector = styled.div`
   top: 251px;
   left: 3em;
   padding: 12px 3.5px;
-  background-color: ${darkerGrey};
-  border: 1px solid ${borderGrey};
+  background-color: var(--midnight);
+  border: 1px solid var(--pavement);
   border-radius: 12px;
 
   @media (max-width: 1068px) {
@@ -207,13 +199,13 @@ const FontOption = styled.button`
   border-radius: 5px;
   padding: 3.5px 6.5px;
   margin-bottom: 6px;
-  background-color: ${darkerGrey};
+  background-color: var(--midnight);
   
   color: ${(props) => {
     if (props.$state === 'on') {
-      return highlightRed;
+      return `var(--scarlet)`;
     } else {
-      return lightGrey;
+      return `var(--stone)`;
     }
   }};
 
@@ -224,15 +216,15 @@ const FontOption = styled.button`
   &:hover {
     background-color: ${(props) => {
       if (props.$state === 'on') {
-        return darkerGrey;
+        return `var(--midnight)`;
       } else {
-        return mediumGrey;
+        return `var(--pavement)`;
       }
     }};
 
     color: ${(props) => {
       if (props.$state === 'on') {
-        return highlightRed;
+        return `var(--scarlet)`;
       } else {
         return snow;
       }
@@ -262,8 +254,8 @@ const FontSelector = styled.div`
   top: 310px;
   right: 6.25em;
   padding: 10px 4px;
-  background-color: ${darkerGrey};
-  border: 1px solid ${borderGrey};
+  background-color: var(--midnight);
+  border: 1px solid var(--pavement);
   border-radius: 12px;
 
   @media (max-width: 1068px) {
@@ -284,7 +276,7 @@ const ColorOption = styled.button`
 
   border: ${(props) => {
     if (props.$state === 'on') {
-      return '2px solid ' + highlightRed;
+      return `2px solid var(--scarlet)`;
     } else {
       return '1.5px solid #727578';
     }
@@ -313,7 +305,7 @@ const ColorOption = styled.button`
   &:hover {
     border: ${(props) => {
       if (props.$state === 'on') {
-        return '2px solid ' + brightHighRed;
+        return `2px solid var(--coral)`;
       } else {
         return '2.25px solid white';
       }
@@ -329,8 +321,8 @@ const ColorSelector = styled.div`
   right: 3em;
   padding: 10px 6px;
   align-items: center;
-  background-color: ${darkerGrey};
-  border: 1px solid ${borderGrey};
+  background-color: var(--midnight);
+  border: 1px solid var(--pavement);
   border-radius: 12px;
 
   @media (max-width: 1068px) {
