@@ -122,13 +122,13 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/grinnell.png"/>
+              <img src="../../assets/photos/grinnell.png"/>
             </CardImage>
             <CardLabel>Grinnell Glacier, Oct 2023</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/avalanche.png"/>
+              <img src="../../assets/photos/avalanche.png"/>
             </CardImage>
             <CardLabel>Avalanche Lake, Oct 2023</CardLabel>
           </Card>
@@ -149,7 +149,7 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/talus-rock.png"/>
+              <img src="../../assets/photos/talus-rock.png"/>
             </CardImage>
             <CardLabel>High Peaks Trail, Jul 2021</CardLabel>
           </Card>
