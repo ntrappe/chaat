@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import ArcticGl from '../../assets/photos/arctic-glacier.png';
+import ArcticMt from '../../assets/photos/arctic-glacier.png';
+import BlackRc from '../../assets/photos/black-rock.png';
+import GreenkRc from '../../assets/photos/green-rock.png';
+import Talus from '../../assets/photos/talus-rock.png';
 
 const GridWrapper = styled.div`
   display: flex;
@@ -149,19 +154,19 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src="../../assets/photos/talus-rock.png"/>
+              <img src={Talus}/>
             </CardImage>
             <CardLabel>High Peaks Trail, Jul 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/green-rock.png"/>
+              <img src={GreenkRc}/>
             </CardImage>
             <CardLabel>Bear Gulch Caves, Feb 2022</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/black-rock.png"/>
+              <img src={BlackRc}/>
             </CardImage>
             <CardLabel>Bear Gulch Caves, Feb 2022</CardLabel>
           </Card>
@@ -191,13 +196,13 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/arctic-mountain.png"/>
+              <img src={ArcticMt}/>
             </CardImage>
             <CardLabel>Spitsbergen, Sep 2022</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/arctic-glacier.png"/>
+              <img src={ArcticGl}/>
             </CardImage>
             <CardLabel>Nordenskiöldbreen, Sep 2022</CardLabel>
           </Card>

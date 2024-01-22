@@ -12,7 +12,7 @@ const lightGrey = '#999';
 const snow = 'rgb(232, 232, 237)';
 
 const HelloBackground = styled.figure`
-  background-image: url("/src/assets/dotted-background.jpeg");
+  background-image: url("./assets/dotted-background.jpeg");
   position: absolute;
   width: 100%;
   height: 640px;
