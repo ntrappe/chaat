@@ -8,8 +8,8 @@ const FooterWrapper = styled.footer`
   width 100%;
   padding: 1.6rem 1.8rem;
   background-color: ${(props) => (props.$colorScheme === 'dark' ? `var(--midnight)` : `var(--paper)`)};
-  color: ${(props) => (props.$colorScheme === 'dark' ? `var(--shark)` : `var(--concrete)`)};
-  border-top: 0.6px solid var(--cloud);
+  border-top: 0.6px solid red;
+  border-color: ${(props) => (props.$colorScheme === 'dark'? `var(--wet-concrete)` : `var(--cloud)`)};
 `;
 
 const FooterGrid = styled.div`
@@ -33,7 +33,7 @@ const Stack = styled.ul`
     font-family: 'SF Pro';
     font-size: 0.7em;
     font-weight: 400;
-    color: var(--concrete);
+    color: ${(props) => (props.$colorScheme === 'dark' ? `var(--shark)` : `var(--concrete)`)};
     margin-bottom: 0.8em;
 
     @media (max-width: 767px) {
@@ -48,7 +48,7 @@ const Stack = styled.ul`
 
   li b {
     font-weight: 600;
-    color: var(--asphalt);
+    color: ${(props) => (props.$colorScheme === 'dark' ? `var(--cloud)` : `var(--asphalt)`)};
   }
 
   a {
@@ -62,14 +62,15 @@ const Stack = styled.ul`
 `;
 
 const FooterAside = styled.div`
-  border-top: 1px solid var(--cloud);
   padding-top: 1.2em;
+  border-top: 1px solid red;
+  border-color: ${(props) => (props.$colorScheme === 'dark' ? `var(--pavement)` : `var(--cloud)`)};
 
   p {
     font-family: 'SF Pro';
     font-size: 0.65em;
     font-weight: 400;
-    color: var(--concrete);
+    color: ${(props) => (props.$colorScheme === 'dark' ? `var(--shark)` : `var(--concrete)`)};
 
     @media (max-width: 767px) {
       font-size: 0.65em;
@@ -77,7 +78,7 @@ const FooterAside = styled.div`
   }
 
   a {
-    color: var(--cornflower);
+    color: ${(props) => (props.$colorScheme === 'dark' ? `var(--coral)` : `var(--scarlet)`)};
   }
 
   a:hover {
@@ -88,8 +89,8 @@ const FooterAside = styled.div`
 function ThickFooter({ $colorScheme }) {
   return (
     <FooterWrapper $colorScheme={$colorScheme}>
-      <FooterGrid>
-        <Stack>
+      <FooterGrid $colorScheme={$colorScheme}>
+        <Stack $colorScheme={$colorScheme}>
           <li><b>Sitemap</b></li>
           <li><Link to={`/projects`}>Design Case Studies</Link></li>
           <li><Link to={`/`}>Design Philosophy</Link></li>
@@ -97,7 +98,7 @@ function ThickFooter({ $colorScheme }) {
           <li><Link to={`/photography`}>Photo Portfolio</Link></li>
           <li><Link to={`/career`}>Career Experience</Link></li>
         </Stack>
-        <Stack>
+        <Stack $colorScheme={$colorScheme}>
           <li><b>Tech Used</b></li>
           <li><a href='https://html.spec.whatwg.org'>HTML</a></li>
           <li><a href='https://www.w3schools.com/css/'>CSS</a></li>
@@ -105,7 +106,7 @@ function ThickFooter({ $colorScheme }) {
           <li><a href='https://vitejs.dev'>Vite</a></li>
           <li><a href='https://www.apple.com/keynote/'>Keynote</a></li>
         </Stack>
-        <Stack>
+        <Stack $colorScheme={$colorScheme}>
           <li><b>Contact</b></li>
           <li><a href='mailto:ntrappe@icloud.com'>Email</a></li>
           <li><a href='http://linkedin.com/in/ntrappe/'>LinkedIn</a></li>
@@ -113,7 +114,7 @@ function ThickFooter({ $colorScheme }) {
           <li><b>Location</b></li>
           <li>Seattle, Washington</li>
         </Stack>
-        <Stack>
+        <Stack $colorScheme={$colorScheme}>
           <li><b>Inspiration</b></li>
           <li><a href='https://developer.apple.com/design/'>apple.com</a></li>
           <li><a href='http://github.com/'>github.com</a></li>
@@ -122,7 +123,7 @@ function ThickFooter({ $colorScheme }) {
           <li>Google Analytics</li>
         </Stack>
       </FooterGrid>
-      <FooterAside>
+      <FooterAside $colorScheme={$colorScheme}>
         <p>To view the source code of this website, visit <a href='https://github.com/ntrappe/chaat'>github.com/ntrappe/chaat</a>.</p>
       </FooterAside>
     </FooterWrapper>
