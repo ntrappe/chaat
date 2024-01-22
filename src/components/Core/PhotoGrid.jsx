@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ArcticGl from '../../assets/photos/arctic-glacier.png';
-import ArcticMt from '../../assets/photos/arctic-glacier.png';
+import ArcticMt from '../../assets/photos/arctic-mountain.png';
 import BlackRc from '../../assets/photos/black-rock.png';
 import GreenkRc from '../../assets/photos/green-rock.png';
 import Talus from '../../assets/photos/talus-rock.png';
+import Windows from '../../assets/photos/windows.png';
+import SunsetPt from '../../assets/photos/sunset-point.png';
+import Sunset from '../../assets/photos/sunset.png';
+import Redwood from '../../assets/photos/redwood.png';
 
 const GridWrapper = styled.div`
   display: flex;
@@ -187,7 +191,7 @@ function PhotoGrid({ $navOpen }) {
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/sunset.png"/>
+              <img src={Sunset}/>
             </CardImage>
             <CardLabel>Angel's Landing, Nov 2021</CardLabel>
           </Card>
@@ -211,7 +215,7 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/redwood.png"/>
+              <img src={Redwood}/>
             </CardImage>
             <CardLabel>Boy Scott Tree Trail, Sep 2021</CardLabel>
           </Card>
@@ -226,13 +230,13 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/windows.png"/>
+              <img src={Windows}/>
             </CardImage>
             <CardLabel>The Windows, Mar 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/sunset-point.png"/>
+              <img src={SunsetPt}/>
             </CardImage>
             <CardLabel>Sunset Point, Mar 2021</CardLabel>
           </Card>
