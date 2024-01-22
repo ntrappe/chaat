@@ -60,14 +60,14 @@ const NavOption = styled.li`
   margin-left: 1.3rem;
   min-width: 0;
   cursor: pointer;
-  color: inherit;
+  color: ${(props) => (props.$colorScheme === 'dark' ? `var(--shark)` : `var(--wet-concrete)`)};
 
   &:hover {
     text-decoration: underline;
   }
 
-  a:visited {
-    color: inherit; /* dont fade clicked links */
+  a, a:visited {
+    color: ${(props) => (props.$colorScheme === 'dark' ? `var(--shark)` : `var(--wet-concrete)`)};
   }
 
   @media screen and (max-width: 767px) {
