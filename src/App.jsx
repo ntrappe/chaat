@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import ProjectsHome from './pages/ProjectsHome.jsx';
 import Project from './pages/Project.jsx';
 import Bookify from './cases/Bookify.jsx';
@@ -15,7 +14,7 @@ import PageNotFound from './pages/PageNotFound.jsx';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/projects' element={<ProjectsHome />} />
@@ -26,7 +25,7 @@ export default function App() {
         <Route path='/career' element={<Career />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

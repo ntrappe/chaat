@@ -29,6 +29,10 @@ const Stack = styled.ul`
   min-width: 0;
   line-spacing: 1.5;
 
+  &:first-child {
+    border-right: 1px solid;
+  }
+
   li {
     font-family: 'SF Pro';
     font-size: 0.7em;
@@ -111,8 +115,8 @@ function ThickFooter({ $colorScheme }) {
           <li><a href='mailto:ntrappe@icloud.com'>Email</a></li>
           <li><a href='http://linkedin.com/in/ntrappe/'>LinkedIn</a></li>
           <br/>
-          <li><b>Location</b></li>
-          <li>Seattle, Washington</li>
+          <li><b>Help</b></li>
+          <li><a href='https://github.com/ntrappe/chaat/issues'>Report Issues</a></li>
         </Stack>
         <Stack $colorScheme={$colorScheme}>
           <li><b>Inspiration</b></li>
