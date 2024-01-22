@@ -9,6 +9,16 @@ import Windows from '../../assets/photos/windows.png';
 import SunsetPt from '../../assets/photos/sunset-point.png';
 import Sunset from '../../assets/photos/sunset.png';
 import Redwood from '../../assets/photos/redwood.png';
+import Grinnell from '../../assets/photos/grinnell.png';
+import Cascades from '../../assets/photos/cascades.png';
+import Josephine from '../../assets/photos/josephine.png';
+import Avalanche from '../../assets/photos/avalanche.png';
+import ContDiv from '../../assets/photos/cont-divide.png';
+import Climb from '../../assets/photos/climb.png';
+import LeafLight from '../../assets/photos/leaf-light.png';
+import SahMeadow from '../../assets/photos/sahale-meadow.png';
+import Rey from '../../assets/photos/reynisfjara.png';
+import Atlantic from '../../assets/photos/atlantic.png';
 
 const GridWrapper = styled.div`
   display: flex;
@@ -131,25 +141,25 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src="../../assets/photos/grinnell.png"/>
+              <img src={Grinnell}/>
             </CardImage>
             <CardLabel>Grinnell Glacier, Oct 2023</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src="../../assets/photos/avalanche.png"/>
+              <img src={Avalanche}/>
             </CardImage>
             <CardLabel>Avalanche Lake, Oct 2023</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/idk.png"/>
+              <img src={ContDiv}/>
             </CardImage>
             <CardLabel>Continental Divide, Oct 2023</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/josephine.png"/>
+              <img src={Josephine}/>
             </CardImage>
             <CardLabel>Josephine Lake, Oct 2023</CardLabel>
           </Card>
@@ -176,7 +186,7 @@ function PhotoGrid({ $navOpen }) {
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/climb.png"/>
+              <img src={Climb}/>
             </CardImage>
             <CardLabel>High Peaks Trail, Jul 2021</CardLabel>
           </Card>
@@ -221,7 +231,7 @@ function PhotoGrid({ $navOpen }) {
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/leaf-light.png"/>
+              <img src={LeafLight}/>
             </CardImage>
             <CardLabel>Jedediah Smith Redwoods, Sep 2021</CardLabel>
           </Card>
@@ -272,13 +282,13 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/sahale-meadow.png"/>
+              <img src={SahMeadow}/>
             </CardImage>
             <CardLabel>Sahale Arm, Sep 2023</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/cascades.png"/>
+              <img src={Cascades}/>
             </CardImage>
             <CardLabel>Sahale Glacier Trail, Sep 2023</CardLabel>
           </Card>
@@ -287,13 +297,13 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/reynisfjara.png"/>
+              <img src={Rey}/>
             </CardImage>
             <CardLabel>Reynisfjara Beach, Sep 2022</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/atlantic.png"/>
+              <img src={Atlantic}/>
             </CardImage>
             <CardLabel>North Atlantic Ocean, Sep 2022</CardLabel>
           </Card>
