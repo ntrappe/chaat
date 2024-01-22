@@ -269,7 +269,7 @@ function Home() {
                 be made to work for your user regardless of what you might like.</p>
             </Wisdom>
             <Wisdom>
-              <h3>Design is Sealmess</h3>
+              <h3>Design is Seamless</h3>
               <p>Bad design is easily noticed. It's abrasive and uncomfortable. Good design, on the other hand, 
                 should feel seamless and natural. It should feel like an extension of ourselves.</p>
             </Wisdom>
