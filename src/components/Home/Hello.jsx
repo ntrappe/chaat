@@ -8,7 +8,7 @@ const HelloBackground = styled.figure`
   background-image: url("/src/assets/dotted-background.jpeg");
   position: absolute;
   width: 100%;
-  height: 640px;
+  height: var(--bg-height-big);
   background-repeat: no-repeat;
   background-size: 1632px 700px;
   max-width: 2400px;    
@@ -16,13 +16,13 @@ const HelloBackground = styled.figure`
   top: 2.75rem;
 
   @media (max-width: 1068px) {
-    height: 510px;
+    height: var(--bg-height-med);
     /* 1/3 of original image size */
     background-size: 1360px 584px;
   }
 
   @media (max-width: 767px) {
-    height: 350px;
+    height: var(--bg-height-small);
     /* 1/4 of original image size */
     background-size: 1020.5px 438px;
   }
@@ -189,7 +189,7 @@ function Hello() {
 
   return (
     <>
-      <HelloBackground></HelloBackground>
+      <HelloBackground id="hello-background"></HelloBackground>
       <HelloTextContainer>
         <HelloText 
           $family={family} 
