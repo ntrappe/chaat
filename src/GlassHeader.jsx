@@ -89,7 +89,7 @@ const NavContent = styled.div`
   }
 `;
 
-function GlassHeader({ $colorScheme, $showSideBar, passSidebarClick }) {
+function GlassHeader({ $colorScheme, $showSideBar, passSidebarClick, passNavClick }) {
 
   const [sideBarOpen, setSideBarOpen] = useState('closed');
   const [direction, setDirection] = useState('down');
@@ -109,6 +109,7 @@ function GlassHeader({ $colorScheme, $showSideBar, passSidebarClick }) {
     console.log('click on ' + direction + ' --> ' + newDirection);
     setDirection(newDirection);
     setNavOpen(newDirection === 'down' ? false : true);
+    passNavClick(newDirection === 'down' ? 'closed' : 'open');
   };
 
   useEffect(() => {
@@ -116,6 +117,7 @@ function GlassHeader({ $colorScheme, $showSideBar, passSidebarClick }) {
       if (window.innerWidth > mobileWidthVar) {
         setDirection('down');
         setNavOpen(false);
+        passNavClick('closed')
       }
 
       if (window.innerWidth > wideWidthVar) {
