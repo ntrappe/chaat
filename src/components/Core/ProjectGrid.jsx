@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import BookPre from '../../assets/project-previews/book-preview.png';
 
 const HID = 'hidden';
 
@@ -129,7 +130,7 @@ function ProjectGrid({ $mode, $navOpen }) {
           <Card>
             <CardImage>
               <img 
-                src="/src/assets/project-previews/pomodoro-preview.png"
+                src={BookPre}
                 alt="tomato representing a pomodoro on a red background"
               />
             </CardImage>

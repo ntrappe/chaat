@@ -191,7 +191,7 @@ function Sidebar({ $mode }) {
             <summary>Design</summary>
             <CasePreview $mode={$mode} selected={selectedItem === 0} onClick={() => handleItemClick(0)}>
               <img
-                src={selectedItem === 0 ? "/src/assets/project-icons/book-active.png" : "/src/assets/project-icons/book-inactive.png"}
+                src={selectedItem === 0 ? "../../assets/project-icons/book-active.png" : "../../assets/project-icons/book-inactive.png"}
                 alt="Book Icon"
               />
               <p><Link to={`/projects/bookify`}>Bookify</Link></p>
