@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import BookPre from '../../assets/project-previews/book-preview.png';
+import PomodoroPre from '../../assets/project-previews/pomodoro-preview.png';
+import MountainPre from '../../assets/project-previews/mountain-preview.png';
+import VacuumPre from '../../assets/project-previews/vacuum-preview.png';
+import FlowPre from '../../assets/project-previews/flow-preview.png';
+import CalPre from '../../assets/project-previews/calendar-preview.png';
 
 const HID = 'hidden';
 
@@ -130,7 +135,7 @@ function ProjectGrid({ $mode, $navOpen }) {
           <Card>
             <CardImage>
               <img 
-                src={BookPre}
+                src={PomodoroPre}
                 alt="tomato representing a pomodoro on a red background"
               />
             </CardImage>
@@ -139,7 +144,7 @@ function ProjectGrid({ $mode, $navOpen }) {
           <Card>
             <CardImage>
               <img 
-                src="/src/assets/project-previews/mountain-preview.png"
+                src={MountainPre}
                 alt="mountain with two peaks on a blue background"
               />
             </CardImage>
@@ -151,7 +156,7 @@ function ProjectGrid({ $mode, $navOpen }) {
           <Card>
             <CardImage>
               <img 
-                src="/src/assets/project-previews/vacuum-preview.png"
+                src={VacuumPre}
                 alt="side profile of a vacuum on a purple background"
               />
             </CardImage>
@@ -160,7 +165,7 @@ function ProjectGrid({ $mode, $navOpen }) {
           <Card>
             <CardImage>
               <img 
-                src="/src/assets/project-previews/book-preview.png"
+                src={BookPre}
                 alt="open book on a green background"
               />
             </CardImage>
@@ -169,7 +174,7 @@ function ProjectGrid({ $mode, $navOpen }) {
           <Card>
             <CardImage>
               <img 
-                src="/src/assets/project-previews/flow-preview.png"
+                src={FlowPre}
                 alt="tomato representing a pomodoro on a red background"
               />
             </CardImage>
@@ -178,7 +183,7 @@ function ProjectGrid({ $mode, $navOpen }) {
           <Card>
             <CardImage>
               <img 
-                src="/src/assets/project-previews/calendar-preview.png"
+                src={CalPre}
                 alt="calendar icon with date january 20th on a cyan background"
               />
             </CardImage>

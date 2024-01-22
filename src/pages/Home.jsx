@@ -269,14 +269,14 @@ function Home() {
                 be made to work for your user regardless of what you might like.</p>
             </Wisdom>
             <Wisdom>
-              <h3>Design is an Extension</h3>
-              <p>We notice bad design. It’s a glaring, abrasive, horrid experience. On the other hand, 
-                good design does what we want, when we want. It becomes an extension of ourselves.</p>
+              <h3>Design is Sealmess</h3>
+              <p>Bad design is easily noticed. It's abrasive and uncomfortable. Good design, on the other hand, 
+                should feel seamless and natural. It should feel like an extension of ourselves.</p>
             </Wisdom>
             <Wisdom>
               <h3>Bring the Trail Mix</h3>
-              <p>Just as a skilled hiker anticipates twists and turns and prepares wisely, a designer 
-                foresees user needs, errors, and challenges. We help navigate this uncharted territory. </p>
+              <p>Just as a skilled hiker anticipates twists and turns, a designer foresees user needs, 
+                errors, and challenges. We help navigate this uncharted territory. </p>
             </Wisdom>
           </WisdomGrid>
         </PhilosophySection>
