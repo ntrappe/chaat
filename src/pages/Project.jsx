@@ -46,6 +46,8 @@ function Project({ customComponent: CaseStudy }) {
   const [mode, setMode] = useState(window.innerWidth > 1023 ? EXP : COL);
   /* by default sidebar is either attached to main page or hidden */
   const [sidebarMode, setSidebarMode] = useState(window.innerWidth > 1023 ? COL : HID);
+  /* need to know if nav is open to freeze content below it */
+  const [navOpen, setNavOpen] = useState(null);
 
   const verifySidebarClick = (signal) => {
     console.log('received data from sidebar: ' + signal);
@@ -60,6 +62,10 @@ function Project({ customComponent: CaseStudy }) {
       console.log('main is COLLAPSED and sidebar is HIDDEN');
       body.setAttribute('mode', 'all');
     }
+  }
+
+  const verifyNavOpen = (signal) => {
+    setNavOpen(signal ? 'open' : 'closed');
   }
 
   const offsetCaseStudy = (index) => {
@@ -94,6 +100,7 @@ function Project({ customComponent: CaseStudy }) {
         $colorScheme={'light'} 
         $showSideBar={true} 
         passSidebarClick={verifySidebarClick}
+        passNavClick={verifyNavOpen}
       />
       <MainWrapper id="main" $mode={mode} $sidebarMode={sidebarMode}>
         <AdjustableSidebar id="adjustable-sidebar" $mode={mode}>
@@ -101,6 +108,7 @@ function Project({ customComponent: CaseStudy }) {
           {/* Render the specific case study if provided */}
           {CaseStudy && <CaseStudy />}
         </AdjustableSidebar>
+        {}
         <FloatingAside $mode={mode} offsetCaseStudy={offsetCaseStudy} />
       </MainWrapper>
     </>
