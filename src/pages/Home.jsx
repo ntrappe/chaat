@@ -3,6 +3,12 @@ import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader';
 import Hello from '../components/Home/Hello';
 import ThickFooter from '../components/Footer/ThickFooter';
+import Carins from '../assets/project-icons/carins.png';
+import Mushroom from '../assets/project-icons/mushroom.png';
+import Lego from '../assets/project-icons/lego.png';
+import Subtitles from '../assets/project-icons/subtitles.png';
+import Hand from '../assets/project-icons/hand.png';
+import Palette from '../assets/project-icons/palette.png';
 
 const MainWrapper = styled.main`
   background-color: inherit;
@@ -153,8 +159,13 @@ const WisdomGrid = styled.div`
 `;
 
 const Wisdom = styled.div`
-
   text-align: left;
+
+  img {
+    width: 40px;
+    height: auto;
+    margin-bottom: 0.6em;
+  }
 
   h3 {
     font-family: 'SF Pro Display';
@@ -166,7 +177,7 @@ const Wisdom = styled.div`
     margin: 0;
 
     @media (max-width: 1068px) {
-      font-size: 21px;
+      font-size: 22px;
       letter-spacing: .011em;
     }
   }
@@ -244,40 +255,63 @@ function Home() {
           <h2>My Core Philosophies</h2>
           <WisdomGrid>
             <Wisdom>
+              <img
+                src={Mushroom}
+                alt="Red mushroom with spots"
+              />
               <h3>Forage for Mushrooms</h3>
               <p>When you forage for mushrooms, you need to identify them by at least two senses (e.g.,
                 color and texture). I try to ensure that interactions with my designs are provided in at 
                 least two modes too. For example, an incorrect input can both shake and turn red.</p>
             </Wisdom>
             <Wisdom>
+              <img
+                src={Subtitles}
+                alt="Stack of three red rocks"
+              />
               <h3>Think About Subtitles</h3>
-              <p>Subtitles were initially designed for those with hearing impairments but we certainly 
-                all enjoy them when we’re in a noisy room trying to watch our favorite show. I try to 
-                think about accessibility not as something just for those with permanent disabilities 
-                but as something we can all benefit from.</p>
+              <p>While subtitles were created for those with hearing impairements, we all appreciate them
+                when we're trapped in a noisy environment trying to binge our favorite show. Accessibility 
+                is for everyone, permanent disability or not.</p>
             </Wisdom>
             <Wisdom>
+              <img
+                src={Lego}
+                alt="Stack of three red rocks"
+              />
               <h3>Test Like a Toddler</h3>
               <p>I  always like to pretend that my users are hyper-active, hangry toddlers. They’re 
                 smashing buttons, swiping at things they shouldn’t, and typing in gibberish. If my 
                 app can survive unexpected, chaotic behavior, then I’ve done my job as an engineer.</p>
             </Wisdom>
             <Wisdom>
+              <img
+                src={Carins}
+                alt="Stack of three red rocks"
+              />
+              <h3>Follow the Cairns</h3>
+              <p>Just as a hiker relies on cairns to avoid wrong turns, users depend on our well-placed 
+                markers to know what to do, where to go, and how to get there. It’s our job to lead 
+                users forward so they don’t get stranded and to predict what could go wrong.</p>
+            </Wisdom>
+            <Wisdom>
+              <img
+                src={Hand}
+                alt="Hand with pointer finger extended"
+              />
+              <h3>An Extension of Us</h3>
+              <p>We notice bad design. It's abrasive, glaring, and uncomfortable. Good design, on the other 
+                hand, should feel like an extension of ourselves. It should feel seamless, natural, and invisible.</p>
+            </Wisdom>
+            <Wisdom>
+              <img
+                src={Palette}
+                alt="Paint palette with a few patches of paint"
+              />
               <h3>Art is Selfish, Design is <em>Selfless</em></h3>
-              <p>My favorite design professor once said that art is for yourself, it’s about making 
-                something you like. On the other hand, design should be utterly selfless. It should 
-                be made to work for your user regardless of what you might like.</p>
-            </Wisdom>
-            <Wisdom>
-              <h3>Design is Seamless</h3>
-              <p>Bad design is easily noticed. It's abrasive and uncomfortable. Good design, on the other hand, 
-                should feel seamless and natural. It should feel like an extension of ourselves.</p>
-            </Wisdom>
-            <Wisdom>
-              <h3>Bring the Trail Mix</h3>
-              <p>Just as a skilled hiker anticipates twists and turns, a designer foresees user needs, 
-                errors, and challenges. We help navigate this uncharted territory. </p>
-            </Wisdom>
+              <p>To quote my designer professor: "Art is for yourself, it’s about making something you like. 
+                Design should be utterly selfless. It's all about what your user needs, not what you might like."</p>
+            </Wisdom>  
           </WisdomGrid>
         </PhilosophySection>
       </MainWrapper>

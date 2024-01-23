@@ -9,7 +9,7 @@ const FooterWrapper = styled.footer`
   padding: 1.6rem 1.8rem;
   background-color: ${(props) => (props.$colorScheme === 'dark' ? `var(--midnight)` : `var(--paper)`)};
   border-top: 0.6px solid red;
-  border-color: ${(props) => (props.$colorScheme === 'dark'? `var(--wet-concrete)` : `var(--cloud)`)};
+  border-color: ${(props) => (props.$colorScheme === 'dark'? `var(--asphalt)` : `var(--cloud)`)};
 `;
 
 const FooterGrid = styled.div`
