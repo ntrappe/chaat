@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader';
 import Hello from '../components/Home/Hello';
 import ThickFooter from '../components/Footer/ThickFooter';
-import Carins from '../assets/project-icons/carins.png';
-import Mushroom from '../assets/project-icons/mushroom.png';
-import Lego from '../assets/project-icons/lego.png';
-import Subtitles from '../assets/project-icons/subtitles.png';
-import Hand from '../assets/project-icons/hand.png';
-import Palette from '../assets/project-icons/palette.png';
+import Cairns from '../assets/page-icons/cairns.png';
+import Mushroom from '../assets/page-icons/mushroom.png';
+import Lego from '../assets/page-icons/lego.png';
+import Subtitles from '../assets/page-icons/subtitles.png';
+import Hand from '../assets/page-icons/hand.png';
+import Palette from '../assets/page-icons/palette.png';
 
 const MainWrapper = styled.main`
   background-color: inherit;
@@ -286,7 +286,7 @@ function Home() {
             </Wisdom>
             <Wisdom>
               <img
-                src={Carins}
+                src={Cairns}
                 alt="Stack of three red rocks"
               />
               <h3>Follow the Cairns</h3>

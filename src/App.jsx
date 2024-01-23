@@ -23,6 +23,7 @@ export default function App() {
         <Route path='/projects/bookify' element={<Project customComponent={Bookify} />} />
         <Route path='/photography' element={<Photography />} />
         <Route path='/career' element={<Career />} />
+        <Route path='/art' element={<Art />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </HashRouter>
