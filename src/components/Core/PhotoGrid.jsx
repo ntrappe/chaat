@@ -1,24 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import LazyLoad from 'react'
 import styled from 'styled-components';
-import ArcticGl from '../../assets/photos/arctic-glacier.png';
-import ArcticMt from '../../assets/photos/arctic-mountain.png';
-import BlackRc from '../../assets/photos/black-rock.png';
-import GreenkRc from '../../assets/photos/green-rock.png';
-import Talus from '../../assets/photos/talus-rock.png';
-import Windows from '../../assets/photos/windows.png';
-import SunsetPt from '../../assets/photos/sunset-point.png';
-import Sunset from '../../assets/photos/sunset.png';
-import Redwood from '../../assets/photos/redwood.png';
-import Grinnell from '../../assets/photos/grinnell.png';
-import Cascades from '../../assets/photos/cascades.png';
-import Josephine from '../../assets/photos/josephine.png';
-import Avalanche from '../../assets/photos/avalanche.png';
-import ContDiv from '../../assets/photos/cont-divide.png';
-import Climb from '../../assets/photos/climb.png';
-import LeafLight from '../../assets/photos/leaf-light.png';
-import SahMeadow from '../../assets/photos/sahale-meadow.png';
-import Rey from '../../assets/photos/reynisfjara.png';
-import Atlantic from '../../assets/photos/atlantic.png';
+import ArcticGl from '../../assets/photos/arctic-glacier.jpeg';
+import ArcticMt from '../../assets/photos/arctic-mountain.jpeg';
+import Atlantic from '../../assets/photos/atlantic.jpeg';
+import Avalanche from '../../assets/photos/avalanche.jpeg';
+import BlackRc from '../../assets/photos/black-rock.jpeg';
+import Cascades from '../../assets/photos/cascades.jpeg';
+import Climb from '../../assets/photos/climb.jpeg';
+import ContDiv from '../../assets/photos/divide.jpeg';
+import GreenkRc from '../../assets/photos/green-rock.jpeg';
+import Grinnell from '../../assets/photos/grinnell.jpeg';
+import Josephine from '../../assets/photos/josephine.jpeg';
+import LeafLight from '../../assets/photos/leaf-light.jpeg';
+import Opening from '../../assets/photos/opening.jpeg';
+import QueensGarden from '../../assets/photos/queens-garden.jpeg';
+import Redwood from '../../assets/photos/redwood.jpeg';
+import Rey from '../../assets/photos/reynisfjara.jpeg';
+import SahMeadow from '../../assets/photos/sahale-meadow.jpeg';
+import Sunset from '../../assets/photos/sunset.jpeg';
+import SunsetPt from '../../assets/photos/sunset-point.jpeg';
+import Talus from '../../assets/photos/talus-rock.jpeg';
+import Windows from '../../assets/photos/windows.jpeg';
+import WestRim from '../../assets/photos/west-rim.jpeg';
+
+
+
+
 
 const GridWrapper = styled.div`
   display: flex;
@@ -141,25 +149,25 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src={Grinnell}/>
+              <img src={Grinnell} />
             </CardImage>
             <CardLabel>Grinnell Glacier, Oct 2023</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={Avalanche}/>
+              <img src={Avalanche} />
             </CardImage>
             <CardLabel>Avalanche Lake, Oct 2023</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={ContDiv}/>
+              <img src={ContDiv} />
             </CardImage>
             <CardLabel>Continental Divide, Oct 2023</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={Josephine}/>
+              <img src={Josephine} />
             </CardImage>
             <CardLabel>Josephine Lake, Oct 2023</CardLabel>
           </Card>
@@ -168,25 +176,25 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src={Talus}/>
+              <img src={Talus} />
             </CardImage>
             <CardLabel>High Peaks Trail, Jul 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={GreenkRc}/>
+              <img src={GreenkRc} />
             </CardImage>
             <CardLabel>Bear Gulch Caves, Feb 2022</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={BlackRc}/>
+              <img src={BlackRc} />
             </CardImage>
             <CardLabel>Bear Gulch Caves, Feb 2022</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={Climb}/>
+              <img src={Climb} />
             </CardImage>
             <CardLabel>High Peaks Trail, Jul 2021</CardLabel>
           </Card>
@@ -195,13 +203,13 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/west-rim.png"/>
+              <img src={WestRim} />
             </CardImage>
             <CardLabel>West Rim Trail, Nov 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={Sunset}/>
+              <img src={Sunset} />
             </CardImage>
             <CardLabel>Angel's Landing, Nov 2021</CardLabel>
           </Card>
@@ -210,13 +218,13 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src={ArcticMt}/>
+              <img src={ArcticMt} />
             </CardImage>
             <CardLabel>Spitsbergen, Sep 2022</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={ArcticGl}/>
+              <img src={ArcticGl} />
             </CardImage>
             <CardLabel>Nordenskiöldbreen, Sep 2022</CardLabel>
           </Card>
@@ -225,13 +233,13 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src={Redwood}/>
+              <img src={Redwood} />
             </CardImage>
             <CardLabel>Boy Scott Tree Trail, Sep 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={LeafLight}/>
+              <img src={LeafLight} />
             </CardImage>
             <CardLabel>Jedediah Smith Redwoods, Sep 2021</CardLabel>
           </Card>
@@ -240,25 +248,25 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src={Windows}/>
+              <img src={Windows} />
             </CardImage>
             <CardLabel>The Windows, Mar 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={SunsetPt}/>
+              <img src={SunsetPt} />
             </CardImage>
             <CardLabel>Sunset Point, Mar 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/queens-garden.png"/>
+              <img src={QueensGarden} />
             </CardImage>
             <CardLabel>Queens Garden, Mar 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src="/src/assets/photos/opening.png"/>
+              <img src={Opening} />
             </CardImage>
             <CardLabel>Peek-a-Boo Loop Trail, Mar '21</CardLabel>
           </Card>
@@ -282,13 +290,16 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src={SahMeadow}/>
+              <img src={SahMeadow} />
             </CardImage>
             <CardLabel>Sahale Arm, Sep 2023</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={Cascades}/>
+              <img 
+                src={Cascades}
+                alt='ranges of blue tinged mountains in the distance, above an emerald lake'
+              />
             </CardImage>
             <CardLabel>Sahale Glacier Trail, Sep 2023</CardLabel>
           </Card>
@@ -297,13 +308,16 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src={Rey}/>
+              <img 
+                src={Rey}
+                alt='black sand beach with vertical rock formations outlining a cave'
+              />
             </CardImage>
             <CardLabel>Reynisfjara Beach, Sep 2022</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={Atlantic}/>
+              <img src={Atlantic} />
             </CardImage>
             <CardLabel>North Atlantic Ocean, Sep 2022</CardLabel>
           </Card>
