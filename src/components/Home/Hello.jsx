@@ -1,11 +1,14 @@
+/// <reference types="vite/client" />
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ColorSelector from './ColorSelector';
 import FontSelector from './FontSelector';
 import LanguageSelector from './LanguageSelector';
+import DarkGrid from '../../assets/backdrops/acteryx-grid.png';
 
 const HelloBackground = styled.figure`
-  background-image: url("/src/assets/dotted-background.jpeg");
+  background-image: url(${DarkGrid});
   position: absolute;
   width: 100%;
   height: var(--bg-height-big);
