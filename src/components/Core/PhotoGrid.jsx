@@ -12,10 +12,10 @@ import ContDiv from '../../assets/photos/divide.jpeg';
 import GreenkRc from '../../assets/photos/green-rock.jpeg';
 import Grinnell from '../../assets/photos/grinnell.jpeg';
 import Josephine from '../../assets/photos/josephine.jpeg';
-import LeafLight from '../../assets/photos/leaf-light.jpeg';
 import Opening from '../../assets/photos/opening.jpeg';
 import QueensGarden from '../../assets/photos/queens-garden.jpeg';
-import Redwood from '../../assets/photos/redwood.jpeg';
+import RedwoodForest from '../../assets/photos/redwood-forest.jpeg';
+import RedwoodLight from '../../assets/photos/redwood-light.jpeg';
 import Rey from '../../assets/photos/reynisfjara.jpeg';
 import SahMeadow from '../../assets/photos/sahale-meadow.jpeg';
 import Sunset from '../../assets/photos/sunset.jpeg';
@@ -23,7 +23,6 @@ import SunsetPt from '../../assets/photos/sunset-point.jpeg';
 import Talus from '../../assets/photos/talus-rock.jpeg';
 import Windows from '../../assets/photos/windows.jpeg';
 import WestRim from '../../assets/photos/west-rim.jpeg';
-
 
 
 
@@ -139,7 +138,7 @@ function PhotoGrid({ $navOpen }) {
   
   return (
     <>
-      <GridWrapper id="photo-grid" $navOpen={$navOpen}>
+      <GridWrapper id='photo-grid' $navOpen={$navOpen}>
         {$navOpen === 'open' && (
           <DarkOverlay />
         )}
@@ -149,25 +148,37 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src={Grinnell} />
+              <img 
+                src={Grinnell}
+                alt='Grey granite peak towering above an aqua covered lake'
+              />
             </CardImage>
             <CardLabel>Grinnell Glacier, Oct 2023</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={Avalanche} />
+              <img 
+                src={Avalanche}
+                alt='Lake reflecting mountains of gold and green trees'
+              />
             </CardImage>
             <CardLabel>Avalanche Lake, Oct 2023</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={ContDiv} />
+              <img 
+                src={ContDiv}
+                alt='Mountain dotted in gold and green with two peaks in the background' 
+              />
             </CardImage>
             <CardLabel>Continental Divide, Oct 2023</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={Josephine} />
+              <img 
+                src={Josephine}
+                alt='Clear blue lake reflecting a granite peak and green pines'
+              />
             </CardImage>
             <CardLabel>Josephine Lake, Oct 2023</CardLabel>
           </Card>
@@ -176,25 +187,37 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src={Talus} />
+              <img 
+                src={Talus}
+                alt='Pink talus rocks dotted with green shrubs'
+              />
             </CardImage>
             <CardLabel>High Peaks Trail, Jul 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={GreenkRc} />
+              <img 
+                src={GreenkRc}
+                alt='A cave covered in green lichen'
+              />
             </CardImage>
             <CardLabel>Bear Gulch Caves, Feb 2022</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={BlackRc} />
+              <img 
+                src={BlackRc}
+                alt='A cave with fallen boulders bathed by sunlight'
+              />
             </CardImage>
             <CardLabel>Bear Gulch Caves, Feb 2022</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={Climb} />
+              <img 
+                src={Climb}
+                alt='A steep rocky slope with a handrail'
+              />
             </CardImage>
             <CardLabel>High Peaks Trail, Jul 2021</CardLabel>
           </Card>
@@ -203,13 +226,19 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src={WestRim} />
+              <img 
+                src={WestRim}
+                alt='A winding trail with a view of a valley and reddish domes'
+              />
             </CardImage>
             <CardLabel>West Rim Trail, Nov 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={Sunset} />
+              <img 
+                src={Sunset}
+                alt='Pink and orange wash across the domes and valley of Zion'
+              />
             </CardImage>
             <CardLabel>Angel's Landing, Nov 2021</CardLabel>
           </Card>
@@ -218,13 +247,19 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src={ArcticMt} />
+              <img 
+                src={ArcticMt}
+                alt='A grey mountain is shrouded in fog above a calm sea'
+              />
             </CardImage>
             <CardLabel>Spitsbergen, Sep 2022</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={ArcticGl} />
+              <img 
+                src={ArcticGl}
+                alt='A bright blue glacier sits in calm water'
+              />
             </CardImage>
             <CardLabel>Nordenskiöldbreen, Sep 2022</CardLabel>
           </Card>
@@ -233,13 +268,19 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src={Redwood} />
+              <img 
+                src={RedwoodForest}
+                alt='Three large redwood trees stand among green ferns' 
+              />
             </CardImage>
             <CardLabel>Boy Scott Tree Trail, Sep 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={LeafLight} />
+              <img 
+                src={RedwoodLight}
+                alt='Sunlight illuminates the leaves of a redwood tree'
+              />
             </CardImage>
             <CardLabel>Jedediah Smith Redwoods, Sep 2021</CardLabel>
           </Card>
@@ -248,49 +289,49 @@ function PhotoGrid({ $navOpen }) {
         <GridCards>
           <Card>
             <CardImage>
-              <img src={Windows} />
+              <img 
+                src={Windows}
+                alt='Towering walls of red rock and hoodoos against an azure sky'
+              />
             </CardImage>
             <CardLabel>The Windows, Mar 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={SunsetPt} />
+              <img 
+                src={SunsetPt}
+                alt='A trail cuts through the red rock landscape and blankets of snow'
+              />
             </CardImage>
             <CardLabel>Sunset Point, Mar 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={QueensGarden} />
+              <img 
+                src={QueensGarden} 
+                alt='A trail wanders through the hoodoos and pink rock of Bryce'
+              />
             </CardImage>
             <CardLabel>Queens Garden, Mar 2021</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={Opening} />
+              <img 
+                src={Opening}
+                alt='Through a narrow opening of red rock, we see walls of hoodoos'
+              />
             </CardImage>
             <CardLabel>Peek-a-Boo Loop Trail, Mar '21</CardLabel>
-          </Card>
-        </GridCards>
-        <GridCardsTitle>Redwood National Park</GridCardsTitle>
-        <GridCards>
-          <Card>
-            <CardImage>
-              <img src="/src/assets/photos/redwood.png"/>
-            </CardImage>
-            <CardLabel>Boy Scott Tree Trail, Sep 2021</CardLabel>
-          </Card>
-          <Card>
-            <CardImage>
-              <img src="/src/assets/photos/leaf-light.png"/>
-            </CardImage>
-            <CardLabel>Jedediah Smith Redwoods, Sep 2021</CardLabel>
           </Card>
         </GridCards>
         <GridCardsTitle>North Cascades National Park</GridCardsTitle>
         <GridCards>
           <Card>
             <CardImage>
-              <img src={SahMeadow} />
+              <img 
+                src={SahMeadow}
+                alt='Sunlight shines in a meadow of pink and orange with grey mountains in the background'
+              />
             </CardImage>
             <CardLabel>Sahale Arm, Sep 2023</CardLabel>
           </Card>
@@ -298,7 +339,7 @@ function PhotoGrid({ $navOpen }) {
             <CardImage>
               <img 
                 src={Cascades}
-                alt='ranges of blue tinged mountains in the distance, above an emerald lake'
+                alt='Line after line of mountain, dotted with glaciers, rise above an emerald and sapphire lake'
               />
             </CardImage>
             <CardLabel>Sahale Glacier Trail, Sep 2023</CardLabel>
@@ -310,14 +351,16 @@ function PhotoGrid({ $navOpen }) {
             <CardImage>
               <img 
                 src={Rey}
-                alt='black sand beach with vertical rock formations outlining a cave'
+                alt='Black sand beach with vertical rock formations outlining a cave'
               />
             </CardImage>
             <CardLabel>Reynisfjara Beach, Sep 2022</CardLabel>
           </Card>
           <Card>
             <CardImage>
-              <img src={Atlantic} />
+              <img 
+                src={Atlantic}
+                alt='A rocky formation juts out of a stormy sea' />
             </CardImage>
             <CardLabel>North Atlantic Ocean, Sep 2022</CardLabel>
           </Card>
