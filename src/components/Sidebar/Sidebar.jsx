@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import BookActive from '../../assets/project-icons/book-active.png';
+import BookInactive from '../../assets/project-icons/book-inactive.png';
+import PomoActive from '../../assets/project-icons/pomodoro-active.png';
+import PomoInactive from '../../assets/project-icons/pomodoro-inactive.png';
+import MountainActive from '../../assets/project-icons/mountain-active.png';
+import MountainInactive from '../../assets/project-icons/mountain-inactive.png';
 
 const EXP = 'expanded';
 const COL = 'collapsed';
@@ -191,21 +197,21 @@ function Sidebar({ $mode }) {
             <summary>Design</summary>
             <CasePreview $mode={$mode} selected={selectedItem === 0} onClick={() => handleItemClick(0)}>
               <img
-                src={selectedItem === 0 ? "../../assets/project-icons/book-active.png" : "../../assets/project-icons/book-inactive.png"}
+                src={selectedItem === 0 ? BookActive : BookInactive}
                 alt="Book Icon"
               />
               <p><Link to={`/projects/bookify`}>Bookify</Link></p>
             </CasePreview>
             <CasePreview $mode={$mode} selected={selectedItem === 1} onClick={() => handleItemClick(1)}>
               <img
-                src={selectedItem === 1 ? "/src/assets/project-icons/pomodoro-active.png" : "/src/assets/project-icons/pomodoro-inactive.png"}
+                src={selectedItem === 1 ? PomoActive : PomoInactive}
                 alt="Tomato Pomodoro Icon"
               />
               <p><Link to={`/projects/pomodoro`}>Pomodoro Timer</Link></p>
             </CasePreview>
             <CasePreview $mode={$mode} selected={selectedItem === 2} onClick={() => handleItemClick(2)}>
               <img
-                src={selectedItem === 2 ? "/src/assets/project-icons/mountain-active.png" : "/src/assets/project-icons/mountain-inactive.png"}
+                src={selectedItem === 2 ? MountainActive : MountainInactive}
                 alt="Mountain Icon"
               />
               <p>National Park App</p>
