@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import BookActive from '../../assets/project-icons/book-active.png';
 import BookInactive from '../../assets/project-icons/book-inactive.png';
 import PomoActive from '../../assets/project-icons/pomodoro-active.png';
@@ -13,6 +13,8 @@ const States = {
   NARROW: 'narrow',
   HIDDEN: 'hidden',
 };
+
+const Cases = ['bookify', 'pomodoro', 'rock'];
 
 const SidebarWrapper = styled.div`
   display: block;
@@ -209,16 +211,17 @@ const CasePreview = styled.div`
 
 function Sidebar({ $sidebarState, closeSidebar }) {
   const [selectedItem, setSelectedItem] = useState(localStorage.getItem('case-study'));
-  const [selectedParent, setSelectedParent] = useState(localStorage.getItem('case-study-category'));
+  const [selectedParent, setSelectedParent] = useState(localStorage.getItem('case-topic'));
 
   const handleItemClick = (index) => {
-    localStorage.setItem('case-study', index);
-    localStorage.setItem('case-study-category', index);
-    setSelectedItem(index);
+    console.log(`clicked ${index} and selectedItem was ${selectedItem}`);
+    localStorage.setItem('case-study', Cases[index]);
+    setSelectedItem(Cases[index]);
     if (index < 3) {
-      setSelectedParent(0);
+      localStorage.setItem('case-topic', 'design')
+      setSelectedParent('design');
     }
-    closeSidebar('close sidebar');
+    closeSidebar('');
   }
 
   const handleResize = () => {
@@ -245,37 +248,56 @@ function Sidebar({ $sidebarState, closeSidebar }) {
       {$sidebarState !== States.HIDDEN && (
         <SidebarAside id="sidebar-aside" $sidebarState={$sidebarState}>
           <ScrollableAside $sidebarState={$sidebarState} id="scrollable-aside">
-            <CaseTopic $sidebarState={$sidebarState} id="design-cases" selected={selectedParent === 0}>
+            <CaseTopic 
+              id="design-cases"
+              open={selectedParent === 'design'}
+              $sidebarState={$sidebarState} 
+              selected={selectedParent === 'design'}
+            >
               <summary>Design</summary>
               <Link to={`/projects/bookify`} onClick={() => handleItemClick(0)}>
-                <CasePreview id="bookify" $sidebarState={$sidebarState} selected={selectedItem === 0}>
+                <CasePreview 
+                  $sidebarState={$sidebarState} 
+                  selected={selectedItem === Cases[0]}
+                >
                 <img
-                  src={selectedItem === 0 ? BookActive : BookInactive}
+                  src={selectedItem === Cases[0] ? BookActive : BookInactive}
                   alt="Book Icon"
                 />
                 <p>Bookify</p>
                 </CasePreview>
               </Link>
               <Link to={`/projects/pomodoro`} onClick={() => handleItemClick(1)}>
-                <CasePreview id="pomodoro" $sidebarState={$sidebarState} selected={selectedItem === 1}>
+                <CasePreview 
+                  $sidebarState={$sidebarState} 
+                  selected={selectedItem === Cases[1]}
+                >
                   <img
-                    src={selectedItem === 1 ? PomoActive : PomoInactive}
+                    src={selectedItem === Cases[1] ? PomoActive : PomoInactive}
                     alt="Tomato Pomodoro Icon"
                   />
                   <p>Pomodoro Timer</p>
                 </CasePreview>
               </Link>
               <Link to={`/projects/rock`} onClick={() => handleItemClick(2)}>
-                <CasePreview $sidebarState={$sidebarState} selected={selectedItem === 2}>
+                <CasePreview 
+                  $sidebarState={$sidebarState} 
+                  selected={selectedItem === Cases[2]}
+                >
                   <img
-                    src={selectedItem === 2 ? MountainActive : MountainInactive}
+                    src={selectedItem === Cases[2] ? MountainActive : MountainInactive}
                     alt="Mountain Icon"
                   />
                   <p>National Park App</p>
                 </CasePreview>
               </Link>
             </CaseTopic>
-            <CaseTopic $sidebarState={$sidebarState} id="engineering-cases" selected={selectedParent === 1}>
+            <CaseTopic 
+              id="engineering-cases"
+              open={selectedParent === 'engineering'}
+              $sidebarState={$sidebarState}
+              selected={selectedParent === 'engineering'}
+            >
               <summary>Engineering</summary>
             </CaseTopic>
           </ScrollableAside>

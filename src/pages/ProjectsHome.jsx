@@ -93,7 +93,7 @@ function ProjectsHome() {
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
-    console.log(`@Projects @resize sidebar ${sidebarState} & project ${projectState}`);
+    // console.log(`@Projects @resize sidebar ${sidebarState} & project ${projectState}`);
 
     return () => {
       window.removeEventListener('resize', handleResize);

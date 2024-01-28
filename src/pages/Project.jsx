@@ -55,6 +55,7 @@ const DarkOverlay = styled.div`
 function Project({ customComponent: CaseStudy }) {
   const body = document.getElementById('body');
   body.setAttribute('page', 'projects');
+  console.log('IN PROJECT');
 
   const [sidebarState, setSidebarState] = useState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
   const [projectState, setProjectState] = useState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
