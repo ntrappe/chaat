@@ -113,7 +113,6 @@ function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar 
   const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
   const [chevronState, setChevronState] = useState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
   const [sidebarState, setSidebarState] = useState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
-  const [scroll, setScroll] = useState('scroll');
 
   const handleResize = () => {
     if (window.innerWidth > 1023) {
@@ -147,6 +146,11 @@ function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar 
     setNavState((prevState) => (prevState === States.HIDDEN ? States.EXPANDED : States.HIDDEN));
   }
 
+  const resetNav = () => {
+    setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
+    setChevronState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
+  }
+
   useEffect(() => {
     window.addEventListener('resize', handleResize);
     bubbleUpNav(navState);
@@ -174,6 +178,7 @@ function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar 
               <NavMenu 
                 $colorScheme={$colorScheme}
                 $navState={navState}
+                resetNav={resetNav}
               />
             )}
             {(sidebarState !== States.EXPANDED && navState !== States.NARROW) && (

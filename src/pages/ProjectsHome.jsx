@@ -92,6 +92,10 @@ function ProjectsHome() {
     console.log('Click --> nav: ', navState);
   }, [navState]);
 
+  useEffect(() => {
+    console.log('Current pathname:', window.location.pathname);
+  }, [window.location.pathname]);
+
   return (
     <>
       <GlassHeader 
@@ -114,9 +118,9 @@ function ProjectsHome() {
         </AdjustableSidebar>
       </MainWrapper>
       {/* Only show footer if sidebar isn't open */}
-      {/* {(projectState !== States.HIDDEN && navState !== States.OPEN) && (
+      {(projectState !== States.HIDDEN && navState !== States.OPEN) && (
         <ThickFooter $colorScheme={COLORSCHEME} />
-      )} */}
+      )}
     </>
   )
 }

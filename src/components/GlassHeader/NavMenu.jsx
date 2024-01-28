@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const States = {
   EXPANDED: 'expanded',
@@ -105,25 +105,27 @@ const NavOption = styled.li`
   }
 `;
 
-function NavMenu({ $colorScheme, $navState }) {
+function NavMenu({ $colorScheme, $navState, resetNav }) {
+  const location = useLocation().pathname;
+
   return (
     <NavMenuWrapper id="nav-menu" $navState={$navState} $colorScheme={$colorScheme}>
       <NavMenuTray id="nav-menu-tray" $navState={$navState}>
         <NavMenuOptions id="nav-menu-options" $navState={$navState}>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/`}>Home</Link>
+            <Link to={`/`} onClick={resetNav}>Home</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/projects`}>Projects</Link>
+            <Link to={`/projects`} onClick={resetNav}>Projects</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/career`}>Career</Link>
+            <Link to={`/career`} onClick={resetNav}>Career</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/art`}>Art</Link>
+            <Link to={`/art`} onClick={resetNav}>Art</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/photography`}>Photography</Link>
+            <Link to={`/photography`} onClick={resetNav}>Photography</Link>
           </NavOption>
         </NavMenuOptions>
       </NavMenuTray>
