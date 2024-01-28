@@ -1,13 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+
+const States = {
+  EXPANDED: 'expanded',
+  NARROW: 'narrow',
+  HIDDEN: 'hidden',
+};
 
 const BookifyWrapper = styled.div`
   display: flex;
   flex-flow: column;
   flex: 1 1 auto;
-  min-width: 0;
   height: 100%;
   padding-top: 2.35rem;
+  background-color: ${(props) => {
+    if (props.$projectState === States.NARROW) {
+      return 'purple';
+    } else if (props.$projectState === States.EXPANDED) {
+      return 'orange';
+    } else {
+      return 'grey';
+    }
+  }};
+  
+  @media (max-width: 1023px) {
+    min-width: 100%:
+    width: 100%:
+    position: ${(props) => (props.$sidebarState === States.EXPANDED ? 'fixed' : 'relative')};
+    overflow: ${(props) => (props.$sidebarState === States.EXPANDED ? 'hidden' : 'unset')};
+  }
 `;
 
 const BookifyTitle = styled.h1`
@@ -36,11 +57,15 @@ const BookifyPreview = styled.div`
   }  
 `;
 
-function Bookify() {
+function Bookify({ $sidebarState, $projectState }) {
   
   return (
     <>
-      <BookifyWrapper>
+      <BookifyWrapper 
+        id="case-study" 
+        $sidebarState={$sidebarState}
+        $projectState={$projectState}
+      >
         <BookifyTitle id="case-study-title">Bookify</BookifyTitle>
         <BookifyTag id="case-study-tag">Finding books.</BookifyTag>
         <BookifyPreview id="case-study-preview">

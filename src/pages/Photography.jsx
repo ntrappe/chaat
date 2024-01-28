@@ -39,15 +39,23 @@ const DarkOverlay = styled.div`
 
 function Photography() {
   const body = document.getElementById('body');
-  const root = document.getElementById('root');
   body.setAttribute('colorscheme', COLORSCHEME);
 
   const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
-  
+  const [scroll, setScroll] = useState(true);
+
   const handleNavToggle = (state) => {
     setNavState(state);
-    root.setAttribute('scroll', state === States.EXPANDED ? 'noscroll' : 'scroll');
+    setScroll(state !== States.EXPANDED);
   }
+
+  useEffect(() => {
+    const root = document.getElementById('root');
+    if (root) {
+      root.style.position = scroll ? 'unset' : 'fixed';
+    }
+  }, [scroll]);
+
   return (
     <>
       <GlassHeader 

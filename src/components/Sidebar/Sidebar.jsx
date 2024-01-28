@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import BookActive from '../../assets/project-icons/book-active.png';
@@ -17,13 +17,31 @@ const States = {
 const SidebarWrapper = styled.div`
   display: block;
   position: relative;
-  top: 0.5rem;
+  top: 0;
+  margin-top: ${(props) => (props.$sidebarState === States.NARROW ? '0.5rem' : '0')};
+  background-color: ${(props) => {
+    if (props.$sidebarState === States.NARROW) {
+      return 'plum';
+    } else if (props.$sidebarState === States.EXPANDED) {
+      return 'orangered';
+    } else {
+      return 'darkgrey';
+    }
+  }};
+  transition: none;
 
   @media (max-width: 1023px) {
-    display: flex;
-    position: relative;
-    width: 100%;
-    height: auto;
+    position: fixed;
+    top: var(--nav-height);
+    min-width: 0;
+    width: 100% !important;
+    max-width: 100%;
+    height: calc(var(--app-height) - var(--nav-height));
+    border: 2px solid red;
+    z-index: 9999;
+    left: 0;
+    transition: ${(props) => (props.$sidebarState === States.NARROW ? 'none' : 'transform .25s ease-in')};
+    transform: ${(props) => (props.$sidebarState === States.EXPANDED ? 'translateX(0)' : 'translateX(-100%)')};
   }
 `;
 
@@ -31,23 +49,34 @@ const SidebarAside = styled.div`
   position: relative;
   height: 100%;
   width: 200px;
-  max-width: 100vw;
+
+  background-color: ${(props) => {
+    if (props.$sidebarState === States.NARROW) {
+      return 'purple';
+    } else if (props.$sidebarState === States.EXPANDED) {
+      return 'orange';
+    } else {
+      return 'grey';
+    }
+  }};
 
   @media (max-width: 1023px) {
-    display: flex;
+    display: ${(props) => (props.$sidebarState === States.EXPANDED ? 'flex' : 'none')};
+    position: ${(props) => (props.$sidebarState === States.EXPANDED ? 'static' : 'unset')};
     flex-flow: column;
-    width: 100%;
+    width: 100% !important;
   }
 `;
 
 const ScrollableAside = styled.nav`
+  // position: ${(props) => (props.$sidebarState === States.NARROW ? 'sticky' : 'unset')};
+  // position: ${(props) => (props.$sidebarState === States.NARROW ? '-webkit-sticky' : 'unset')};
   position: sticky;
   position: -webkit-sticky;
   top: var(--nav-height);
   width: 195px;
-  transform: translateZ(0);
   margin-top: 10px;
-  padding-top: ${(props) => (props.$mode === States.NARROW ? '21px' : '0')};
+  padding-top: ${(props) => (props.$sidebarState === States.NARROW ? '21px' : '0')};
 
   @media (max-width: 1023px) {
     width: 100%;
@@ -57,21 +86,21 @@ const ScrollableAside = styled.nav`
 const CaseTopic = styled.details`
   width: 100%
   padding: 5px 0 5px 0;
-  margin-bottom: ${(props) => (props.$mode === States.EXPANDED ? '4px' : '0')};
+  margin-bottom: ${(props) => (props.$sidebarState === States.EXPANDED ? '4px' : '0')};
 
   @media (max-width: 1023px) {
-    padding: ${(props) => (props.$mode === States.EXPANDED ? '0 !important' : '5px 0 5px 0')};
+    padding: ${(props) => (props.$sidebarState === States.EXPANDED ? '0 !important' : '5px 0 5px 0')};
   }
   
   summary {
     cursor: pointer;
     list-style-type: none;
     margin: 0;
-    padding: ${(props) => (props.$mode === States.NARROW ? '7px 0' : 'inherit')};
+    padding: ${(props) => (props.$sidebarState === States.NARROW ? '7px 0' : 'inherit')};
     font-size: 14px;
     font-weight: ${(props) => (props.selected ? '500' : '300')};
     color: ${(props) => {
-      if (props.$mode === States.EXPANDED) {
+      if (props.$sidebarState === States.EXPANDED) {
         return `var(--midnight)`;
       } else {
         if (props.selected) {
@@ -87,9 +116,9 @@ const CaseTopic = styled.details`
     }
 
     &:hover {
-      background-color: ${(props) => (props.$mode === States.EXPANDED ? `var(--dust)` : 'inherit')};
-      // color: ${(props) => (props.$mode === States.NARROW ? 'red' : 'inherit')};
-      text-decoration: ${(props) => (props.$mode === States.NARROW ? 'underline' : 'none')};
+      background-color: ${(props) => (props.$sidebarState === States.EXPANDED ? `var(--dust)` : 'inherit')};
+      // color: ${(props) => (props.$sidebarState === States.NARROW ? 'red' : 'inherit')};
+      text-decoration: ${(props) => (props.$sidebarState === States.NARROW ? 'underline' : 'none')};
     }
     
     &::before {
@@ -121,14 +150,15 @@ const CasePreview = styled.div`
   align-items: center;
   padding: 7px 0 7px 0;
   cursor: pointer;
-  background-color: ${(props) => (props.$mode === States.EXPANDED && props.selected ? `var(--snow)` : 'inherit')};
+  background-color: ${(props) => (props.$sidebarState === States.EXPANDED && props.selected ? `var(--snow)` : 'inherit')};
+  background-color: ${(props) => (props.selected ? 'orange' : 'azure')};
 
   @media (max-width: 1023px) {
     padding: 8px 40px 8px 10px;
   }
 
   &:hover {
-    background-color: ${(props) => (props.$mode === States.EXPANDED ? `var(--dust)` : 'inherit')};
+    background-color: ${(props) => (props.$sidebarState === States.EXPANDED ? `var(--dust)` : 'inherit')};
   }
 
   img {
@@ -149,7 +179,7 @@ const CasePreview = styled.div`
     letter-spacing: -.224px;
     font-weight: ${(props) => (props.selected ? '500' : '300')};
     color: ${(props) => {
-      if (props.$mode === States.EXPANDED) {
+      if (props.$sidebarState === States.EXPANDED) {
         return `var(--midnight)`;
       } else {
         if (props.selected) {
@@ -166,9 +196,9 @@ const CasePreview = styled.div`
   }
 
   p:hover {
-    // color: ${(props) => (props.$mode === States.NARROW ? 'red' : 'inherit')};
+    // color: ${(props) => (props.$sidebarState === States.NARROW ? 'red' : 'inherit')};
     font-weight: ${(props) => (props.selected ? '500' : '300')};
-    text-decoration: ${(props) => (props.$mode === States.NARROW ? 'underline' : 'none')};
+    text-decoration: ${(props) => (props.$sidebarState === States.NARROW ? 'underline' : 'none')};
   }
 
   a:hover {
@@ -177,57 +207,80 @@ const CasePreview = styled.div`
   }
 `;
 
-function Sidebar({ $mode }) {
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [selectedParent, setSelectedParent] = useState(null);
+function Sidebar({ $sidebarState, closeSidebar }) {
+  const [selectedItem, setSelectedItem] = useState(localStorage.getItem('case-study'));
+  const [selectedParent, setSelectedParent] = useState(localStorage.getItem('case-study-category'));
 
   const handleItemClick = (index) => {
+    localStorage.setItem('case-study', index);
+    localStorage.setItem('case-study-category', index);
     setSelectedItem(index);
     if (index < 3) {
       setSelectedParent(0);
     }
+    closeSidebar('close sidebar');
   }
+
+  const handleResize = () => {
+    const newHeight = window.innerHeight;
+    // console.log('new height: ' + newHeight);
+    document.documentElement.style.setProperty('--app-height', `${newHeight}px`);
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+      sidebar.style.transition = $sidebarState === States.NARROW ? 'none' : 'transform .25s ease-in';
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [handleResize]);
 
   return (
     <>
-    <SidebarWrapper id="sidebar" $mode={$mode}>
-       <SidebarAside id="sidebar-aside" $mode={$mode}>
-        <ScrollableAside $mode={$mode} id="scrollable-aside">
-          <CaseTopic $mode={$mode} id="design-cases" selected={selectedParent === 0}>
-            <summary>Design</summary>
-            <Link to={`/projects/bookify`} onClick={() => console.log('clicked link')}>
-              <CasePreview $mode={$mode} selected={selectedItem === 0} onClick={() => console.log('clicked case preview')}>
-              <img
-                src={selectedItem === 0 ? BookActive : BookInactive}
-                alt="Book Icon"
-              />
-              <p>Bookify</p>
-              </CasePreview>
-            </Link>
-            <Link to={`/projects/pomodoro`} onClick={() => handleItemClick(1)}>
-              <CasePreview $mode={$mode} selected={selectedItem === 1}>
+    <SidebarWrapper id="sidebar" $sidebarState={$sidebarState}>
+      {$sidebarState !== States.HIDDEN && (
+        <SidebarAside id="sidebar-aside" $sidebarState={$sidebarState}>
+          <ScrollableAside $sidebarState={$sidebarState} id="scrollable-aside">
+            <CaseTopic $sidebarState={$sidebarState} id="design-cases" selected={selectedParent === 0}>
+              <summary>Design</summary>
+              <Link to={`/projects/bookify`} onClick={() => handleItemClick(0)}>
+                <CasePreview id="bookify" $sidebarState={$sidebarState} selected={selectedItem === 0}>
                 <img
-                  src={selectedItem === 1 ? PomoActive : PomoInactive}
-                  alt="Tomato Pomodoro Icon"
+                  src={selectedItem === 0 ? BookActive : BookInactive}
+                  alt="Book Icon"
                 />
-                <p>Pomodoro Timer</p>
-              </CasePreview>
-            </Link>
-            <Link to={`/projects/rock`} onClick={() => handleItemClick(2)}>
-              <CasePreview $mode={$mode} selected={selectedItem === 2}>
-                <img
-                  src={selectedItem === 2 ? MountainActive : MountainInactive}
-                  alt="Mountain Icon"
-                />
-                <p>National Park App</p>
-              </CasePreview>
-            </Link>
-          </CaseTopic>
-          <CaseTopic $mode={$mode} id="engineering-cases" selected={selectedParent === 1}>
-            <summary>Engineering</summary>
-          </CaseTopic>
-        </ScrollableAside>
-      </SidebarAside>
+                <p>Bookify</p>
+                </CasePreview>
+              </Link>
+              <Link to={`/projects/pomodoro`} onClick={() => handleItemClick(1)}>
+                <CasePreview id="pomodoro" $sidebarState={$sidebarState} selected={selectedItem === 1}>
+                  <img
+                    src={selectedItem === 1 ? PomoActive : PomoInactive}
+                    alt="Tomato Pomodoro Icon"
+                  />
+                  <p>Pomodoro Timer</p>
+                </CasePreview>
+              </Link>
+              <Link to={`/projects/rock`} onClick={() => handleItemClick(2)}>
+                <CasePreview $sidebarState={$sidebarState} selected={selectedItem === 2}>
+                  <img
+                    src={selectedItem === 2 ? MountainActive : MountainInactive}
+                    alt="Mountain Icon"
+                  />
+                  <p>National Park App</p>
+                </CasePreview>
+              </Link>
+            </CaseTopic>
+            <CaseTopic $sidebarState={$sidebarState} id="engineering-cases" selected={selectedParent === 1}>
+              <summary>Engineering</summary>
+            </CaseTopic>
+          </ScrollableAside>
+        </SidebarAside>
+      )}
     </SidebarWrapper>
     </>
   )

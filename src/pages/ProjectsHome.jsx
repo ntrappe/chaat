@@ -15,12 +15,17 @@ const States = {
 
 const MainWrapper = styled.main`
   display: flex;
-  width: calc(var(--max-main-width) - var(--aside-width));
+  width: var(--max-main-width);
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 3em;
+  background-color: pink;
 
-  @media (max-width: 767px) {
+  @media (max-width: 1023px) {
+    width: var(--med-main-width);
+  }
+
+  @media (max-width: 735px) {
     width: ${(props) => (props.$projectState === States.HIDDEN ? '100%' : '87.5%')};
   }
 `;
@@ -32,7 +37,6 @@ const AdjustableSidebar = styled.div`
 
   @media (max-width: 1023px) {
     display: ${(props) => (props.$projectState === States.EXPANDED ? 'flex' : 'block')};
-    // position: ${(props) => (props.$projectState === States.HIDDEN ? 'fixed' : 'relative')};
     width: ${(props) => (props.$projectState === States.HIDDEN ? '100%' : 'auto')};
   }
 `;
@@ -49,12 +53,12 @@ const DarkOverlay = styled.div`
 
 function ProjectsHome() {
   const body = document.getElementById('body');
-  const root = document.getElementById('root');
   body.setAttribute('colorscheme', COLORSCHEME);
 
   const [sidebarState, setSidebarState] = useState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
   const [projectState, setProjectState] = useState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
   const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
+  const [scroll, setScroll] = useState(true);
 
   // width > 1023 so sidebar can only be NAR or same
   const handleResize = () => {
@@ -73,15 +77,23 @@ function ProjectsHome() {
     console.log('sidebar clicked, projects thinks ' + state);
     setSidebarState((prevState) => (prevState === States.HIDDEN ? States.EXPANDED : States.HIDDEN));
     setProjectState((prevState) => (prevState === States.EXPANDED ? States.HIDDEN : States.EXPANDED));
+    setScroll(state !== States.EXPANDED);
   };
 
   const handleNavToggle = (state) => {
     setNavState(state);
-    root.setAttribute('scroll', state === States.EXPANDED ? 'noscroll' : 'scroll');
+    setScroll(state !== States.EXPANDED);
+  }
+
+  const closeSidebar = (signal) => {
+    console.log(signal);
+    setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
+    setProjectState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
   }
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
+    console.log(`@Projects @resize sidebar ${sidebarState} & project ${projectState}`);
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -89,12 +101,11 @@ function ProjectsHome() {
   }, [sidebarState, navState, projectState]);
 
   useEffect(() => {
-    console.log('Click --> nav: ', navState);
-  }, [navState]);
-
-  useEffect(() => {
-    console.log('Current pathname:', window.location.pathname);
-  }, [window.location.pathname]);
+    const root = document.getElementById('root');
+    if (root) {
+      root.style.position = scroll ? 'unset' : 'fixed';
+    }
+  }, [scroll]);
 
   return (
     <>
@@ -109,12 +120,14 @@ function ProjectsHome() {
       )}
       <MainWrapper id="main" $projectState={projectState}>
         <AdjustableSidebar id="adjustable-sidebar" $projectState={projectState}>
-          {sidebarState !== States.HIDDEN && (
-            <Sidebar $mode={sidebarState} />
-          )}
-          {projectState !== States.HIDDEN && (
-            <ProjectGrid $mode={projectState} $navState={navState} />
-          )}   
+          <Sidebar 
+            $sidebarState={sidebarState}
+            closeSidebar={closeSidebar}
+          />
+          <ProjectGrid 
+            $mode={projectState} 
+            $navState={navState}
+          />
         </AdjustableSidebar>
       </MainWrapper>
       {/* Only show footer if sidebar isn't open */}

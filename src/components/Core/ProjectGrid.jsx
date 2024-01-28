@@ -22,7 +22,10 @@ const GridWrapper = styled.div`
   padding-top: 2.35rem;
 
   @media (max-width: 1023px) {
-    display: ${(props) => (props.$mode === States.HIDDEN ? 'none' : 'flex')};
+    min-width: 100%:
+    width: 100%:
+    position: ${(props) => (props.$sidebarState === States.EXPANDED ? 'fixed' : 'relative')};
+    overflow: ${(props) => (props.$sidebarState === States.EXPANDED ? 'hidden' : 'unset')};
   }
 `;
 

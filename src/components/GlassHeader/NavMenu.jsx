@@ -105,7 +105,7 @@ const NavOption = styled.li`
   }
 `;
 
-function NavMenu({ $colorScheme, $navState, resetNav }) {
+function NavMenu({ $colorScheme, $navState, closeNav }) {
   const location = useLocation().pathname;
 
   return (
@@ -113,19 +113,19 @@ function NavMenu({ $colorScheme, $navState, resetNav }) {
       <NavMenuTray id="nav-menu-tray" $navState={$navState}>
         <NavMenuOptions id="nav-menu-options" $navState={$navState}>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/`} onClick={resetNav}>Home</Link>
+            <Link to={`/`} onClick={closeNav}>Home</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/projects`} onClick={resetNav}>Projects</Link>
+            <Link to={`/projects`} onClick={closeNav}>Projects</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/career`} onClick={resetNav}>Career</Link>
+            <Link to={`/career`} onClick={closeNav}>Career</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/art`} onClick={resetNav}>Art</Link>
+            <Link to={`/art`} onClick={closeNav}>Art</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/photography`} onClick={resetNav}>Photography</Link>
+            <Link to={`/photography`} onClick={closeNav}>Photography</Link>
           </NavOption>
         </NavMenuOptions>
       </NavMenuTray>

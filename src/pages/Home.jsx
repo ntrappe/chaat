@@ -204,17 +204,24 @@ const Wisdom = styled.div`
 
 function Home() {
   const body = document.getElementById('body');
-  const root = document.getElementById('root');
   body.setAttribute('colorscheme', COLORSCHEME);
 
   /* need to know if nav is open to freeze content below it */
   const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
   const [helloHeight, setHelloHeight] = useState(0);
+  const [scroll, setScroll] = useState(true);
 
   const handleNavToggle = (state) => {
     setNavState(state);
-    root.setAttribute('scroll', state === States.EXPANDED ? 'noscroll' : 'scroll');
+    setScroll(state !== States.EXPANDED);
   }
+
+  useEffect(() => {
+    const root = document.getElementById('root');
+    if (root) {
+      root.style.position = scroll ? 'unset' : 'fixed';
+    }
+  }, [scroll]);
 
   useEffect(() => {
     const helloBackground = document.getElementById('hello-background');

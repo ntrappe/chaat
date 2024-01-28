@@ -23,19 +23,13 @@ body[colorscheme="dark"] {
 }
 
 body[colorscheme="light"] {
-  background-color: white;
+  /* background-color: white; */
+  background-color: #ffe75c;
 }
 
 #root {
-  background-color: inherit;
-}
-
-#root[scroll="noscroll"] {
-  position: fixed;
-}
-
-#root[scroll="scroll"] {
-  position: relative;
+  /* background-color: inherit; */
+  background-color: #2f80ef;
 }
 
 body, #root {
@@ -129,8 +123,10 @@ html {
   --nav-height: 2.75rem;
   --mobile-width: 767px;
   --proj-sect-gap: 30px;
-  --max-main-width: 980px;
-  --aside-width: 140px;
+  --max-main-width: 960px;
+  --med-main-width: 660px;
+  --aside-width: 150px;
+  --app-height: 100vh;
 
   --paper: #f8f8fa;
   --snow: #e8e8e8;

@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const HID = 'hidden';
-const OVERVIEW = 0;
-const PROBLEM = 1;
-const RESEARCH = 2;
-
 const FloatingAsideWrapper = styled.div`
+  display: block;
   position: sticky;
   position: -webkit-sticky;
   top: 4.23rem;
@@ -14,10 +10,6 @@ const FloatingAsideWrapper = styled.div`
   width: var(--aside-width);
   padding-left: 38px;
   margin-top: 130px; /* match this with case study text */
-
-  @media (max-width: 1023px) {
-    display: ${(props) => (props.$mode === HID ? 'none' : 'flex')};
-  }
   
   @media (max-width: 767px) {
     display: none;

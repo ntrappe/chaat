@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-
-const HID = 'hidden';
 
 const RockWrapper = styled.div`
   display: flex;
@@ -10,10 +8,6 @@ const RockWrapper = styled.div`
   min-width: 0;
   height: 100%;
   padding-top: 2.35rem;
-
-  @media (max-width: 1023px) {
-    display: ${(props) => (props.$mode === HID ? 'none' : 'flex')};
-  }
 `;
 
 const RockTitle = styled.h1`
@@ -42,11 +36,11 @@ const RockPreview = styled.div`
   }  
 `;
 
-function Rock({ $mode }) {
+function Rock() {
   
   return (
     <>
-      <RockWrapper $mode={$mode}>
+      <RockWrapper>
         <RockTitle id="case-study-title">Rock </RockTitle>
         <RockTag id="case-study-tag">National park app.</RockTag>
         <RockPreview id="case-study-preview">

@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-const HID = 'hidden';
+const States = {
+  EXPANDED: 'expanded',
+  NARROW: 'narrow',
+  HIDDEN: 'hidden',
+};
 
 const PomodoroWrapper = styled.div`
   display: flex;
@@ -12,7 +16,10 @@ const PomodoroWrapper = styled.div`
   padding-top: 2.35rem;
 
   @media (max-width: 1023px) {
-    display: ${(props) => (props.$mode === HID ? 'none' : 'flex')};
+    min-width: 100%:
+    width: 100%:
+    position: ${(props) => (props.$sidebarState === States.EXPANDED ? 'fixed' : 'relative')};
+    overflow: ${(props) => (props.$sidebarState === States.EXPANDED ? 'hidden' : 'unset')};
   }
 `;
 
@@ -60,11 +67,15 @@ const PomodoroSection = styled.section`
   }
 `;
 
-function Pomodoro({ $mode }) {
+function Pomodoro({ $sidebarState, $projectState }) {
   
   return (
     <>
-      <PomodoroWrapper $mode={$mode}>
+      <PomodoroWrapper
+        id="case-study" 
+        $sidebarState={$sidebarState}
+        $projectState={$projectState}
+      >
         <PomodoroTitle id="case-study-title">Pomodoro Timer</PomodoroTitle>
         <PomodoroTag id="case-study-tag">A web-based timer designed to curb procrastination.</PomodoroTag>
         <PomodoroPreview id="case-study-preview">

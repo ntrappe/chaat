@@ -131,8 +131,10 @@ function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar 
   };
 
   const handleSidebarToggle = () => {
-    setSidebarState((prevState) => (prevState === States.HIDDEN ? States.EXPANDED : States.HIDDEN));
-    bubbleUpSidebar();
+    const nextState = sidebarState === States.HIDDEN ? States.EXPANDED : States.HIDDEN;
+    setSidebarState(nextState);
+    bubbleUpSidebar(nextState);
+
     if (navState === States.EXPANDED) {
       setNavState(States.HIDDEN);
       setChevronState(Arrow.DOWN);
@@ -141,24 +143,24 @@ function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar 
   };
 
   const handleNavToggle = () => {
-    console.log('clicked chevron on ' + chevronState);
+    const nextState = navState === States.HIDDEN ? States.EXPANDED : States.HIDDEN;
     setChevronState((prevState) => (prevState === Arrow.DOWN ? Arrow.UP : Arrow.DOWN));
-    setNavState((prevState) => (prevState === States.HIDDEN ? States.EXPANDED : States.HIDDEN));
+    setNavState(nextState);
+    bubbleUpNav(nextState);
   }
 
-  const resetNav = () => {
+  const closeNav = () => {
     setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
     setChevronState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
   }
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
-    bubbleUpNav(navState);
 
     return () => {
       window.removeEventListener('resize', handleResize);
     }
-  }, [chevronState, navState, sidebarState, scroll]); 
+  }, [chevronState, navState, sidebarState]); 
 
   return (
     <>
@@ -178,7 +180,7 @@ function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar 
               <NavMenu 
                 $colorScheme={$colorScheme}
                 $navState={navState}
-                resetNav={resetNav}
+                closeNav={closeNav}
               />
             )}
             {(sidebarState !== States.EXPANDED && navState !== States.NARROW) && (
