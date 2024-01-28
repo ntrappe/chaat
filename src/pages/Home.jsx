@@ -10,12 +10,21 @@ import Subtitles from '../assets/page-icons/subtitles.png';
 import Hand from '../assets/page-icons/hand.png';
 import Palette from '../assets/page-icons/palette.png';
 
+const COLORSCHEME = 'dark';
+
+const States = {
+  EXPANDED: 'expanded',
+  NARROW: 'narrow',
+  HIDDEN: 'hidden',
+};
+
 const MainWrapper = styled.main`
   background-color: inherit;
+  height: 100%;
 
   @media (max-width: 767px) {
-    position: ${(props) => (props.$navOpen === 'open' ? 'fixed' : 'unset')};
-    top: ${(props) => (props.$navOpen === 'open' ? `var(--nav-height)` : 'unset')};
+    // position: ${(props) => (props.$navState === States.EXPANDED ? 'fixed' : 'unset')};
+    top: ${(props) => (props.$navState === States.EXPANDED ? `var(--nav-height)` : 'unset')};
   }
 `;
 
@@ -195,14 +204,16 @@ const Wisdom = styled.div`
 
 function Home() {
   const body = document.getElementById('body');
-  body.setAttribute('page', 'home');
+  const root = document.getElementById('root');
+  body.setAttribute('colorscheme', COLORSCHEME);
 
   /* need to know if nav is open to freeze content below it */
-  const [navOpen, setNavOpen] = useState(null);
+  const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
   const [helloHeight, setHelloHeight] = useState(0);
 
-  const verifyNavOpen = (signal) => {
-    setNavOpen(signal ? 'open' : 'closed');
+  const handleNavToggle = (state) => {
+    setNavState(state);
+    root.setAttribute('scroll', state === States.EXPANDED ? 'noscroll' : 'scroll');
   }
 
   useEffect(() => {
@@ -229,15 +240,15 @@ function Home() {
   return (
     <>
       <GlassHeader 
-        $colorScheme={'dark'} 
+        $colorScheme={COLORSCHEME} 
         $showSideBar={false} 
-        passSidebarClick={() => console.log('no sidebar')}
-        passNavClick={verifyNavOpen}
+        bubbleUpSidebar={() => console.log('no sidebar')}
+        bubbleUpNav={handleNavToggle}
       />
-      <MainWrapper $navOpen={navOpen}>
-        {navOpen === 'open' && (
-          <DarkOverlay />
-        )}
+      {navState === States.EXPANDED && (
+        <DarkOverlay />
+      )}
+      <MainWrapper $navState={navState}>
         <HelloSection id="hello-section" style={{ height: helloHeight }}>
           <Hello id="hello"/>
         </HelloSection>
@@ -316,8 +327,8 @@ function Home() {
         </PhilosophySection>
       </MainWrapper>
       {/* Only show footer if sidebar isn't open */}
-      {(navOpen !== 'open') && (
-        <ThickFooter $colorScheme={'dark'} />
+      {navState !== States.EXPANDED && (
+        <ThickFooter $colorScheme={COLORSCHEME} />
       )}
     </>
   )

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const HID = 'hidden';
-
 const BookifyWrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -10,10 +8,6 @@ const BookifyWrapper = styled.div`
   min-width: 0;
   height: 100%;
   padding-top: 2.35rem;
-
-  @media (max-width: 1023px) {
-    display: ${(props) => (props.$mode === HID ? 'none' : 'flex')};
-  }
 `;
 
 const BookifyTitle = styled.h1`
@@ -42,11 +36,11 @@ const BookifyPreview = styled.div`
   }  
 `;
 
-function Bookify({ $mode }) {
+function Bookify() {
   
   return (
     <>
-      <BookifyWrapper $mode={$mode}>
+      <BookifyWrapper>
         <BookifyTitle id="case-study-title">Bookify</BookifyTitle>
         <BookifyTag id="case-study-tag">Finding books.</BookifyTag>
         <BookifyPreview id="case-study-preview">

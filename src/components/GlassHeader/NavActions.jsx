@@ -1,6 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const Arrow = {
+  NONE: 'none',
+  DOWN: 'down',
+  UP: 'up',
+}
+
 const NavActionsWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -14,16 +20,12 @@ const NavActionsWrapper = styled.div`
 `;
 
 const NavMenuMobile = styled.a`
-  display: none;
+  display: ${(props) => (props.chevronState === Arrow.NONE ? 'none' : 'flex')};
   align-items: center;
   cursor: pointer;
   overflow: hidden;
   width: 1.17rem;
   height: 2.8rem;
-
-  @media screen and (max-width: 767px) {
-    display: flex;
-  }
 `;
 
 const NavMenuChevron = styled.span`
@@ -32,7 +34,7 @@ const NavMenuChevron = styled.span`
   width: 100%;
   height: 0.7rem;
   transition: transform 1s cubic-bezier(.86,0,.07,1),transform-origin 1s cubic-bezier(.86,0,.07,1);
-  transform: ${(props) => (props.$direction === 'down' ? 'translateY(0)' : 'translateY(-8px)')};
+  transform: ${(props) => (props.$chevronState === Arrow.DOWN ? 'translateY(0)' : 'translateY(-8px)')};
 
   &::before,
   &::after {
@@ -47,27 +49,27 @@ const NavMenuChevron = styled.span`
   }
 
   &::before {
-    transform-origin: ${(props) => (props.$direction === 'down' ? '100% 100%' : '100% 0')};
-    transform: ${(props) => (props.$direction === 'down' ? 'rotate(40deg) scaleY(1.5)' : 'rotate(-40deg) scaleY(1.5)')};
+    transform-origin: ${(props) => (props.$chevronState === Arrow.DOWN ? '100% 100%' : '100% 0')};
+    transform: ${(props) => (props.$chevronState === Arrow.DOWN ? 'rotate(40deg) scaleY(1.5)' : 'rotate(-40deg) scaleY(1.5)')};
     right: 50%;
     border-radius: .5px 0 0 .5px;
   }
 
   &::after {
-    transform-origin: ${(props) => (props.$direction === 'down' ? '0 100%' : '0 0')};
-    transform: ${(props) => (props.$direction === 'down' ? 'rotate(-40deg) scaleY(1.5)' : 'rotate(40deg) scaleY(1.5)')};
+    transform-origin: ${(props) => (props.$chevronState === Arrow.DOWN ? '0 100%' : '0 0')};
+    transform: ${(props) => (props.$chevronState === Arrow.DOWN ? 'rotate(-40deg) scaleY(1.5)' : 'rotate(40deg) scaleY(1.5)')};
     left: 50%;
     border-radius: 0 .5px .5px 0;
   }
 `;
 
-function NavActions({ $direction, handleChevronClick, $showChevron }) {
+function NavActions({ $chevronState, handleChevronClick }) {
   return (
     <NavActionsWrapper id="nav-actions">
-      <NavMenuMobile>
-        {$showChevron && (
+      <NavMenuMobile id="nav-menu-mobile" $chevronState={$chevronState}>
+        {$chevronState !== Arrow.NONE && (
           <NavMenuChevron id="chevron" 
-            $direction={$direction} 
+            $chevronState={$chevronState} 
             onClick={handleChevronClick} 
           ></NavMenuChevron>
         )}

@@ -8,8 +8,18 @@ import NavPre from './NavPre.jsx';
 /* General Style Variables */
 const navHeight = '2.8rem'
 const navCompactHeight = '2.8rem';
-const mobileWidthVar = 767;
-const wideWidthVar = 1023;
+
+const States = {
+  EXPANDED: 'expanded',
+  NARROW: 'narrow',
+  HIDDEN: 'hidden',
+};
+
+const Arrow = {
+  NONE: 'none',
+  DOWN: 'down',
+  UP: 'up',
+}
 
 const NavHeader = styled.header`
   display: flex;
@@ -18,8 +28,7 @@ const NavHeader = styled.header`
   left: 0;
   width: 100%;
   z-index: 1001;
-  height: ${navHeight};
-  // border-bottom: ${(props) => (props.$colorScheme === 'dark' ? 'green' : `var(--cloud)`)};
+  height: var(--nav-height);
 
   @media and (max-width: 767px) {
     min-width: 320px;
@@ -51,22 +60,31 @@ const NavBackground = styled.div`
   border-bottom: 0.8px solid;
   border-color: ${(props) => (props.$colorScheme === 'dark' ? `var(--pavement)` : `var(--cloud)`)};
 
+  background: ${(props) => {
+    if (props.$navState === States.EXPANDED) {
+      return 'yellow';
+    } else if (props.$navState === States.NARROW) {
+      return 'pink';
+    } else {
+      return 'orange';
+    }
+  }};
+
+  background-color: ${(props) => {
+    if (props.$navState === States.EXPANDED) {
+      return props.$colorScheme === 'dark' ? `var(--obsidian)` : 'white';
+    } else {
+      return props.$colorScheme === 'dark' ? `var(--obsidian-glassy)` : `var(--white-glassy)`;
+    }
+  }};
+
+  min-height: ${(props) => (props.$navState === States.EXPANDED ? '17em' : '0')};
+
   @supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: saturate(180%) blur(20px);
     transition: background-color .5s ease;
     transition-property: background-color,backdrop-filter,-webkit-backdrop-filter;
-  }
-
-  @media (max-width: 767px) {
-    min-height: ${(props) => (props.$navOpen ? '17em' : '100%')};
-    background-color: ${(props) => {
-      if (props.$colorScheme === 'dark') {
-        return props.$navOpen ? `var(--obsidian)` : `var(--obsidian-glassy)`;
-      } else {
-        return props.$navOpen ? 'white' : `var(--white-glassy)`;
-      }
-    }};
   }
 }
 `;
@@ -90,78 +108,80 @@ const NavContent = styled.div`
   }
 `;
 
-function GlassHeader({ $colorScheme, $showSideBar, passSidebarClick, passNavClick }) {
+function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar }) {
 
-  const [sideBarOpen, setSideBarOpen] = useState('closed');
-  const [direction, setDirection] = useState('down');
-  const [navOpen, setNavOpen] = useState(false);
-  const [showChevron, setShowChevron] = useState(true);
+  const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
+  const [chevronState, setChevronState] = useState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
+  const [sidebarState, setSidebarState] = useState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
+  const [scroll, setScroll] = useState('scroll');
 
-  const handleSideBarClick = () => {
-    const newState = sideBarOpen === 'closed' ? 'open' : 'closed';
-     /* if user wants sidebar to open while nav is open, close nav first */
-    setNavOpen(false);
-    setDirection('down');
-    /* now open sidebar */
-    setSideBarOpen(newState);
-    passSidebarClick(newState);
-    setShowChevron(newState != 'open'); 
-  }
-
-  const handleChevronClick = () => {
-    const newDirection = direction === 'up' ? 'down' : 'up';
-    console.log('click on ' + direction + ' --> ' + newDirection);
-    setDirection(newDirection);
-    setNavOpen(newDirection === 'down' ? false : true);
-    passNavClick(!navOpen);
+  const handleResize = () => {
+    if (window.innerWidth > 1023) {
+      setSidebarState(States.NARROW);
+    } else if (window.innerWidth <= 1023 && sidebarState === States.NARROW) {
+      setSidebarState(States.HIDDEN);
+    } else if (window.innerWidth > 767) {
+      console.log(`resize > 1023: nav ${navState} & chevron ${chevronState}`);
+      setNavState(States.NARROW);
+      setChevronState(Arrow.NONE);
+    } else if (window.innerWidth <= 767 && navState === States.NARROW) {
+      console.log('thinks nav is narrow [default]');
+      setNavState(States.HIDDEN);
+      setChevronState(Arrow.DOWN);
+    }
   };
 
+  const handleSidebarToggle = () => {
+    setSidebarState((prevState) => (prevState === States.HIDDEN ? States.EXPANDED : States.HIDDEN));
+    bubbleUpSidebar();
+    if (navState === States.EXPANDED) {
+      setNavState(States.HIDDEN);
+      setChevronState(Arrow.DOWN);
+      console.log('shut down nav!');
+    }
+  };
+
+  const handleNavToggle = () => {
+    console.log('clicked chevron on ' + chevronState);
+    setChevronState((prevState) => (prevState === Arrow.DOWN ? Arrow.UP : Arrow.DOWN));
+    setNavState((prevState) => (prevState === States.HIDDEN ? States.EXPANDED : States.HIDDEN));
+  }
+
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > mobileWidthVar) {
-        setDirection('down');
-        setNavOpen(false);
-        passNavClick(false);
-      }
-
-      if (window.innerWidth > wideWidthVar) {
-        setSideBarOpen('closed');
-      }
-    };
-
-    // Attach the event listener when the component mounts
     window.addEventListener('resize', handleResize);
+    bubbleUpNav(navState);
 
-    // Cleanup the event listener when the component unmounts
     return () => {
       window.removeEventListener('resize', handleResize);
     }
-  }, []); // Empty dependency array ensures that this effect runs once on mount
+  }, [chevronState, navState, sidebarState, scroll]); 
 
   return (
     <>
       <NavHeader $colorScheme={$colorScheme}>
-        <NavWrapper $navOpen={navOpen}>
-          <NavBackground id="nav-background" $navOpen={navOpen} $colorScheme={$colorScheme}></NavBackground>
-          <NavContent id="nav-content" $navOpen={navOpen}>
+        <NavWrapper $navState={navState}>
+          <NavBackground id="nav-background" $navState={navState} $colorScheme={$colorScheme}></NavBackground>
+          <NavContent id="nav-content" $navState={navState}>
             <NavPre 
               $colorScheme={$colorScheme} 
-              handleSideBarClick={handleSideBarClick}
+              handleSideBarClick={handleSidebarToggle}
               $showSideBar={$showSideBar}
             />
             <NavTitle 
               $colorScheme={$colorScheme} 
-              $navOpen={navOpen}
             />
-            <NavMenu 
-              $colorScheme={$colorScheme}
-              $navOpen={navOpen}
-            />
-            <NavActions
-              $direction={direction} 
-              handleChevronClick={handleChevronClick}
-              $showChevron={showChevron}
-            />
+            {navState !== States.HIDDEN && (
+              <NavMenu 
+                $colorScheme={$colorScheme}
+                $navState={navState}
+              />
+            )}
+            {(sidebarState !== States.EXPANDED && navState !== States.NARROW) && (
+              <NavActions
+                $chevronState={chevronState}
+                handleChevronClick={handleNavToggle}
+              />
+            )}
           </NavContent>
         </NavWrapper>
       </NavHeader>

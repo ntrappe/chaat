@@ -5,26 +5,23 @@ import Sidebar from '../components/Sidebar/Sidebar.jsx';
 import ProjectGrid from '../components/Core/ProjectGrid.jsx';
 import ThickFooter from '../components/Footer/ThickFooter.jsx';
 
-const EXP = 'expanded';
-const COL = 'collapsed';
-const HID = 'hidden';
+const COLORSCHEME = 'light';
+
+const States = {
+  EXPANDED: 'expanded',
+  NARROW: 'narrow',
+  HIDDEN: 'hidden',
+};
 
 const MainWrapper = styled.main`
   display: flex;
-  width: 980px;
+  width: calc(var(--max-main-width) - var(--aside-width));
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 3em;
 
-  @media (max-width: 1023px) {
-    width: ${(props) => props.$sidebarMode === EXP ? '100%' : '692px'};
-    position: ${(props) => (props.$mode === 'HID' ? 'fixed' : 'relative')};
-    top: ${(props) => (props.$mode === HID ? '1rem' : '0')};
-    overflow: ${(props) => (props.$mode === HID ? 'hidden' : 'none')};
-  }
-
   @media (max-width: 767px) {
-    width: ${(props) => (props.$mode === HID ? '100%' : '87.5%')};
+    width: ${(props) => (props.$projectState === States.HIDDEN ? '100%' : '87.5%')};
   }
 `;
 
@@ -34,80 +31,92 @@ const AdjustableSidebar = styled.div`
   flex: 1;
 
   @media (max-width: 1023px) {
-    display: ${(props) => (props.$mode === COL ? 'block' : 'flex')};
-    position: ${(props) => (props.$mode === HID ? 'fixed' : 'relative')};
-    width: ${(props) => (props.$mode === HID ? '100%' : 'auto')};
+    display: ${(props) => (props.$projectState === States.EXPANDED ? 'flex' : 'block')};
+    // position: ${(props) => (props.$projectState === States.HIDDEN ? 'fixed' : 'relative')};
+    width: ${(props) => (props.$projectState === States.HIDDEN ? '100%' : 'auto')};
   }
+`;
+
+const DarkOverlay = styled.div`
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(13,13,13,0.25);
+  z-index: 1000;
 `;
 
 function ProjectsHome() {
   const body = document.getElementById('body');
-  body.setAttribute('page', 'projects');
+  const root = document.getElementById('root');
+  body.setAttribute('colorscheme', COLORSCHEME);
 
-  /* by default sidebar can't be open so components will either be in collapsed or expanded mode */
-  const [mode, setMode] = useState(window.innerWidth > 1023 ? EXP : COL);
-  /* by default sidebar is either attached to main page or hidden */
-  const [sidebarMode, setSidebarMode] = useState(window.innerWidth > 1023 ? COL : HID);
-  /* need to know if nav is open to freeze content below it */
-  const [navOpen, setNavOpen] = useState(null);
+  const [sidebarState, setSidebarState] = useState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
+  const [projectState, setProjectState] = useState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
+  const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
 
-  const verifySidebarClick = (signal) => {
-    if (signal === 'open') {
-      setMode(HID);
-      setSidebarMode(EXP);
-      body.setAttribute('mode', 'sidebar');
-      setNavOpen('closed');
-    } else {
-      setMode(COL);
-      setSidebarMode(HID);
-      body.setAttribute('mode', 'all');
+  // width > 1023 so sidebar can only be NAR or same
+  const handleResize = () => {
+    if (window.innerWidth > 1023) {
+      setSidebarState(States.NARROW);
+      setProjectState(States.NARROW);
+    } else if (window.innerWidth <= 1023 && sidebarState === States.NARROW) {
+      setSidebarState(States.HIDDEN);
+      setProjectState(States.EXPANDED);
     }
-  }
+  };
 
-  const verifyNavOpen = (signal) => {
-    setNavOpen(signal ? 'open' : 'closed');
+  // [width <= 1023 only] sidebar can only be EXP or HID
+  // [width <= 1023 only] project can only be shown or not
+  const handleSidebarToggle = (state) => {
+    console.log('sidebar clicked, projects thinks ' + state);
+    setSidebarState((prevState) => (prevState === States.HIDDEN ? States.EXPANDED : States.HIDDEN));
+    setProjectState((prevState) => (prevState === States.EXPANDED ? States.HIDDEN : States.EXPANDED));
+  };
+
+  const handleNavToggle = (state) => {
+    setNavState(state);
+    root.setAttribute('scroll', state === States.EXPANDED ? 'noscroll' : 'scroll');
   }
 
   useEffect(() => {
-    const handleResize = () => {
-      /* if wide screen, sidebar is in collapsed mode */
-      if (window.innerWidth > 1023) {
-        console.log('main is EXPANDED and sidebar is COLLAPSED');
-        setMode(EXP);
-        setSidebarMode(COL);
-      /* if mobile screen, sidebar is hidden unless opened */
-      } else {
-        console.log('smol so main is ' + mode + ' sidebar is ' + sidebarMode);
-      }
-    };
-
-    // Attach the event listener when the component mounts
     window.addEventListener('resize', handleResize);
 
-    // Cleanup the event listener when the component unmounts
     return () => {
       window.removeEventListener('resize', handleResize);
-    }
-  }, []); // Empty dependency array ensures that this effect runs once on mount
+    };
+  }, [sidebarState, navState, projectState]);
+
+  useEffect(() => {
+    console.log('Click --> nav: ', navState);
+  }, [navState]);
 
   return (
     <>
       <GlassHeader 
-        $colorScheme={'light'} 
+        $colorScheme={COLORSCHEME} 
         $showSideBar={true} 
-        passSidebarClick={verifySidebarClick}
-        passNavClick={verifyNavOpen}
+        bubbleUpSidebar={handleSidebarToggle}
+        bubbleUpNav={handleNavToggle}
       />
-      <MainWrapper id="main" $mode={mode} $sidebarMode={sidebarMode}>
-        <AdjustableSidebar id="adjustable-sidebar" $mode={mode}>
-          <Sidebar $mode={sidebarMode} />
-          <ProjectGrid $mode={mode} $navOpen={navOpen} />
+      {navState === States.EXPANDED && (
+        <DarkOverlay />
+      )}
+      <MainWrapper id="main" $projectState={projectState}>
+        <AdjustableSidebar id="adjustable-sidebar" $projectState={projectState}>
+          {sidebarState !== States.HIDDEN && (
+            <Sidebar $mode={sidebarState} />
+          )}
+          {projectState !== States.HIDDEN && (
+            <ProjectGrid $mode={projectState} $navState={navState} />
+          )}   
         </AdjustableSidebar>
       </MainWrapper>
       {/* Only show footer if sidebar isn't open */}
-      {(navOpen !== 'open' && mode !== HID) && (
-        <ThickFooter $colorScheme={'light'} />
-      )}
+      {/* {(projectState !== States.HIDDEN && navState !== States.OPEN) && (
+        <ThickFooter $colorScheme={COLORSCHEME} />
+      )} */}
     </>
   )
 }

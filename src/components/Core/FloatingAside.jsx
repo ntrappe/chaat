@@ -11,7 +11,7 @@ const FloatingAsideWrapper = styled.div`
   position: -webkit-sticky;
   top: 4.23rem;
   align-self: flex-start;
-  width: 140px;
+  width: var(--aside-width);
   padding-left: 38px;
   margin-top: 130px; /* match this with case study text */
 

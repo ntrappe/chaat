@@ -8,10 +8,11 @@ import PomoInactive from '../../assets/project-icons/pomodoro-inactive.png';
 import MountainActive from '../../assets/project-icons/mountain-active.png';
 import MountainInactive from '../../assets/project-icons/mountain-inactive.png';
 
-const EXP = 'expanded';
-const COL = 'collapsed';
-
-const navHeight = '2.75rem';
+const States = {
+  EXPANDED: 'expanded',
+  NARROW: 'narrow',
+  HIDDEN: 'hidden',
+};
 
 const SidebarWrapper = styled.div`
   display: block;
@@ -19,24 +20,23 @@ const SidebarWrapper = styled.div`
   top: 0.5rem;
 
   @media (max-width: 1023px) {
-    width: ${(props) => (props.$mode === EXP ? '100%' : 'auto')};
-    height: ${(props) => (props.$mode === EXP ? 'auto' : '0')}
-    display: ${(props) => (props.$mode === EXP ? 'flex' : 'block')};
-    position: ${(props) => (props.$mode === EXP ? 'relative' : 'static')};
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: auto;
   }
 `;
 
 const SidebarAside = styled.div`
   position: relative;
   height: 100%;
-  width: 210px;
+  width: 200px;
   max-width: 100vw;
 
   @media (max-width: 1023px) {
-    display: ${(props) => (props.$mode === EXP ? 'flex' : 'none')};
-    flex-flow: ${(props) => (props.$mode === EXP ? 'column' : 'unset')};
-    width: ${(props) => (props.$mode === EXP ? '100%' : 'auto')};
-    margin-right: ${(props) => (props.$mode === EXP ? '5px solid' : 'none')};
+    display: flex;
+    flex-flow: column;
+    width: 100%;
   }
 `;
 
@@ -47,7 +47,7 @@ const ScrollableAside = styled.nav`
   width: 195px;
   transform: translateZ(0);
   margin-top: 10px;
-  padding-top: ${(props) => (props.$mode === COL ? '21px' : '0')};
+  padding-top: ${(props) => (props.$mode === States.NARROW ? '21px' : '0')};
 
   @media (max-width: 1023px) {
     width: 100%;
@@ -57,21 +57,21 @@ const ScrollableAside = styled.nav`
 const CaseTopic = styled.details`
   width: 100%
   padding: 5px 0 5px 0;
-  margin-bottom: ${(props) => (props.$mode === EXP ? '4px' : '0')};
+  margin-bottom: ${(props) => (props.$mode === States.EXPANDED ? '4px' : '0')};
 
   @media (max-width: 1023px) {
-    padding: ${(props) => (props.$mode === EXP ? '0 !important' : '5px 0 5px 0')};
+    padding: ${(props) => (props.$mode === States.EXPANDED ? '0 !important' : '5px 0 5px 0')};
   }
   
   summary {
     cursor: pointer;
     list-style-type: none;
     margin: 0;
-    padding: ${(props) => (props.$mode === COL ? '7px 0' : 'inherit')};
+    padding: ${(props) => (props.$mode === States.NARROW ? '7px 0' : 'inherit')};
     font-size: 14px;
     font-weight: ${(props) => (props.selected ? '500' : '300')};
     color: ${(props) => {
-      if (props.$mode === EXP) {
+      if (props.$mode === States.EXPANDED) {
         return `var(--midnight)`;
       } else {
         if (props.selected) {
@@ -83,13 +83,13 @@ const CaseTopic = styled.details`
     }};
 
     @media (max-width: 1023px) {
-      padding: ${(props) => (props.$mode === EXP ? '8.5px 0 8.5px 17px' : '0')};
+      padding: 8.5px 0 8.5px 17px;
     }
 
     &:hover {
-      background-color: ${(props) => (props.$mode === EXP ? `var(--dust)` : 'inherit')};
-      // color: ${(props) => (props.$mode === COL ? 'red' : 'inherit')};
-      text-decoration: ${(props) => (props.$mode === COL ? 'underline' : 'none')};
+      background-color: ${(props) => (props.$mode === States.EXPANDED ? `var(--dust)` : 'inherit')};
+      // color: ${(props) => (props.$mode === States.NARROW ? 'red' : 'inherit')};
+      text-decoration: ${(props) => (props.$mode === States.NARROW ? 'underline' : 'none')};
     }
     
     &::before {
@@ -121,14 +121,14 @@ const CasePreview = styled.div`
   align-items: center;
   padding: 7px 0 7px 0;
   cursor: pointer;
-  background-color: ${(props) => (props.$mode === EXP && props.selected ? `var(--snow)` : 'inherit')};
+  background-color: ${(props) => (props.$mode === States.EXPANDED && props.selected ? `var(--snow)` : 'inherit')};
 
   @media (max-width: 1023px) {
-    padding: ${(props) => (props.$mode === EXP ? '8px 40px 8px 10px' : '7px 0 7px 0')};
+    padding: 8px 40px 8px 10px;
   }
 
   &:hover {
-    background-color: ${(props) => (props.$mode === EXP ? `var(--dust)` : 'inherit')};
+    background-color: ${(props) => (props.$mode === States.EXPANDED ? `var(--dust)` : 'inherit')};
   }
 
   img {
@@ -149,7 +149,7 @@ const CasePreview = styled.div`
     letter-spacing: -.224px;
     font-weight: ${(props) => (props.selected ? '500' : '300')};
     color: ${(props) => {
-      if (props.$mode === EXP) {
+      if (props.$mode === States.EXPANDED) {
         return `var(--midnight)`;
       } else {
         if (props.selected) {
@@ -166,9 +166,9 @@ const CasePreview = styled.div`
   }
 
   p:hover {
-    // color: ${(props) => (props.$mode === COL ? 'red' : 'inherit')};
+    // color: ${(props) => (props.$mode === States.NARROW ? 'red' : 'inherit')};
     font-weight: ${(props) => (props.selected ? '500' : '300')};
-    text-decoration: ${(props) => (props.$mode === COL ? 'underline' : 'none')};
+    text-decoration: ${(props) => (props.$mode === States.NARROW ? 'underline' : 'none')};
   }
 
   a:hover {
@@ -195,27 +195,33 @@ function Sidebar({ $mode }) {
         <ScrollableAside $mode={$mode} id="scrollable-aside">
           <CaseTopic $mode={$mode} id="design-cases" selected={selectedParent === 0}>
             <summary>Design</summary>
-            <CasePreview $mode={$mode} selected={selectedItem === 0} onClick={() => handleItemClick(0)}>
+            <Link to={`/projects/bookify`} onClick={() => console.log('clicked link')}>
+              <CasePreview $mode={$mode} selected={selectedItem === 0} onClick={() => console.log('clicked case preview')}>
               <img
                 src={selectedItem === 0 ? BookActive : BookInactive}
                 alt="Book Icon"
               />
-              <p><Link to={`/projects/bookify`}>Bookify</Link></p>
-            </CasePreview>
-            <CasePreview $mode={$mode} selected={selectedItem === 1} onClick={() => handleItemClick(1)}>
-              <img
-                src={selectedItem === 1 ? PomoActive : PomoInactive}
-                alt="Tomato Pomodoro Icon"
-              />
-              <p><Link to={`/projects/pomodoro`}>Pomodoro Timer</Link></p>
-            </CasePreview>
-            <CasePreview $mode={$mode} selected={selectedItem === 2} onClick={() => handleItemClick(2)}>
-              <img
-                src={selectedItem === 2 ? MountainActive : MountainInactive}
-                alt="Mountain Icon"
-              />
-              <p>National Park App</p>
-            </CasePreview>
+              <p>Bookify</p>
+              </CasePreview>
+            </Link>
+            <Link to={`/projects/pomodoro`} onClick={() => handleItemClick(1)}>
+              <CasePreview $mode={$mode} selected={selectedItem === 1}>
+                <img
+                  src={selectedItem === 1 ? PomoActive : PomoInactive}
+                  alt="Tomato Pomodoro Icon"
+                />
+                <p>Pomodoro Timer</p>
+              </CasePreview>
+            </Link>
+            <Link to={`/projects/rock`} onClick={() => handleItemClick(2)}>
+              <CasePreview $mode={$mode} selected={selectedItem === 2}>
+                <img
+                  src={selectedItem === 2 ? MountainActive : MountainInactive}
+                  alt="Mountain Icon"
+                />
+                <p>National Park App</p>
+              </CasePreview>
+            </Link>
           </CaseTopic>
           <CaseTopic $mode={$mode} id="engineering-cases" selected={selectedParent === 1}>
             <summary>Engineering</summary>

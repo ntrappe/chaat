@@ -3,26 +3,41 @@ import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
 import FloatingAside from '../components/Core/FloatingAside.jsx';
 import Sidebar from '../components/Sidebar/Sidebar.jsx';
+import ThickFooter from '../components/Footer/ThickFooter.jsx';
 
-const EXP = 'expanded';
-const COL = 'collapsed';
-const HID = 'hidden';
+const States = {
+  EXPANDED: 'expanded',
+  NARROW: 'narrow',
+  HIDDEN: 'hidden',
+};
 
 const MainWrapper = styled.main`
   display: flex;
   width: 980px;
   margin-left: auto;
   margin-right: auto;
-
+  padding-bottom: 3em;
+  border: 1px solid black !important;
+  border-color: ${(props) => {
+    if (props.$projectState === States.EXPANDED) {
+      return 'blue';
+    } else if (props.$projectState === States.NARROW) {
+      return 'red';
+    } else {
+      return 'green';
+    }
+  }};
+  
   @media (max-width: 1023px) {
-    width: ${(props) => props.$sidebarMode === EXP ? '100%' : '692px'};
-    position: ${(props) => (props.$mode === 'HID' ? 'fixed' : 'relative')};
-    top: ${(props) => (props.$mode === HID ? '1rem' : '0')};
-    overflow: ${(props) => (props.$mode === HID ? 'hidden' : 'none')};
+    // can only be expanded or hidden, sidebar open be 100% width
+    width: ${(props) => props.$projectState === States.EXPANDED ? '692px' : '100%' };
+    position: ${(props) => (props.$projectState === States.HIDDEN ? 'fixed' : 'relative')};
+    top: ${(props) => (props.$projectState === States.HIDDEN ? '1rem' : '0')};
+    overflow: ${(props) => (props.$projectState === States.HIDDEN ? 'hidden' : 'none')};
   }
 
-  @media (max-width: 735px) {
-    width: ${(props) => (props.$mode === HID ? '100%' : '87.5%')};
+  @media (max-width: 767px) {
+    width: ${(props) => (props.$projectState === States.HIDDEN ? '100%' : '87.5%')};
   }
 `;
 
@@ -30,11 +45,12 @@ const AdjustableSidebar = styled.div`
   display: flex;
   min-width: 0;
   flex: 1;
+  background-color: teal;
 
   @media (max-width: 1023px) {
-    display: ${(props) => (props.$mode === COL ? 'block' : 'flex')};
-    position: ${(props) => (props.$mode === HID ? 'fixed' : 'relative')};
-    width: ${(props) => (props.$mode === HID ? '100%' : 'auto')};
+    display: ${(props) => (props.$projectState === States.EXPANDED ? 'flex' : 'block')};
+    position: ${(props) => (props.$projectState === States.HIDDEN ? 'fixed' : 'relative')};
+    width: ${(props) => (props.$projectState === States.HIDDEN ? '100%' : 'auto')};
   }
 `;
 
@@ -42,75 +58,65 @@ function Project({ customComponent: CaseStudy }) {
   const body = document.getElementById('body');
   body.setAttribute('page', 'projects');
 
-  /* by default sidebar can't be open so components will either be in collapsed or expanded mode */
-  const [mode, setMode] = useState(window.innerWidth > 1023 ? EXP : COL);
-  /* by default sidebar is either attached to main page or hidden */
-  const [sidebarMode, setSidebarMode] = useState(window.innerWidth > 1023 ? COL : HID);
-  /* need to know if nav is open to freeze content below it */
-  const [navOpen, setNavOpen] = useState(null);
+  const [sidebarState, setSidebarState] = useState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
+  const [projectState, setProjectState] = useState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
+ 
+  // width > 1023 so sidebar can only be NAR or same
+  const handleResize = () => {
+    const width = window.innerWidth;
 
-  const verifySidebarClick = (signal) => {
-    console.log('received data from sidebar: ' + signal);
-    if (signal === 'open') {
-      setMode(HID);
-      setSidebarMode(EXP);
-      console.log('main is HIDDEN and sidebar is EXPANDED');
-      body.setAttribute('mode', 'sidebar');
-    } else {
-      setMode(COL);
-      setSidebarMode(HID);
-      console.log('main is COLLAPSED and sidebar is HIDDEN');
-      body.setAttribute('mode', 'all');
+    if (window > 1023) {
+      setSidebarState(States.NARROW);
+      setProjectState(States.NARROW);
+    } else if (width <= 1023 && sidebarState === States.HIDDEN) {
+      setProjectState(States.EXPANDED);
     }
-  }
+  };
 
-  const verifyNavOpen = (signal) => {
-    setNavOpen(signal ? 'open' : 'closed');
-  }
-
-  const offsetCaseStudy = (index) => {
-    console.log('sup');
-  }
+  // [width <= 1023 only] sidebar can only be EXP or HID
+  // [width <= 1023 only] project can only be shown or not
+  const handleSidebarToggle = () => {
+    setSidebarState((prevState) => (prevState === States.HIDDEN ? States.EXPANDED : States.HIDDEN));
+    setProjectState((prevState) => (prevState === States.EXPANDED ? States.HIDDEN : States.EXPANDED));
+  };
 
   useEffect(() => {
-    const handleResize = () => {
-      /* if wide screen, sidebar is in collapsed mode */
-      if (window.innerWidth > 1023) {
-        console.log('main is EXPANDED and sidebar is COLLAPSED');
-        setMode(EXP);
-        setSidebarMode(COL);
-      /* if mobile screen, sidebar is hidden unless opened */
-      } else {
-        console.log('smol so main is ' + mode + ' sidebar is ' + sidebarMode);
-      }
-    };
-
-    // Attach the event listener when the component mounts
     window.addEventListener('resize', handleResize);
 
-    // Cleanup the event listener when the component unmounts
     return () => {
       window.removeEventListener('resize', handleResize);
-    }
-  }, []); // Empty dependency array ensures that this effect runs once on mount
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log('Updated sidebar state:', sidebarState);
+    console.log('Updated project state:', projectState);
+  }, [sidebarState, projectState]);
 
   return (
     <>
       <GlassHeader 
         $colorScheme={'light'} 
         $showSideBar={true} 
-        passSidebarClick={verifySidebarClick}
-        passNavClick={verifyNavOpen}
+        passSidebarClick={handleSidebarToggle}
+        passNavClick={() => console.log('oops')}
       />
-      <MainWrapper id="main" $mode={mode} $sidebarMode={sidebarMode}>
-        <AdjustableSidebar id="adjustable-sidebar" $mode={mode}>
-          <Sidebar $mode={sidebarMode} />
-          {/* Render the specific case study if provided */}
-          {CaseStudy && <CaseStudy />}
+      <MainWrapper id="main" $projectState={projectState}>
+        <AdjustableSidebar id="adjustable-sidebar" $projectState={projectState}>
+          {sidebarState !== States.HIDDEN && (
+            <Sidebar $mode={sidebarState} />
+          )}
+          {projectState !== States.HIDDEN && CaseStudy && (
+            <CaseStudy />
+          )}  
         </AdjustableSidebar>
-        {}
-        <FloatingAside $mode={mode} offsetCaseStudy={offsetCaseStudy} />
+        {sidebarState !== States.HIDDEN && (
+          <FloatingAside $mode={projectState} offsetCaseStudy={() => console.log('heh')} />
+        )}
       </MainWrapper>
+      {sidebarState !== States.HIDDEN && (
+        <ThickFooter $colorScheme={'light'} />
+      )}
     </>
   )
 }

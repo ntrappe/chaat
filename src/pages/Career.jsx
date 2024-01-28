@@ -3,6 +3,14 @@ import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
 import ThickFooter from '../components/Footer/ThickFooter.jsx';
 
+const COLORSCHEME = 'light';
+
+const States = {
+  EXPANDED: 'expanded',
+  NARROW: 'narrow',
+  HIDDEN: 'hidden',
+};
+
 const MainWrapper = styled.main`
   display: flex;
   width: 800px;
@@ -66,18 +74,38 @@ const Note = styled.div`
   }
 `;
 
+const DarkOverlay = styled.div`
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(13,13,13,0.10);
+  z-index: 1000;
+`;
+
 function Career() {
   const body = document.getElementById('body');
-  body.setAttribute('page', 'projects');
+  const root = document.getElementById('root');
+  body.setAttribute('colorscheme', COLORSCHEME);
+
+  const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
+  const handleNavToggle = (state) => {
+    setNavState(state);
+    root.setAttribute('scroll', state === States.EXPANDED ? 'noscroll' : 'scroll');
+  }
 
   return (
     <>
       <GlassHeader 
-        $colorScheme={'light'} 
+        $colorScheme={COLORSCHEME} 
         $showSideBar={false} 
-        passSidebarClick={() => console.log('no sidebar')}
-        passNavClick={() => console.log('idc')}
+        bubbleUpSidebar={() => console.log('no sidebar')}
+        bubbleUpNav={handleNavToggle}
       />
+      {navState === States.EXPANDED && (
+        <DarkOverlay />
+      )}
       <MainWrapper id="main">
         <CareerWrapper>
           <CareerTitle>Career</CareerTitle>
@@ -87,7 +115,9 @@ function Career() {
           </Note>
         </CareerWrapper>
       </MainWrapper>
-      <ThickFooter $colorScheme={'light'} />
+      {navState !== States.EXPANDED && (
+        <ThickFooter $colorScheme={COLORSCHEME} />
+      )}
     </>
   )
 }

@@ -18,29 +18,30 @@ header {
   }
 }
 
-body[page="home"] {
+body[colorscheme="dark"] {
   background-color: var(--obsidian);
 }
 
-body[page="photography"],
-body[page="projects"] {
+body[colorscheme="light"] {
   background-color: white;
-}
-
-body[mode="sidebar"] {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  overflow: hidden scroll;
 }
 
 #root {
   background-color: inherit;
 }
 
+#root[scroll="noscroll"] {
+  position: fixed;
+}
+
+#root[scroll="scroll"] {
+  position: relative;
+}
+
 body, #root {
   margin: 0;
   width: 100%;
+  height: 100%;
 }
 
 ol, ul {
@@ -128,6 +129,8 @@ html {
   --nav-height: 2.75rem;
   --mobile-width: 767px;
   --proj-sect-gap: 30px;
+  --max-main-width: 980px;
+  --aside-width: 140px;
 
   --paper: #f8f8fa;
   --snow: #e8e8e8;

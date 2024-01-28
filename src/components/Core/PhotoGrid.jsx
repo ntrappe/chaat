@@ -24,9 +24,6 @@ import Talus from '../../assets/photos/talus-rock.jpeg';
 import Windows from '../../assets/photos/windows.jpeg';
 import WestRim from '../../assets/photos/west-rim.jpeg';
 
-
-
-
 const GridWrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -34,13 +31,6 @@ const GridWrapper = styled.div`
   min-width: 0;
   height: 100%;
   padding-top: 2.35rem;
-
-  @media (max-width: 767px) {
-    position: ${(props) => (props.$navOpen === 'open' ? 'fixed' : 'relative')};
-    left: ${(props) => (props.$navOpen === 'open' ? '0' : 'unset')};
-    margin-left: ${(props) => (props.$navOpen === 'open' ? '6.25%' : 'auto')};
-    margin-right: ${(props) => (props.$navOpen === 'open' ? '6.25%' : 'auto')};
-  }
 `;
 
 const GridTitle = styled.h1`
@@ -124,24 +114,10 @@ const CardImage = styled.div`
   }
 `;
 
-const DarkOverlay = styled.div`
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(13,13,13,0.25);
-  z-index: 1000;
-`;
-
-function PhotoGrid({ $navOpen }) {
-  
+function PhotoGrid() {
   return (
     <>
-      <GridWrapper id='photo-grid' $navOpen={$navOpen}>
-        {$navOpen === 'open' && (
-          <DarkOverlay />
-        )}
+      <GridWrapper id='photo-grid'>
         <GridTitle>Photography</GridTitle>
         <GridTag>Exploring the great outdoors through my lens. Captured on an iPhone SE.</GridTag>
         <GridCardsTitle>Glacier National Park</GridCardsTitle>

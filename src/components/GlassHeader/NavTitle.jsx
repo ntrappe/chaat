@@ -15,7 +15,7 @@ const NavTitleWrapper = styled.div`
   font-weight: 500;
   letter-spacing: -0.152px;
   color: ${(props) => (props.$colorScheme === 'dark' ? `var(--stone)` : `var(--wet-concrete)`)};
-  grid-area: ${(props) => (props.$navOpen ? 'title' : 'unset')}; /* TODO check */
+  grid-area: 'title';
 
   @media (max-width: 767px) {
     padding-top: 0;
@@ -48,9 +48,9 @@ const LinkTitle = styled.p`
   }
 `;
 
-function NavTitle({ $colorScheme, $navOpen }) {
+function NavTitle({ $colorScheme }) {
   return (
-    <NavTitleWrapper id="nav-title" $navOpen={$navOpen} $colorScheme={$colorScheme}>
+    <NavTitleWrapper id="nav-title" $colorScheme={$colorScheme}>
       <LinkTitle $colorScheme={$colorScheme}><Link to={`/`}>Nicole Trappe</Link></LinkTitle>
     </NavTitleWrapper>
   )
