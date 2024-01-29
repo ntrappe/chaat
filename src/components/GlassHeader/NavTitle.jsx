@@ -18,8 +18,6 @@ const NavTitleWrapper = styled.div`
   flex: 1;
   grid-area: 'title';
 
-  background-color: orange !important;
-
   @media (max-width: 767px) {
     padding-top: 0;
     height: ${navCompactHeight};
