@@ -14,7 +14,11 @@ const States = {
   HIDDEN: 'hidden',
 };
 
-const Cases = ['bookify', 'pomodoro', 'rock'];
+const Cases = [
+  { id: 0, name: 'bookify', topic: 'design'},
+  { id: 1, name: 'pomodoro', topic: 'design'},
+  { id: 2, name: 'rock', topic: 'design'},
+]
 
 const SidebarWrapper = styled.div`
   display: block;
@@ -112,16 +116,17 @@ const CaseTopic = styled.details`
         }
       }
     }};
+    background-color: red;
 
     @media (max-width: 1023px) {
       padding: 8.5px 0 8.5px 17px;
     }
 
-    &:hover {
-      background-color: ${(props) => (props.$sidebarState === States.EXPANDED ? `var(--dust)` : 'inherit')};
-      // color: ${(props) => (props.$sidebarState === States.NARROW ? 'red' : 'inherit')};
-      text-decoration: ${(props) => (props.$sidebarState === States.NARROW ? 'underline' : 'none')};
-    }
+    // &:hover {
+    //   background-color: ${(props) => (props.$sidebarState === States.EXPANDED ? `var(--dust)` : 'inherit')};
+    //   // color: ${(props) => (props.$sidebarState === States.NARROW ? 'red' : 'inherit')};
+    //   text-decoration: ${(props) => (props.$sidebarState === States.NARROW ? 'underline' : 'none')};
+    // }
     
     &::before {
       content: url("data:image/svg+xml,%3Csvg data-v-b5c5049e='' data-v-1ab7c05f='' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svg-icon inline-chevron-right-icon icon-inline chevron' viewBox='0 0 14 14' data-v-8029502c=''%3E%3Cpath data-v-b5c5049e='' d='m4.81347656 13.1269531c.22558594 0 .41015625-.0820312.56738282-.2324219l5.31835942-5.19531245c.1845703-.19140625.2802734-.38964844.2802734-.63574219 0-.23925781-.0888672-.45117187-.2802734-.62890625l-5.31835942-5.20214843c-.15722657-.15039063-.34179688-.23242188-.56738282-.23242188-.45800781 0-.81347656.35546875-.81347656.80664062 0 .21875.09570312.43066407.24609375.58789063l4.79199219 4.67578125-4.79199219 4.6621094c-.15722656.1640625-.24609375.3623047-.24609375.5878906 0 .4511719.35546875.8066406.81347656.8066406z'%3E%3C/path%3E%3C/svg%3E");
@@ -132,18 +137,22 @@ const CaseTopic = styled.details`
     }
   }
 
+  &[open] summary {
+    background-color: teal;
+  }
+
   summary::-webkit-details-marker {
     display: none;
   }
 
-  &[open] summary {
-    &::before {
-      vertical-align: middle;
-      transform: rotate(90deg);
-      margin-left: 2.5px;
-      margin-right: 2.5px;
-    }
-  }
+  // &[open] summary {
+  //   &::before {
+  //     vertical-align: middle;
+  //     transform: rotate(90deg);
+  //     margin-left: 2.5px;
+  //     margin-right: 2.5px;
+  //   }
+  // }
 `;
 
 const CasePreview = styled.div`
@@ -212,21 +221,26 @@ const CasePreview = styled.div`
 function Sidebar({ $sidebarState, closeSidebar }) {
   const [selectedItem, setSelectedItem] = useState(localStorage.getItem('case-study'));
   const [selectedParent, setSelectedParent] = useState(localStorage.getItem('case-topic'));
+  const [designOpen, setDesignOpen] = useState(selectedParent === 'design');
+  const [engOpen, setEngOpen] = useState(selectedParent === 'engineering');
 
   const handleItemClick = (index) => {
-    console.log(`clicked ${index} and selectedItem was ${selectedItem}`);
-    localStorage.setItem('case-study', Cases[index]);
-    setSelectedItem(Cases[index]);
-    if (index < 3) {
-      localStorage.setItem('case-topic', 'design')
+    localStorage.setItem('case-study', index);
+    setSelectedItem(index);
+    if ((index === 'bookify') || (index === 'pomodoro') || (index === 'rock')) {
+      localStorage.setItem('case-topic', 'design');
       setSelectedParent('design');
+      setDesignOpen(true);
+    } else if (index === 'hii') {
+      localStorage.setItem('case-topic', 'engineering');
+      setSelectedParent('engineering');
+      setEngOpen(true);
     }
     closeSidebar('');
   }
 
   const handleResize = () => {
     const newHeight = window.innerHeight;
-    // console.log('new height: ' + newHeight);
     document.documentElement.style.setProperty('--app-height', `${newHeight}px`);
     const sidebar = document.getElementById('sidebar');
     if (sidebar) {
@@ -242,67 +256,85 @@ function Sidebar({ $sidebarState, closeSidebar }) {
     };
   }, [handleResize]);
 
+  useEffect(() => {
+  // This code will run whenever designOpen or engOpen changes
+  // You can perform actions or trigger updates here
+  console.log('designOpen changed:', designOpen);
+  console.log('engOpen changed:', engOpen);
+
+}, [designOpen, engOpen]); // Specify the dependencies here
+
+
   return (
     <>
     <SidebarWrapper id="sidebar" $sidebarState={$sidebarState}>
-      {$sidebarState !== States.HIDDEN && (
         <SidebarAside id="sidebar-aside" $sidebarState={$sidebarState}>
           <ScrollableAside $sidebarState={$sidebarState} id="scrollable-aside">
-            <CaseTopic 
+            <CaseTopic
+              open={designOpen}
               id="design-cases"
-              open={selectedParent === 'design'}
-              $sidebarState={$sidebarState} 
               selected={selectedParent === 'design'}
+              $sidebarState={$sidebarState} 
             >
               <summary>Design</summary>
-              <Link to={`/projects/bookify`} onClick={() => handleItemClick(0)}>
+              <Link to={`/projects/bookify`} onClick={() => handleItemClick('bookify')}>
                 <CasePreview 
                   $sidebarState={$sidebarState} 
-                  selected={selectedItem === Cases[0]}
+                  selected={selectedItem === 'bookify'}
                 >
                 <img
-                  src={selectedItem === Cases[0] ? BookActive : BookInactive}
+                  src={selectedItem === 'bookify' ? BookActive : BookInactive}
                   alt="Book Icon"
                 />
                 <p>Bookify</p>
                 </CasePreview>
               </Link>
-              <Link to={`/projects/pomodoro`} onClick={() => handleItemClick(1)}>
+              <Link to={`/projects/pomodoro`} onClick={() => handleItemClick('pomodoro')}>
                 <CasePreview 
                   $sidebarState={$sidebarState} 
-                  selected={selectedItem === Cases[1]}
+                  selected={selectedItem === 'pomodoro'}
                 >
                   <img
-                    src={selectedItem === Cases[1] ? PomoActive : PomoInactive}
+                    src={selectedItem === 'pomodoro' ? PomoActive : PomoInactive}
                     alt="Tomato Pomodoro Icon"
                   />
                   <p>Pomodoro Timer</p>
                 </CasePreview>
               </Link>
-              <Link to={`/projects/rock`} onClick={() => handleItemClick(2)}>
+              <Link to={`/projects/rock`} onClick={() => handleItemClick('rock')}>
                 <CasePreview 
                   $sidebarState={$sidebarState} 
-                  selected={selectedItem === Cases[2]}
+                  selected={selectedItem === 'rock'}
                 >
                   <img
-                    src={selectedItem === Cases[2] ? MountainActive : MountainInactive}
+                    src={selectedItem === 'rock' ? MountainActive : MountainInactive}
                     alt="Mountain Icon"
                   />
                   <p>National Park App</p>
                 </CasePreview>
               </Link>
             </CaseTopic>
-            <CaseTopic 
-              id="engineering-cases"
-              open={selectedParent === 'engineering'}
-              $sidebarState={$sidebarState}
+            <CaseTopic
+              open={engOpen}
               selected={selectedParent === 'engineering'}
+              $sidebarState={$sidebarState} 
             >
               <summary>Engineering</summary>
+              <Link to={`/projects/rock`} onClick={() => handleItemClick('hii')}>
+                <CasePreview 
+                  $sidebarState={$sidebarState} 
+                  selected={selectedItem === 'hii'}
+                >
+                  <img
+                    src={selectedItem === 'hii' ? MountainActive : MountainInactive}
+                    alt="Mountain Icon"
+                  />
+                  <p>HII</p>
+                </CasePreview>
+              </Link>
             </CaseTopic>
           </ScrollableAside>
         </SidebarAside>
-      )}
     </SidebarWrapper>
     </>
   )
