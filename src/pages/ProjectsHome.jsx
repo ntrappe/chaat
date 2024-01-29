@@ -19,7 +19,6 @@ const MainWrapper = styled.main`
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 3em;
-  background-color: pink;
 
   @media (max-width: 1023px) {
     width: var(--med-main-width);

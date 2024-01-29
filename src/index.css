@@ -23,13 +23,11 @@ body[colorscheme="dark"] {
 }
 
 body[colorscheme="light"] {
-  /* background-color: white; */
-  background-color: #ffe75c;
+  background-color: white;
 }
 
 #root {
-  /* background-color: inherit; */
-  background-color: #2f80ef;
+  background-color: inherit;
 }
 
 body, #root {

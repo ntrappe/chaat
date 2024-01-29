@@ -20,7 +20,6 @@ const MainWrapper = styled.main`
   margin-right: auto;
   margin-top: 0;
   padding-bottom: 3em;
-  background-color: plum;
 
   @media (max-width: 1023px) {
     width: var(--med-main-width);
