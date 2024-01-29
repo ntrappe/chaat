@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import BookActive from '../../assets/project-icons/book-active.png';
 import BookInactive from '../../assets/project-icons/book-inactive.png';
 import PomoActive from '../../assets/project-icons/pomodoro-active.png';
@@ -184,7 +184,6 @@ const CasePreview = styled.div`
   }
 
   p:hover {
-    // color: ${(props) => (props.$sidebarState === States.NARROW ? 'red' : 'inherit')};
     font-weight: ${(props) => (props.selected ? '500' : '300')};
     text-decoration: ${(props) => (props.$sidebarState === States.NARROW ? 'underline' : 'none')};
   }
@@ -240,7 +239,6 @@ function Sidebar({ $sidebarState, closeSidebar }) {
   console.log('engOpen changed:', engOpen);
 
 }, [designOpen, engOpen]); // Specify the dependencies here
-
 
   return (
     <>

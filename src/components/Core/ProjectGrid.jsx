@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import BookPre from '../../assets/project-previews/book-preview.png';
 import PomodoroPre from '../../assets/project-previews/pomodoro-preview.png';
@@ -71,6 +72,7 @@ const GridCards = styled.div`
 const Card = styled.div`
   grid-column: span 1;
   min-width: 0;
+  cursor: pointer;
 
   @media (max-width: 767px) {
     grid-column: span 2;
@@ -81,6 +83,11 @@ const CardLabel = styled.h4`
   font-size: 0.8rem;
   padding: 10px 0; 
   color: var(--wet-concrete);
+
+  &:hover {
+    color: var(--asphalt);
+    text-decoration: underline;
+  }
 
   @media (max-width: 767px) {
     font-size: 0.9rem;
@@ -106,6 +113,10 @@ const CardImage = styled.div`
     width: 100%;
   }
 
+  &:hover {
+    border: 3px solid rgba(0,0,0,.25);
+  }
+
   @media (max-width: 735px) {
     grid-column: span 1;
   }
@@ -120,62 +131,73 @@ function ProjectGrid({ $mode }) {
         <GridCardsTitle>Recently Updated</GridCardsTitle>
         <GridCards>
           <Card>
-            <CardImage>
-              <img 
-                src={PomodoroPre}
-                alt="tomato representing a pomodoro on a red background"
-              />
-            </CardImage>
-            <CardLabel>Pomodoro Timer</CardLabel>
+            <Link to={`/projects/pomodoro`}>
+              <CardImage>
+                <img 
+                  src={PomodoroPre}
+                  alt="tomato representing a pomodoro on a red background"
+                />
+              </CardImage>
+              <CardLabel>Pomodoro Timer</CardLabel>
+            </Link>
           </Card>
           <Card>
-            <CardImage>
-              <img 
-                src={MountainPre}
-                alt="mountain with two peaks on a blue background"
-              />
-            </CardImage>
-            <CardLabel>Rock App</CardLabel>
+            <Link to={`/projects/rock`}>
+              <CardImage>
+                <img 
+                  src={MountainPre}
+                  alt="mountain with two peaks on a blue background"
+                />
+              </CardImage>
+              <CardLabel>Rock App</CardLabel>
+            </Link>
           </Card>
         </GridCards>
         <GridCardsTitle>Coming Soon</GridCardsTitle>
         <GridCards>
-          
           <Card>
-            <CardImage>
-              <img 
-                src={BookPre}
-                alt="open book on a green background"
-              />
-            </CardImage>
-            <CardLabel>Bookify App</CardLabel>
+            <Link to={`/projects/bookify`}>
+              <CardImage>
+                <img 
+                  src={BookPre}
+                  alt="open book on a green background"
+                />
+              </CardImage>
+              <CardLabel>Bookify App</CardLabel>
+            </Link>
           </Card>
           <Card>
-            <CardImage>
-              <img 
-                src={FlowPre}
-                alt="tomato representing a pomodoro on a red background"
-              />
-            </CardImage>
-            <CardLabel>Flow Controller</CardLabel>
+            <Link to={`/projects/flow`}>
+              <CardImage>
+                <img 
+                  src={FlowPre}
+                  alt="tomato representing a pomodoro on a red background"
+                />
+              </CardImage>
+              <CardLabel>Flow Controller</CardLabel>
+            </Link>
           </Card>
           <Card>
-            <CardImage>
-              <img 
-                src={CalPre}
-                alt="calendar icon with date january 20th on a cyan background"
-              />
-            </CardImage>
-            <CardLabel>NPS 2025 Calendar</CardLabel>
+            <Link to={`/projects/calendar`}>
+              <CardImage>
+                <img 
+                  src={CalPre}
+                  alt="calendar icon with date january 20th on a cyan background"
+                />
+              </CardImage>
+              <CardLabel>NPS 2025 Calendar</CardLabel>
+            </Link>
           </Card>
           <Card>
-            <CardImage>
-              <img 
-                src={VacuumPre}
-                alt="side profile of a vacuum on a purple background"
-              />
-            </CardImage>
-            <CardLabel>Vaccum Redesign</CardLabel>
+            <Link to={`/projects/vacuum`}>
+              <CardImage>
+                <img 
+                  src={VacuumPre}
+                  alt="side profile of a vacuum on a purple background"
+                />
+              </CardImage>
+              <CardLabel>Vaccum Redesign</CardLabel>
+            </Link>
           </Card>
         </GridCards>
       </GridWrapper>

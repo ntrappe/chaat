@@ -92,7 +92,7 @@ const NavBackground = styled.div`
 const NavContent = styled.div`
   display: flex;
   padding: 0 1.3rem;
-  max-width: 950px;
+  max-width: var(--nav-max-width);
   height: 100%;
   margin: 0 auto;
   position: relative;
