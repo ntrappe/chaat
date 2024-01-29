@@ -15,7 +15,10 @@ const NavTitleWrapper = styled.div`
   font-weight: 500;
   letter-spacing: -0.152px;
   color: ${(props) => (props.$colorScheme === 'dark' ? `var(--stone)` : `var(--wet-concrete)`)};
+  flex: 1;
   grid-area: 'title';
+
+  background-color: orange !important;
 
   @media (max-width: 767px) {
     padding-top: 0;

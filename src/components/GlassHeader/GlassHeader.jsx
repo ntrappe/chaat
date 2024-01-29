@@ -97,7 +97,9 @@ const NavContent = styled.div`
   margin: 0 auto;
   position: relative;
   z-index: 2;
-  justify-content: space-between;
+  justify-content: ${(props) => (props.$navState === States.HIDDEN ? 'flex-start' : 'space-between')};
+  background-color: ${(props) => (props.$navState === States.HIDDEN ? 'red' : 'pink')};
+
 
   @media (max-width: 767px) {
     display: grid;

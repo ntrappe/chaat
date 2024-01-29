@@ -18,6 +18,8 @@ const NavMenuWrapper = styled.div`
   letter-spacing: -0.12px;
   color: ${(props) => (props.$colorScheme === 'dark' ? `var(--shark)` : `var(--wet-concrete)`)};
 
+  background-color: teal !important;
+
   @media (max-width: 767px) {
     overflow: hidden;
     letter-spacing: -0.28px;
