@@ -138,8 +138,7 @@ function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar 
     if (navState === States.EXPANDED) {
       setNavState(States.HIDDEN);
       setChevronState(Arrow.DOWN);
-      console.log('shut down nav!');
-    }
+    } 
   };
 
   const handleNavToggle = () => {
@@ -176,7 +175,7 @@ function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar 
             <NavTitle 
               $colorScheme={$colorScheme} 
             />
-            {navState !== States.HIDDEN && (
+            {sidebarState !== States.EXPANDED && (
               <NavMenu 
                 $colorScheme={$colorScheme}
                 $navState={navState}
