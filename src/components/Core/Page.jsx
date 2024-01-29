@@ -221,11 +221,8 @@ function Page({ customComponent: SubPage, showAside, grid }) {
       <GlassHeader 
         $colorScheme={COLORSCHEME} 
         $showSideBar={true} 
-        $resetNav={resetNav}
         bubbleUpSidebar={handleSidebarToggle}
         bubbleUpNav={handleNavToggle}
-        bubbleUpClose={handleResetNav}
-        bubbleUpResetSelect={bubbleUpResetSelect}
       />
       {navState === States.EXPANDED && (
         <DarkOverlay />

@@ -108,8 +108,7 @@ const NavContent = styled.div`
   }
 `;
 
-function GlassHeader({ $colorScheme, $showSideBar, $resetNav, 
-    bubbleUpNav, bubbleUpSidebar, bubbleUpClose, bubbleUpResetSelect }) {
+function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar }) {
   
   const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
   const [chevronState, setChevronState] = useState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
@@ -180,19 +179,6 @@ function GlassHeader({ $colorScheme, $showSideBar, $resetNav,
   }
 
   /**
-   * Listen for a signal that resetNav is set to true because we need to shut down nav and 
-   * then call a function to indicate to our parent that we did our job.
-   */
-  useEffect(() => {
-    if ($resetNav) {
-      setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
-      setChevronState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
-      setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
-      bubbleUpClose();    // notify parent
-    }
-  }, [$resetNav]);
-
-  /**
    * Listen to window resizing which is dependent on the states
    * chevronState, navState, and sidebarState.
    */
@@ -223,7 +209,6 @@ function GlassHeader({ $colorScheme, $showSideBar, $resetNav,
                 $colorScheme={$colorScheme}
                 $navState={navState}
                 closeNav={closeNav}
-                bubbleUpResetSelect={bubbleUpResetSelect}
               />
             )}
             {(sidebarState !== States.EXPANDED && navState !== States.NARROW) && (

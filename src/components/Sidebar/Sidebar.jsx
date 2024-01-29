@@ -194,7 +194,7 @@ const CasePreview = styled.div`
   }
 `;
 
-function Sidebar({ $sidebarState, closeSidebar, $updateSelection, bubbleUpSelection }) {
+function Sidebar({ $sidebarState, closeSidebar }) {
   // Indicates which case study is selected
   const [selectedItem, setSelectedItem] = useState(localStorage.getItem('case-study'));
   // Indicates which parent (<summary>) is selected (aka a child is selected)
@@ -256,19 +256,6 @@ function Sidebar({ $sidebarState, closeSidebar, $updateSelection, bubbleUpSelect
     };
   }, [handleResize]);
 
-  /**
-   * When an case study is clicked in the project grid or the users has clicked on the Projects
-   * page which erases all saved projects, sidebar needs to update its selections. If given the 
-   * flag (updateSelection) to update (set to true), it updates the item and its parent. It 
-   * then confirms it updated by calling on a function in its parent.
-   */
-  useEffect(() => {
-    if ($updateSelection) {   // if we have a signal to update
-      setSelectedItem(localStorage.getItem('case-study'));
-      setSelectedParent(localStorage.getItem('case-topic'));
-      bubbleUpSelection();    // notify parent
-    }
-  }, [$updateSelection])
 
   /**
    * May not be the most useful function but we want <details> to be aware of changes in
@@ -278,6 +265,27 @@ function Sidebar({ $sidebarState, closeSidebar, $updateSelection, bubbleUpSelect
     console.log('designOpen changed:', designOpen);
     console.log('engOpen changed:', engOpen);
   }, [designOpen, engOpen]);
+
+  /**
+   * When an case study is clicked in the project grid or the users has clicked on the Projects
+   * page which erases all saved projects, sidebar needs to update its selections. If there is 
+   * a change to local storage, we know the current selectedItem has changed so update.
+   */
+  useEffect(() => {
+    const updateSelectedItem = () => {
+      setSelectedItem(localStorage.getItem('case-study'));
+      setSelectedParent(localStorage.getItem('case-topic'));
+    }
+    
+    // Listen for changes in localStorage
+    window.addEventListener('storage', updateSelectedItem);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('storage', updateSelectedItem);
+    };
+  }, []); // Empty dependency array to ensure the effect runs once on mount
+
 
   return (
     <>
