@@ -59,7 +59,6 @@ function Page({ customComponent: SubPage, showAside }) {
   const [projectState, setProjectState] = useState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
   const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
   const [scroll, setScroll] = useState(true);
-  const [resetNav, setResetNav] = useState(false);
 
   /**
    * On a page resize, this affects the states of the sidebar. If the page is
@@ -114,18 +113,20 @@ function Page({ customComponent: SubPage, showAside }) {
   /**
    * When we select a new project, only that case study component is updated.
    * This means that even the sidebar will stay open because it's not aware of
-   * any other change. So, we manually tell the sidebar to close as we've navigated
-   * to a new project.
-   * 
-   * @param {string} signal random message
+   * any other change. We need to update all the states to represent this reset.
    */
-  const closeSidebar = (signal) => {
-    setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
-    setProjectState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
-    // When the sidebar is open, nav is gone so the user cannot modify too many
-    // things. When we close the sidebar, we need to update nav to be normal
-    setResetNav(true);
-  }
+  useEffect(() => {
+    const closeSidebar = () => {
+      setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
+      setProjectState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
+    }
+
+    window.addEventListener('project selected', closeSidebar);
+
+    return () => {
+      window.removeEventListener('project selected', closeSidebar);
+    }
+  }, [sidebarState, projectState]);
 
 
   /**
@@ -160,8 +161,6 @@ function Page({ customComponent: SubPage, showAside }) {
    */
   useEffect(() => {
     const closeNav = () => {
-      console.log('close nav called in GlassHeader by listening to event in NavMenu');
-      setResetNav(false);
       setScroll(true);
       setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
       setProjectState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
@@ -180,7 +179,6 @@ function Page({ customComponent: SubPage, showAside }) {
       <GlassHeader 
         $colorScheme={COLORSCHEME} 
         $showSideBar={true} 
-        $resetNav={resetNav}
         bubbleUpSidebar={handleSidebarToggle}
         bubbleUpNav={handleNavToggle}
       />
@@ -189,10 +187,7 @@ function Page({ customComponent: SubPage, showAside }) {
       )}
       <MainWrapper id="main" $projectState={projectState}>
         <AdjustableSidebar id="adjustable-sidebar" $projectState={projectState}>
-          <Sidebar 
-            $sidebarState={sidebarState}
-            closeSidebar={closeSidebar}
-          />
+          <Sidebar $sidebarState={sidebarState} />
           <SubPage id="single-proj" $mode={projectState} $navState={navState} />
         </AdjustableSidebar>
       {showAside && (

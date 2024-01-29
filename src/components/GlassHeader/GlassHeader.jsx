@@ -108,7 +108,7 @@ const NavContent = styled.div`
   }
 `;
 
-function GlassHeader({ $colorScheme, $showSideBar, $resetNav, bubbleUpNav, bubbleUpSidebar, bubbleUpClose }) {
+function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar, bubbleUpClose }) {
   
   const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
   const [chevronState, setChevronState] = useState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
@@ -170,14 +170,18 @@ function GlassHeader({ $colorScheme, $showSideBar, $resetNav, bubbleUpNav, bubbl
   }
 
   useEffect(() => {
-    if ($resetNav) {
-      console.log('reset nav in GlassHeader');
+    const resetNav = () => {
       setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
       setChevronState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
       setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
-      bubbleUpClose();
     }
-  }, [$resetNav]);
+
+    window.addEventListener('project selected', resetNav);
+
+    return () => {
+      window.removeEventListener('project selected', resetNav);
+    }
+  }, [chevronState, navState, sidebarState])
 
   /**
    * Listen to window resizing which is dependent on the states

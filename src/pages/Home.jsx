@@ -230,10 +230,8 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
       <GlassHeader 
         $colorScheme={$colorScheme} 
         $showSideBar={false} 
-        $resetNav={false}
         bubbleUpSidebar={() => console.log('no sidebar')}
         bubbleUpNav={handleNavToggle}
-        bubbleUpClose={() => console.log('no sidebar')}
       />
       {$navState === States.EXPANDED && (
         <DarkOverlay />

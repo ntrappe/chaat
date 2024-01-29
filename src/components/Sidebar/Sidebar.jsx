@@ -194,7 +194,7 @@ const CasePreview = styled.div`
   }
 `;
 
-function Sidebar({ $sidebarState, closeSidebar }) {
+function Sidebar({ $sidebarState }) {
   // Indicates which case study is selected
   const [selectedItem, setSelectedItem] = useState(localStorage.getItem('case-study'));
   // Indicates which parent (<summary>) is selected (aka a child is selected)
@@ -227,8 +227,8 @@ function Sidebar({ $sidebarState, closeSidebar }) {
       setSelectedParent(Topics[1]);
       setEngOpen(true);
     }
-    // we've selected something so tell sidebar to close
-    closeSidebar();
+    // selected a project so dispatch event for header and sidebar to close
+    window.dispatchEvent(new Event('project selected'));
   }
 
   /**
