@@ -140,15 +140,7 @@ function ProjectGrid({ $mode }) {
         </GridCards>
         <GridCardsTitle>Coming Soon</GridCardsTitle>
         <GridCards>
-          <Card>
-            <CardImage>
-              <img 
-                src={VacuumPre}
-                alt="side profile of a vacuum on a purple background"
-              />
-            </CardImage>
-            <CardLabel>Vaccum Redesign</CardLabel>
-          </Card>
+          
           <Card>
             <CardImage>
               <img 
@@ -175,6 +167,15 @@ function ProjectGrid({ $mode }) {
               />
             </CardImage>
             <CardLabel>NPS 2025 Calendar</CardLabel>
+          </Card>
+          <Card>
+            <CardImage>
+              <img 
+                src={VacuumPre}
+                alt="side profile of a vacuum on a purple background"
+              />
+            </CardImage>
+            <CardLabel>Vaccum Redesign</CardLabel>
           </Card>
         </GridCards>
       </GridWrapper>

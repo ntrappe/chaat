@@ -7,6 +7,12 @@ import PomoActive from '../../assets/project-icons/pomodoro-active.png';
 import PomoInactive from '../../assets/project-icons/pomodoro-inactive.png';
 import MountainActive from '../../assets/project-icons/mountain-active.png';
 import MountainInactive from '../../assets/project-icons/mountain-inactive.png';
+import CalendarActive from '../../assets/project-icons/calendar-active.png';
+import CalendarInactive from '../../assets/project-icons/calendar-inactive.png';
+import VacuumActive from '../../assets/project-icons/vacuum-active.png';
+import VacuumInactive from '../../assets/project-icons/vacuum-inactive.png';
+import FlowActive from '../../assets/project-icons/flow-active.png';
+import FlowInactive from '../../assets/project-icons/flow-inactive.png';
 
 const States = {
   EXPANDED: 'expanded',
@@ -14,11 +20,9 @@ const States = {
   HIDDEN: 'hidden',
 };
 
-const Cases = [
-  { id: 0, name: 'bookify', topic: 'design'},
-  { id: 1, name: 'pomodoro', topic: 'design'},
-  { id: 2, name: 'rock', topic: 'design'},
-]
+const DesignCases = ['calendar', 'pomodoro', 'rock', 'vacuum'];
+const EngCases = ['bookify', 'flow'];
+const Topics = ['design', 'engineering'];
 
 const SidebarWrapper = styled.div`
   display: block;
@@ -221,19 +225,19 @@ const CasePreview = styled.div`
 function Sidebar({ $sidebarState, closeSidebar }) {
   const [selectedItem, setSelectedItem] = useState(localStorage.getItem('case-study'));
   const [selectedParent, setSelectedParent] = useState(localStorage.getItem('case-topic'));
-  const [designOpen, setDesignOpen] = useState(selectedParent === 'design');
-  const [engOpen, setEngOpen] = useState(selectedParent === 'engineering');
+  const [designOpen, setDesignOpen] = useState(selectedParent === Topics[0]);
+  const [engOpen, setEngOpen] = useState(selectedParent === Topics[1]);
 
   const handleItemClick = (index) => {
     localStorage.setItem('case-study', index);
     setSelectedItem(index);
     if ((index === 'bookify') || (index === 'pomodoro') || (index === 'rock')) {
-      localStorage.setItem('case-topic', 'design');
-      setSelectedParent('design');
+      localStorage.setItem('case-topic', Topics[0]);
+      setSelectedParent(Topics[0]);
       setDesignOpen(true);
     } else if (index === 'hii') {
-      localStorage.setItem('case-topic', 'engineering');
-      setSelectedParent('engineering');
+      localStorage.setItem('case-topic', Topics[1]);
+      setSelectedParent(Topics[1]);
       setEngOpen(true);
     }
     closeSidebar('');
@@ -273,63 +277,87 @@ function Sidebar({ $sidebarState, closeSidebar }) {
             <CaseTopic
               open={designOpen}
               id="design-cases"
-              selected={selectedParent === 'design'}
+              selected={selectedParent === Topics[0]}
               $sidebarState={$sidebarState} 
             >
               <summary>Design</summary>
-              <Link to={`/projects/bookify`} onClick={() => handleItemClick('bookify')}>
+              <Link to={`/projects/calendar`} onClick={() => handleItemClick(DesignCases[0])}>
                 <CasePreview 
                   $sidebarState={$sidebarState} 
-                  selected={selectedItem === 'bookify'}
-                >
-                <img
-                  src={selectedItem === 'bookify' ? BookActive : BookInactive}
-                  alt="Book Icon"
-                />
-                <p>Bookify</p>
-                </CasePreview>
-              </Link>
-              <Link to={`/projects/pomodoro`} onClick={() => handleItemClick('pomodoro')}>
-                <CasePreview 
-                  $sidebarState={$sidebarState} 
-                  selected={selectedItem === 'pomodoro'}
+                  selected={selectedItem === DesignCases[0]}
                 >
                   <img
-                    src={selectedItem === 'pomodoro' ? PomoActive : PomoInactive}
+                    src={selectedItem === DesignCases[0] ? CalendarActive : CalendarInactive}
+                    alt="Calendar icon with January 20th date"
+                  />
+                  <p>NPS Calendar</p>
+                </CasePreview>
+              </Link>
+              <Link to={`/projects/pomodoro`} onClick={() => handleItemClick(DesignCases[1])}>
+                <CasePreview 
+                  $sidebarState={$sidebarState} 
+                  selected={selectedItem === DesignCases[1]}
+                >
+                  <img
+                    src={selectedItem === DesignCases[1] ? PomoActive : PomoInactive}
                     alt="Tomato Pomodoro Icon"
                   />
                   <p>Pomodoro Timer</p>
                 </CasePreview>
               </Link>
-              <Link to={`/projects/rock`} onClick={() => handleItemClick('rock')}>
+              <Link to={`/projects/rock`} onClick={() => handleItemClick(DesignCases[2])}>
                 <CasePreview 
                   $sidebarState={$sidebarState} 
-                  selected={selectedItem === 'rock'}
+                  selected={selectedItem === DesignCases[2]}
                 >
                   <img
-                    src={selectedItem === 'rock' ? MountainActive : MountainInactive}
+                    src={selectedItem === DesignCases[2] ? MountainActive : MountainInactive}
                     alt="Mountain Icon"
                   />
-                  <p>National Park App</p>
+                  <p>Rock App</p>
+                </CasePreview>
+              </Link>
+              <Link to={`/projects/vacuum`} onClick={() => handleItemClick(DesignCases[3])}>
+                <CasePreview 
+                  $sidebarState={$sidebarState} 
+                  selected={selectedItem === DesignCases[3]}
+                >
+                  <img
+                    src={selectedItem === DesignCases[3] ? VacuumActive : VacuumInactive}
+                    alt="Upright vacuum Icon"
+                  />
+                  <p>Vacuum Redesign</p>
                 </CasePreview>
               </Link>
             </CaseTopic>
             <CaseTopic
               open={engOpen}
-              selected={selectedParent === 'engineering'}
+              selected={selectedParent === Topics[1]}
               $sidebarState={$sidebarState} 
             >
               <summary>Engineering</summary>
-              <Link to={`/projects/rock`} onClick={() => handleItemClick('hii')}>
+              <Link to={`/projects/bookify`} onClick={() => handleItemClick(EngCases[0])}>
                 <CasePreview 
                   $sidebarState={$sidebarState} 
-                  selected={selectedItem === 'hii'}
+                  selected={selectedItem === EngCases[0]}
                 >
-                  <img
-                    src={selectedItem === 'hii' ? MountainActive : MountainInactive}
-                    alt="Mountain Icon"
-                  />
-                  <p>HII</p>
+                <img
+                  src={selectedItem === EngCases[0] ? BookActive : BookInactive}
+                  alt="Book Icon"
+                />
+                <p>Bookify</p>
+                </CasePreview>
+              </Link>
+              <Link to={`/projects/flow`} onClick={() => handleItemClick(EngCases[1])}>
+                <CasePreview 
+                  $sidebarState={$sidebarState} 
+                  selected={selectedItem === EngCases[1]}
+                >
+                <img
+                  src={selectedItem === EngCases[1] ? FlowActive : FlowInactive}
+                  alt="Box with a wavy line moving through"
+                />
+                <p>Flow Controller</p>
                 </CasePreview>
               </Link>
             </CaseTopic>
