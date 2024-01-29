@@ -105,14 +105,7 @@ const NavOption = styled.li`
   }
 `;
 
-function NavMenu({ $colorScheme, $navState, closeNav }) {
-  const location = useLocation().pathname;
-
-  const clearStorage = () => {
-    localStorage.clear();
-    console.log('cleared local storage');
-  }
-
+function NavMenu({ $colorScheme, $navState, closeNav, bubbleUpResetSelect }) {
   return (
     <NavMenuWrapper id="nav-menu" $navState={$navState} $colorScheme={$colorScheme}>
       <NavMenuTray id="nav-menu-tray" $navState={$navState}>
@@ -123,7 +116,7 @@ function NavMenu({ $colorScheme, $navState, closeNav }) {
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
             <Link 
               to={`/projects`} 
-              onClick={() => { closeNav(); clearStorage(); }}
+              onClick={() => { closeNav(); bubbleUpResetSelect(); }}
             >Projects</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>

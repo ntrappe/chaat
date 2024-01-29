@@ -108,59 +108,94 @@ const NavContent = styled.div`
   }
 `;
 
-function GlassHeader({ $colorScheme, $showSideBar, $resetNav, bubbleUpNav, bubbleUpSidebar, bubbleUpClose }) {
-
+function GlassHeader({ $colorScheme, $showSideBar, $resetNav, 
+    bubbleUpNav, bubbleUpSidebar, bubbleUpClose, bubbleUpResetSelect }) {
+  
   const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
   const [chevronState, setChevronState] = useState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
   const [sidebarState, setSidebarState] = useState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
 
+  /**
+   * On a page resize, this affects the states of the nav. If the page is greater than 767px,
+   * nav is fully shown and is NARROW. If the page is smaller than that, it will be in compact form
+   * and, by default, hidden with a chevron down. If the nav is open, a smaller resize does nothing 
+   * (it stays open) but a larger will shift its state again. The sidebar will either be part of 
+   * the screen if width is more than 1023px, or in a compact mode.
+   */
   const handleResize = () => {
+    // make sidebar narrow (part of screen)
     if (window.innerWidth > 1023) {
       setSidebarState(States.NARROW);
+    // make sidebar compact
     } else if (window.innerWidth <= 1023 && sidebarState === States.NARROW) {
       setSidebarState(States.HIDDEN);
+    // make nav narrow (fully seen)
     } else if (window.innerWidth > 767) {
       setNavState(States.NARROW);
       setChevronState(Arrow.NONE);
+    // make nav hidden if not open on small resize
     } else if (window.innerWidth <= 767 && navState === States.NARROW) {
       setNavState(States.HIDDEN);
       setChevronState(Arrow.DOWN);
     }
   };
 
+  /**
+   * Passes function to child NavPre to indicate whether the sidebar button has been clicked. If
+   * so then it will call on a function to notify its parent of the change and updates the sidebar 
+   * state. If the sidebar is open, nav should not be open so we hide it.
+   */
   const handleSidebarToggle = () => {
     const nextState = sidebarState === States.HIDDEN ? States.EXPANDED : States.HIDDEN;
-    setSidebarState(nextState);
-    bubbleUpSidebar(nextState);
+    setSidebarState(nextState);   // update sidebar state
+    bubbleUpSidebar(nextState);   // notify parent
 
+    // if nav was open, we hide/close it while sidebar is open
     if (navState === States.EXPANDED) {
       setNavState(States.HIDDEN);
       setChevronState(Arrow.DOWN);
     } 
   };
 
+  /**
+   * In the compact form, nav is represented as either EXPANDED (drop-down) or HIDDEN. A chevron
+   * points down when it is closed and up when open. This function is called when nav is
+   * opened or closed and we update the chevron to match. We also notify the parent of the change 
+   * in state.
+   */
   const handleNavToggle = () => {
     const nextState = navState === States.HIDDEN ? States.EXPANDED : States.HIDDEN;
     setChevronState((prevState) => (prevState === Arrow.DOWN ? Arrow.UP : Arrow.DOWN));
-    setNavState(nextState);
-    bubbleUpNav(nextState);
+    setNavState(nextState);   // update nav state
+    bubbleUpNav(nextState);   // notify parent
   }
 
+  /**
+   * When a user selects a different page to navigate to, the parent will call this function 
+   * to shut down the nav and return it to its original (not opened) state.
+   */
   const closeNav = () => {
     setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
     setChevronState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
   }
 
+  /**
+   * Listen for a signal that resetNav is set to true because we need to shut down nav and 
+   * then call a function to indicate to our parent that we did our job.
+   */
   useEffect(() => {
     if ($resetNav) {
-      console.log('reset nav in GlassHeader');
       setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
       setChevronState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
       setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
-      bubbleUpClose();
+      bubbleUpClose();    // notify parent
     }
   }, [$resetNav]);
 
+  /**
+   * Listen to window resizing which is dependent on the states
+   * chevronState, navState, and sidebarState.
+   */
   useEffect(() => {
     window.addEventListener('resize', handleResize);
 
@@ -188,6 +223,7 @@ function GlassHeader({ $colorScheme, $showSideBar, $resetNav, bubbleUpNav, bubbl
                 $colorScheme={$colorScheme}
                 $navState={navState}
                 closeNav={closeNav}
+                bubbleUpResetSelect={bubbleUpResetSelect}
               />
             )}
             {(sidebarState !== States.EXPANDED && navState !== States.NARROW) && (

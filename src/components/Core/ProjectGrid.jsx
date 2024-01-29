@@ -14,6 +14,9 @@ const States = {
   HIDDEN: 'hidden',
 };
 
+const DesignCases = ['calendar', 'pomodoro', 'rock', 'vacuum'];
+const EngCases = ['bookify', 'flow'];
+
 const GridWrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -122,7 +125,8 @@ const CardImage = styled.div`
   }
 `;
 
-function ProjectGrid({ $mode }) {
+function ProjectGrid({ $mode, bubbleUpItemClick }) {
+
   return (
     <>
       <GridWrapper id="project-grid" $mode={$mode}>
@@ -131,7 +135,7 @@ function ProjectGrid({ $mode }) {
         <GridCardsTitle>Recently Updated</GridCardsTitle>
         <GridCards>
           <Card>
-            <Link to={`/projects/pomodoro`}>
+            <Link to={`/projects/pomodoro`} onClick={() => bubbleUpItemClick(DesignCases[1])}>
               <CardImage>
                 <img 
                   src={PomodoroPre}
@@ -142,7 +146,7 @@ function ProjectGrid({ $mode }) {
             </Link>
           </Card>
           <Card>
-            <Link to={`/projects/rock`}>
+            <Link to={`/projects/rock`} onClick={() => bubbleUpItemClick(DesignCases[2])}>
               <CardImage>
                 <img 
                   src={MountainPre}
@@ -156,7 +160,7 @@ function ProjectGrid({ $mode }) {
         <GridCardsTitle>Coming Soon</GridCardsTitle>
         <GridCards>
           <Card>
-            <Link to={`/projects/bookify`}>
+            <Link to={`/projects/bookify`} onClick={() => bubbleUpItemClick(EngCases[0])}>
               <CardImage>
                 <img 
                   src={BookPre}
@@ -167,7 +171,7 @@ function ProjectGrid({ $mode }) {
             </Link>
           </Card>
           <Card>
-            <Link to={`/projects/flow`}>
+            <Link to={`/projects/flow`} onClick={() => bubbleUpItemClick(EngCases[1])}>
               <CardImage>
                 <img 
                   src={FlowPre}
@@ -178,7 +182,7 @@ function ProjectGrid({ $mode }) {
             </Link>
           </Card>
           <Card>
-            <Link to={`/projects/calendar`}>
+            <Link to={`/projects/calendar`} onClick={() => bubbleUpItemClick(DesignCases[0])}>
               <CardImage>
                 <img 
                   src={CalPre}
@@ -189,7 +193,7 @@ function ProjectGrid({ $mode }) {
             </Link>
           </Card>
           <Card>
-            <Link to={`/projects/vacuum`}>
+            <Link to={`/projects/vacuum`} onClick={() => bubbleUpItemClick(DesignCases[3])}>
               <CardImage>
                 <img 
                   src={VacuumPre}

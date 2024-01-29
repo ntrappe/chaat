@@ -122,6 +122,7 @@ html {
   --mobile-width: 767px;
   --proj-sect-gap: 30px;
   --max-main-width: 930px;
+  --nav-max-width: 960px;
   --med-main-width: 660px;
   --aside-width: 150px;
   --app-height: 100vh;

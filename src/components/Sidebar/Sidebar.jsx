@@ -194,51 +194,90 @@ const CasePreview = styled.div`
   }
 `;
 
-function Sidebar({ $sidebarState, closeSidebar }) {
+function Sidebar({ $sidebarState, closeSidebar, $updateSelection, bubbleUpSelection }) {
+  // Indicates which case study is selected
   const [selectedItem, setSelectedItem] = useState(localStorage.getItem('case-study'));
+  // Indicates which parent (<summary>) is selected (aka a child is selected)
   const [selectedParent, setSelectedParent] = useState(localStorage.getItem('case-topic'));
+  // Indicates if design details should be open
   const [designOpen, setDesignOpen] = useState(selectedParent === Topics[0]);
+  // Indicates if engineering details should be open
   const [engOpen, setEngOpen] = useState(selectedParent === Topics[1]);
 
+  /**
+   * Function is called when an item (case study) in the sidebar is clicked. It updates selectedItem
+   * to be that item and selectedParent with its corresponding <summary>. 
+   * 
+   * We use local storage for this. When an item is clicked (in sidebar or projects grid), we save 
+   * that case study to local storage so that, as we go between projects, we can keep track.
+   * 
+   * @param {string} index case study
+   */
   const handleItemClick = (index) => {
+    // set selected case study in local storage and in selectedItem
     localStorage.setItem('case-study', index);
     setSelectedItem(index);
-    if ((index === 'bookify') || (index === 'pomodoro') || (index === 'rock')) {
+    // set parent of case study in selectedParent and local storage
+    if (DesignCases.includes(index)) {
       localStorage.setItem('case-topic', Topics[0]);
       setSelectedParent(Topics[0]);
       setDesignOpen(true);
-    } else if (index === 'hii') {
+    } else if (EngCases.includes(index)) {
       localStorage.setItem('case-topic', Topics[1]);
       setSelectedParent(Topics[1]);
       setEngOpen(true);
     }
+    // we've selected something so tell sidebar to close
     closeSidebar();
   }
 
+  /**
+   * Style-only function. It first fits the sidebar to fill up the height of the current window.
+   * Second, it only allows a transition for a sidebar to open or close when toggled and not on a
+   * resize.
+   */
   const handleResize = () => {
     const newHeight = window.innerHeight;
     document.documentElement.style.setProperty('--app-height', `${newHeight}px`);
     const sidebar = document.getElementById('sidebar');
+    // no transition shown for a resize, only toggle
     if (sidebar) {
       sidebar.style.transition = $sidebarState === States.NARROW ? 'none' : 'transform .25s ease-in';
     }
   }
 
+  /**
+   * Listen for a resize which is dependent on the handleResize function.
+   */
   useEffect(() => {
     window.addEventListener('resize', handleResize);
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, [handleResize]);
 
+  /**
+   * When an case study is clicked in the project grid or the users has clicked on the Projects
+   * page which erases all saved projects, sidebar needs to update its selections. If given the 
+   * flag (updateSelection) to update (set to true), it updates the item and its parent. It 
+   * then confirms it updated by calling on a function in its parent.
+   */
   useEffect(() => {
-  // This code will run whenever designOpen or engOpen changes
-  // You can perform actions or trigger updates here
-  console.log('designOpen changed:', designOpen);
-  console.log('engOpen changed:', engOpen);
+    if ($updateSelection) {   // if we have a signal to update
+      setSelectedItem(localStorage.getItem('case-study'));
+      setSelectedParent(localStorage.getItem('case-topic'));
+      bubbleUpSelection();    // notify parent
+    }
+  }, [$updateSelection])
 
-}, [designOpen, engOpen]); // Specify the dependencies here
+  /**
+   * May not be the most useful function but we want <details> to be aware of changes in
+   * designOpen and engOpen so it knows to be open or not.
+   */
+  useEffect(() => {
+    console.log('designOpen changed:', designOpen);
+    console.log('engOpen changed:', engOpen);
+  }, [designOpen, engOpen]);
 
   return (
     <>

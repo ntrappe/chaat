@@ -7,13 +7,14 @@ const States = {
   HIDDEN: 'hidden',
 };
 
-const BookifyWrapper = styled.div`
+const FlowWrapper = styled.div`
   display: flex;
   flex-flow: column;
   flex: 1 1 auto;
+  min-width: 0;
   height: 100%;
   padding-top: 2.35rem;
-  
+
   @media (max-width: 1023px) {
     min-width: 100%:
     width: 100%:
@@ -22,18 +23,18 @@ const BookifyWrapper = styled.div`
   }
 `;
 
-const BookifyTitle = styled.h1`
+const FlowTitle = styled.h1`
   margin-bottom: 32px;
   color: var(--midnight);
 `;
 
-const BookifyTag = styled.h2`
+const FlowTag = styled.h2`
   letter-spacing: .007em;
   margin-bottom: 30px;
   color: var(--wet-concrete);
 `;
 
-const BookifyPreview = styled.div`
+const FlowPreview = styled.div`
   display: flex;
   justify-content: center;
   min-width: 0;
@@ -48,27 +49,26 @@ const BookifyPreview = styled.div`
   }  
 `;
 
-function Bookify({ $sidebarState, $projectState }) {
+function Flow({ $sidebarState, $projectState }) {
   
   return (
     <>
-      <BookifyWrapper 
+      <FlowWrapper
         id="case-study" 
         $sidebarState={$sidebarState}
         $projectState={$projectState}
       >
-        <BookifyTitle id="case-study-title">Bookify</BookifyTitle>
-        <BookifyTag id="case-study-tag">Finding books.</BookifyTag>
-        <BookifyPreview id="case-study-preview">
+        <FlowTitle id="case-study-title">Flow Controller</FlowTitle>
+        <FlowTag id="case-study-tag">Coming soon.</FlowTag>
+        <FlowPreview id="case-study-preview">
           <img
-            src="/src/assets/case-study-images/book-preview.png"
-            alt="Tomato Pomodoro Icon"
+            src="/src/assets/case-study-images/flow-preview.png"
+            alt="Gas flowing through a sensory array"
           />
-        </BookifyPreview>
-        <h3>The HIG contains guidance and best practices that can help you design a great experience for any Apple platform.</h3>
-      </BookifyWrapper>
+        </FlowPreview>
+      </FlowWrapper>
     </>
   )
 }
   
-export default Bookify;
+export default Flow;
