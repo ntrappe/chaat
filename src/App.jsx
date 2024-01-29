@@ -11,21 +11,22 @@ import Art from './pages/Art.jsx';
 import Career from './pages/Career.jsx';
 import PageNotFound from './pages/PageNotFound.jsx';
 import Page from './components/Core/Page.jsx';
+import MinimalPage from './components/Core/MinimalPage.jsx';
 import ProjectGrid from './components/Core/ProjectGrid.jsx';
 
 export default function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/projects' element={<Page customComponent={ProjectGrid} showAside={false} grid={true} />} />
-        <Route path='/projects/pomodoro' element={<Page customComponent={Pomodoro} showAside={true} grid={false} />} />
-        <Route path='/projects/rock' element={<Page customComponent={Rock} showAside={true} grid={false} />} />
-        <Route path='/projects/bookify' element={<Page customComponent={Bookify} showAside={true} grid={false} />} />
-        <Route path='/projects/flow' element={<Page customComponent={Flow} showAside={false} grid={false} />} />
-        <Route path='/photography' element={<Photography />} />
-        <Route path='/career' element={<Career />} />
-        <Route path='/art' element={<Art />} />
+        <Route path='/' element={<MinimalPage customComponent={Home} $colorScheme={'dark'} />} />
+        <Route path='/projects' element={<Page customComponent={ProjectGrid} showAside={false} />} />
+        <Route path='/projects/pomodoro' element={<Page customComponent={Pomodoro} showAside={true} />} />
+        <Route path='/projects/rock' element={<Page customComponent={Rock} showAside={true} />} />
+        <Route path='/projects/bookify' element={<Page customComponent={Bookify} showAside={true} />} />
+        <Route path='/projects/flow' element={<Page customComponent={Flow} showAside={false} />} />
+        <Route path='/photography' element={<MinimalPage customComponent={Photography} $colorScheme={'light'}/>} />
+        <Route path='/career' element={<MinimalPage customComponent={Career} $colorScheme={'light'}/>} />
+        <Route path='/art' element={<MinimalPage customComponent={Art} $colorScheme={'light'} />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </HashRouter>

@@ -16,6 +16,7 @@ const States = {
 
 const DesignCases = ['calendar', 'pomodoro', 'rock', 'vacuum'];
 const EngCases = ['bookify', 'flow'];
+const Topics = ['design', 'engineering'];
 
 const GridWrapper = styled.div`
   display: flex;
@@ -125,7 +126,33 @@ const CardImage = styled.div`
   }
 `;
 
-function ProjectGrid({ $mode, bubbleUpItemClick }) {
+function ProjectGrid({ $mode }) {
+
+  /**
+   * When a case study is clicked, set it in local storage. Sidebar is listening to changes
+   * to storage and will update the selected item.
+   * 
+   * @param {string} index case study name
+   */
+  const setItem = (index) => {
+    // save that case study item to local storage
+    if (DesignCases.includes(index) || EngCases.includes(index)) {
+      window.localStorage.setItem('case-study', index);
+    } else {
+      console.error(`Error @ProjectGrid: Unexpected child given ${index}`);
+    }
+    
+    // save the parent of the case study to local storage
+    if (DesignCases.includes(index)) {
+      localStorage.setItem('case-topic', Topics[0])
+    } else if (EngCases.includes(index)) {
+      localStorage.setItem('case-topic', Topics[1]);
+    } else {
+      console.error('Error @ProjectGrid: Child does not belong to any case topic');
+    }
+    // Dispatch event notification AFTER everything has been loaded into storage
+    window.dispatchEvent(new Event('storage'));
+  }
 
   return (
     <>
@@ -135,7 +162,7 @@ function ProjectGrid({ $mode, bubbleUpItemClick }) {
         <GridCardsTitle>Recently Updated</GridCardsTitle>
         <GridCards>
           <Card>
-            <Link to={`/projects/pomodoro`} onClick={() => bubbleUpItemClick(DesignCases[1])}>
+            <Link to={`/projects/pomodoro`} onClick={() => setItem(DesignCases[1])}>
               <CardImage>
                 <img 
                   src={PomodoroPre}
@@ -146,7 +173,7 @@ function ProjectGrid({ $mode, bubbleUpItemClick }) {
             </Link>
           </Card>
           <Card>
-            <Link to={`/projects/rock`} onClick={() => bubbleUpItemClick(DesignCases[2])}>
+            <Link to={`/projects/rock`} onClick={() => setItem(DesignCases[2])}>
               <CardImage>
                 <img 
                   src={MountainPre}
@@ -160,7 +187,7 @@ function ProjectGrid({ $mode, bubbleUpItemClick }) {
         <GridCardsTitle>Coming Soon</GridCardsTitle>
         <GridCards>
           <Card>
-            <Link to={`/projects/bookify`} onClick={() => bubbleUpItemClick(EngCases[0])}>
+            <Link to={`/projects/bookify`} onClick={() => setItem(EngCases[0])}>
               <CardImage>
                 <img 
                   src={BookPre}
@@ -171,7 +198,7 @@ function ProjectGrid({ $mode, bubbleUpItemClick }) {
             </Link>
           </Card>
           <Card>
-            <Link to={`/projects/flow`} onClick={() => bubbleUpItemClick(EngCases[1])}>
+            <Link to={`/projects/flow`} onClick={() => setItem(EngCases[1])}>
               <CardImage>
                 <img 
                   src={FlowPre}
@@ -182,7 +209,7 @@ function ProjectGrid({ $mode, bubbleUpItemClick }) {
             </Link>
           </Card>
           <Card>
-            <Link to={`/projects/calendar`} onClick={() => bubbleUpItemClick(DesignCases[0])}>
+            <Link to={`/projects/calendar`} onClick={() => setItem(DesignCases[0])}>
               <CardImage>
                 <img 
                   src={CalPre}
@@ -193,7 +220,7 @@ function ProjectGrid({ $mode, bubbleUpItemClick }) {
             </Link>
           </Card>
           <Card>
-            <Link to={`/projects/vacuum`} onClick={() => bubbleUpItemClick(DesignCases[3])}>
+            <Link to={`/projects/vacuum`} onClick={() => setItem(DesignCases[3])}>
               <CardImage>
                 <img 
                   src={VacuumPre}

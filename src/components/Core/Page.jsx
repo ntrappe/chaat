@@ -13,10 +13,6 @@ const States = {
   HIDDEN: 'hidden',
 };
 
-const Topics = ['design', 'engineering'];
-const DesignCases = ['calendar', 'pomodoro', 'rock', 'vacuum'];
-const EngCases = ['bookify', 'flow'];
-
 const MainWrapper = styled.main`
   display: flex;
   width: var(--max-main-width);
@@ -37,6 +33,7 @@ const AdjustableSidebar = styled.div`
   display: flex;
   min-width: 0;
   flex: 1;
+  background-color: teal;
 
   @media (max-width: 1023px) {
     display: ${(props) => (props.$projectState === States.EXPANDED ? 'flex' : 'block')};
@@ -54,7 +51,7 @@ const DarkOverlay = styled.div`
   z-index: 1000;
 `;
 
-function Page({ customComponent: SubPage, showAside, grid }) {
+function Page({ customComponent: SubPage, showAside }) {
   const body = document.getElementById('body');
   body.setAttribute('colorscheme', COLORSCHEME);
 
@@ -63,7 +60,6 @@ function Page({ customComponent: SubPage, showAside, grid }) {
   const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
   const [scroll, setScroll] = useState(true);
   const [resetNav, setResetNav] = useState(false);
-  const [updateSelection, setUpdateSelection] = useState(false);
 
   /**
    * On a page resize, this affects the states of the sidebar. If the page is
@@ -76,6 +72,8 @@ function Page({ customComponent: SubPage, showAside, grid }) {
     // make sidebar narrow (part of screen)
     if (window.innerWidth > 1023) {
       setSidebarState(States.NARROW);
+      setNavState(States.NARROW);
+      setScroll(true);
     // make sidebar hidden if not open on a smaller resize
     } else if (window.innerWidth <= 1023 && sidebarState === States.NARROW) {
       setSidebarState(States.HIDDEN);
@@ -129,69 +127,6 @@ function Page({ customComponent: SubPage, showAside, grid }) {
     setResetNav(true);
   }
 
-  /**
-   * When we select a new project, only that case study component is updatd. 
-   * Everything else stays the same which means the header and sidebar can
-   * remain in an old state. We want the page to act like we've reset everything
-   * so we want to scroll, the sidebar should be narrow or hidden, the header
-   * should be narrow or hidden, etc.
-   */
-  const handleResetNav = () => {
-    setResetNav(false);
-    setScroll(true);
-    setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
-    setProjectState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
-    setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
-  }
-
-  /**
-   * Function sent to ProjectGrid to indicate when a user has clicked a project
-   * preview. We will then save that selected project to local storage and set
-   * a flag updateSelection to true so Sidebar (which is listening) knows it 
-   * should update the selected item it displays.
-   * 
-   * @param {string} index name of case study
-   */
-  const bubbleUpItemClick = (index) => {
-    // save that case study item to local storage
-    localStorage.setItem('case-study', index);
-    // save the parent of the case study to local storage
-    if (DesignCases.includes(index)) {
-      localStorage.setItem('case-topic', Topics[0])
-    } else if (EngCases.includes(index)) {
-      localStorage.setItem('case-topic', Topics[1]);
-    }
-    // tell sidebar to update
-    setUpdateSelection(true);
-  }
-
-  /**
-   * Function sent to Sidebar to verify once it has updated the selected
-   * item(s). This can either remove all selected items if we cleared storage
-   * or if we clicked an item in ProjectGrid and need the sidebar to reflect that.
-   * 
-   * Sidebar calls this function when it's done so we set the flag updateSelection
-   * to false as everything has been updated.
-   */
-  const bubbleUpSelection = () => {
-    // we're done with updates
-    setUpdateSelection(false);
-  }
-
-  /**
-   * Function sent to GlassHeader > NavMenu to indicate when a user clicks the 
-   * Projects page so we can reset the selection of any project in sidebar.
-   * 
-   * When the function is called in NavMenu (Projects was clicked), we clear
-   * local storage because we have no active project then set the updateSelection
-   * state to true so the sidebar knows to update its selected item.
-   */
-  const bubbleUpResetSelect = () => {
-    // nothing selected yet so clear storage
-    localStorage.clear();
-    // tell sidebar to update
-    setUpdateSelection(true);
-  }
 
   /**
    * Listen to window resizing which is dependent on the states
@@ -216,11 +151,36 @@ function Page({ customComponent: SubPage, showAside, grid }) {
     }
   }, [scroll]);
 
+  /**
+   * Listen to an event that will be dispatched in NavMenu when the Projects page is 
+   * clicked. When we select a new project (or go to that page), only that case study 
+   * component is updated. Everything else stays the same which means the header and 
+   * sidebar can remain in an old state. We want the page to act like we've reset everything
+   * so we want to scroll, nav should be narrow or hidden, etc.
+   */
+  useEffect(() => {
+    const closeNav = () => {
+      console.log('close nav called in GlassHeader by listening to event in NavMenu');
+      setResetNav(false);
+      setScroll(true);
+      setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
+      setProjectState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
+      setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
+    }
+
+    window.addEventListener('close nav', closeNav);
+
+    return () => {
+      window.removeEventListener('close nav', closeNav);
+    }
+  }, [navState, scroll, sidebarState, projectState]);
+
   return (
     <>
       <GlassHeader 
         $colorScheme={COLORSCHEME} 
         $showSideBar={true} 
+        $resetNav={resetNav}
         bubbleUpSidebar={handleSidebarToggle}
         bubbleUpNav={handleNavToggle}
       />
@@ -232,15 +192,8 @@ function Page({ customComponent: SubPage, showAside, grid }) {
           <Sidebar 
             $sidebarState={sidebarState}
             closeSidebar={closeSidebar}
-            $updateSelection={updateSelection}
-            bubbleUpSelection={bubbleUpSelection}
           />
-          {grid && (
-            <SubPage id="project-grid" $mode={projectState} $navState={navState} bubbleUpItemClick={bubbleUpItemClick} />
-          )}
-          {!grid && (
-            <SubPage id="single-proj" $mode={projectState} $navState={navState} />
-          )}
+          <SubPage id="single-proj" $mode={projectState} $navState={navState} />
         </AdjustableSidebar>
       {showAside && (
         <FloatingAside $mode={projectState} offsetCaseStudy={() => console.log('heh')} />

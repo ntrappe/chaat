@@ -50,9 +50,18 @@ const LinkTitle = styled.p`
 `;
 
 function NavTitle({ $colorScheme }) {
+  /**
+   * If click title of the website, close any nav if open.
+   */
+  const closeNav = () => {
+    window.dispatchEvent(new Event('close nav'));
+  }
+
   return (
     <NavTitleWrapper id="nav-title" $colorScheme={$colorScheme}>
-      <LinkTitle $colorScheme={$colorScheme}><Link to={`/`}>Nicole Trappe</Link></LinkTitle>
+      <LinkTitle $colorScheme={$colorScheme}>
+        <Link to={`/`} onClick={() => closeNav()}>Nicole Trappe</Link>
+      </LinkTitle>
     </NavTitleWrapper>
   )
 }

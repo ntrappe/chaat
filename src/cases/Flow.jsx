@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import FlowPreviewImg from '../assets/case-study-images/flow-preview.png';
 
 const States = {
   EXPANDED: 'expanded',
@@ -14,6 +15,8 @@ const FlowWrapper = styled.div`
   min-width: 0;
   height: 100%;
   padding-top: 2.35rem;
+  background-color: yellow;
+  width: 700px;
 
   @media (max-width: 1023px) {
     min-width: 100%:
@@ -43,7 +46,7 @@ const FlowPreview = styled.div`
   img {
     display: block;
     margin: auto;
-    width: 740px;
+    width: 600px;
     max-width: 100%;
     border-radius: 20px;
   }  
@@ -62,8 +65,8 @@ function Flow({ $sidebarState, $projectState }) {
         <FlowTag id="case-study-tag">Coming soon.</FlowTag>
         <FlowPreview id="case-study-preview">
           <img
-            src="/src/assets/case-study-images/flow-preview.png"
-            alt="Gas flowing through a sensory array"
+            src={FlowPreviewImg}
+            alt="Gas flowing through a sensor array"
           />
         </FlowPreview>
       </FlowWrapper>

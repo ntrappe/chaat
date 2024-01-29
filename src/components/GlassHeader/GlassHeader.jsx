@@ -108,7 +108,7 @@ const NavContent = styled.div`
   }
 `;
 
-function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar }) {
+function GlassHeader({ $colorScheme, $showSideBar, $resetNav, bubbleUpNav, bubbleUpSidebar, bubbleUpClose }) {
   
   const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
   const [chevronState, setChevronState] = useState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
@@ -169,14 +169,15 @@ function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar 
     bubbleUpNav(nextState);   // notify parent
   }
 
-  /**
-   * When a user selects a different page to navigate to, the parent will call this function 
-   * to shut down the nav and return it to its original (not opened) state.
-   */
-  const closeNav = () => {
-    setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
-    setChevronState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
-  }
+  useEffect(() => {
+    if ($resetNav) {
+      console.log('reset nav in GlassHeader');
+      setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
+      setChevronState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
+      setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
+      bubbleUpClose();
+    }
+  }, [$resetNav]);
 
   /**
    * Listen to window resizing which is dependent on the states
@@ -189,6 +190,24 @@ function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar 
       window.removeEventListener('resize', handleResize);
     }
   }, [chevronState, navState, sidebarState]); 
+
+  /**
+   * Listen to an event that will be dispatched in NavMenu when the Projects page is clicked. When that
+   * happens, we need to close nav (make it NARROW or HIDDEN) and adjust the chevron.
+   */
+  useEffect(() => {
+    const closeNav = () => {
+      console.log('close nav called in GlassHeader by listening to event in NavMenu');
+      setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
+      setChevronState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
+    }
+
+    window.addEventListener('close nav', closeNav);
+
+    return () => {
+      window.removeEventListener('close nav', closeNav);
+    }
+  }, [navState, chevronState]);
 
   return (
     <>
@@ -208,7 +227,6 @@ function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar 
               <NavMenu 
                 $colorScheme={$colorScheme}
                 $navState={navState}
-                closeNav={closeNav}
               />
             )}
             {(sidebarState !== States.EXPANDED && navState !== States.NARROW) && (

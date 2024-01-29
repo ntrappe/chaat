@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PomodoroPreviewImg from '../assets/case-study-images/pomodoro-preview.png';
 
 const States = {
   EXPANDED: 'expanded',
@@ -80,7 +81,7 @@ function Pomodoro({ $sidebarState, $projectState }) {
         <PomodoroTag id="case-study-tag">A web-based timer designed to curb procrastination.</PomodoroTag>
         <PomodoroPreview id="case-study-preview">
           <img
-            src="/src/assets/case-study-images/pomodoro-preview.png"
+            src={PomodoroPreviewImg}
             alt="Tomato Pomodoro Icon"
           />
         </PomodoroPreview>

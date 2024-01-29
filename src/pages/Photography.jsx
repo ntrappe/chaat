@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
 import PhotoGrid from '../components/Core/PhotoGrid.jsx';
 import ThickFooter from '../components/Footer/ThickFooter.jsx';
-
-const COLORSCHEME = 'light';
 
 const States = {
   EXPANDED: 'expanded',
@@ -14,13 +12,13 @@ const States = {
 
 const MainWrapper = styled.main`
   display: flex;
-  width: 980px;
+  width: var(--max-main-width);
   align-self: center;
   /* top | right | bottom | left */
   margin: 0 auto 5em auto;
 
   @media (max-width: 1023px) {
-    width: 692px;
+    width: var(--med-main-width);
   }
 
   @media (max-width: 767px) {
@@ -37,42 +35,26 @@ const DarkOverlay = styled.div`
   z-index: 1000;
 `;
 
-function Photography() {
-  const body = document.getElementById('body');
-  body.setAttribute('colorscheme', COLORSCHEME);
-
-  const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
-  const [scroll, setScroll] = useState(true);
-
-  const handleNavToggle = (state) => {
-    setNavState(state);
-    setScroll(state !== States.EXPANDED);
-  }
-
-  useEffect(() => {
-    const root = document.getElementById('root');
-    if (root) {
-      root.style.position = scroll ? 'unset' : 'fixed';
-    }
-  }, [scroll]);
-
+function Photography({ $navState, $colorScheme, handleNavToggle }) {
   return (
     <>
       <GlassHeader 
-        $colorScheme={'light'} 
+        $colorScheme={$colorScheme} 
         $showSideBar={false} 
+        $resetNav={false}
         bubbleUpSidebar={() => console.log('no sidebar')}
         bubbleUpNav={handleNavToggle}
+        bubbleUpClose={() => console.log('no sidebar')}
       />
-      {navState === States.EXPANDED && (
+      {$navState === States.EXPANDED && (
         <DarkOverlay />
       )}
       <MainWrapper id="main">
         <PhotoGrid />
       </MainWrapper>
       {/* Only show footer if sidebar isn't open */}
-      {(navState !== States.EXPANDED) && (
-        <ThickFooter $colorScheme={COLORSCHEME} />
+      {($navState !== States.EXPANDED) && (
+        <ThickFooter $colorScheme={$colorScheme} />
       )}
     </>
   )

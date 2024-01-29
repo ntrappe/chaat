@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
 import ThickFooter from '../components/Footer/ThickFooter.jsx';
-
-const COLORSCHEME = 'light';
 
 const States = {
   EXPANDED: 'expanded',
@@ -84,34 +82,18 @@ const DarkOverlay = styled.div`
   z-index: 1000;
 `;
 
-function Career() {
-  const body = document.getElementById('body');
-  body.setAttribute('colorscheme', COLORSCHEME);
-
-  const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
-  const [scroll, setScroll] = useState(true);
-
-  const handleNavToggle = (state) => {
-    setNavState(state);
-    setScroll(state !== States.EXPANDED);
-  }
-
-  useEffect(() => {
-    const root = document.getElementById('root');
-    if (root) {
-      root.style.position = scroll ? 'unset' : 'fixed';
-    }
-  }, [scroll]);
-
+function Career({ $navState, $colorScheme, handleNavToggle }) {
   return (
     <>
       <GlassHeader 
-        $colorScheme={COLORSCHEME} 
+        $colorScheme={$colorScheme} 
         $showSideBar={false} 
+        $resetNav={false}
         bubbleUpSidebar={() => console.log('no sidebar')}
         bubbleUpNav={handleNavToggle}
+        bubbleUpClose={() => console.log('no sidebar')}
       />
-      {navState === States.EXPANDED && (
+      {$navState === States.EXPANDED && (
         <DarkOverlay />
       )}
       <MainWrapper id="main">
@@ -123,8 +105,8 @@ function Career() {
           </Note>
         </CareerWrapper>
       </MainWrapper>
-      {navState !== States.EXPANDED && (
-        <ThickFooter $colorScheme={COLORSCHEME} />
+      {$navState !== States.EXPANDED && (
+        <ThickFooter $colorScheme={$colorScheme} />
       )}
     </>
   )

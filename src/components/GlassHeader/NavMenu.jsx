@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const States = {
   EXPANDED: 'expanded',
@@ -105,11 +105,25 @@ const NavOption = styled.li`
   }
 `;
 
-function NavMenu({ $colorScheme, $navState, closeNav }) {
+function NavMenu({ $colorScheme, $navState }) {
 
+  /**
+   * When a user clicks the Projects page link, we clear out any current selection of 
+   * projects as if they're starting from scratch. Dispatch an event so sidebar, which is
+   * listening, can update the current selection.
+   */
   const clearSavedProjects = () => {
-    localStorage.clear();
-    console.log('cleared local storage @NavMenu');
+    window.localStorage.clear();
+    // Dispatch event notification AFTER everything has been loaded into storage
+    window.dispatchEvent(new Event('storage'));
+  }
+
+  /**
+   * Notify listening compontents that a user clicked a page so we need
+   * to close the nav.
+   */
+  const closeNav = () => {
+    window.dispatchEvent(new Event('close nav'));
   }
 
   return (
@@ -117,7 +131,7 @@ function NavMenu({ $colorScheme, $navState, closeNav }) {
       <NavMenuTray id="nav-menu-tray" $navState={$navState}>
         <NavMenuOptions id="nav-menu-options" $navState={$navState}>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/`} onClick={closeNav}>Home</Link>
+            <Link to={`/`} onClick={() => closeNav()}>Home</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
             <Link 
@@ -126,13 +140,13 @@ function NavMenu({ $colorScheme, $navState, closeNav }) {
             >Projects</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/career`} onClick={closeNav}>Career</Link>
+            <Link to={`/career`} onClick={() => closeNav()}>Career</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/art`} onClick={closeNav}>Art</Link>
+            <Link to={`/art`} onClick={() => closeNav()}>Art</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/photography`} onClick={closeNav}>Photography</Link>
+            <Link to={`/photography`} onClick={() => closeNav()}>Photography</Link>
           </NavOption>
         </NavMenuOptions>
       </NavMenuTray>

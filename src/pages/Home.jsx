@@ -10,8 +10,6 @@ import Subtitles from '../assets/page-icons/subtitles.png';
 import Hand from '../assets/page-icons/hand.png';
 import Palette from '../assets/page-icons/palette.png';
 
-const COLORSCHEME = 'dark';
-
 const States = {
   EXPANDED: 'expanded',
   NARROW: 'narrow',
@@ -23,7 +21,6 @@ const MainWrapper = styled.main`
   height: 100%;
 
   @media (max-width: 767px) {
-    // position: ${(props) => (props.$navState === States.EXPANDED ? 'fixed' : 'unset')};
     top: ${(props) => (props.$navState === States.EXPANDED ? `var(--nav-height)` : 'unset')};
   }
 `;
@@ -51,7 +48,6 @@ const IntroSection = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // background-color: var(--midnight);
   padding: 3rem 0;
 
   @media (max-width: 734px) {
@@ -202,36 +198,14 @@ const Wisdom = styled.div`
   }
 `;
 
-/**
- * Component that renders a full page of a welcome message, introduction, and
- * list of core philosophies.
- *
- * @component
- * @returns {JSX.Element} JSX element representing the home page.
- */
-function Home() {
-  const body = document.getElementById('body');
-  body.setAttribute('colorscheme', COLORSCHEME);
 
-  // Nav starts off as either visibly part of header or hidden away if mobile width
-  const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
+function Home({ $navState, $colorScheme, handleNavToggle }) {
   // Height of hello message depends on width of screen
   const [helloHeight, setHelloHeight] = useState(0);
-  // Decide whether to scroll or not depending on if nav is open
-  const [scroll, setScroll] = useState(true);
-
-  const handleNavToggle = (state) => {
-    setNavState(state);
-    setScroll(state !== States.EXPANDED);
-  }
-
-  useEffect(() => {
-    const root = document.getElementById('root');
-    if (root) {
-      root.style.position = scroll ? 'unset' : 'fixed';
-    }
-  }, [scroll]);
-
+  
+  /**
+   * Adjust side of background image as width becomes more or less narrow.
+   */
   useEffect(() => {
     const helloBackground = document.getElementById('hello-background');
     if (helloBackground) { /* if rendered in DOM */
@@ -244,27 +218,27 @@ function Home() {
       }
     };
 
-    // Attach the event listener when the component mounts
     window.addEventListener('resize', handleResize);
 
-    // Cleanup the event listener when the component unmounts
     return () => {
       window.removeEventListener('resize', handleResize);
     }
-  }, []); // Empty dependency array ensures that this effect runs once on mount
+  }, [helloHeight]);
 
   return (
     <>
       <GlassHeader 
-        $colorScheme={COLORSCHEME} 
+        $colorScheme={$colorScheme} 
         $showSideBar={false} 
+        $resetNav={false}
         bubbleUpSidebar={() => console.log('no sidebar')}
         bubbleUpNav={handleNavToggle}
+        bubbleUpClose={() => console.log('no sidebar')}
       />
-      {navState === States.EXPANDED && (
+      {$navState === States.EXPANDED && (
         <DarkOverlay />
       )}
-      <MainWrapper $navState={navState}>
+      <MainWrapper $navState={$navState}>
         <HelloSection id="hello-section" style={{ height: helloHeight }}>
           <Hello 
             id="hello"
@@ -345,8 +319,8 @@ function Home() {
         </PhilosophySection>
       </MainWrapper>
       {/* Only show footer if sidebar isn't open */}
-      {navState !== States.EXPANDED && (
-        <ThickFooter $colorScheme={COLORSCHEME} />
+      {$navState !== States.EXPANDED && (
+        <ThickFooter $colorScheme={$colorScheme} />
       )}
     </>
   )

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import RockPreviewImg from '../assets/case-study-images/rock-preview.png';
 
 const RockWrapper = styled.div`
   display: flex;
@@ -45,7 +46,7 @@ function Rock() {
         <RockTag id="case-study-tag">National park app.</RockTag>
         <RockPreview id="case-study-preview">
           <img
-            src="/src/assets/case-study-images/mountain-preview.png"
+            src={RockPreviewImg}
             alt="Tomato Pomodoro Icon"
           />
         </RockPreview>

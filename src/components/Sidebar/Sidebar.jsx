@@ -215,15 +215,15 @@ function Sidebar({ $sidebarState, closeSidebar }) {
    */
   const handleItemClick = (index) => {
     // set selected case study in local storage and in selectedItem
-    localStorage.setItem('case-study', index);
+    window.localStorage.setItem('case-study', index);
     setSelectedItem(index);
     // set parent of case study in selectedParent and local storage
     if (DesignCases.includes(index)) {
-      localStorage.setItem('case-topic', Topics[0]);
+      window.localStorage.setItem('case-topic', Topics[0]);
       setSelectedParent(Topics[0]);
       setDesignOpen(true);
     } else if (EngCases.includes(index)) {
-      localStorage.setItem('case-topic', Topics[1]);
+      window.localStorage.setItem('case-topic', Topics[1]);
       setSelectedParent(Topics[1]);
       setEngOpen(true);
     }
@@ -270,11 +270,29 @@ function Sidebar({ $sidebarState, closeSidebar }) {
    * When an case study is clicked in the project grid or the users has clicked on the Projects
    * page which erases all saved projects, sidebar needs to update its selections. If there is 
    * a change to local storage, we know the current selectedItem has changed so update.
+   * 
+   * Also make sure to open relevant <details> by setting designOpen or engOpen.
    */
   useEffect(() => {
     const updateSelectedItem = () => {
-      setSelectedItem(localStorage.getItem('case-study'));
-      setSelectedParent(localStorage.getItem('case-topic'));
+      const child = window.localStorage.getItem('case-study');
+      const parent = window.localStorage.getItem('case-topic');
+      setSelectedItem(child);
+      setSelectedParent(parent);
+
+      // cleared storage so no child or parent should be selected
+      if (child === null && parent === null) {
+        setDesignOpen(false);
+        setEngOpen(false);
+      // if we have a valid parent set, open its <details>
+      } else if (parent === Topics[0]) {
+        setDesignOpen(true);
+      // if we have a valid parent set, open its <details>
+      } else if (parent === Topics[1]) {
+        setEngOpen(true);
+      } else {
+        console.error(`Error @ Sidebar: Local storage has an unknown parent ${parent}`);
+      }
     }
     
     // Listen for changes in localStorage
@@ -284,7 +302,7 @@ function Sidebar({ $sidebarState, closeSidebar }) {
     return () => {
       window.removeEventListener('storage', updateSelectedItem);
     };
-  }, []); // Empty dependency array to ensure the effect runs once on mount
+  }, [selectedItem, selectedParent]);
 
 
   return (
