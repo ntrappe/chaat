@@ -202,13 +202,22 @@ const Wisdom = styled.div`
   }
 `;
 
+/**
+ * Component that renders a full page of a welcome message, introduction, and
+ * list of core philosophies.
+ *
+ * @component
+ * @returns {JSX.Element} JSX element representing the home page.
+ */
 function Home() {
   const body = document.getElementById('body');
   body.setAttribute('colorscheme', COLORSCHEME);
 
-  /* need to know if nav is open to freeze content below it */
+  // Nav starts off as either visibly part of header or hidden away if mobile width
   const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
+  // Height of hello message depends on width of screen
   const [helloHeight, setHelloHeight] = useState(0);
+  // Decide whether to scroll or not depending on if nav is open
   const [scroll, setScroll] = useState(true);
 
   const handleNavToggle = (state) => {
@@ -257,7 +266,9 @@ function Home() {
       )}
       <MainWrapper $navState={navState}>
         <HelloSection id="hello-section" style={{ height: helloHeight }}>
-          <Hello id="hello"/>
+          <Hello 
+            id="hello"
+          />
         </HelloSection>
         <IntroSection id="intro-section">
           <IntroText>

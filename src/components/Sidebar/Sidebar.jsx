@@ -213,7 +213,7 @@ function Sidebar({ $sidebarState, closeSidebar }) {
       setSelectedParent(Topics[1]);
       setEngOpen(true);
     }
-    closeSidebar('');
+    closeSidebar();
   }
 
   const handleResize = () => {

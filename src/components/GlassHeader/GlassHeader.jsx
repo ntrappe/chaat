@@ -108,7 +108,7 @@ const NavContent = styled.div`
   }
 `;
 
-function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar }) {
+function GlassHeader({ $colorScheme, $showSideBar, $resetNav, bubbleUpNav, bubbleUpSidebar, bubbleUpClose }) {
 
   const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
   const [chevronState, setChevronState] = useState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
@@ -120,11 +120,9 @@ function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar 
     } else if (window.innerWidth <= 1023 && sidebarState === States.NARROW) {
       setSidebarState(States.HIDDEN);
     } else if (window.innerWidth > 767) {
-      console.log(`resize > 1023: nav ${navState} & chevron ${chevronState}`);
       setNavState(States.NARROW);
       setChevronState(Arrow.NONE);
     } else if (window.innerWidth <= 767 && navState === States.NARROW) {
-      console.log('thinks nav is narrow [default]');
       setNavState(States.HIDDEN);
       setChevronState(Arrow.DOWN);
     }
@@ -152,6 +150,16 @@ function GlassHeader({ $colorScheme, $showSideBar, bubbleUpNav, bubbleUpSidebar 
     setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
     setChevronState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
   }
+
+  useEffect(() => {
+    if ($resetNav) {
+      console.log('reset nav in GlassHeader');
+      setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
+      setChevronState(window.innerWidth > 767 ? Arrow.NONE : Arrow.DOWN);
+      setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
+      bubbleUpClose();
+    }
+  }, [$resetNav]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);

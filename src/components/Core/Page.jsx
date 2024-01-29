@@ -58,14 +58,13 @@ function Page({ customComponent: SubPage, showAside }) {
   const [projectState, setProjectState] = useState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
   const [navState, setNavState] = useState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
   const [scroll, setScroll] = useState(true);
+  const [resetNav, setResetNav] = useState(false);
 
   const handleResize = () => {
     if (window.innerWidth > 1023) {
       setSidebarState(States.NARROW);
-      setProjectState(States.NARROW);
     } else if (window.innerWidth <= 1023 && sidebarState === States.NARROW) {
       setSidebarState(States.HIDDEN);
-      setProjectState(States.EXPANDED);
     }
   };
 
@@ -85,10 +84,21 @@ function Page({ customComponent: SubPage, showAside }) {
     console.log(signal);
     setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
     setProjectState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
+    setResetNav(true);
+  }
+
+  const handleResetNav = () => {
+    console.log(`@Page: reset`);
+    setResetNav(false);
+    setScroll(true);
+    setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
+    setProjectState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
+    setNavState(window.innerWidth > 767 ? States.NARROW : States.HIDDEN);
   }
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
+    console.log(`@Page navState is ${navState}`);
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -107,8 +117,10 @@ function Page({ customComponent: SubPage, showAside }) {
       <GlassHeader 
         $colorScheme={COLORSCHEME} 
         $showSideBar={true} 
+        $resetNav={resetNav}
         bubbleUpSidebar={handleSidebarToggle}
         bubbleUpNav={handleNavToggle}
+        bubbleUpClose={handleResetNav}
       />
       {navState === States.EXPANDED && (
         <DarkOverlay />
