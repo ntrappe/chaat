@@ -301,7 +301,6 @@ function Rock() {
           />
         </RockPreview>
         <RockSection id="overview-section">
-          <h3>Overview</h3>
           <OverviewGrid>
             <OverviewBox>
               <h4>Duration</h4>
@@ -415,7 +414,7 @@ function Rock() {
           </p>
         </RockSection>
         <RockSection id="design-section">
-          
+
         </RockSection>
       </RockWrapper>
     </>
