@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PomodoroPreviewImg from '../assets/case-study-images/pomodoro-preview.png';
+import PomodoroPrev from '../assets/case-study-images/pomodoro/pomodoro-preview.png';
 
 const States = {
   EXPANDED: 'expanded',
@@ -73,16 +73,16 @@ function Pomodoro({ $sidebarState, $projectState }) {
   return (
     <>
       <PomodoroWrapper
-        id="case-study" 
+        id='case-study' 
         $sidebarState={$sidebarState}
         $projectState={$projectState}
       >
-        <PomodoroTitle id="case-study-title">Pomodoro Timer</PomodoroTitle>
-        <PomodoroTag id="case-study-tag">A web-based timer designed to curb procrastination.</PomodoroTag>
-        <PomodoroPreview id="case-study-preview">
+        <PomodoroTitle id='case-study-title'>Pomodoro Timer</PomodoroTitle>
+        <PomodoroTag id='case-study-tag'>A web-based timer designed to curb procrastination.</PomodoroTag>
+        <PomodoroPreview id='case-study-preview'>
           <img
-            src={PomodoroPreviewImg}
-            alt="Tomato Pomodoro Icon"
+            src={PomodoroPrev}
+            alt='Tomato Pomodoro Icon'
           />
         </PomodoroPreview>
         <PomodoroSection>

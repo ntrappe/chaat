@@ -33,7 +33,6 @@ const AdjustableSidebar = styled.div`
   display: flex;
   min-width: 0;
   flex: 1;
-  background-color: teal;
 
   @media (max-width: 1023px) {
     display: ${(props) => (props.$projectState === States.EXPANDED ? 'flex' : 'block')};
@@ -191,7 +190,7 @@ function Page({ customComponent: SubPage, showAside }) {
           <SubPage id="single-proj" $mode={projectState} $navState={navState} />
         </AdjustableSidebar>
       {showAside && (
-        <FloatingAside $mode={projectState} offsetCaseStudy={() => console.log('heh')} />
+        <FloatingAside $mode={projectState} />
       )}
       </MainWrapper>
       {(projectState !== States.HIDDEN && navState !== States.OPEN) && (

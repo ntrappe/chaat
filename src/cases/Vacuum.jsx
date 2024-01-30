@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import FlowPreviewImg from '../assets/case-study-images/flow-preview.png';
+import VacuumPreviewImg from '../assets/case-study-images/vacuum-preview.png';
 
 const States = {
   EXPANDED: 'expanded',
@@ -8,15 +8,13 @@ const States = {
   HIDDEN: 'hidden',
 };
 
-const FlowWrapper = styled.div`
+const VacuumWrapper = styled.div`
   display: flex;
   flex-flow: column;
   flex: 1 1 auto;
   min-width: 0;
   height: 100%;
   padding-top: 2.35rem;
-  background-color: yellow;
-  width: 700px;
 
   @media (max-width: 1023px) {
     min-width: 100%:
@@ -26,18 +24,18 @@ const FlowWrapper = styled.div`
   }
 `;
 
-const FlowTitle = styled.h1`
+const VacuumTitle = styled.h1`
   margin-bottom: 32px;
   color: var(--midnight);
 `;
 
-const FlowTag = styled.h2`
+const VacuumTag = styled.h2`
   letter-spacing: .007em;
   margin-bottom: 30px;
   color: var(--wet-concrete);
 `;
 
-const FlowPreview = styled.div`
+const VacuumPreview = styled.div`
   display: flex;
   justify-content: center;
   min-width: 0;
@@ -46,32 +44,32 @@ const FlowPreview = styled.div`
   img {
     display: block;
     margin: auto;
-    width: 600px;
+    width: 740px;
     max-width: 100%;
     border-radius: 20px;
   }  
 `;
 
-function Flow({ $sidebarState, $projectState }) {
+function Vacuum({ $sidebarState, $projectState }) {
   
   return (
     <>
-      <FlowWrapper
+      <VacuumWrapper
         id='case-study' 
         $sidebarState={$sidebarState}
         $projectState={$projectState}
       >
-        <FlowTitle id='case-study-title'>Flow Controller</FlowTitle>
-        <FlowTag id='case-study-tag'>Coming soon.</FlowTag>
-        <FlowPreview id='case-study-preview'>
+        <VacuumTitle id='case-study-title'>Vacuum Redesign</VacuumTitle>
+        <VacuumTag id='case-study-tag'>Coming soon.</VacuumTag>
+        <VacuumPreview id='case-study-preview'>
           <img
-            src={FlowPreviewImg}
-            alt='Gas flowing through a sensor array'
+            src={VacuumPreviewImg}
+            alt='A badly designed vacuum left of the redesign'
           />
-        </FlowPreview>
-      </FlowWrapper>
+        </VacuumPreview>
+      </VacuumWrapper>
     </>
   )
 }
   
-export default Flow;
+export default Vacuum;
