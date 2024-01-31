@@ -369,7 +369,7 @@ function Rock() {
             </OverviewBox>
             <OverviewBox>
               <h4>Try It</h4>
-              <p><a href='https://www.figma.com/proto/ywP4mSyfwGENQ4pwyzv1vW/A4-National-Park-App?type=design&node-id=580-4846&t=DVSwa6gAjz1CVh71-1&scaling=scale-down&page-id=580%3A4841&starting-point-node-id=580%3A4846&show-proto-sidebar=1&mode=design'>Figma</a></p>
+              <p><a href='https://www.figma.com/proto/ywP4mSyfwGENQ4pwyzv1vW/A4-National-Park-App?type=design&node-id=675-6029&t=g8QpYQoQiVCjQTzi-1&scaling=scale-down&page-id=580%3A4841&starting-point-node-id=580%3A4846&show-proto-sidebar=1&mode=design'>Figma</a></p>
             </OverviewBox>
           </OverviewGrid>
         </RockSection>
