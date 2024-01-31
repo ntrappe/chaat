@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import RockPrev from '../assets/case-study-images/rock/rock-preview.png';
+import Pinnacles from '../assets/case-study-images/rock/pinnacles.jpg';
+import MarketResearch from '../assets/case-study-images/rock/MarketResearch.png';
+import PreviewTestA from '../assets/case-study-images/rock/PreviewTestA.png';
+import PreviewTestB from '../assets/case-study-images/rock/PreviewTestB.png';
+import PreviewTestC from '../assets/case-study-images/rock/PreviewTestC.png';
 
 const States = {
   EXPANDED: 'expanded',
@@ -35,7 +40,7 @@ const RockTag = styled.h2`
   color: var(--wet-concrete);
 `;
 
-const RockPreview = styled.div`
+const RockGraphic = styled.div`
   display: flex;
   justify-content: center;
   min-width: 0;
@@ -55,15 +60,20 @@ const RockSection = styled.section`
   margin-top: var(--proj-sect-gap);
 
   h3 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin: 0;
+    margin-top: 0.2rem;
   }
 
   h4 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 600;
     color: var(--asphalt);
-    margin-top: 1em;
+    margin-top: 1.8em;
+  }
+
+  h3 + h4 {
+    margin-top: 0.8em;
   }
 
   p {
@@ -77,12 +87,50 @@ const RockSection = styled.section`
     color: var(--asphalt);
   }
 
+  h3 + p {
+    margin-top: 0.7em;
+  }
+
+  p b {
+    font-weight: 400;
+  }
+
   a {
     color: var(--scarlet);
   }
 
   a:hover {
     text-decoration: underline;
+  }
+
+  ul, ol {
+    padding-left: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  ul li {
+    list-style-type: disc;
+    font-family: 'SF Pro';
+    font-size: 0.9rem;
+    line-height: 1.6;
+    font-weight: 300;
+    padding-left: 0.2rem;
+    color: var(--asphalt);
+  }
+
+  ol li {
+    list-style-type: number;
+    font-family: 'SF Pro';
+    font-size: 0.9rem;
+    line-height: 1.6;
+    font-weight: 300;
+    padding-left: 0.2rem;
+    color: var(--asphalt);
+  }
+
+  li b {
+    font-weight: 400;
   }
 `;
 
@@ -141,15 +189,16 @@ const Quote = styled.h5`
   font-family: 'SF Pro Display';
   font-size: 18px;
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1.5;
   letter-spacing: 0;
   margin-top: 1.3em;
   margin-bottom: 1.3em;
-  color: var(--concrete);
+  color: var(--lichen);
 
   em {
     font-size: 30px;
-    color: var(--pavement);
+    color: var(--moss);
+    line-height: 1.2;
   }
 `;
 
@@ -292,14 +341,14 @@ function Rock() {
       <RockWrapper>
         <RockTitle id='case-study-title'>Rock </RockTitle>
         <RockTag id='case-study-tag'>An app to explore national parks and find the ideal hike.</RockTag>
-        <RockPreview id='case-study-preview'>
+        <RockGraphic id='case-study-preview'>
           <img
             src={RockPrev}
             alt='Three iphones lined up. The first with the Rock app opening up. Second with 
               a list of national parks. Third with a national park, Zion, selected and basic
               information about the park.'
           />
-        </RockPreview>
+        </RockGraphic>
         <RockSection id="overview-section">
           <OverviewGrid>
             <OverviewBox>
@@ -344,6 +393,12 @@ function Rock() {
             visitation (and therefore less funding). Second, there was a clear generation gap in that most of 
             the visitors were older folks who’d grown up hiking.
           </p>
+          <RockGraphic id='case-study-preview'>
+            <img
+              src={Pinnacles}
+              alt='A mound of cinnamon-colored rocks backed by a blue sky'
+            />
+          </RockGraphic>
         </RockSection>
         <RockSection id="research-section">
           <h3>Research</h3>
@@ -366,12 +421,16 @@ function Rock() {
           </p>
           <h4>Surveys</h4>
           <p>
-            To investigate this, we surveyed 50 millennials across a variety of demographics. You can check out our 
-            survey <a href='https://forms.gle/h2bxRMqGSMJAn3pt6'>here</a>. Four key trends emerged when we analyzed the 
-            data. First, 77% of respondents had a desire to go to a National Park. Second, 74% of respondents agreed 
-            more people should visit National Parks. Third, 55% of respondents had not visited a Park in the past 12 
-            months. Lastly, 20% of respondents were confident in their knowledge of the Parks nearest to them.
+            To investigate this, we surveyed <b>50</b> millennials across a variety of demographics. You can check out our 
+            survey <a href='https://forms.gle/h2bxRMqGSMJAn3pt6'>here</a>. Four key trends emerged when we analyzed  
+            the data:
           </p>
+          <ul>
+            <li><b>77%</b> of respondents had a desire to go to a National Park</li>
+            <li><b>74%</b> of respondents agreed more people should visit National Parks</li>
+            <li><b>55%</b> of respondents had <b>not</b> visited a Park in the past 12 months</li>
+            <li><b>80%</b> of respondents were <b>not</b> confident in their knowledge of the Parks nearest to them</li>
+          </ul>
           <p>Now, this was more confusing. Millennials cared about the environment and wanted to go to National Parks 
             but … weren’t? We had to dig a little deeper and interview respondents about what was motivating them or 
             discouraging them from visiting the parks. While time was often a consideration, a major trend emerged: 
@@ -379,7 +438,7 @@ function Rock() {
           </p>
           <Quote>
             <em>“I’m not confident in my ability to go to a national park by myself (deriving, planning, directions, 
-              packing, etc.)”</em> — Daniel Wang (pseudonym)
+              packing, etc.)”</em> — Daniel Wang (p)
           </Quote>
           <p>
             Our key findings suggested that millennials want to visit parks but are frustrated with the process of 
@@ -388,34 +447,112 @@ function Rock() {
           </p>
           <Quote>
             <em>“I’m confused on the process of going. I believe you may have to book in advance to go to Yosemite? 
-              I know there’s more steps to the process but I’m not sure how to start.”</em> — Melissa Roberts (pseudonym)
+              I know there’s more steps to the process but I’m not sure how to start.”</em> — Melissa Roberts (p)
           </Quote>
           <h4>Market Research</h4>
           <p>
-            We wanted to see what was already available on the market. Was there already an app that could solve all 
-            our problems? Nope. Definitely not. We compared the most popular apps related to outdoor adventures and 
-            experiences: NPS App, NPS Page, CA Parks + Rec, Google Search, HipCamp, AllTrails, Apple Maps, Yelp, 
-            Wanderlog, and TripAdvisor.
+            Millennials were clearly asking for a centralized hub of information. Before we built our own, we 
+            wanted to see what the market had to offer. Maybe this was just a problem of awareness? Did an app 
+            already exist that could support planning visits to National Parks? 
           </p>
           <p>
-            While many of these applications touched upon features we knew would be necessary, the majority lacked a 
-            comprehensive guide to each park. Many didn’t have information on conditions or closures, filters for 
-            difficulty or proximity, equipment needed, nor weather.
+            Kinda? We compared the <b>10</b> most popular apps and websites and found that many provided lists 
+            of hikes, directions, and photos, but weren’t solving our problem. The majority lacked a comprehensive 
+            guide for each park geared towards a novice who didn’t know what to look for. Many didn’t provide 
+            pertinent information on conditions, closures, filters for difficulty, equipment requirements, and 
+            more. If you’d like to see our full breakdown, you can find it on 
+            this <a href='https://docs.google.com/document/d/1eKqaEfm-ZcYMHUdmKS3_RhwLTFxx08vJjQCDKVrxwAA/edit?usp=sharing'>Google Doc</a>.
           </p>
+          <RockGraphic id='case-study-preview'>
+            <img
+              src={MarketResearch}
+              alt='A mound of cinnamon-colored rocks backed by a blue sky'
+            />
+          </RockGraphic>
         </RockSection>
         <RockSection id="approach-section">
           <h3>Approach</h3>
-          <h4>Previews Sell</h4>
+          <p>When thinking about designing the app, I focused on five questions:</p>
+          <ol>
+            <li>How do we make it fun?</li>
+            <li>How do we appeal across millennials?</li>
+            <li>How do we get people interested in a park?</li>
+            <li>How much information do we want to provide?</li>
+            <li>When will they be using this?</li>
+          </ol>
+          <h4>Hiking is Fun</h4>
           <p>
-            As this was part of a Design class, we were obligated to create mood boards, personas, story lines, wireframes,
-            and low-fidelity mockups. However, that didn’t feel right for this project. I immediately went into 
-            high-fidelity mockups because I need to find the balance of information that would be helpful but not overwhelming. 
-            The key part of this project was what information to present, how much to present, and how to present it.
+            First, millennials were feeling overwhelmed and stressed so we wanted our app to evoke the opposite 
+            feelings. We wanted them to feel excited, adventurous, and happy. We wanted them to be in awe of 
+            the parks not in dread. The first concept of fun was color. How could we bring in pops of color to 
+            the app?
+          </p>
+          <h4>Broad Appeal</h4>
+          <p>
+            Second, we had a broad audience. We were targeting a large demographic across genders, socioeconomic 
+            statuses, and races. For that reason, we also wanted the app to feel minimalist, modern, and fairly 
+            neutral in its core color scheme. We wanted it to feel familiar and intuitive.
+          </p>
+          <h4>Show Don't Tell</h4>
+          <p>
+            Third, the best way to sell a park is to show a park. The National Parks are gorgeous and impressive 
+            and we were going to lean heavily into photography.
+          </p>
+          <h4>The Challenge</h4>
+          <p>
+            Fourth, the most challenging part—and arguably most important part—of this application would be how 
+            much information to provide and how to display it. We needed to find a balance of educating our 
+            audience without overwhelming them. We had to provide novices they might not know to check without 
+            making them feel uncomfortable.
+          </p>
+          <h4>Set the Scene</h4>
+          <p>
+            Fifth, as a Software Engineer, I always ask the context around the use of an application. This app 
+            could be used at home while debating on going to a National Park, on the drive to a Park checking 
+            conditions, or even in the Park while on a hike. Given that National Parks rarely have good cellular 
+            connection, our app would have to provide all the information someone might need without network. 
+            This meant we would want to have offline maps, trail details, and more.
           </p>
         </RockSection>
         <RockSection id="design-section">
-
+          <h3>Design</h3>
+          <h4>Designing the Fun</h4>
+          <p>
+            Our initial challenge in design was to find a balance between minimalism and fun. The bulk of our mockups
+            were actually high-fidelity because we wanted to nail the look and feel of our previews. We needed to 
+            find a balance of how much color to use to make it fun but not distract from the parks. To determine our 
+            design, we conducted three rounds of A/B testing and iterated through a number of designs.
+          </p>
+          <RockGraphic id='case-study-preview'>
+            <img
+              src={PreviewTestA}
+              alt='Four National Park preview component designs. The first has a drop shadow and the preview is a full
+              color. The second uses a drop shadow but more diffused with a white background. The third uses no shadow 
+              but a thin outline and colorful backgrounds. The fourth uses a thin outline and no color.'
+            />
+          </RockGraphic>
+          <p>We also played around with the size of the previews, what information to display, and a light vs dark mode.</p>
+          <RockGraphic id='case-study-preview'>
+            <img
+              src={PreviewTestB}
+              alt='More National Park previews. Half with soft pastel backgrounds and half with a dark grey.'
+            />
+          </RockGraphic>
+          <p>
+            With the feedback we received from users, we decided that the photo of the National Park should take up the 
+            full width of the preview. While having colorful backgrounds—even half-height colorful backgrounds—were fun, 
+            we didn’t want to take away from the parks. Those photos had enough color and we wanted them to be the focal 
+            point. So we increased the size of the photos and removed the unnecessary colorful additions.
+          </p>
         </RockSection>
+        <RockGraphic id='case-study-preview'>
+            <img
+              src={PreviewTestC}
+              alt='Four National Park preview component designs. The first has a drop shadow and the preview is a full
+              color. The second uses a drop shadow but more diffused with a white background. The third uses no shadow 
+              but a thin outline and colorful backgrounds. The fourth uses a thin outline and no color.'
+            />
+          </RockGraphic>
       </RockWrapper>
     </>
   )
