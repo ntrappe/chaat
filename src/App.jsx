@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Routes, Route, HashRouter } from 'react-router-dom';
 import Bookify from './cases/Bookify.jsx';
 import Pomodoro from './cases/Pomodoro.jsx';
+import Museum from './cases/Museum.jsx';
 import Rock from './cases/Rock.jsx';
 import Flow from './cases/Flow.jsx';
 import Vacuum from './cases/Vacuum.jsx';
@@ -23,6 +24,7 @@ export default function App() {
         <Route path='/' element={<MinimalPage customComponent={Home} $colorScheme={'dark'} />} />
         <Route path='/projects' element={<Page customComponent={ProjectGrid} showAside={false} />} />
         <Route path='/projects/pomodoro' element={<Page customComponent={Pomodoro} showAside={true} />} />
+        <Route path='/projects/museum' element={<Page customComponent={Museum} showAside={true} />} />
         <Route path='/projects/rock' element={<Page customComponent={Rock} showAside={true} />} />
         <Route path='/projects/bookify' element={<Page customComponent={Bookify} showAside={true} />} />
         <Route path='/projects/flow' element={<Page customComponent={Flow} showAside={false} />} />

@@ -353,19 +353,19 @@ function Rock() {
           <OverviewGrid>
             <OverviewBox>
               <h4>Duration</h4>
-              <p>2 months</p>
+              <p>2 Months</p>
             </OverviewBox>
             <OverviewBox>
               <h4>Team Size</h4>
-              <p>3 members</p>
+              <p>3 Members</p>
             </OverviewBox>
             <OverviewBox>
               <h4>Role</h4>
               <p>Lead</p>
             </OverviewBox>
             <OverviewBox>
-              <h4>Format</h4>
-              <p>Mobile App</p>
+              <h4>Domain</h4>
+              <p>Prototyping</p>
             </OverviewBox>
             <OverviewBox>
               <h4>Try It</h4>
@@ -384,6 +384,11 @@ function Rock() {
         </RockSection>
         <RockSection id="background-section">
           <h3>Background</h3>
+          <p>This project was part of my Prototyping course at UC San Diego. Our objective was to
+            build an interactive and innovative mobile information system to address a user problem.
+            We were allowed to chose any problem of interest so long as we employed moodboards, wireframes,
+            prototypes, and syle guides.
+          </p>
           <p>
             Two months before this project began, I was waiting in line for the shuttle at Pinnacles National 
             Park. It’s a park full of towering cinnamon-colored talus rocks, hidden caves, deep gulches, and 

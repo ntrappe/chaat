@@ -13,6 +13,8 @@ import VacuumActive from '../../assets/project-icons/vacuum-active.png';
 import VacuumInactive from '../../assets/project-icons/vacuum-inactive.png';
 import FlowActive from '../../assets/project-icons/flow-active.png';
 import FlowInactive from '../../assets/project-icons/flow-inactive.png';
+import MuseumActive from '../../assets/project-icons/bust-active.png';
+import MuseumInactive from '../../assets/project-icons/bust-inactive.png';
 
 const States = {
   EXPANDED: 'expanded',
@@ -20,7 +22,7 @@ const States = {
   HIDDEN: 'hidden',
 };
 
-const DesignCases = ['calendar', 'pomodoro', 'rock', 'vacuum'];
+const DesignCases = ['museum', 'calendar', 'pomodoro', 'rock', 'vacuum'];
 const EngCases = ['bookify', 'flow'];
 const Topics = ['design', 'engineering'];
 
@@ -317,49 +319,61 @@ function Sidebar({ $sidebarState }) {
               $sidebarState={$sidebarState} 
             >
               <summary>Design</summary>
-              <Link to={`/projects/calendar`} onClick={() => handleItemClick(DesignCases[0])}>
+              <Link to={`/projects/museum`} onClick={() => handleItemClick(DesignCases[0])}>
                 <CasePreview 
                   $sidebarState={$sidebarState} 
                   selected={selectedItem === DesignCases[0]}
                 >
                   <img
-                    src={selectedItem === DesignCases[0] ? CalendarActive : CalendarInactive}
-                    alt="Calendar icon with January 20th date"
+                    src={selectedItem === DesignCases[0] ? MuseumActive : MuseumInactive}
+                    alt="Shape of bust with a man's head and neck"
                   />
-                  <p>NPS Calendar</p>
+                  <p>Museum Poster</p>
                 </CasePreview>
               </Link>
-              <Link to={`/projects/pomodoro`} onClick={() => handleItemClick(DesignCases[1])}>
+              <Link to={`/projects/calendar`} onClick={() => handleItemClick(DesignCases[1])}>
                 <CasePreview 
                   $sidebarState={$sidebarState} 
                   selected={selectedItem === DesignCases[1]}
                 >
                   <img
-                    src={selectedItem === DesignCases[1] ? PomoActive : PomoInactive}
-                    alt="Tomato Pomodoro Icon"
+                    src={selectedItem === DesignCases[1] ? CalendarActive : CalendarInactive}
+                    alt="Calendar icon with January 20th date"
                   />
-                  <p>Pomodoro Timer</p>
+                  <p>NPS Calendar</p>
                 </CasePreview>
               </Link>
-              <Link to={`/projects/rock`} onClick={() => handleItemClick(DesignCases[2])}>
+              <Link to={`/projects/pomodoro`} onClick={() => handleItemClick(DesignCases[2])}>
                 <CasePreview 
                   $sidebarState={$sidebarState} 
                   selected={selectedItem === DesignCases[2]}
                 >
                   <img
-                    src={selectedItem === DesignCases[2] ? MountainActive : MountainInactive}
-                    alt="Mountain Icon"
+                    src={selectedItem === DesignCases[2] ? PomoActive : PomoInactive}
+                    alt="Tomato Pomodoro Icon"
                   />
-                  <p>Rock App</p>
+                  <p>Pomodoro Timer</p>
                 </CasePreview>
               </Link>
-              <Link to={`/projects/vacuum`} onClick={() => handleItemClick(DesignCases[3])}>
+              <Link to={`/projects/rock`} onClick={() => handleItemClick(DesignCases[3])}>
                 <CasePreview 
                   $sidebarState={$sidebarState} 
                   selected={selectedItem === DesignCases[3]}
                 >
                   <img
-                    src={selectedItem === DesignCases[3] ? VacuumActive : VacuumInactive}
+                    src={selectedItem === DesignCases[3] ? MountainActive : MountainInactive}
+                    alt="Mountain Icon"
+                  />
+                  <p>Rock App</p>
+                </CasePreview>
+              </Link>
+              <Link to={`/projects/vacuum`} onClick={() => handleItemClick(DesignCases[4])}>
+                <CasePreview 
+                  $sidebarState={$sidebarState} 
+                  selected={selectedItem === DesignCases[4]}
+                >
+                  <img
+                    src={selectedItem === DesignCases[4] ? VacuumActive : VacuumInactive}
                     alt="Upright vacuum Icon"
                   />
                   <p>Vacuum Redesign</p>

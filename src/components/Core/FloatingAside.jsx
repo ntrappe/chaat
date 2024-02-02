@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const SectionTitles = ['Overview', 'Problem', 'Background', 'Research', 'Approach', 'Design', 'Insights'];
+const SectionTitles = ['Overview', 'Problem', 'Background', 'Research', 'Approach', 'Design', 'Final Result', 'Insights'];
 
 const FloatingAsideWrapper = styled.div`
   display: block;
@@ -68,6 +68,10 @@ function FloatingAside({ $mode }) {
         window.dispatchEvent(new Event('design click'));
         setSelectedItem(SectionTitles[5]);
         break;
+      case 6:
+        window.dispatchEvent(new Event('final click'));
+        setSelectedItem(SectionTitles[6]);
+        break;
       default:
     }
   }
@@ -79,12 +83,14 @@ function FloatingAside({ $mode }) {
     const setResearch = () => { setSelectedItem(SectionTitles[3]) };
     const setApproach = () => { setSelectedItem(SectionTitles[4]) };
     const setDesign = () => { setSelectedItem(SectionTitles[5]) };
+    const setFinal = () => { setSelectedItem(SectionTitles[6]) };
     window.addEventListener('overview scroll', setOverview);
     window.addEventListener('problem scroll', setProblem);
     window.addEventListener('background scroll', setBackground);
     window.addEventListener('research scroll', setResearch);
     window.addEventListener('approach scroll', setApproach);
     window.addEventListener('design scroll', setDesign);
+    window.addEventListener('final scroll', setFinal);
 
     return () => {
       window.removeEventListener('overview scroll', setOverview);
@@ -93,6 +99,7 @@ function FloatingAside({ $mode }) {
       window.removeEventListener('research scroll', setResearch);
       window.removeEventListener('approach scroll', setApproach);
       window.removeEventListener('design scroll', setDesign);
+      window.removeEventListener('final scroll', setFinal);
     }
   }, [selectedItem]);
   
@@ -127,6 +134,10 @@ function FloatingAside({ $mode }) {
           selected={selectedItem === SectionTitles[6]}
           onClick={() => handleItemClick(6)}
         >{SectionTitles[6]}</AsideItem>
+        <AsideItem 
+          selected={selectedItem === SectionTitles[7]}
+          onClick={() => handleItemClick(7)}
+        >{SectionTitles[7]}</AsideItem>
       </AsideSections>
     </FloatingAsideWrapper>
   )

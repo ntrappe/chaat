@@ -276,8 +276,8 @@ function Pomodoro({ $sidebarState, $projectState }) {
               <p>Lead</p>
             </OverviewBox>
             <OverviewBox>
-              <h4>Format</h4>
-              <p>Web App</p>
+              <h4>Domain</h4>
+              <p>Web Dev</p>
             </OverviewBox>
             <OverviewBox>
               <h4>Try It</h4>

@@ -7,6 +7,7 @@ import MountainPre from '../../assets/project-previews/mountain-preview.png';
 import VacuumPre from '../../assets/project-previews/vacuum-preview.png';
 import FlowPre from '../../assets/project-previews/flow-preview.png';
 import CalPre from '../../assets/project-previews/calendar-preview.png';
+import MuseumPre from '../../assets/project-previews/museum-preview.png';
 
 const States = {
   EXPANDED: 'expanded',
@@ -14,7 +15,7 @@ const States = {
   HIDDEN: 'hidden',
 };
 
-const DesignCases = ['calendar', 'pomodoro', 'rock', 'vacuum'];
+const DesignCases = ['museum', 'calendar', 'pomodoro', 'rock', 'vacuum'];
 const EngCases = ['bookify', 'flow'];
 const Topics = ['design', 'engineering'];
 
@@ -162,7 +163,18 @@ function ProjectGrid({ $mode }) {
         <GridCardsTitle>Recently Updated</GridCardsTitle>
         <GridCards>
           <Card>
-            <Link to={`/projects/pomodoro`} onClick={() => setItem(DesignCases[1])}>
+            <Link to={`/projects/museum`} onClick={() => setItem(DesignCases[0])}>
+              <CardImage>
+                <img 
+                  src={MuseumPre}
+                  alt="Bust of a man with his head and neck on a purple-pink background"
+                />
+              </CardImage>
+              <CardLabel>Museum Poster</CardLabel>
+            </Link>
+          </Card>
+          <Card>
+            <Link to={`/projects/pomodoro`} onClick={() => setItem(DesignCases[2])}>
               <CardImage>
                 <img 
                   src={PomodoroPre}
@@ -173,7 +185,7 @@ function ProjectGrid({ $mode }) {
             </Link>
           </Card>
           <Card>
-            <Link to={`/projects/rock`} onClick={() => setItem(DesignCases[2])}>
+            <Link to={`/projects/rock`} onClick={() => setItem(DesignCases[3])}>
               <CardImage>
                 <img 
                   src={MountainPre}
@@ -209,7 +221,7 @@ function ProjectGrid({ $mode }) {
             </Link>
           </Card>
           <Card>
-            <Link to={`/projects/calendar`} onClick={() => setItem(DesignCases[0])}>
+            <Link to={`/projects/calendar`} onClick={() => setItem(DesignCases[1])}>
               <CardImage>
                 <img 
                   src={CalPre}
@@ -220,7 +232,7 @@ function ProjectGrid({ $mode }) {
             </Link>
           </Card>
           <Card>
-            <Link to={`/projects/vacuum`} onClick={() => setItem(DesignCases[3])}>
+            <Link to={`/projects/vacuum`} onClick={() => setItem(DesignCases[4])}>
               <CardImage>
                 <img 
                   src={VacuumPre}
