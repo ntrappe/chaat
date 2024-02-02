@@ -289,6 +289,16 @@ function Museum() {
       }
     };
 
+    const moveToInsights = () => {
+      const insightsSect = document.getElementById('insights-section');
+      if (insightsSect) {
+        window.scrollTo({
+          top: insightsSect.offsetTop - navHeight,
+          behavior: 'smooth',
+        })
+      }
+    };
+
     window.addEventListener('overview click', moveToOverview);
     window.addEventListener('problem click', moveToProblem);
     window.addEventListener('background click', moveToBackground);
@@ -296,6 +306,7 @@ function Museum() {
     window.addEventListener('approach click', moveToApproach);
     window.addEventListener('design click', moveToDesign);
     window.addEventListener('final click', moveToFinal);
+    window.addEventListener('insights click', moveToInsights);
 
     return () => {
       window.removeEventListener('overview click', moveToOverview);
@@ -305,6 +316,7 @@ function Museum() {
       window.removeEventListener('approach click', moveToApproach);
       window.removeEventListener('design click', moveToDesign);
       window.removeEventListener('final click', moveToFinal);
+      window.removeEventListener('insights click', moveToInsights);
     }
   }, []);
 
@@ -317,6 +329,7 @@ function Museum() {
       const approachSect = document.getElementById('approach-section');
       const designSect = document.getElementById('design-section');
       const finalSect = document.getElementById('final-section');
+      const insightsSect = document.getElementById('insights-section');
 
       if (overviewSect) {
         if ((overviewSect.offsetTop - window.scrollY) < 100) {
@@ -351,6 +364,11 @@ function Museum() {
       if (finalSect) {
         if ((finalSect.offsetTop - window.scrollY) < 100) {
           window.dispatchEvent(new Event('final scroll'));
+        }
+      }
+      if (insightsSect) {
+        if ((insightsSect.offsetTop - window.scrollY) < 100) {
+          window.dispatchEvent(new Event('insights scroll'));
         }
       }
     }
@@ -606,6 +624,22 @@ function Museum() {
               alt='Final poster has 3 columns for sessions, 2 renders of buildings, a section at the bottom for info and the map'
             />
           </MuseumGraphic>
+        </MuseumSection>
+        <MuseumSection id="insights-section">
+          <h3>Insights</h3>
+          <p>I learned a number of things from this project both in terms of how to structure a poster but also
+          </p>
+          <ul>
+            <li><b>Audience. </b>It's really hard to know how to choose colors, styles, layouts, and sizes without
+            really knowing who your audience is. I made quite a few assumptions when doing this so I may have targeted
+            completely different people than the intended audience.</li>
+            <li><b>More is More? </b>It's also so challenging trying to find a balance of providing details or information
+            but also keeping the product streamlined and comprehensive. I still go back and forth whether the map is adding
+            value or making the layout weird, if the photos didn't have to be renders, or if I shouldn't have included 
+            stats like nationality.</li>
+            <li><b>Grid-ing. </b>Using a grid as the basis of all design is super helpful. It allows you to be more 
+            creative, bucket information together, divide sections, and direct attention.</li>
+          </ul>
         </MuseumSection>
      </MuseumWrapper>
     </>

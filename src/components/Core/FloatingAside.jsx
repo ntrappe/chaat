@@ -72,6 +72,10 @@ function FloatingAside({ $mode }) {
         window.dispatchEvent(new Event('final click'));
         setSelectedItem(SectionTitles[6]);
         break;
+      case 7:
+        window.dispatchEvent(new Event('insights click'));
+        setSelectedItem(SectionTitles[7]);
+        break;
       default:
     }
   }
@@ -84,6 +88,7 @@ function FloatingAside({ $mode }) {
     const setApproach = () => { setSelectedItem(SectionTitles[4]) };
     const setDesign = () => { setSelectedItem(SectionTitles[5]) };
     const setFinal = () => { setSelectedItem(SectionTitles[6]) };
+    const setInsights= () => { setSelectedItem(SectionTitles[7]) };
     window.addEventListener('overview scroll', setOverview);
     window.addEventListener('problem scroll', setProblem);
     window.addEventListener('background scroll', setBackground);
@@ -91,6 +96,7 @@ function FloatingAside({ $mode }) {
     window.addEventListener('approach scroll', setApproach);
     window.addEventListener('design scroll', setDesign);
     window.addEventListener('final scroll', setFinal);
+    window.addEventListener('insights scroll', setInsights);
 
     return () => {
       window.removeEventListener('overview scroll', setOverview);
@@ -100,6 +106,7 @@ function FloatingAside({ $mode }) {
       window.removeEventListener('approach scroll', setApproach);
       window.removeEventListener('design scroll', setDesign);
       window.removeEventListener('final scroll', setFinal);
+      window.removeEventListener('insights scroll', setInsights);
     }
   }, [selectedItem]);
   
