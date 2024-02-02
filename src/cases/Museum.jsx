@@ -384,7 +384,7 @@ function Museum() {
     <>
       <MuseumWrapper>
         <MuseumTitle id='case-study-title'>Museum Poster</MuseumTitle>
-        <MuseumTag id='case-study-tag'>An app to explore national parks and find the ideal hike.</MuseumTag>
+        <MuseumTag id='case-study-tag'>A poster to encourage the public to learn about unique architecture.</MuseumTag>
         <MuseumGraphic id='case-study-preview'>
           <img
             src={MuseumPrev}
