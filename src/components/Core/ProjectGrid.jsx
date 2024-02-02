@@ -79,6 +79,15 @@ const Card = styled.div`
   min-width: 0;
   cursor: pointer;
 
+  p {
+    font-family: 'SF Pro';
+    font-weight: 300;
+  }
+  
+  p em {
+    font-weight: 600;
+  }
+
   @media (max-width: 767px) {
     grid-column: span 2;
   }
@@ -170,7 +179,9 @@ function ProjectGrid({ $mode }) {
                   alt="Bust of a man with his head and neck on a purple-pink background"
                 />
               </CardImage>
-              <CardLabel>Museum Poster</CardLabel>
+              <CardLabel>
+                <p><em>Museum Poster</em>, Graphic Design</p>
+              </CardLabel>
             </Link>
           </Card>
           <Card>
@@ -181,7 +192,9 @@ function ProjectGrid({ $mode }) {
                   alt="tomato representing a pomodoro on a red background"
                 />
               </CardImage>
-              <CardLabel>Pomodoro Timer</CardLabel>
+              <CardLabel>
+                <p><em>Pomodoro Timer</em>, Web Development</p>
+              </CardLabel>
             </Link>
           </Card>
           <Card>
@@ -192,7 +205,9 @@ function ProjectGrid({ $mode }) {
                   alt="mountain with two peaks on a blue background"
                 />
               </CardImage>
-              <CardLabel>Rock App</CardLabel>
+              <CardLabel>
+                <p><em>Rock App</em>, Prototyping</p>
+              </CardLabel>
             </Link>
           </Card>
         </GridCards>
@@ -206,7 +221,9 @@ function ProjectGrid({ $mode }) {
                   alt="open book on a green background"
                 />
               </CardImage>
-              <CardLabel>Bookify App</CardLabel>
+              <CardLabel>
+                <p><em>Bookify App</em>, Mobile Applications</p>
+              </CardLabel>
             </Link>
           </Card>
           <Card>
@@ -217,7 +234,9 @@ function ProjectGrid({ $mode }) {
                   alt="tomato representing a pomodoro on a red background"
                 />
               </CardImage>
-              <CardLabel>Flow Controller</CardLabel>
+              <CardLabel>
+                <p><em>Flow Controller</em>, Python Scripting</p>
+              </CardLabel>
             </Link>
           </Card>
           <Card>
@@ -228,7 +247,9 @@ function ProjectGrid({ $mode }) {
                   alt="calendar icon with date january 20th on a cyan background"
                 />
               </CardImage>
-              <CardLabel>NPS 2025 Calendar</CardLabel>
+              <CardLabel>
+                <p><em>NPS 2025 Calendar</em>, Graphic Design</p>
+              </CardLabel>
             </Link>
           </Card>
           <Card>
@@ -239,7 +260,9 @@ function ProjectGrid({ $mode }) {
                   alt="side profile of a vacuum on a purple background"
                 />
               </CardImage>
-              <CardLabel>Vaccum Redesign</CardLabel>
+              <CardLabel>
+                <p><em>Vaccum Redesign</em>, Industrial Design</p>
+              </CardLabel>
             </Link>
           </Card>
         </GridCards>
