@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import MuseumPrev from '../assets/case-study-images/museum/museum-wall.png';
 import FinalPoster from '../assets/case-study-images/museum/poster-official.png';
@@ -15,11 +15,31 @@ import ColorMock1 from '../assets/case-study-images/museum/ColorMockup1.png';
 import ColorMock2 from '../assets/case-study-images/museum/ColorMockup2.png';
 import FinalMaybe from '../assets/case-study-images/museum/FinalMaybe.png';
 
+/* -------------- Start Constants -------------- */
+const SCROLL_MOVE_DURATION = 250;   // in miliseconds
+const NAV_HEIGHT = 3;               // in rem
+
 const States = {
   EXPANDED: 'expanded',
   NARROW: 'narrow',
   HIDDEN: 'hidden',
 };
+
+const SectionTitles = [             // names of sections
+  'overview', 
+  'problem', 
+  'background', 
+  'research', 
+  'approach', 
+  'design',
+  'final',
+  'insights',
+];
+
+const SectionClicks = SectionTitles.map((title) => `${title}-click`);
+const SectionScrolls = SectionTitles.map((title) => `${title}-scroll`);
+const SectionIds = SectionTitles.map((title) => `${title}-section`);
+/* -------------- End Constants -------------- */
 
 const MuseumWrapper = styled.div`
   display: flex;
@@ -101,7 +121,7 @@ const MuseumSection = styled.section`
   }
 
   p b {
-    font-weight: 400;
+    font-weight: 500;
   }
 
   a {
@@ -139,7 +159,7 @@ const MuseumSection = styled.section`
   }
 
   li b {
-    font-weight: 400;
+    font-weight: 500;
   }
 `;
 
@@ -194,181 +214,88 @@ const OverviewBox = styled.div`
   }
 `;
 
-const Quote = styled.h5`
-  font-family: 'SF Pro Display';
-  font-size: 18px;
-  font-weight: 300;
-  line-height: 1.5;
-  letter-spacing: 0;
-  margin-top: 1.3em;
-  margin-bottom: 1.3em;
-  color: var(--lichen);
+/**
+ * Component for the 'Museum' Project. As with all other case studies, it has 
+ * 6 major sections for the different parts of design process. It also coordinates
+ * with FloatingAside to jump between sections on either this page or thru Aside.
+ *  
+ * @param {string} $sidebarState If sidebar is open, closed, or narrow. 
+ * @returns Museum component to be passed to Page
+ */
+function Museum({ $sidebarState }) {
+  const [disableScrollListener, setDisableScrollListener] = useState(false);
 
-  em {
-    font-size: 30px;
-    color: var(--moss);
-    line-height: 1.2;
-  }
-`;
-
-function Museum() {
-  
+  /**
+   * When an item is clicked in the list of sections in Aside, is sends an event of which
+   * section was clicked. We listen for which section was clicked and will scroll the window to
+   * the start of that section. We add additional logic to make it a smoother (less jerky) scroll.
+   * Dependency on disableScrollListener which is enabled when manually scrolling.
+   */
   useEffect(() => {
-    const navHeight = 3 * parseFloat(getComputedStyle(document.documentElement).fontSize); // Convert rem to pixels
+    // Convert nav height in rem to pixels
+    const navHeight = NAV_HEIGHT * parseFloat(getComputedStyle(document.documentElement).fontSize);
 
-    const moveToOverview = () => {
-      const overviewSect = document.getElementById('overview-section');
-      if (overviewSect) {
+    const moveToSection = (index) => {
+      const nextSection = document.getElementById(SectionIds[index]);
+      if (nextSection) {
+        /* Need to disable the scroll listener because when we jump to a section, this is technically
+         * a scroll and aside will be listening and show us jumping through every section between
+         * the current and next which looks jerky. Temporarily disable while we're manually scrolling
+         */
+        setDisableScrollListener(true);
+        
+        // now scroll the section to just below the nav
         window.scrollTo({
-          top: overviewSect.offsetTop - navHeight,
+          top: nextSection.offsetTop - navHeight,
           behavior: 'smooth',
-        })
+        });
+
+        /**
+         * Only let us disable listening to scrolls for the duration of moving the section to the 
+         * top of our window. (About 250 miliseconds). Then renable it.
+         */
+        setTimeout(() => {
+          setDisableScrollListener(false);
+        }, SCROLL_MOVE_DURATION);
+      } else {
+        console.error(`Invalid section ${index} to move to @Pomodoro`);
       }
     };
 
-    const moveToProblem = () => {
-      console.log('move to problem');
-      const problemSect = document.getElementById('problem-section');
-      if (problemSect) {
-        window.scrollTo({
-          top: problemSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToBackground = () => {
-      console.log('move to background');
-      const backgroundSect = document.getElementById('background-section');
-      if (backgroundSect) {
-        window.scrollTo({
-          top: backgroundSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToResearch = () => {
-      console.log('move to research');
-      const researchSect = document.getElementById('research-section');
-      if (researchSect) {
-        window.scrollTo({
-          top: researchSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToApproach = () => {
-      const approachSect = document.getElementById('approach-section');
-      if (approachSect) {
-        window.scrollTo({
-          top: approachSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToDesign = () => {
-      const designSect = document.getElementById('design-section');
-      if (designSect) {
-        window.scrollTo({
-          top: designSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToFinal = () => {
-      const finalSect = document.getElementById('final-section');
-      if (finalSect) {
-        window.scrollTo({
-          top: finalSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToInsights = () => {
-      const insightsSect = document.getElementById('insights-section');
-      if (insightsSect) {
-        window.scrollTo({
-          top: insightsSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    window.addEventListener('overview click', moveToOverview);
-    window.addEventListener('problem click', moveToProblem);
-    window.addEventListener('background click', moveToBackground);
-    window.addEventListener('research click', moveToResearch);
-    window.addEventListener('approach click', moveToApproach);
-    window.addEventListener('design click', moveToDesign);
-    window.addEventListener('final click', moveToFinal);
-    window.addEventListener('insights click', moveToInsights);
+    // for each section, listen to a click so we can move it to the top
+    for (let i = 0; i < SectionClicks.length; i++) {
+      window.addEventListener(SectionClicks[i], () => moveToSection(i));
+    }
 
     return () => {
-      window.removeEventListener('overview click', moveToOverview);
-      window.removeEventListener('problem click', moveToProblem);
-      window.removeEventListener('background click', moveToBackground);
-      window.removeEventListener('research click', moveToResearch);
-      window.removeEventListener('approach click', moveToApproach);
-      window.removeEventListener('design click', moveToDesign);
-      window.removeEventListener('final click', moveToFinal);
-      window.removeEventListener('insights click', moveToInsights);
+      // remove listeners for clicks to the sections
+      for (let i = 0; i < SectionClicks.length; i++) {
+        window.removeEventListener(SectionClicks[i], () => moveToSection(i));
+      }
     }
-  }, []);
+  }, [disableScrollListener]);
 
+  /**
+   * As we scroll through the section, we want the list of sections in aside to match the 
+   * current state of the window. If we can listen to scrolling, when a section is within 
+   * 100px of the top of the window, dispatch an event to Aside so it knows this section
+   * is the current active one. Dependency on disableScrollListener.
+   */
   useEffect(() => {
     const updateSection = () => {
-      const overviewSect = document.getElementById('overview-section');
-      const problemSect = document.getElementById('problem-section');
-      const backgroundSect = document.getElementById('background-section');
-      const researchSect = document.getElementById('research-section');
-      const approachSect = document.getElementById('approach-section');
-      const designSect = document.getElementById('design-section');
-      const finalSect = document.getElementById('final-section');
-      const insightsSect = document.getElementById('insights-section');
-
-      if (overviewSect) {
-        if ((overviewSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('overview scroll'));
-        }
-      }
-      if (problemSect) {
-        if ((problemSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('problem scroll'));
-        }
-      }
-      if (backgroundSect) {
-        if ((backgroundSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('background scroll'));
-        }
-      }
-      if (researchSect) {
-        if ((researchSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('research scroll'));
-        }
-      }
-      if (approachSect) {
-        if ((approachSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('approach scroll'));
-        }
-      }
-      if (designSect) {
-        if ((designSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('design scroll'));
-        }
-      }
-      if (finalSect) {
-        if ((finalSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('final scroll'));
-        }
-      }
-      if (insightsSect) {
-        if ((insightsSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('insights scroll'));
+      // if not manually moving section to top, listen
+      if (!disableScrollListener) {
+        // for each section, fetch the associated element
+        for (let i = 0; i < SectionIds.length; i++) {
+          const nextSection = document.getElementById(SectionIds[i]);
+          if (nextSection) {
+            // if the section is within 100px of the top of the window, event!
+            if ((nextSection.offsetTop - window.scrollY) < 100) {
+              window.dispatchEvent(new Event(SectionScrolls[i]));
+            }
+          } else {
+            console.error(`Invalid section ${SectionIds[i]} to update @Pomodoro`);
+          }
         }
       }
     }
@@ -378,11 +305,11 @@ function Museum() {
     return () => {
       window.removeEventListener('scroll', updateSection);
     }
-  }, []);
+  }, [disableScrollListener]);
 
   return (
     <>
-      <MuseumWrapper>
+      <MuseumWrapper id='case-study' $sidebarState={$sidebarState}>
         <MuseumTitle id='case-study-title'>Museum Poster</MuseumTitle>
         <MuseumTag id='case-study-tag'>A poster to encourage the public to learn about unique architecture.</MuseumTag>
         <MuseumGraphic id='case-study-preview'>

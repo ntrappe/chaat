@@ -268,6 +268,14 @@ const DynamicDescription = styled.div`
   }
 `;
 
+/**
+ * Component for the 'Pomodoro' Project. As with all other case studies, it has 
+ * 6 major sections for the different parts of design process. It also coordinates
+ * with FloatingAside to jump between sections on either this page or thru Aside.
+ *  
+ * @param {string} $sidebarState If sidebar is open, closed, or narrow. 
+ * @returns Pomodoro component to be passed to Page
+ */
 function Pomodoro({ $sidebarState }) {
   const videoDemo = useRef(null);
   const videoDescription = useRef(null);
@@ -293,16 +301,14 @@ function Pomodoro({ $sidebarState }) {
         console.error('Invalid video and description heights @Pomodoro.jsx');
       }
     }
-    
-    // if (videoheight > 1) {
-    //   console.log(`vid height ${videoHeight} and description ${descriptionHeight}`);
-      
-    // } else {
-    //   console.error('Invalid height for video @Pomodoro.jsx');
-    // }
   }
 
+   /**
+   * If there is a resize, Video has changed height so update the value we save
+   * for its height to make sure Transcript matches. Dependency on videoHeight.
+   */
   useEffect(() => {
+    updateVideoHeight();    // initially, set Transcript height
     window.addEventListener('resize', updateVideoHeight);
 
     return () => {
@@ -310,9 +316,12 @@ function Pomodoro({ $sidebarState }) {
     }
   }, [videoHeight, showVideo]);
 
+  /**
+   * Whenver Transcript is visible and Video is hidden, reset the scroll
+   * position. If we scrolled, then switch to Video, then back, it will remain
+   * at the same scroll position unless we do this. Dependency on showVideo.
+   */
   useEffect(() => {
-    updateVideoHeight();
-
     // when click on transcript, reset scroll to top
     if (!showVideo) {
       transcript.current.scrollTo({
@@ -320,9 +329,6 @@ function Pomodoro({ $sidebarState }) {
         behavior: 'smooth',
       });
     }
-
-    console.log('showVideo -- ', showVideo);
-
   }, [showVideo]);
 
   /**
