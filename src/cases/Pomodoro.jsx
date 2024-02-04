@@ -325,6 +325,12 @@ function Pomodoro({ $sidebarState }) {
 
   }, [showVideo]);
 
+  /**
+   * When an item is clicked in the list of sections in Aside, is sends an event of which
+   * section was clicked. We listen for which section was clicked and will scroll the window to
+   * the start of that section. We add additional logic to make it a smoother (less jerky) scroll.
+   * Dependency on disableScrollListener which is enabled when manually scrolling.
+   */
   useEffect(() => {
     // Convert nav height in rem to pixels
     const navHeight = NAV_HEIGHT * parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -332,13 +338,22 @@ function Pomodoro({ $sidebarState }) {
     const moveToSection = (index) => {
       const nextSection = document.getElementById(SectionIds[index]);
       if (nextSection) {
+        /* Need to disable the scroll listener because when we jump to a section, this is technically
+         * a scroll and aside will be listening and show us jumping through every section between
+         * the current and next which looks jerky. Temporarily disable while we're manually scrolling
+         */
         setDisableScrollListener(true);
         
+        // now scroll the section to just below the nav
         window.scrollTo({
           top: nextSection.offsetTop - navHeight,
           behavior: 'smooth',
         });
 
+        /**
+         * Only let us disable listening to scrolls for the duration of moving the section to the 
+         * top of our window. (About 250 miliseconds). Then renable it.
+         */
         setTimeout(() => {
           setDisableScrollListener(false);
         }, SCROLL_MOVE_DURATION);
@@ -347,23 +362,34 @@ function Pomodoro({ $sidebarState }) {
       }
     };
 
+    // for each section, listen to a click so we can move it to the top
     for (let i = 0; i < SectionClicks.length; i++) {
       window.addEventListener(SectionClicks[i], () => moveToSection(i));
     }
 
     return () => {
+      // remove listeners for clicks to the sections
       for (let i = 0; i < SectionClicks.length; i++) {
         window.removeEventListener(SectionClicks[i], () => moveToSection(i));
       }
     }
   }, [disableScrollListener]);
 
+  /**
+   * As we scroll through the section, we want the list of sections in aside to match the 
+   * current state of the window. If we can listen to scrolling, when a section is within 
+   * 100px of the top of the window, dispatch an event to Aside so it knows this section
+   * is the current active one. Dependency on disableScrollListener.
+   */
   useEffect(() => {
     const updateSection = () => {
+      // if not manually moving section to top, listen
       if (!disableScrollListener) {
+        // for each section, fetch the associated element
         for (let i = 0; i < SectionIds.length; i++) {
           const nextSection = document.getElementById(SectionIds[i]);
           if (nextSection) {
+            // if the section is within 100px of the top of the window, event!
             if ((nextSection.offsetTop - window.scrollY) < 100) {
               window.dispatchEvent(new Event(SectionScrolls[i]));
             }

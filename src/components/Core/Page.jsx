@@ -118,6 +118,7 @@ function Page({ customComponent: SubPage, showAside }) {
     const closeSidebar = () => {
       setSidebarState(window.innerWidth > 1023 ? States.NARROW : States.HIDDEN);
       setProjectState(window.innerWidth > 1023 ? States.NARROW : States.EXPANDED);
+      setScroll(true);
     }
 
     window.addEventListener('project selected', closeSidebar);
@@ -125,7 +126,7 @@ function Page({ customComponent: SubPage, showAside }) {
     return () => {
       window.removeEventListener('project selected', closeSidebar);
     }
-  }, [sidebarState, projectState]);
+  }, [sidebarState, projectState, scroll]);
 
 
   /**
@@ -187,7 +188,7 @@ function Page({ customComponent: SubPage, showAside }) {
       <MainWrapper id="main" $projectState={projectState}>
         <AdjustableSidebar id="adjustable-sidebar" $projectState={projectState}>
           <Sidebar $sidebarState={sidebarState} />
-          <SubPage id="single-proj" $mode={projectState} $navState={navState} />
+          <SubPage id="single-proj" $mode={projectState} />
         </AdjustableSidebar>
       {showAside && (
         <FloatingAside $mode={projectState} />
