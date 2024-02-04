@@ -34,16 +34,17 @@ const CalendarTag = styled.h2`
   color: var(--wet-concrete);
 `;
 
-
-function Calendar({ $sidebarState, $projectState }) {
-  
+/**
+ * Component for the 'Calendar' Project. It is in progress so it just has the 
+ * title, tagline, and image.
+ *  
+ * @param {string} $sidebarState If sidebar is open, closed, or narrow. 
+ * @returns Calendar component to be passed to Page
+ */
+function Calendar({ $sidebarState }) {
   return (
     <>
-      <CalendarWrapper
-        id='case-study' 
-        $sidebarState={$sidebarState}
-        $projectState={$projectState}
-      >
+      <CalendarWrapper id='case-study' $sidebarState={$sidebarState}>
         <CalendarTitle id='case-study-title'>National Park Service 2025 Calendar</CalendarTitle>
         <CalendarTag id='case-study-tag'>Coming soon.</CalendarTag>
       </CalendarWrapper>

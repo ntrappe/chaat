@@ -50,15 +50,17 @@ const VacuumPreview = styled.div`
   }  
 `;
 
-function Vacuum({ $sidebarState, $projectState }) {
-  
+/**
+ * Component for the 'Vacuum' Project. It is in progress so it just has the 
+ * title, tagline, and image.
+ *  
+ * @param {string} $sidebarState If sidebar is open, closed, or narrow. 
+ * @returns Vacuum component to be passed to Page
+ */
+function Vacuum({ $sidebarState, }) {
   return (
     <>
-      <VacuumWrapper
-        id='case-study' 
-        $sidebarState={$sidebarState}
-        $projectState={$projectState}
-      >
+      <VacuumWrapper id='case-study' $sidebarState={$sidebarState}>
         <VacuumTitle id='case-study-title'>Vacuum Redesign</VacuumTitle>
         <VacuumTag id='case-study-tag'>Coming soon.</VacuumTag>
         <VacuumPreview id='case-study-preview'>

@@ -48,15 +48,17 @@ const BookifyPreview = styled.div`
   }  
 `;
 
-function Bookify({ $sidebarState, $projectState }) {
-  
+/**
+ * Component for the 'Bookify' Project. It is in progress so it just has the 
+ * title, tagline, and image.
+ *  
+ * @param {string} $sidebarState If sidebar is open, closed, or narrow. 
+ * @returns Bookify component to be passed to Page
+ */
+function Bookify({ $sidebarState }) { 
   return (
     <>
-      <BookifyWrapper 
-        id="case-study" 
-        $sidebarState={$sidebarState}
-        $projectState={$projectState}
-      >
+      <BookifyWrapper id="case-study" $sidebarState={$sidebarState}>
         <BookifyTitle id="case-study-title">Bookify</BookifyTitle>
         <BookifyTag id="case-study-tag">Finding books.</BookifyTag>
         <BookifyPreview id="case-study-preview">

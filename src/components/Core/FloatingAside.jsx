@@ -142,7 +142,7 @@ function FloatingAside({ $mode }) {
           onClick={() => handleItemClick(6)}
           style={{ textTransform: 'capitalize' }}
         >
-          {SectionTitles[6]}
+          Final Result
         </AsideItem>
         <AsideItem 
           selected={selectedItem === 7}

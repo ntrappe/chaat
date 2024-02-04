@@ -52,15 +52,17 @@ const FlowPreview = styled.div`
   }  
 `;
 
-function Flow({ $sidebarState, $projectState }) {
-  
+/**
+ * Component for the 'Flow' Project. It is in progress so it just has the 
+ * title, tagline, and image.
+ *  
+ * @param {string} $sidebarState If sidebar is open, closed, or narrow. 
+ * @returns Flow component to be passed to Page
+ */
+function Flow({ $sidebarState }) {
   return (
     <>
-      <FlowWrapper
-        id='case-study' 
-        $sidebarState={$sidebarState}
-        $projectState={$projectState}
-      >
+      <FlowWrapper id='case-study' $sidebarState={$sidebarState}>
         <FlowTitle id='case-study-title'>Flow Controller</FlowTitle>
         <FlowTag id='case-study-tag'>Coming soon.</FlowTag>
         <FlowPreview id='case-study-preview'>

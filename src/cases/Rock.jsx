@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import RockPrev from '../assets/case-study-images/rock/rock-preview.png';
 import Pinnacles from '../assets/case-study-images/rock/pinnacles.jpg';
@@ -7,11 +7,31 @@ import PreviewTestA from '../assets/case-study-images/rock/PreviewTestA.png';
 import PreviewTestB from '../assets/case-study-images/rock/PreviewTestB.png';
 import PreviewTestC from '../assets/case-study-images/rock/PreviewTestC.png';
 
-const States = {
+/* -------------- Start Constants -------------- */
+const SCROLL_MOVE_DURATION = 250;   // in miliseconds
+const NAV_HEIGHT = 3;               // in rem
+
+const States = {                    // states of project/sidebar
   EXPANDED: 'expanded',
   NARROW: 'narrow',
   HIDDEN: 'hidden',
 };
+
+const SectionTitles = [             // names of sections
+  'overview', 
+  'problem', 
+  'background', 
+  'research', 
+  'approach', 
+  'design',
+  'final',
+  'insights',
+];
+
+const SectionClicks = SectionTitles.map((title) => `${title}-click`);
+const SectionScrolls = SectionTitles.map((title) => `${title}-scroll`);
+const SectionIds = SectionTitles.map((title) => `${title}-section`);
+/* -------------- End Constants -------------- */
 
 const RockWrapper = styled.div`
   display: flex;
@@ -202,129 +222,80 @@ const Quote = styled.h5`
   }
 `;
 
-function Rock() {
-  
+function Rock({ $sidebarState }) {
+  const [disableScrollListener, setDisableScrollListener] = useState(false);
+ 
+    /**
+   * When an item is clicked in the list of sections in Aside, is sends an event of which
+   * section was clicked. We listen for which section was clicked and will scroll the window to
+   * the start of that section. We add additional logic to make it a smoother (less jerky) scroll.
+   * Dependency on disableScrollListener which is enabled when manually scrolling.
+   */
   useEffect(() => {
-    const navHeight = 3 * parseFloat(getComputedStyle(document.documentElement).fontSize); // Convert rem to pixels
+    // Convert nav height in rem to pixels
+    const navHeight = NAV_HEIGHT * parseFloat(getComputedStyle(document.documentElement).fontSize);
 
-    const moveToOverview = () => {
-      console.log('move to overview');
-      const overviewSect = document.getElementById('overview-section');
-      if (overviewSect) {
+    const moveToSection = (index) => {
+      const nextSection = document.getElementById(SectionIds[index]);
+      if (nextSection) {
+        /* Need to disable the scroll listener because when we jump to a section, this is technically
+         * a scroll and aside will be listening and show us jumping through every section between
+         * the current and next which looks jerky. Temporarily disable while we're manually scrolling
+         */
+        setDisableScrollListener(true);
+        
+        // now scroll the section to just below the nav
         window.scrollTo({
-          top: overviewSect.offsetTop - navHeight,
+          top: nextSection.offsetTop - navHeight,
           behavior: 'smooth',
-        })
+        });
+
+        /**
+         * Only let us disable listening to scrolls for the duration of moving the section to the 
+         * top of our window. (About 250 miliseconds). Then renable it.
+         */
+        setTimeout(() => {
+          setDisableScrollListener(false);
+        }, SCROLL_MOVE_DURATION);
+      } else {
+        console.error(`Invalid section ${index} to move to @Rock`);
       }
     };
 
-    const moveToProblem = () => {
-      console.log('move to problem');
-      const problemSect = document.getElementById('problem-section');
-      if (problemSect) {
-        window.scrollTo({
-          top: problemSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToBackground = () => {
-      console.log('move to background');
-      const backgroundSect = document.getElementById('background-section');
-      if (backgroundSect) {
-        window.scrollTo({
-          top: backgroundSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToResearch = () => {
-      console.log('move to research');
-      const researchSect = document.getElementById('research-section');
-      if (researchSect) {
-        window.scrollTo({
-          top: researchSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToApproach = () => {
-      const approachSect = document.getElementById('approach-section');
-      if (approachSect) {
-        window.scrollTo({
-          top: approachSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToDesign = () => {
-      const designSect = document.getElementById('design-section');
-      if (designSect) {
-        window.scrollTo({
-          top: designSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    window.addEventListener('overview click', moveToOverview);
-    window.addEventListener('problem click', moveToProblem);
-    window.addEventListener('background click', moveToBackground);
-    window.addEventListener('research click', moveToResearch);
-    window.addEventListener('approach click', moveToApproach);
-    window.addEventListener('design click', moveToDesign);
+    // for each section, listen to a click so we can move it to the top
+    for (let i = 0; i < SectionClicks.length; i++) {
+      window.addEventListener(SectionClicks[i], () => moveToSection(i));
+    }
 
     return () => {
-      window.removeEventListener('overview click', moveToOverview);
-      window.removeEventListener('problem click', moveToProblem);
-      window.removeEventListener('background click', moveToBackground);
-      window.removeEventListener('research click', moveToResearch);
-      window.removeEventListener('approach click', moveToApproach);
-      window.removeEventListener('design click', moveToDesign);
+      // remove listeners for clicks to the sections
+      for (let i = 0; i < SectionClicks.length; i++) {
+        window.removeEventListener(SectionClicks[i], () => moveToSection(i));
+      }
     }
-  }, []);
+  }, [disableScrollListener]);
 
+  /**
+   * As we scroll through the section, we want the list of sections in aside to match the 
+   * current state of the window. If we can listen to scrolling, when a section is within 
+   * 100px of the top of the window, dispatch an event to Aside so it knows this section
+   * is the current active one. Dependency on disableScrollListener.
+   */
   useEffect(() => {
     const updateSection = () => {
-      const overviewSect = document.getElementById('overview-section');
-      const problemSect = document.getElementById('problem-section');
-      const backgroundSect = document.getElementById('background-section');
-      const researchSect = document.getElementById('research-section');
-      const approachSect = document.getElementById('approach-section');
-      const designSect = document.getElementById('design-section');
-
-      if (overviewSect) {
-        if ((overviewSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('overview scroll'));
-        }
-      }
-      if (problemSect) {
-        if ((problemSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('problem scroll'));
-        }
-      }
-      if (backgroundSect) {
-        if ((backgroundSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('background scroll'));
-        }
-      }
-      if (researchSect) {
-        if ((researchSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('research scroll'));
-        }
-      }
-      if (approachSect) {
-        if ((approachSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('approach scroll'));
-        }
-      }
-      if (designSect) {
-        if ((designSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('design scroll'));
+      // if not manually moving section to top, listen
+      if (!disableScrollListener) {
+        // for each section, fetch the associated element
+        for (let i = 0; i < SectionIds.length; i++) {
+          const nextSection = document.getElementById(SectionIds[i]);
+          if (nextSection != null) {
+            // if the section is within 100px of the top of the window, event!
+            if ((nextSection.offsetTop - window.scrollY) < 100) {
+              window.dispatchEvent(new Event(SectionScrolls[i]));
+            }
+          } else {
+            console.error(`Invalid section ${SectionIds[i]} to update @Rock`);
+          }
         }
       }
     }
@@ -334,11 +305,11 @@ function Rock() {
     return () => {
       window.removeEventListener('scroll', updateSection);
     }
-  }, []);
+  }, [disableScrollListener]);
 
   return (
     <>
-      <RockWrapper>
+      <RockWrapper id='case-study' $sidebarState={$sidebarState}>
         <RockTitle id='case-study-title'>Rock </RockTitle>
         <RockTag id='case-study-tag'>An app to explore national parks and find the ideal hike.</RockTag>
         <RockGraphic id='case-study-preview'>
@@ -349,7 +320,7 @@ function Rock() {
               information about the park.'
           />
         </RockGraphic>
-        <RockSection id="overview-section">
+        <RockSection id={SectionIds[0]}>
           <OverviewGrid>
             <OverviewBox>
               <h4>Duration</h4>
@@ -373,7 +344,7 @@ function Rock() {
             </OverviewBox>
           </OverviewGrid>
         </RockSection>
-        <RockSection id="problem-section">
+        <RockSection id={SectionIds[1]}>
           <h3>Problem</h3>
           <p>
             Millennials visit national parks less than any other previous generation. Because of this, the 
@@ -382,7 +353,7 @@ function Rock() {
             to visit. They don’t know how to select a park, what to look for, and which hikes are suitable.
           </p>
         </RockSection>
-        <RockSection id="background-section">
+        <RockSection id={SectionIds[2]}>
           <h3>Background</h3>
           <p>This project was part of my Prototyping course at UC San Diego. Our objective was to
             build an interactive and innovative mobile information system to address a user problem.
@@ -405,7 +376,7 @@ function Rock() {
             />
           </RockGraphic>
         </RockSection>
-        <RockSection id="research-section">
+        <RockSection id={SectionIds[3]}>
           <h3>Research</h3>
           <h4>Articles & Interviews</h4>
           <p>
@@ -475,7 +446,7 @@ function Rock() {
             />
           </RockGraphic>
         </RockSection>
-        <RockSection id="approach-section">
+        <RockSection id={SectionIds[4]}>
           <h3>Approach</h3>
           <p>When thinking about designing the app, I focused on five questions:</p>
           <ol>
@@ -519,7 +490,7 @@ function Rock() {
             This meant we would want to have offline maps, trail details, and more.
           </p>
         </RockSection>
-        <RockSection id="design-section">
+        <RockSection id={SectionIds[5]}>
           <h3>Design</h3>
           <h4>Designing the Fun</h4>
           <p>
@@ -549,8 +520,7 @@ function Rock() {
             we didn’t want to take away from the parks. Those photos had enough color and we wanted them to be the focal 
             point. So we increased the size of the photos and removed the unnecessary colorful additions.
           </p>
-        </RockSection>
-        <RockGraphic id='case-study-preview'>
+          <RockGraphic>
             <img
               src={PreviewTestC}
               alt='Four National Park preview component designs. The first has a drop shadow and the preview is a full
@@ -558,6 +528,13 @@ function Rock() {
               but a thin outline and colorful backgrounds. The fourth uses a thin outline and no color.'
             />
           </RockGraphic>
+        </RockSection>
+        <RockSection id={SectionIds[6]}>
+          <h3>Final Result</h3>
+        </RockSection>
+        <RockSection id={SectionIds[7]}>
+          <h3>Insights</h3>
+        </RockSection>
       </RockWrapper>
     </>
   )

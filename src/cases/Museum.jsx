@@ -165,19 +165,18 @@ const MuseumSection = styled.section`
 
 const OverviewGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto);
   grid-auto-flow: row;
-  gap: 10px;
+  gap: 15px;
   margin-top: 0.8em;
   margin-bottom: 1em;
 
   @media (max-width: 767px) {
-    gap: 5px;
+    gap: 10px;
   }
 
   @media (max-width: 575px) {
-    grid-template-columns: repeat(3, auto);
-    gap: 20px;
+    gap: 7px;
   }
 `;
 
@@ -207,7 +206,7 @@ const OverviewBox = styled.div`
     text-decoration: underline;
   }
 
-  @media (max-width: 735px) {
+  @media (max-width: 600px) {
     h4, p {
       font-size: 0.8rem;
     }
@@ -258,7 +257,7 @@ function Museum({ $sidebarState }) {
           setDisableScrollListener(false);
         }, SCROLL_MOVE_DURATION);
       } else {
-        console.error(`Invalid section ${index} to move to @Pomodoro`);
+        console.error(`Invalid section ${index} to move to @Museum`);
       }
     };
 
@@ -294,7 +293,7 @@ function Museum({ $sidebarState }) {
               window.dispatchEvent(new Event(SectionScrolls[i]));
             }
           } else {
-            console.error(`Invalid section ${SectionIds[i]} to update @Pomodoro`);
+            console.error(`Invalid section ${SectionIds[i]} to update @Museum`);
           }
         }
       }
@@ -320,7 +319,7 @@ function Museum({ $sidebarState }) {
               information about the park.'
           />
         </MuseumGraphic>
-        <MuseumSection id="overview-section">
+        <MuseumSection id={SectionIds[0]}>
           <OverviewGrid>
             <OverviewBox>
               <h4>Duration</h4>
@@ -340,7 +339,7 @@ function Museum({ $sidebarState }) {
             </OverviewBox>
           </OverviewGrid>
         </MuseumSection>
-        <MuseumSection id="problem-section">
+        <MuseumSection id={SectionIds[1]}>
           <h3>Problem</h3>
           <p>
               The Canadian Centre for Architecture would like to encourage people to visit their newest 
@@ -349,7 +348,7 @@ function Museum({ $sidebarState }) {
               provide more support for the Centre, and be accessible to a broad audience.
           </p>
         </MuseumSection>
-        <MuseumSection id="background-section">
+        <MuseumSection id={SectionIds[2]}>
           <h3>Background</h3>
           <p>
             The first assignment in my Prototyping course at UC San Diego was to understand 
@@ -373,7 +372,7 @@ function Museum({ $sidebarState }) {
             />
           </MuseumGraphic>
         </MuseumSection>
-        <MuseumSection id="research-section">
+        <MuseumSection id={SectionIds[3]}>
           <h3>Research</h3>
           <p>
             Unlike most projects I've worked on, we never get to communicate with the shareholders 
@@ -391,7 +390,7 @@ function Museum({ $sidebarState }) {
             that reason, I made assumption #1: this is for retirees.
           </p>
         </MuseumSection>
-        <MuseumSection id="approach-section">
+        <MuseumSection id={SectionIds[4]}>
           <h3>Approach</h3>
           <p>
             Given that this was going to be a poster for retirees to get them interested in learning 
@@ -433,7 +432,7 @@ function Museum({ $sidebarState }) {
             I wanted to know. Another thing to add.</li>
           </ul>
         </MuseumSection>
-        <MuseumSection id="design-section">
+        <MuseumSection id={SectionIds[5]}>
           <h3>Design</h3>
           <h4>The Photos</h4>
           <p>
@@ -539,7 +538,7 @@ function Museum({ $sidebarState }) {
             />
           </MuseumGraphic>
         </MuseumSection>
-        <MuseumSection id="final-section">
+        <MuseumSection id={SectionIds[6]}>
           <h3>Final Result</h3>
           <p>
             I tried to warm up the poster more, remove some unnecessary color blocks behind the hours, and 
@@ -552,7 +551,7 @@ function Museum({ $sidebarState }) {
             />
           </MuseumGraphic>
         </MuseumSection>
-        <MuseumSection id="insights-section">
+        <MuseumSection id={SectionIds[7]}>
           <h3>Insights</h3>
           <p>I learned a number of things from this project both in terms of how to structure a poster but also
           </p>
