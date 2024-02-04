@@ -238,7 +238,6 @@ const Transcript = styled.div`
 const DynamicDescription = styled.div`
   width: 100%;
   display: ${(props) => (props.$showVideo ? 'block' : 'none')};
-  margin-bottom: 1rem;
 
   p {
     font-size: 0.8rem;
@@ -541,7 +540,7 @@ function Pomodoro({ $sidebarState, $projectState }) {
           <p>
             If we had been hired to create a timer—rather than assigned it in class—we would want customers 
             to use our product. To do this, we would have to position ourselves uniquely on the market and 
-            find ways to prove that our solution was superior. As a team, we investigated the six most 
+            find ways to prove that our solution was superior. As a team, we investigated the 6 most 
             popular timers. A number of problems emerged:
           </p>
           <ul>
@@ -563,7 +562,7 @@ function Pomodoro({ $sidebarState, $projectState }) {
         <PomodoroSection id='design-section'>
           <h3>Design</h3>
         </PomodoroSection>
-        <PomodoroSection id='final-section'>
+        <PomodoroSection id='final-section' style={{ marginBottom: '1rem' }}>
           <h3>Final Result</h3>
           <DynamicButtonCont>
             <DynamicButton selected={showVideo} onClick={() => setShowVideo(true)}>
@@ -587,18 +586,18 @@ function Pomodoro({ $sidebarState, $projectState }) {
             </Video>
             <Transcript id="transcript" ref={transcript} $showVideo={showVideo}>
               <p>
-                When we first open the app, we see a dark screen with six features. From left
+                When we first open the app, we see a dark screen with 6 features. From left
                 to right, we have a button for settings, a label indicating a work session, a 
                 timer with 25 minutes, a button to start the timer, a button for information, 
                 and a button for statistics.
               </p>
               <p>
                 When we click Start, the timer immediately starts to tick down from 25 minutes.
-                The button that previously said Start has now changed to Restart. Note that we 
-                did speed up this timer for the demo. 
+                The button that previously said <b>Start</b> has now changed to <b>Restart</b>. 
+                Note that we did speed up this timer for the demo. 
               </p>
               <p>
-                At 23 minutes or so, we click Restart to stop the timer and set it back to 25 
+                At 23 minutes or so, we click <b>Restart</b> to stop the timer and set it back to 25 
                 minutes. This is considered an interruption and we have forfeited this pomodoro.
               </p>
               <p>
@@ -606,7 +605,7 @@ function Pomodoro({ $sidebarState, $projectState }) {
                 a work session from 25 to 2. The timer now shows 2 minutes.
               </p>
               <p>
-                We click Start and the timer begins to tick down from 2 minutes. While the timer 
+                We click <b>Start</b> and the timer begins to tick down from 2 minutes. While the timer 
                 is running, we click the settings button to open the sidebar and see that all
                 options, except volume, are greyed out and cannot be clicked. No distractions are
                 allowed.
@@ -623,7 +622,7 @@ function Pomodoro({ $sidebarState, $projectState }) {
                 minutes because it would go against the pomodoro technique.
               </p>
               <p>
-                We click start and let the short break timer run down. Once complete, we click statistics
+                We click <b>Start</b> and let the short break timer run down. Once complete, we click statistics
                 to open up a display of four blocks. From left to right, the first block represents
                 work sessions, then short breaks, then long breaks, and, finally, interruptions. Here, 
                 we see 1 square block indicating a work session, 1 square block for a short break, and 
@@ -644,7 +643,7 @@ function Pomodoro({ $sidebarState, $projectState }) {
                 shows only minutes. This is supposed to reduce further distractions by displaying fewer changes.
               </p>
               <p>
-                With '2m' representing 2 minutes on the timer, we click start and and complete our second break.
+                With '2m' representing 2 minutes on the timer, we click <b>Start</b> and and complete our second break.
                 The video ends after this.
               </p>
             </Transcript>
