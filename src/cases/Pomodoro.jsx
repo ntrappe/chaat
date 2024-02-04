@@ -1,16 +1,32 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import PomodoroPrev from '../assets/case-study-images/pomodoro/pomodoro-preview.png';
-import Pomo1 from '../assets/case-study-images/pomodoro/pomo1.png';
-import Break1 from '../assets/case-study-images/pomodoro/break1.png';
-import Settings from '../assets/case-study-images/pomodoro/settings.png';
-import Stats from '../assets/case-study-images/pomodoro/stats.png';
 
-const States = {
+/* -------------- Start Constants -------------- */
+const SCROLL_MOVE_DURATION = 250;   // in miliseconds
+const NAV_HEIGHT = 3;               // in rem
+
+const States = {                    // states of project/sidebar
   EXPANDED: 'expanded',
   NARROW: 'narrow',
   HIDDEN: 'hidden',
 };
+
+const SectionTitles = [             // names of sections
+  'overview', 
+  'problem', 
+  'background', 
+  'research', 
+  'approach', 
+  'design',
+  'final',
+  'insights',
+];
+
+const SectionClicks = SectionTitles.map((title) => `${title}-click`);
+const SectionScrolls = SectionTitles.map((title) => `${title}-scroll`);
+const SectionIds = SectionTitles.map((title) => `${title}-section`);
+/* -------------- End Constants -------------- */
 
 const PomodoroWrapper = styled.div`
   display: flex;
@@ -252,13 +268,14 @@ const DynamicDescription = styled.div`
   }
 `;
 
-function Pomodoro({ $sidebarState, $projectState }) {
+function Pomodoro({ $sidebarState }) {
   const videoDemo = useRef(null);
   const videoDescription = useRef(null);
   const transcript = useRef(null);
   const [showVideo, setShowVideo] = useState(true);
   const [videoHeight, setVideoHeight] = useState(0);
   const [transcriptHeight, setTranscripHeight] = useState(0);
+  const [disableScrollListener, setDisableScrollListener] = useState(false);
   
   const updateVideoHeight = () => {
     const nextVideoHeight = videoDemo.current.clientHeight;
@@ -309,158 +326,50 @@ function Pomodoro({ $sidebarState, $projectState }) {
   }, [showVideo]);
 
   useEffect(() => {
-    const navHeight = 3 * parseFloat(getComputedStyle(document.documentElement).fontSize); // Convert rem to pixels
+    // Convert nav height in rem to pixels
+    const navHeight = NAV_HEIGHT * parseFloat(getComputedStyle(document.documentElement).fontSize);
 
-    const moveToOverview = () => {
-      const overviewSect = document.getElementById('overview-section');
-      if (overviewSect) {
+    const moveToSection = (index) => {
+      const nextSection = document.getElementById(SectionIds[index]);
+      if (nextSection) {
+        setDisableScrollListener(true);
+        
         window.scrollTo({
-          top: overviewSect.offsetTop - navHeight,
+          top: nextSection.offsetTop - navHeight,
           behavior: 'smooth',
-        })
+        });
+
+        setTimeout(() => {
+          setDisableScrollListener(false);
+        }, SCROLL_MOVE_DURATION);
+      } else {
+        console.error(`Invalid section ${index} to move to @Pomodoro`);
       }
     };
 
-    const moveToProblem = () => {
-      const problemSect = document.getElementById('problem-section');
-      if (problemSect) {
-        window.scrollTo({
-          top: problemSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToBackground = () => {
-      const backgroundSect = document.getElementById('background-section');
-      if (backgroundSect) {
-        window.scrollTo({
-          top: backgroundSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToResearch = () => {
-      const researchSect = document.getElementById('research-section');
-      if (researchSect) {
-        window.scrollTo({
-          top: researchSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToApproach = () => {
-      const approachSect = document.getElementById('approach-section');
-      if (approachSect) {
-        window.scrollTo({
-          top: approachSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToDesign = () => {
-      const designSect = document.getElementById('design-section');
-      if (designSect) {
-        window.scrollTo({
-          top: designSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToFinal = () => {
-      const finalSect = document.getElementById('final-section');
-      if (finalSect) {
-        window.scrollTo({
-          top: finalSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    const moveToInsights = () => {
-      const insightsSect = document.getElementById('insights-section');
-      if (insightsSect) {
-        window.scrollTo({
-          top: insightsSect.offsetTop - navHeight,
-          behavior: 'smooth',
-        })
-      }
-    };
-
-    window.addEventListener('overview click', moveToOverview);
-    window.addEventListener('problem click', moveToProblem);
-    window.addEventListener('background click', moveToBackground);
-    window.addEventListener('research click', moveToResearch);
-    window.addEventListener('approach click', moveToApproach);
-    window.addEventListener('design click', moveToDesign);
-    window.addEventListener('final click', moveToFinal);
-    window.addEventListener('insights click', moveToInsights);
+    for (let i = 0; i < SectionClicks.length; i++) {
+      window.addEventListener(SectionClicks[i], () => moveToSection(i));
+    }
 
     return () => {
-      window.removeEventListener('overview click', moveToOverview);
-      window.removeEventListener('problem click', moveToProblem);
-      window.removeEventListener('background click', moveToBackground);
-      window.removeEventListener('research click', moveToResearch);
-      window.removeEventListener('approach click', moveToApproach);
-      window.removeEventListener('design click', moveToDesign);
-      window.removeEventListener('final click', moveToFinal);
-      window.removeEventListener('insights click', moveToInsights);
+      for (let i = 0; i < SectionClicks.length; i++) {
+        window.removeEventListener(SectionClicks[i], () => moveToSection(i));
+      }
     }
-  }, []);
+  }, [disableScrollListener]);
 
   useEffect(() => {
     const updateSection = () => {
-      const overviewSect = document.getElementById('overview-section');
-      const problemSect = document.getElementById('problem-section');
-      const backgroundSect = document.getElementById('background-section');
-      const researchSect = document.getElementById('research-section');
-      const approachSect = document.getElementById('approach-section');
-      const designSect = document.getElementById('design-section');
-      const finalSect = document.getElementById('final-section');
-      const insightsSect = document.getElementById('insights-section');
-
-      if (overviewSect) {
-        if ((overviewSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('overview scroll'));
-        }
-      }
-      if (problemSect) {
-        if ((problemSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('problem scroll'));
-        }
-      }
-      if (backgroundSect) {
-        if ((backgroundSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('background scroll'));
-        }
-      }
-      if (researchSect) {
-        if ((researchSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('research scroll'));
-        }
-      }
-      if (approachSect) {
-        if ((approachSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('approach scroll'));
-        }
-      }
-      if (designSect) {
-        if ((designSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('design scroll'));
-        }
-      }
-      if (finalSect) {
-        if ((finalSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('final scroll'));
-        }
-      }
-      if (insightsSect) {
-        if ((insightsSect.offsetTop - window.scrollY) < 100) {
-          window.dispatchEvent(new Event('insights scroll'));
+      if (!disableScrollListener) {
+        for (let i = 0; i < SectionIds.length; i++) {
+          const nextSection = document.getElementById(SectionIds[i]);
+          if (nextSection) {
+            if ((nextSection.offsetTop - window.scrollY) < 100) {
+              window.dispatchEvent(new Event(SectionScrolls[i]));
+            }
+          } else {
+            console.error(`Invalid section ${SectionIds[i]} to update @Pomodoro`);
+          }
         }
       }
     }
@@ -470,15 +379,11 @@ function Pomodoro({ $sidebarState, $projectState }) {
     return () => {
       window.removeEventListener('scroll', updateSection);
     }
-  }, []);
+  }, [disableScrollListener]);
 
   return (
     <>
-      <PomodoroWrapper
-        id='case-study' 
-        $sidebarState={$sidebarState}
-        $projectState={$projectState}
-      >
+      <PomodoroWrapper id='case-study' $sidebarState={$sidebarState}>
         <PomodoroTitle id='case-study-title'>Pomodoro Timer</PomodoroTitle>
         <PomodoroTag id='case-study-tag'>A web-based timer designed to curb procrastination.</PomodoroTag>
         <PomodoroGraphic id='case-study-preview'>

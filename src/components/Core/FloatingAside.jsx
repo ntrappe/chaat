@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const SectionTitles = ['Overview', 'Problem', 'Background', 'Research', 'Approach', 'Design', 'Final Result', 'Insights'];
+/* -------------- Start Constants -------------- */
+const SectionTitles = [
+  'overview', 
+  'problem', 
+  'background', 
+  'research', 
+  'approach', 
+  'design',
+  'final',
+  'insights',
+];
+
+const SectionClicks = SectionTitles.map((title) => `${title}-click`);
+const SectionScrolls = SectionTitles.map((title) => `${title}-scroll`);
+/* -------------- End Constants -------------- */
 
 const FloatingAsideWrapper = styled.div`
   display: block;
@@ -40,111 +54,92 @@ const AsideItem = styled.li`
 `;
 
 function FloatingAside({ $mode }) {
-  const [selectedItem, setSelectedItem] = useState(SectionTitles[0]);
+  const [selectedItem, setSelectedItem] = useState(0);
 
   const handleItemClick = (index) => {
-    switch (index) {
-      case 0:
-        window.dispatchEvent(new Event('overview click'));
-        setSelectedItem(SectionTitles[0]);
-        break;
-      case 1:
-        window.dispatchEvent(new Event('problem click'));
-        setSelectedItem(SectionTitles[1]);
-        break;
-      case 2:
-        window.dispatchEvent(new Event('background click'));
-        setSelectedItem(SectionTitles[2]);
-        break;
-      case 3:
-        window.dispatchEvent(new Event('research click'));
-        setSelectedItem(SectionTitles[3]);
-        break;
-      case 4:
-        window.dispatchEvent(new Event('approach click'));
-        setSelectedItem(SectionTitles[4]);
-        break;
-      case 5:
-        window.dispatchEvent(new Event('design click'));
-        setSelectedItem(SectionTitles[5]);
-        break;
-      case 6:
-        window.dispatchEvent(new Event('final click'));
-        setSelectedItem(SectionTitles[6]);
-        break;
-      case 7:
-        window.dispatchEvent(new Event('insights click'));
-        setSelectedItem(SectionTitles[7]);
-        break;
-      default:
+    if ((index >= 0) && (index < SectionTitles.length)) {
+      setSelectedItem(index);
+      window.dispatchEvent(new Event(SectionClicks[index]));
+    } else {
+      console.error('Received invalid index reference (no section) @FloatingAside');
     }
   }
+  
+  useEffect(() => {
+    // console.log('selectedItem -- ', selectedItem);
+  }, [selectedItem])
 
   useEffect(() => {
-    const setOverview = () => { setSelectedItem(SectionTitles[0]) };
-    const setProblem = () => { setSelectedItem(SectionTitles[1]) };
-    const setBackground = () => { setSelectedItem(SectionTitles[2]) };
-    const setResearch = () => { setSelectedItem(SectionTitles[3]) };
-    const setApproach = () => { setSelectedItem(SectionTitles[4]) };
-    const setDesign = () => { setSelectedItem(SectionTitles[5]) };
-    const setFinal = () => { setSelectedItem(SectionTitles[6]) };
-    const setInsights= () => { setSelectedItem(SectionTitles[7]) };
-    window.addEventListener('overview scroll', setOverview);
-    window.addEventListener('problem scroll', setProblem);
-    window.addEventListener('background scroll', setBackground);
-    window.addEventListener('research scroll', setResearch);
-    window.addEventListener('approach scroll', setApproach);
-    window.addEventListener('design scroll', setDesign);
-    window.addEventListener('final scroll', setFinal);
-    window.addEventListener('insights scroll', setInsights);
+    for (let i = 0; i < SectionScrolls.length; i++) {
+      window.addEventListener(SectionScrolls[i], () => setSelectedItem(i));
+    }
 
     return () => {
-      window.removeEventListener('overview scroll', setOverview);
-      window.removeEventListener('problem scroll', setProblem);
-      window.removeEventListener('background scroll', setBackground);
-      window.removeEventListener('research scroll', setResearch);
-      window.removeEventListener('approach scroll', setApproach);
-      window.removeEventListener('design scroll', setDesign);
-      window.removeEventListener('final scroll', setFinal);
-      window.removeEventListener('insights scroll', setInsights);
+      for (let i = 0; i < SectionScrolls.length; i++) {
+        window.removeEventListener(SectionScrolls[i], () => setSelectedItem(i));
+      }
     }
   }, [selectedItem]);
   
   return (
     <FloatingAsideWrapper $mode={$mode} id="floating-aside">
-      <AsideSections id="aside-sections" selected>
+      <AsideSections id="aside-sections">
         <AsideItem 
-          selected={selectedItem === SectionTitles[0]}
+          selected={selectedItem === 0}
           onClick={() => handleItemClick(0)}
-        >{SectionTitles[0]}</AsideItem>
+          style={{ textTransform: 'capitalize' }}
+        >
+          {SectionTitles[0]}
+        </AsideItem>
         <AsideItem 
-          selected={selectedItem === SectionTitles[1]}
+          selected={selectedItem === 1}
           onClick={() => handleItemClick(1)}
-        >{SectionTitles[1]}</AsideItem>
+          style={{ textTransform: 'capitalize' }}
+        >
+          {SectionTitles[1]}
+        </AsideItem>
         <AsideItem 
-          selected={selectedItem === SectionTitles[2]}
+          selected={selectedItem === 2}
           onClick={() => handleItemClick(2)}
-        >{SectionTitles[2]}</AsideItem>
+          style={{ textTransform: 'capitalize' }}
+        >
+          {SectionTitles[2]}
+        </AsideItem>
         <AsideItem 
-          selected={selectedItem === SectionTitles[3]}
+          selected={selectedItem === 3}
           onClick={() => handleItemClick(3)}
-        >{SectionTitles[3]}</AsideItem>
+          style={{ textTransform: 'capitalize' }}
+        >
+          {SectionTitles[3]}
+        </AsideItem>
         <AsideItem 
-          selected={selectedItem === SectionTitles[4]}
+          selected={selectedItem === 4}
           onClick={() => handleItemClick(4)}
-        >{SectionTitles[4]}</AsideItem>
+          style={{ textTransform: 'capitalize' }}
+        >
+          {SectionTitles[4]}
+        </AsideItem>
         <AsideItem 
-          selected={selectedItem === SectionTitles[5]}
+          selected={selectedItem === 5}
           onClick={() => handleItemClick(5)}
-        >{SectionTitles[5]}</AsideItem>
+          style={{ textTransform: 'capitalize' }}
+        >
+          {SectionTitles[5]}
+        </AsideItem>
         <AsideItem 
-          selected={selectedItem === SectionTitles[6]}
+          selected={selectedItem === 6}
           onClick={() => handleItemClick(6)}
-        >{SectionTitles[6]}</AsideItem>
+          style={{ textTransform: 'capitalize' }}
+        >
+          {SectionTitles[6]}
+        </AsideItem>
         <AsideItem 
-          selected={selectedItem === SectionTitles[7]}
+          selected={selectedItem === 7}
           onClick={() => handleItemClick(7)}
-        >{SectionTitles[7]}</AsideItem>
+          style={{ textTransform: 'capitalize' }}
+        >
+          {SectionTitles[7]}
+        </AsideItem>
       </AsideSections>
     </FloatingAsideWrapper>
   )
