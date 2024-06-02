@@ -118,7 +118,7 @@ function ThickFooter({ $colorScheme }) {
           <li><Link to={`/`}>Design Philosophy</Link></li>
           <li><Link to={`/art`}>Art Portfolio</Link></li>
           <li><Link to={`/photography`}>Photo Portfolio</Link></li>
-          <li><Link to={`/career`}>Career Experience</Link></li>
+          <li><Link to={`/career`}>Work Experience</Link></li>
         </Stack>
         <Stack $colorScheme={$colorScheme}>
           <li><b>Contact</b></li>

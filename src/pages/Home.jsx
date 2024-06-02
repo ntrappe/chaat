@@ -85,7 +85,7 @@ const IntroText = styled.div`
   p {
     font-family: 'SF Pro Display';
     text-align: center;
-    color: var(--samoyed);
+    color: var(--cloud);
     line-height: 1.5;
     font-weight: 300;
     letter-spacing: .012em;
@@ -103,7 +103,7 @@ const IntroText = styled.div`
   }
 
   a {
-    color: var(--shark);
+    color: white;
     font-weight: 400;
   }
 
