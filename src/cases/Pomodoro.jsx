@@ -1,6 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import PomodoroPrev from '../assets/case-study-images/pomodoro/pomodoro-preview.png';
+import Pomofocus from '../assets/case-study-images/pomodoro/pomofocus.png';
+import Wireframe1 from '../assets/case-study-images/pomodoro/wireframe_1.png';
+import Wireframe2 from '../assets/case-study-images/pomodoro/wireframe_2.png';
+import Mockup from '../assets/case-study-images/pomodoro/roadmap_features1.png';
+import BadBehavior from '../assets/case-study-images/pomodoro/badbehavior.png';
 
 /* -------------- Start Constants -------------- */
 const SCROLL_MOVE_DURATION = 250;   // in miliseconds
@@ -146,6 +151,10 @@ const PomodoroSection = styled.section`
 
   li b {
     font-weight: 400;
+  }
+
+  i {
+    font-style: italic;
   }
 `;
 
@@ -478,13 +487,24 @@ function Pomodoro({ $sidebarState }) {
             If we had been hired to create a timer—rather than assigned it in class—we would want customers 
             to use our product. To do this, we would have to position ourselves uniquely on the market and 
             find ways to prove that our solution was superior. As a team, we investigated the 6 most 
-            popular timers. A number of problems emerged:
+            popular timers. 
           </p>
-          <ul>
-            <li>Most timers had a pause/stop button during a “pomodoro” which violated the technique (it should be forfeited)</li>
-            <li>All the timers had salient colors, gamification, or notifications—all of which were distracting (another violation)</li>
-            <li>Some timers lacked clear signifiers or feedback which reduced usability</li>
-          </ul>
+          
+          <PomodoroGraphic>
+            <img 
+              src={Pomofocus}
+              alt={'Example of a popular Pomodoro Timer, Pomofocus, with a Pause button'}
+            />
+          </PomodoroGraphic>
+          <p>A number of problems emerged:
+            <ul>
+              <li>Most timers had a pause/stop button during a “pomodoro” which violated the 
+                technique (it should be forfeited).</li>
+              <li>All the timers had salient colors, gamification, or notifications—all of 
+                which were distracting (another violation).</li>
+              <li>Some timers lacked clear signifiers or feedback which reduced usability.</li>
+            </ul>
+          </p>
           <h4>Try the Technique</h4>
           <p>
             While it would be better design practice to source a group of engineering students and conduct a 
@@ -495,6 +515,65 @@ function Pomodoro({ $sidebarState }) {
         </PomodoroSection>
         <PomodoroSection id='approach-section'>
           <h3>Approach</h3>
+          <h4>Simplicity is Key</h4>
+          <p>
+            As engineers, we'd rather drown in a sea of features than restrain ourselves to
+            work on something as "simple" as a timer (the horror). As a result, this project
+            was a humbling reminder that we design for users and not ourselves. We distilled 
+            our initial pile of features down to a handful by asking five questions about each:
+            <ul>
+              <li>Who does this benefit?</li>
+              <li>What is the context?</li>
+              <li>When would the answer work?</li>
+              <li>Where would the answer work?</li>
+              <li>Why is this a problem?</li>
+            </ul>
+          </p>
+          <h4>Sketch it Out</h4>
+          <p>
+            Next, we drew some mockups to visualize how a user might interact with our app. 
+            This helped us simplify the controls, improve the layout, and make sure the timer 
+            truly was the star of the show.
+          </p>
+          <PomodoroGraphic>
+            <img
+              src={Wireframe1}
+              alt='Wireframe showing the user enter the website and clicking on the timer 
+              to start and reset.'
+            />
+          </PomodoroGraphic>
+          <PomodoroGraphic>
+            <img
+                src={Wireframe2}
+                alt='Wireframe showing the user enter the website and clicking on the timer 
+                to start and reset.'
+              />
+          </PomodoroGraphic>
+          <h4>User Experience</h4>
+          <p>
+            Beyond simplicity, the most critical component of the app was to guide user behavior.
+            We tested different background colors for levels of salience, how many options to provide,
+            and what could be manipulated or not while working. We wanted to ensure that users would
+            not use the app as a distraction nor be distracted by it.
+          </p>
+          <PomodoroGraphic>
+            <img
+                src={Mockup}
+                alt='Two mockups of the app with a light blue background, label for current mode, 
+                prominent timer, and two buttons: restart and finish.'
+              />
+          </PomodoroGraphic>
+          <h4>Plan for Chaos</h4>
+          <p>
+            We thought about all the ways people might misuse the site, from inputting nonsense 
+            to button mashing, and made sure we had test cases covered.
+          </p>
+          <PomodoroGraphic>
+            <img
+                src={BadBehavior}
+                alt='GitHub Issue with a list of potential bad user behaviors.'
+              />
+          </PomodoroGraphic>
         </PomodoroSection>
         <PomodoroSection id='design-section'>
           <h3>Design</h3>
