@@ -6,6 +6,10 @@ import Wireframe1 from '../assets/case-study-images/pomodoro/wireframe_1.png';
 import Wireframe2 from '../assets/case-study-images/pomodoro/wireframe_2.png';
 import Mockup from '../assets/case-study-images/pomodoro/roadmap_features1.png';
 import BadBehavior from '../assets/case-study-images/pomodoro/badbehavior.png';
+import Resized from '../assets/case-study-images/pomodoro/resized.png';
+import DarkMode from '../assets/case-study-images/pomodoro/darkmode.png';
+import InvalidInput from '../assets/case-study-images/pomodoro/invalidinput.png';
+import KeyboardShortcuts from '../assets/case-study-images/pomodoro/keyshortcuts.png';
 
 /* -------------- Start Constants -------------- */
 const SCROLL_MOVE_DURATION = 250;   // in miliseconds
@@ -577,6 +581,64 @@ function Pomodoro({ $sidebarState }) {
         </PomodoroSection>
         <PomodoroSection id='design-section'>
           <h3>Design</h3>
+          <h4>Dark Mode Default</h4>
+          <p>
+            Built with engineering students in mind, our app defaults to dark mode for less 
+            distraction. Plus, it aligns with the preference of most users for a darker interface.
+          </p>
+          <PomodoroGraphic>
+            <img
+                src={DarkMode}
+                alt='Two windows: one with dark mode by default and other light mode.'
+              />
+          </PomodoroGraphic>
+          <h4>Resizing Flexibility</h4>
+          <p>
+            We made the app fully resizable, anticipating users might want to keep it minimized 
+            or tucked away in a browser tab. This way, the Pomodoro timer can effectively function 
+            as a background process, keeping the main workspace clear.
+          </p>
+          <PomodoroGraphic>
+            <img
+                src={Resized}
+                alt='Three windows of varying sizes showing the app can be resized easily.'
+              />
+          </PomodoroGraphic>
+          <h4>Feature Hierarchy</h4>
+          <p>
+            We arranged the UI elements based on their importance. The timer, being the most  
+            critical feature, is most prominent. Next, we placed the session labels and timer
+            controls. Settings and other auxiliary features are subtly positioned, maintaining 
+            focus on the core functionality.
+          </p>
+          <h4>User Guidance</h4>
+          <p>
+            To guide user interaction, we implemented visual cues. For example, entering an 
+            invalid work session length turns the input field red and defaults to an acceptable 
+            value. Additionally, during work sessions, options that could potentially distract, 
+            like the <b>Stats</b> button or settings to adjust break length, are grayed out and 
+            made unclickable.
+          </p>
+          <PomodoroGraphic>
+            <img
+                src={InvalidInput}
+                alt='User inputed an invalid number for the length of a work session so the field
+                outline turns red and will default to an accepted length.'
+              />
+          </PomodoroGraphic>
+          <h4>Accessibility</h4>
+          <p>
+            We wanted our timer to be universally usable, so we put in the extra effort to ensure 
+            screen-reader compatibility and responsiveness to various screen sizes. To enhance 
+            usability, we also added keyboard shortcuts,
+          </p>
+          <PomodoroGraphic>
+            <img
+                src={KeyboardShortcuts}
+                alt='Screenshot of the Info section of the site explaining which keys to use to interact
+                with the site. For example, R will click the reset button.'
+              />
+          </PomodoroGraphic>
         </PomodoroSection>
         <PomodoroSection id='final-section' style={{ marginBottom: '1rem' }}>
           <h3>Final Result</h3>
@@ -675,6 +737,26 @@ function Pomodoro({ $sidebarState }) {
         </PomodoroSection>
         <PomodoroSection id='insights-section'>
           <h3>Insights</h3>
+          <p>
+            <ul>
+              <li>
+                <b>Simplicity is Hard!</b> You can't hide behind your features so you have to completely
+                understand your user, prioritize the features they need, and perfect it. 
+              </li>
+              <li>
+                <b>Usage Before Construction.</b> Understand when, how, and when your users will be using
+                your tech before you start designing your architecture. Even knowing that the app would be
+                minimizing the forced into different dimensions informed us early on that we needed a component
+                architecture and lots of flex box.
+              </li>
+              <li>
+                <b>It's Never Finished.</b> Looking back on this app years later, I see so many more improvements
+                we could make now that I've had much more experience in web development and fresh eyes. It's a
+                good reminder that your projects are never completely done, there's always opportunities for 
+                improvement.
+              </li>
+            </ul>
+          </p>
         </PomodoroSection>
       </PomodoroWrapper>
     </>
