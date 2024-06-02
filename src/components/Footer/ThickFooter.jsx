@@ -142,7 +142,7 @@ function ThickFooter({ $colorScheme }) {
           <li><a href='http://github.com/'>github.com</a></li>
           <br/>
           <li><b>Privacy Policy</b></li>
-          <li>Google Analytics</li>
+          <li><a href='https://github.com/ntrappe/chaat/blob/main/PRIVACY.md'>Google Analytics</a></li>
         </Stack>
       </FooterGrid>
       <FooterAside $colorScheme={$colorScheme}>
