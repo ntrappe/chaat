@@ -35,7 +35,7 @@ const DarkOverlay = styled.div`
   z-index: 1000;
 `;
 
-function Photography({ $navState, $colorScheme, handleNavToggle }) {
+function Visual({ $navState, $colorScheme, handleNavToggle }) {
   return (
     <>
       <GlassHeader 
@@ -47,7 +47,7 @@ function Photography({ $navState, $colorScheme, handleNavToggle }) {
       {$navState === States.EXPANDED && (
         <DarkOverlay />
       )}
-      <MainWrapper id="main">
+      <MainWrapper id='main'>
         <PhotoGrid />
       </MainWrapper>
       {/* Only show footer if sidebar isn't open */}
@@ -58,4 +58,4 @@ function Photography({ $navState, $colorScheme, handleNavToggle }) {
   )
 }
 
-export default Photography;
+export default Visual;

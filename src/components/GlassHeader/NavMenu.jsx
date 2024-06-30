@@ -143,10 +143,7 @@ function NavMenu({ $colorScheme, $navState }) {
             <Link to={`/career`} onClick={() => closeNav()}>Career</Link>
           </NavOption>
           <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/art`} onClick={() => closeNav()}>Art</Link>
-          </NavOption>
-          <NavOption $navState={$navState} $colorScheme={$colorScheme}>
-            <Link to={`/photography`} onClick={() => closeNav()}>Photography</Link>
+            <Link to={`/visual`} onClick={() => closeNav()}>Visual</Link>
           </NavOption>
         </NavMenuOptions>
       </NavMenuTray>

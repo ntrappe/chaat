@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
 import ThickFooter from '../components/Footer/ThickFooter.jsx';
+import Tile from '../components/Core/Tile.jsx';
 
 const States = {
   EXPANDED: 'expanded',
@@ -95,13 +96,14 @@ function Career({ $navState, $colorScheme, handleNavToggle }) {
         <DarkOverlay />
       )}
       <MainWrapper id="main">
-        <CareerWrapper>
+        <Tile/>
+        {/* <CareerWrapper>
           <CareerTitle>Career</CareerTitle>
           <Note>
             <h5>Note</h5>
             <p>This page is currently under construction. Please check back later.</p>
           </Note>
-        </CareerWrapper>
+        </CareerWrapper> */}
       </MainWrapper>
       {$navState !== States.EXPANDED && (
         <ThickFooter $colorScheme={$colorScheme} />

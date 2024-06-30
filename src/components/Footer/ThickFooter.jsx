@@ -14,21 +14,20 @@ const FooterWrapper = styled.footer`
 
 const FooterGrid = styled.div`
   display: grid;
-  /* even though we have 4 stacks, we want sitemap to take up 2 spots to be more 
-   * salient so it'll be set to 5 */
+  /* Sitemap no longer takes up 2 stacks, so specify 5 stacks total */
   grid-template-columns: repeat(5, 1fr);
   grid-auto-flow: row;
-  gap: 2.5rem;
+  gap: 1.25rem;
   padding-bottom: 1.2em;
 
   @media (max-width: 767px) {
-    grid-template-columns: repeat(4, 1fr); /* 4 stacks across */
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
   }
 
-  @media (max-width: 625px) {
-    grid-template-columns: repeat(2, 1fr); /* 2 stacks across */
-    gap: 2rem;
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
   }
 `;
 
@@ -36,32 +35,12 @@ const Stack = styled.ul`
   min-width: 0;
   line-spacing: 1.5;
 
-  &:first-child {
-    border-right: 1px solid blue;
-    border-color: ${(props) => (props.$colorScheme === 'dark' ? `var(--pavement)` : `var(--cloud)`)};
-    grid-column: span 2;
-
-    @media (max-width: 767px) {
-      grid-column: span 1;
-      border-right: none;
-    }
-
-    @media (max-width: 625px) {
-      grid-column: span 1;
-    }
-  }
-
   li {
     font-family: 'SF Pro';
     font-size: 0.7em;
     font-weight: 400;
     color: ${(props) => (props.$colorScheme === 'dark' ? `var(--shark)` : `var(--concrete)`)};
     margin-bottom: 0.8em;
-
-    @media (max-width: 767px) {
-      font-size: 0.65em;
-      margin-bottom: 0.65em;
-    }
   }
 
   li:last-child {
@@ -115,34 +94,31 @@ function ThickFooter({ $colorScheme }) {
         <Stack $colorScheme={$colorScheme}>
           <li><b>Sitemap</b></li>
           <li><Link to={`/projects`}>Design Case Studies</Link></li>
-          <li><Link to={`/`}>Design Philosophy</Link></li>
-          <li><Link to={`/art`}>Art Portfolio</Link></li>
-          <li><Link to={`/photography`}>Photo Portfolio</Link></li>
-          <li><Link to={`/career`}>Career Experience</Link></li>
+          <li><Link to={`/career`}>Work Experience</Link></li>
+          <li><Link to={`/visual`}>Visual Portfolio</Link></li>
         </Stack>
         <Stack $colorScheme={$colorScheme}>
-          <li><b>Contact</b></li>
+          <li><b>Contact & Help</b></li>
           <li><a href='mailto:ntrappe@icloud.com'>Email</a></li>
           <li><a href='http://linkedin.com/in/ntrappe/'>LinkedIn</a></li>
-          <br/>
-          <li><b>Help</b></li>
-          <li><a href='https://github.com/ntrappe/chaat/issues'>Report Issues</a></li>
+          <li><a href='https://github.com/ntrappe/chaat/issues'>Report an Issue</a></li>
         </Stack>
         <Stack $colorScheme={$colorScheme}>
           <li><b>Tech Used</b></li>
-          <li><a href='https://html.spec.whatwg.org'>HTML</a></li>
-          <li><a href='https://www.w3schools.com/css/'>CSS</a></li>
           <li><a href='https://react.dev'>React</a></li>
           <li><a href='https://vitejs.dev'>Vite</a></li>
-          <li><a href='https://www.apple.com/keynote/'>Keynote</a></li>
+          <li><a href='https://www.cypress.io'>Cypress</a></li>
         </Stack>
         <Stack $colorScheme={$colorScheme}>
           <li><b>Inspiration</b></li>
-          <li><a href='https://developer.apple.com/design/'>apple.com</a></li>
-          <li><a href='http://github.com/'>github.com</a></li>
-          <br/>
-          <li><b>Privacy Policy</b></li>
-          <li>Google Analytics</li>
+          <li><a href='https://developer.apple.com/design/'>Apple</a></li>
+          <li><a href='https://primer.style'>Primer</a></li>
+          <li><a href='https://brand.slackhq.com/illustration'>Slack</a></li>
+        </Stack>
+        <Stack $colorScheme={$colorScheme}>
+          <li><b>Policies</b></li>
+          <li><a href='https://github.com/ntrappe/chaat/blob/main/PRIVACY.md'>Privacy</a></li>
+          <li><a href='https://github.com/ntrappe/chaat/blob/main/COPYRIGHT.md'>Copyright</a></li>
         </Stack>
       </FooterGrid>
       <FooterAside $colorScheme={$colorScheme}>

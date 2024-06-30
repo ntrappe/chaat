@@ -9,8 +9,7 @@ import Flow from './cases/Flow.jsx';
 import Vacuum from './cases/Vacuum.jsx';
 import Calendar from './cases/Calendar.jsx';
 import Home from './pages/Home.jsx';
-import Photography from './pages/Photography.jsx';
-import Art from './pages/Art.jsx';
+import Visual from './pages/Visual.jsx';
 import Career from './pages/Career.jsx';
 import PageNotFound from './pages/PageNotFound.jsx';
 import Page from './components/Core/Page.jsx';
@@ -30,9 +29,8 @@ export default function App() {
         <Route path='/projects/flow' element={<Page customComponent={Flow} showAside={false} />} />
         <Route path='/projects/vacuum' element={<Page customComponent={Vacuum} showAside={false} />} />
         <Route path='/projects/calendar' element={<Page customComponent={Calendar} showAside={false} />} />
-        <Route path='/photography' element={<MinimalPage customComponent={Photography} $colorScheme={'light'}/>} />
+        <Route path='/visual' element={<MinimalPage customComponent={Visual} $colorScheme={'light'}/>} />
         <Route path='/career' element={<MinimalPage customComponent={Career} $colorScheme={'light'}/>} />
-        <Route path='/art' element={<MinimalPage customComponent={Art} $colorScheme={'light'} />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </HashRouter>
