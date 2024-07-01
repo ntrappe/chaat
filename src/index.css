@@ -127,6 +127,10 @@ html {
   --aside-width: 150px;
   --app-height: 100vh;
 
+  --divider-width: 1.5px;
+  --min-stack-width: 100px;
+  --stack-gap: 25px;
+
   --paper: #f8f8fa;
   --snow: #e8e8e8;
   --samoyed: #e4e4e5;

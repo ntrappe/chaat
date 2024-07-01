@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import Stack from '../Core/Stack';
 
 const FooterWrapper = styled.footer`
   position: relative;
@@ -14,55 +14,13 @@ const FooterWrapper = styled.footer`
 
 const FooterGrid = styled.div`
   display: grid;
-  /* Sitemap no longer takes up 2 stacks, so specify 5 stacks total */
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(var(--min-stack-width), 1fr));
   grid-auto-flow: row;
-  gap: 1.25rem;
-  padding-bottom: 1.2em;
-
-  @media (max-width: 767px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  @media (max-width: 600px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-  }
-`;
-
-const Stack = styled.ul`
-  min-width: 0;
-  line-spacing: 1.5;
-
-  li {
-    font-family: 'SF Pro';
-    font-size: 0.7em;
-    font-weight: 400;
-    color: ${(props) => (props.$colorScheme === 'dark' ? `var(--shark)` : `var(--concrete)`)};
-    margin-bottom: 0.8em;
-  }
-
-  li:last-child {
-    margin-bottom: 0;
-  }
-
-  li b {
-    font-weight: 600;
-    color: ${(props) => (props.$colorScheme === 'dark' ? `var(--cloud)` : `var(--asphalt)`)};
-  }
-
-  a {
-    color: inherit;
-    font-weight: inherit;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
+  gap: var(--stack-gap);
 `;
 
 const FooterAside = styled.div`
+  margin-top: 1em;
   padding-top: 1.2em;
   border-top: 1px solid red;
   border-color: ${(props) => (props.$colorScheme === 'dark' ? `var(--pavement)` : `var(--cloud)`)};
@@ -91,34 +49,34 @@ function ThickFooter({ $colorScheme }) {
   return (
     <FooterWrapper $colorScheme={$colorScheme}>
       <FooterGrid $colorScheme={$colorScheme}>
-        <Stack $colorScheme={$colorScheme}>
-          <li><b>Sitemap</b></li>
-          <li><Link to={`/projects`}>Design Case Studies</Link></li>
-          <li><Link to={`/career`}>Work Experience</Link></li>
-          <li><Link to={`/visual`}>Visual Portfolio</Link></li>
+        <Stack color={$colorScheme}>
+          <Stack.Heading>Sitemap</Stack.Heading>
+          <Stack.InternalPage page={'projects'}>Design Case Studies</Stack.InternalPage>
+          <Stack.InternalPage page={'career'}>Work Experience</Stack.InternalPage>
+          <Stack.InternalPage page={'visual'}>Visual Portfolio</Stack.InternalPage>
         </Stack>
-        <Stack $colorScheme={$colorScheme}>
-          <li><b>Contact & Help</b></li>
-          <li><a href='mailto:ntrappe@icloud.com'>Email</a></li>
-          <li><a href='http://linkedin.com/in/ntrappe/'>LinkedIn</a></li>
-          <li><a href='https://github.com/ntrappe/chaat/issues'>Report an Issue</a></li>
+        <Stack color={$colorScheme}>
+          <Stack.Heading>Contact & Help</Stack.Heading>
+          <Stack.ExternalLink page={'mailto:ntrappe@icloud.com'}>Email</Stack.ExternalLink>
+          <Stack.ExternalLink page={'http://linkedin.com/in/ntrappe'}>LinkedIn</Stack.ExternalLink>
+          <Stack.ExternalLink page={'https://github.com/ntrappe/chaat/issues'}>Report an Issue</Stack.ExternalLink>
         </Stack>
-        <Stack $colorScheme={$colorScheme}>
-          <li><b>Tech Used</b></li>
-          <li><a href='https://react.dev'>React</a></li>
-          <li><a href='https://vitejs.dev'>Vite</a></li>
-          <li><a href='https://www.cypress.io'>Cypress</a></li>
+        <Stack color={$colorScheme}>
+          <Stack.Heading>Tech Used</Stack.Heading>
+          <Stack.ExternalLink page={'https://react.dev'}>React</Stack.ExternalLink>
+          <Stack.ExternalLink page={'https://vitejs.dev'}>Vite</Stack.ExternalLink>
+          <Stack.ExternalLink page={'https://www.cypress.io'}>Cypress</Stack.ExternalLink>
         </Stack>
-        <Stack $colorScheme={$colorScheme}>
-          <li><b>Inspiration</b></li>
-          <li><a href='https://developer.apple.com/design/'>Apple</a></li>
-          <li><a href='https://primer.style'>Primer</a></li>
-          <li><a href='https://brand.slackhq.com/illustration'>Slack</a></li>
+        <Stack color={$colorScheme}>
+          <Stack.Heading>Inspiration</Stack.Heading>
+          <Stack.ExternalLink page={'https://developer.apple.com/design/'}>Apple</Stack.ExternalLink>
+          <Stack.ExternalLink page={'https://primer.style'}>Primer</Stack.ExternalLink>
+          <Stack.ExternalLink page={'https://brand.slackhq.com/illustration'}>Slack</Stack.ExternalLink>
         </Stack>
-        <Stack $colorScheme={$colorScheme}>
-          <li><b>Policies</b></li>
-          <li><a href='https://github.com/ntrappe/chaat/blob/main/PRIVACY.md'>Privacy</a></li>
-          <li><a href='https://github.com/ntrappe/chaat/blob/main/COPYRIGHT.md'>Copyright</a></li>
+        <Stack color={$colorScheme}>
+          <Stack.Heading>Policies</Stack.Heading>
+          <Stack.ExternalLink page={'https://github.com/ntrappe/chaat/blob/main/PRIVACY.md'}>Privacy</Stack.ExternalLink>
+          <Stack.ExternalLink page={'https://github.com/ntrappe/chaat/blob/main/COPYRIGHT.md'}>Copyright</Stack.ExternalLink>
         </Stack>
       </FooterGrid>
       <FooterAside $colorScheme={$colorScheme}>
