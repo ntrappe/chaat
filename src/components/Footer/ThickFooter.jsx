@@ -62,10 +62,9 @@ function ThickFooter({ $colorScheme }) {
           <Stack.ExternalLink page={'https://github.com/ntrappe/chaat/issues'}>Report an Issue</Stack.ExternalLink>
         </Stack>
         <Stack color={$colorScheme}>
-          <Stack.Heading>Tech Used</Stack.Heading>
-          <Stack.ExternalLink page={'https://react.dev'}>React</Stack.ExternalLink>
-          <Stack.ExternalLink page={'https://vitejs.dev'}>Vite</Stack.ExternalLink>
-          <Stack.ExternalLink page={'https://www.cypress.io'}>Cypress</Stack.ExternalLink>
+          <Stack.Heading>Policies</Stack.Heading>
+          <Stack.ExternalLink page={'https://github.com/ntrappe/chaat/blob/main/PRIVACY.md'}>Privacy</Stack.ExternalLink>
+          <Stack.ExternalLink page={'https://github.com/ntrappe/chaat/blob/main/COPYRIGHT.md'}>Copyright</Stack.ExternalLink>
         </Stack>
         <Stack color={$colorScheme}>
           <Stack.Heading>Inspiration</Stack.Heading>
@@ -73,14 +72,9 @@ function ThickFooter({ $colorScheme }) {
           <Stack.ExternalLink page={'https://primer.style'}>Primer</Stack.ExternalLink>
           <Stack.ExternalLink page={'https://brand.slackhq.com/illustration'}>Slack</Stack.ExternalLink>
         </Stack>
-        <Stack color={$colorScheme}>
-          <Stack.Heading>Policies</Stack.Heading>
-          <Stack.ExternalLink page={'https://github.com/ntrappe/chaat/blob/main/PRIVACY.md'}>Privacy</Stack.ExternalLink>
-          <Stack.ExternalLink page={'https://github.com/ntrappe/chaat/blob/main/COPYRIGHT.md'}>Copyright</Stack.ExternalLink>
-        </Stack>
       </FooterGrid>
       <FooterAside $colorScheme={$colorScheme}>
-        <p>To view the source code of this website, visit <a href='https://github.com/ntrappe/chaat'>github.com/ntrappe/chaat</a>.</p>
+        <p>Coded in React. Tested in Cypress. View the source code at <a href='https://github.com/ntrappe/chaat'>github.com/ntrappe/chaat</a>.</p>
       </FooterAside>
     </FooterWrapper>
   )
