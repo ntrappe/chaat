@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import RockPrev from '../assets/case-study-images/rock/rock-preview.png';
-import Pinnacles from '../assets/case-study-images/rock/pinnacles.jpg';
-import MarketResearch from '../assets/case-study-images/rock/MarketResearch.png';
-import PreviewTestA from '../assets/case-study-images/rock/PreviewTestA.png';
-import PreviewTestB from '../assets/case-study-images/rock/PreviewTestB.png';
-import PreviewTestC from '../assets/case-study-images/rock/PreviewTestC.png';
 
 /* -------------- Start Constants -------------- */
 const SCROLL_MOVE_DURATION = 250;   // in miliseconds
@@ -314,7 +308,7 @@ function Rock({ $sidebarState }) {
         <RockTag id='case-study-tag'>An app to explore national parks and find the ideal hike.</RockTag>
         <RockGraphic id='case-study-preview'>
           <img
-            src={RockPrev}
+            src='/case-study-images/rock/rock-preview.png'
             alt='Three iphones lined up. The first with the Rock app opening up. Second with 
               a list of national parks. Third with a national park, Zion, selected and basic
               information about the park.'
@@ -371,7 +365,7 @@ function Rock({ $sidebarState }) {
           </p>
           <RockGraphic id='case-study-preview'>
             <img
-              src={Pinnacles}
+              src='/case-study-images/rock/pinnacles.jpg'
               alt='A mound of cinnamon-colored rocks backed by a blue sky'
             />
           </RockGraphic>
@@ -441,7 +435,7 @@ function Rock({ $sidebarState }) {
           </p>
           <RockGraphic id='case-study-preview'>
             <img
-              src={MarketResearch}
+              src='/case-study-images/rock/MarketResearch.png'
               alt='A mound of cinnamon-colored rocks backed by a blue sky'
             />
           </RockGraphic>
@@ -501,7 +495,7 @@ function Rock({ $sidebarState }) {
           </p>
           <RockGraphic id='case-study-preview'>
             <img
-              src={PreviewTestA}
+              src='/case-study-images/rock/PreviewTestA.png'
               alt='Four National Park preview component designs. The first has a drop shadow and the preview is a full
               color. The second uses a drop shadow but more diffused with a white background. The third uses no shadow 
               but a thin outline and colorful backgrounds. The fourth uses a thin outline and no color.'
@@ -510,7 +504,7 @@ function Rock({ $sidebarState }) {
           <p>We also played around with the size of the previews, what information to display, and a light vs dark mode.</p>
           <RockGraphic id='case-study-preview'>
             <img
-              src={PreviewTestB}
+              src='/case-study-images/rock/PreviewTestB.png'
               alt='More National Park previews. Half with soft pastel backgrounds and half with a dark grey.'
             />
           </RockGraphic>
@@ -522,7 +516,7 @@ function Rock({ $sidebarState }) {
           </p>
           <RockGraphic>
             <img
-              src={PreviewTestC}
+              src='/case-study-images/rock/PreviewTestC.png'
               alt='Four National Park preview component designs. The first has a drop shadow and the preview is a full
               color. The second uses a drop shadow but more diffused with a white background. The third uses no shadow 
               but a thin outline and colorful backgrounds. The fourth uses a thin outline and no color.'

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import VacuumPreviewImg from '../assets/case-study-images/vacuum-preview.png';
 
 const States = {
   EXPANDED: 'expanded',
@@ -65,7 +64,7 @@ function Vacuum({ $sidebarState, }) {
         <VacuumTag id='case-study-tag'>Coming soon.</VacuumTag>
         <VacuumPreview id='case-study-preview'>
           <img
-            src={VacuumPreviewImg}
+            src='/case-study-images/vacuum-preview.png'
             alt='A badly designed vacuum left of the redesign'
           />
         </VacuumPreview>

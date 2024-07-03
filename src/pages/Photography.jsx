@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
-import PhotoGrid from '../components/Core/PhotoGrid.jsx';
 import ThickFooter from '../components/Footer/ThickFooter.jsx';
 
 const States = {
@@ -48,7 +47,7 @@ function Photography({ $navState, $colorScheme, handleNavToggle }) {
         <DarkOverlay />
       )}
       <MainWrapper id="main">
-        <PhotoGrid />
+        sup
       </MainWrapper>
       {/* Only show footer if sidebar isn't open */}
       {($navState !== States.EXPANDED) && (

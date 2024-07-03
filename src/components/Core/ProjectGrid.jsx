@@ -1,13 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import BookPre from '../../assets/project-previews/book-preview.png';
-import PomodoroPre from '../../assets/project-previews/pomodoro-preview.png';
-import MountainPre from '../../assets/project-previews/mountain-preview.png';
-import VacuumPre from '../../assets/project-previews/vacuum-preview.png';
-import FlowPre from '../../assets/project-previews/flow-preview.png';
-import CalPre from '../../assets/project-previews/calendar-preview.png';
-import MuseumPre from '../../assets/project-previews/museum-preview.png';
 
 const States = {
   EXPANDED: 'expanded',
@@ -175,7 +168,7 @@ function ProjectGrid({ $mode }) {
             <Link to={`/projects/museum`} onClick={() => setItem(DesignCases[0])}>
               <CardImage>
                 <img 
-                  src={MuseumPre}
+                  src='/project-previews/museum-preview.png'
                   alt="Bust of a man with his head and neck on a purple-pink background"
                 />
               </CardImage>
@@ -188,7 +181,7 @@ function ProjectGrid({ $mode }) {
             <Link to={`/projects/pomodoro`} onClick={() => setItem(DesignCases[2])}>
               <CardImage>
                 <img 
-                  src={PomodoroPre}
+                  src='/project-previews/pomodoro-preview.png'
                   alt="tomato representing a pomodoro on a red background"
                 />
               </CardImage>
@@ -201,7 +194,7 @@ function ProjectGrid({ $mode }) {
             <Link to={`/projects/rock`} onClick={() => setItem(DesignCases[3])}>
               <CardImage>
                 <img 
-                  src={MountainPre}
+                  src='/project-previews/mountain-preview.png'
                   alt="mountain with two peaks on a blue background"
                 />
               </CardImage>
@@ -217,7 +210,7 @@ function ProjectGrid({ $mode }) {
             <Link to={`/projects/bookify`} onClick={() => setItem(EngCases[0])}>
               <CardImage>
                 <img 
-                  src={BookPre}
+                  src='/project-previews/book-preview.png'
                   alt="open book on a green background"
                 />
               </CardImage>
@@ -230,7 +223,7 @@ function ProjectGrid({ $mode }) {
             <Link to={`/projects/flow`} onClick={() => setItem(EngCases[1])}>
               <CardImage>
                 <img 
-                  src={FlowPre}
+                  src='/project-previews/flow-preview.png'
                   alt="tomato representing a pomodoro on a red background"
                 />
               </CardImage>
@@ -243,7 +236,7 @@ function ProjectGrid({ $mode }) {
             <Link to={`/projects/calendar`} onClick={() => setItem(DesignCases[1])}>
               <CardImage>
                 <img 
-                  src={CalPre}
+                  src='/project-previews/calendar-preview.png'
                   alt="calendar icon with date january 20th on a cyan background"
                 />
               </CardImage>
@@ -256,7 +249,7 @@ function ProjectGrid({ $mode }) {
             <Link to={`/projects/vacuum`} onClick={() => setItem(DesignCases[4])}>
               <CardImage>
                 <img 
-                  src={VacuumPre}
+                  src='/project-previews/vacuum-preview.png'
                   alt="side profile of a vacuum on a purple background"
                 />
               </CardImage>

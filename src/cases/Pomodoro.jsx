@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import PomodoroPrev from '../assets/case-study-images/pomodoro/pomodoro-preview.png';
 
 /* -------------- Start Constants -------------- */
 const SCROLL_MOVE_DURATION = 250;   // in miliseconds
@@ -420,7 +419,7 @@ function Pomodoro({ $sidebarState }) {
         <PomodoroTag id='case-study-tag'>A web-based timer designed to curb procrastination.</PomodoroTag>
         <PomodoroGraphic id='case-study-preview'>
           <img
-            src={PomodoroPrev}
+            src='/case-study-images/pomodoro/pomodoro-preview.png'
             alt='Tomato Pomodoro Icon'
           />
         </PomodoroGraphic>

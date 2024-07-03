@@ -2,13 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader';
 import Hello from '../components/Home/Hello';
-import ThickFooter from '../components/Footer/ThickFooter';
-import Cairns from '../assets/page-icons/cairns.png';
-import Mushroom from '../assets/page-icons/mushroom.png';
-import Lego from '../assets/page-icons/lego.png';
-import Subtitles from '../assets/page-icons/subtitles.png';
-import Hand from '../assets/page-icons/hand.png';
-import Palette from '../assets/page-icons/palette.png';
+import Footer from '../features/Footer.jsx';
 
 const States = {
   EXPANDED: 'expanded',
@@ -257,7 +251,7 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
           <WisdomGrid>
             <Wisdom>
               <img
-                src={Mushroom}
+                src='/page-icons/mushroom.png'
                 alt="Red mushroom with spots"
               />
               <h3>Forage for Mushrooms</h3>
@@ -267,7 +261,7 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
             </Wisdom>
             <Wisdom>
               <img
-                src={Subtitles}
+                src='/page-icons/subtitles.png'
                 alt="Stack of three red rocks"
               />
               <h3>Think About Subtitles</h3>
@@ -277,7 +271,7 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
             </Wisdom>
             <Wisdom>
               <img
-                src={Lego}
+                src='/page-icons/lego.png'
                 alt="Stack of three red rocks"
               />
               <h3>Test Like a Toddler</h3>
@@ -287,7 +281,7 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
             </Wisdom>
             <Wisdom>
               <img
-                src={Cairns}
+                src='/page-icons/cairns.png'
                 alt="Stack of three red rocks"
               />
               <h3>Follow the Cairns</h3>
@@ -297,7 +291,7 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
             </Wisdom>
             <Wisdom>
               <img
-                src={Hand}
+                src='/page-icons/hand.png'
                 alt="Hand with pointer finger extended"
               />
               <h3>An Extension of Us</h3>
@@ -306,7 +300,7 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
             </Wisdom>
             <Wisdom>
               <img
-                src={Palette}
+                src='/page-icons/palette.png'
                 alt="Paint palette with a few patches of paint"
               />
               <h3>Art is Selfish, Design is <em>Selfless</em></h3>
@@ -318,7 +312,7 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
       </MainWrapper>
       {/* Only show footer if sidebar isn't open */}
       {$navState !== States.EXPANDED && (
-        <ThickFooter $colorScheme={$colorScheme} />
+        <Footer colorScheme={$colorScheme} />
       )}
     </>
   )

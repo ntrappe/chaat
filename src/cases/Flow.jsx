@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import FlowPreviewImg from '../assets/case-study-images/flow-preview.png';
 
 const States = {
   EXPANDED: 'expanded',
@@ -67,7 +66,7 @@ function Flow({ $sidebarState }) {
         <FlowTag id='case-study-tag'>Coming soon.</FlowTag>
         <FlowPreview id='case-study-preview'>
           <img
-            src={FlowPreviewImg}
+            src='/case-study-images/flow-preview.png'
             alt='Gas flowing through a sensor array'
           />
         </FlowPreview>

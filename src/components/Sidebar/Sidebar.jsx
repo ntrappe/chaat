@@ -1,20 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import BookActive from '../../assets/project-icons/book-active.png';
-import BookInactive from '../../assets/project-icons/book-inactive.png';
-import PomoActive from '../../assets/project-icons/pomodoro-active.png';
-import PomoInactive from '../../assets/project-icons/pomodoro-inactive.png';
-import MountainActive from '../../assets/project-icons/mountain-active.png';
-import MountainInactive from '../../assets/project-icons/mountain-inactive.png';
-import CalendarActive from '../../assets/project-icons/calendar-active.png';
-import CalendarInactive from '../../assets/project-icons/calendar-inactive.png';
-import VacuumActive from '../../assets/project-icons/vacuum-active.png';
-import VacuumInactive from '../../assets/project-icons/vacuum-inactive.png';
-import FlowActive from '../../assets/project-icons/flow-active.png';
-import FlowInactive from '../../assets/project-icons/flow-inactive.png';
-import MuseumActive from '../../assets/project-icons/bust-active.png';
-import MuseumInactive from '../../assets/project-icons/bust-inactive.png';
 
 const States = {
   EXPANDED: 'expanded',
@@ -325,7 +311,8 @@ function Sidebar({ $sidebarState }) {
                   selected={selectedItem === DesignCases[0]}
                 >
                   <img
-                    src={selectedItem === DesignCases[0] ? MuseumActive : MuseumInactive}
+                    src={selectedItem === DesignCases[0] ? 
+                      '/project-icons/bust-active.png' : '/project-icons/bust-inactive.png'}
                     alt="Shape of bust with a man's head and neck"
                   />
                   <p>Museum Poster</p>
@@ -337,7 +324,8 @@ function Sidebar({ $sidebarState }) {
                   selected={selectedItem === DesignCases[1]}
                 >
                   <img
-                    src={selectedItem === DesignCases[1] ? CalendarActive : CalendarInactive}
+                    src={selectedItem === DesignCases[1] ? 
+                      '/project-icons/calendar-active.png' : '/project-icons/calendar-inactive.png'}
                     alt="Calendar icon with January 20th date"
                   />
                   <p>NPS Calendar</p>
@@ -349,7 +337,8 @@ function Sidebar({ $sidebarState }) {
                   selected={selectedItem === DesignCases[2]}
                 >
                   <img
-                    src={selectedItem === DesignCases[2] ? PomoActive : PomoInactive}
+                    src={selectedItem === DesignCases[2] ? 
+                      '/project-icons/pomodoro-active.png' : '/project-icons/pomodoro-inactive.png'}
                     alt="Tomato Pomodoro Icon"
                   />
                   <p>Pomodoro Timer</p>
@@ -361,7 +350,8 @@ function Sidebar({ $sidebarState }) {
                   selected={selectedItem === DesignCases[3]}
                 >
                   <img
-                    src={selectedItem === DesignCases[3] ? MountainActive : MountainInactive}
+                    src={selectedItem === DesignCases[3] ? 
+                      '/project-icons/mountain-active.png' : '/project-icons/mountain-inactive.png'}
                     alt="Mountain Icon"
                   />
                   <p>Rock App</p>
@@ -373,7 +363,8 @@ function Sidebar({ $sidebarState }) {
                   selected={selectedItem === DesignCases[4]}
                 >
                   <img
-                    src={selectedItem === DesignCases[4] ? VacuumActive : VacuumInactive}
+                    src={selectedItem === DesignCases[4] ? 
+                      '/project-icons/vacuum-active.png' : '/project-icons/vacuum-inactive.png'}
                     alt="Upright vacuum Icon"
                   />
                   <p>Vacuum Redesign</p>
@@ -392,7 +383,8 @@ function Sidebar({ $sidebarState }) {
                   selected={selectedItem === EngCases[0]}
                 >
                 <img
-                  src={selectedItem === EngCases[0] ? BookActive : BookInactive}
+                  src={selectedItem === EngCases[0] ? 
+                    '/project-icons/book-active.png' : '/project-icons/book-inactive.png'}
                   alt="Book Icon"
                 />
                 <p>Bookify</p>
@@ -404,7 +396,8 @@ function Sidebar({ $sidebarState }) {
                   selected={selectedItem === EngCases[1]}
                 >
                 <img
-                  src={selectedItem === EngCases[1] ? FlowActive : FlowInactive}
+                  src={selectedItem === EngCases[1] ? 
+                    '/project-icons/flow-active.png' : '/project-icons/flow-inactive.png'}
                   alt="Box with a wavy line moving through"
                 />
                 <p>Flow Controller</p>

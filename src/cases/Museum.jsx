@@ -1,19 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import MuseumPrev from '../assets/case-study-images/museum/museum-wall.png';
-import FinalPoster from '../assets/case-study-images/museum/poster-official.png';
-import ContentReq from '../assets/case-study-images/museum/content-req.png';
-import HouseOriginal from '../assets/case-study-images/museum/HouseOriginal.png';
-import HouseLines from '../assets/case-study-images/museum/HouseLines.png';
-import HouseRender from '../assets/case-study-images/museum/HouseRender.png';
-import RoughMockups from '../assets/case-study-images/museum/RoughMockups.png';
-import BWMock1 from '../assets/case-study-images/museum/BWMockup1.png';
-import BWMock2 from '../assets/case-study-images/museum/BWMockup2.png';
-import BWMock3 from '../assets/case-study-images/museum/BWMockup3.png';
-import TitleMock from '../assets/case-study-images/museum/TitleMockup.png';
-import ColorMock1 from '../assets/case-study-images/museum/ColorMockup1.png';
-import ColorMock2 from '../assets/case-study-images/museum/ColorMockup2.png';
-import FinalMaybe from '../assets/case-study-images/museum/FinalMaybe.png';
 
 /* -------------- Start Constants -------------- */
 const SCROLL_MOVE_DURATION = 250;   // in miliseconds
@@ -313,7 +299,7 @@ function Museum({ $sidebarState }) {
         <MuseumTag id='case-study-tag'>A poster to encourage the public to learn about unique architecture.</MuseumTag>
         <MuseumGraphic id='case-study-preview'>
           <img
-            src={MuseumPrev}
+            src='/case-study-images/museum/museum-wall.png'
             alt='Three iphones lined up. The first with the Museum app opening up. Second with 
               a list of national parks. Third with a national park, Zion, selected and basic
               information about the park.'
@@ -335,7 +321,7 @@ function Museum({ $sidebarState }) {
             </OverviewBox>
             <OverviewBox>
               <h4>Download It</h4>
-              <p><a href={FinalPoster} download>poster.png</a></p>
+              <p><a href='/case-study-images/museum/poster-official.png' download>poster.png</a></p>
             </OverviewBox>
           </OverviewGrid>
         </MuseumSection>
@@ -367,7 +353,7 @@ function Museum({ $sidebarState }) {
           </p>
           <MuseumGraphic>
             <img
-              src={ContentReq}
+              src='/case-study-images/museum/content-req.png'
               alt='3 pages of text for the museum poster'
             />
           </MuseumGraphic>
@@ -443,13 +429,13 @@ function Museum({ $sidebarState }) {
           </p>
           <MuseumGraphic>
             <img
-              src={HouseOriginal}
+              src='/case-study-images/museum/HouseOriginal.png'
               alt='Modern building that looks like it is made of stacked blocks and glass'
             />
           </MuseumGraphic>
           <MuseumGraphic>
             <img
-              src={HouseLines}
+              src='/case-study-images/museum/HouseLines.png'
               alt='Previous image but more faint and with a few lines outlining the edges'
             />
           </MuseumGraphic>
@@ -459,7 +445,7 @@ function Museum({ $sidebarState }) {
           </p>
           <MuseumGraphic>
             <img
-              src={HouseRender}
+              src='/case-study-images/museum/HouseRender.png'
               alt='Lines outlining the edges and shapes of the previous image'
             />
           </MuseumGraphic>
@@ -472,7 +458,7 @@ function Museum({ $sidebarState }) {
           </p>
           <MuseumGraphic>
             <img
-              src={RoughMockups}
+              src='/case-study-images/museum/RoughMockups.png'
               alt='Pencil and paper outlines of the poster layout'
             />
           </MuseumGraphic>
@@ -483,19 +469,19 @@ function Museum({ $sidebarState }) {
           </p>
           <MuseumGraphic $orientation={'vertical'}>
             <img
-              src={BWMock1}
+              src='/case-study-images/museum/BWMockup1.png'
               alt='Layout of poster with speaker names at top, map in center, and sessions in 2 columns'
             />
           </MuseumGraphic>
           <MuseumGraphic $orientation={'vertical'}>
             <img
-              src={BWMock2}
+              src='/case-study-images/museum/BWMockup2.png'
               alt='Layout of poster with speaker names at top, map on left, and sessions in two columns'
             />
           </MuseumGraphic>
           <MuseumGraphic $orientation={'vertical'}>
             <img
-              src={BWMock3}
+              src=''
               alt='Layout of poster with speaker names in a box with map and sessions in 3 columns'
             />
           </MuseumGraphic>
@@ -507,7 +493,7 @@ function Museum({ $sidebarState }) {
           </p>
           <MuseumGraphic>
           <img
-            src={TitleMock}
+            src='/case-study-images/museum/TitleMockup.png'
             alt='Layout of poster with speaker names in a box with map and sessions in 3 columns'
           />
           </MuseumGraphic>
@@ -515,13 +501,13 @@ function Museum({ $sidebarState }) {
           <p>I then played around with a number of shades in warm reddish browns, greys, and oranges.</p>
           <MuseumGraphic $orientation={'vertical'}>
             <img
-              src={ColorMock1}
+              src='/case-study-images/museum/ColorMockup1.png'
               alt='Layout of poster with a grey-peach background, brown-grey block for map.'
             />
           </MuseumGraphic>
           <MuseumGraphic $orientation={'vertical'}>
             <img
-              src={ColorMock2}
+              src='/case-study-images/museum/ColorMockup2.png'
               alt='Layout of poster with a grey-peach background, peach block for map.'
             />
           </MuseumGraphic>
@@ -533,7 +519,7 @@ function Museum({ $sidebarState }) {
           </p>
           <MuseumGraphic $orientation={'vertical'}>
             <img
-              src={FinalMaybe}
+              src='/case-study-images/museum/FinalMaybe.png'
               alt='Layout of poster with a grey-peach background, grey block for map'
             />
           </MuseumGraphic>
@@ -546,7 +532,7 @@ function Museum({ $sidebarState }) {
           </p>
           <MuseumGraphic $orientation={'vertical'}>
             <img
-              src={FinalPoster}
+              src='/case-study-images/museum/poster-official.png'
               alt='Final poster has 3 columns for sessions, 2 renders of buildings, a section at the bottom for info and the map'
             />
           </MuseumGraphic>
