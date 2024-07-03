@@ -13,27 +13,22 @@ const StyledWrapper = styled.div`
   @media (max-width: 767px) {
     display: none;
   }
-
-  background-color: #EEE;
 `;
 
 const StyledListWrapper = styled.ul`
   width: 100%;
-  background-color: orange;
 `;
 
 const StyledItem = styled.li`
-  background-color: #123123;
   font-size: var(--aside-text-size);
   line-height: 1.33;
   letter-spacing: -.01em;
   word-break: break-word;
   margin: 0;
   cursor: pointer;
-  padding: var(--aside-padding)
-  border-left: var(--divider-width) solid;
-  // color: ${(props) => (props.selected ? `var(--wet-concrete)` : `var(--concrete)`)};
-  color: ${(props) => (props.selected ? 'orange' : '#eee')};
+  padding: var(--aside-padding);
+  border-left: 1.5px solid;
+  color: ${(props) => (props.selected ? `var(--wet-concrete)` : `var(--concrete)`)};
   font-weight: ${(props) => (props.selected ? '400' : '300')};
   border-color: ${(props) => (props.selected ? `var(--wet-concrete)` : `var(--cloud)`)};
 
@@ -46,7 +41,6 @@ const validateOffset = (offset) => {
   // Parse input to match expected syntax of number then px/em/rem
   const regex = /^(\d*\.?\d+)(px|em|rem)$/;
   const match = offset.match(regex);
-  console.log('validate, match: ' + match);
 
   if (match) {
     // Convert first half of string to number to check values
@@ -55,7 +49,7 @@ const validateOffset = (offset) => {
 
     return numericPart > 0;
   } else {
-    // console.error('Invalid vertical offset value @Aside');
+    console.error('Invalid vertical offset value @Aside');
     return false;
   }
 }
