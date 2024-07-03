@@ -125,7 +125,13 @@ html {
   --nav-max-width: 960px;
   --nav-max-width-content: 932px;
   --med-main-width: 660px;
-  --aside-width: 150px;
+  --aside-width-narrow: 150px;
+  --aside-width-wide: 240px;
+  --aside-vertical-offset: 130px;
+  --aside-gap-narrow: 38px;
+  --aside-gap-wide: 60px;
+  --aside-text-size: 12.5px;
+  --aside-padding: 3px 0 3px 10px;
   --app-height: 100vh;
 
   --divider-width: 1.5px;
