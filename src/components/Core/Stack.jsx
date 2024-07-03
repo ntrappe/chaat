@@ -52,9 +52,9 @@ const StyledStack = styled.ul`
  * @param {*} children Text and/or links passed from parent 
  * @returns unordered list element
  */
-function Stack({ color, children }) {
+function Stack({ color = 'light', children }) {
   return (
-    <StyledStack $color={color} className='stack'>
+    <StyledStack color={color} className='stack'>
       {children}
     </StyledStack>
   ) 

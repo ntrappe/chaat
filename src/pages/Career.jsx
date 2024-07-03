@@ -11,66 +11,37 @@ const States = {
 };
 
 const MainWrapper = styled.main`
-  display: flex;
-  width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  align-self: center;
-  height: 100vh; /* maybe change later, force footer below page end */
+  background-color: skyblue;
+  display: block;
 
-  @media (max-width: 1023px) {
-    width: 600px;
-  }
-
-  @media (max-width: 767px) {
-    width: 87.5%;
 `;
 
-const CareerWrapper = styled.div`
-  display: flex;
-  flex-flow: column;
-  flex: 1 1 auto;
-  min-width: 0;
-  height: 100%;
-  padding-top: 2.35rem;
+const OverviewSection = styled.section`
+  background-color: teal;
+  height: 130px;
 `;
 
-const CareerTitle = styled.h1`
-  margin-bottom: 32px;
-  color: var(--midnight);
+const ResponsiveTileSection = styled.section`
+  display: block;
+  max-width: 1260px;
+  width: 87.5vw;
+  margin-inline: auto;
+  background-color: pink;
 
-  @media (max-width: 767px) {
-    font-size: 1.8rem;
+  @media (max-width: 734px) {
+    max-width: 480px;
   }
 `;
 
-const Note = styled.div`
-  width: fit-content;
-  border: 1px solid var(--violet);
-  border-radius: 12px;
-  background-color: var(--lilac);
-  padding: 17px 15px;
-  
-  h5 {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--violet);
-    padding-bottom: 10px;
-
-    @media (max-width: 767px) {
-      font-size: 0.8rem;
-    }
-  }
-
-  p {
-    font-size: 0.9rem;
-    line-height: 1.4;
-    color: var(--asphalt);
-
-    @media (max-width: 767px) {
-      font-size: 0.8rem;
-    }
-  }
+const TileGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: stretch;
+  grid-column-gap: 30px;
+  column-gap: 30px;
+  grid-row-gap: 30px;
+  row-gap: 30px;
+  // background-color: beige;
 `;
 
 const DarkOverlay = styled.div`
@@ -95,8 +66,30 @@ function Career({ $navState, $colorScheme, handleNavToggle }) {
       {$navState === States.EXPANDED && (
         <DarkOverlay />
       )}
-      <MainWrapper id="main">
-        <Tile/>
+      <MainWrapper className='main'>
+        <OverviewSection>hi</OverviewSection>
+        <ResponsiveTileSection id='responsive-tile-section'>
+          <TileGrid id='tile-grid'>
+            <Tile>
+              <Tile.Front>
+                <Tile.Front.Title>Hello World</Tile.Front.Title>
+                <Tile.Front.Subtitle>Hola Mundo de Aca</Tile.Front.Subtitle>
+              </Tile.Front>
+              <Tile.Back>
+                <Tile.Back.Description>This is a description</Tile.Back.Description>
+              </Tile.Back>
+            </Tile>
+            <Tile>
+              <Tile.Front>
+                <Tile.Front.Title>Vroom</Tile.Front.Title>
+                <Tile.Front.Subtitle>Cars driving now</Tile.Front.Subtitle>
+              </Tile.Front>
+              <Tile.Back>
+                <Tile.Back.Description>This is a description</Tile.Back.Description>
+              </Tile.Back>
+            </Tile>
+          </TileGrid>
+        </ResponsiveTileSection>
         {/* <CareerWrapper>
           <CareerTitle>Career</CareerTitle>
           <Note>
