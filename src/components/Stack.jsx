@@ -69,12 +69,16 @@ const StyledSectionTitle = styled.h3`
     margin-top: 5px;            /* push down vertically to center */
     font-size: 14px;
     color: inherit;
-
+    transition: transform 0.2s;
     display: none;
 
     @media (max-width: 833px) {
       display: flex;
     }
+  }
+
+  .dir-section-title-icon[direction='up'] {
+    transform: rotate(180deg);
   }
 
 `;
@@ -131,6 +135,14 @@ const StyledDirectory = styled.ul`
 function Stack({ color='dark', children }) {
   const [showdir, setShowDir] = useState(false);
 
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 833) {
+        setShowDir(false);
+      }
+    })
+  })
+
   return (
     <StyledStack color={color} className='stack'>
       {React.Children.map(children, (child) => {
@@ -157,7 +169,7 @@ function Heading({ color, showdir, setShowDir, children }) {
         onClick={() => setShowDir(!showdir)}
       >
         <span className='dir-section-title'>{children}</span>
-        <span className='dir-section-title-icon'>
+        <span className='dir-section-title-icon' direction={showdir ? 'up' : 'down'}>
           <svg className='footer-icon-svg' width='11' height='6' viewBox='0 0 11 6'>
             <polyline data-footer-icon-shape='' 
               stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' 
