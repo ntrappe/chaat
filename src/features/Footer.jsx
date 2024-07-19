@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Stack from '../components/Stack.jsx';
+import Directory from '../components/Directory.jsx';
 
 const StyledFooterWrapper = styled.div`
   position: relative;
@@ -25,18 +25,18 @@ const StyledGrid = styled.nav`
     border-bottom: none;
     padding-bottom: 0;
 
-    .stack {
+    .directory {
       border-top: 1px solid;
       border-top-color: ${(props) => (props.color === 'light' ? `var(--bg-light-border)` : `var(--bg-dark-border)`)};
     }
 
-    .stack:last-child {
+    .directory:last-child {
       border-bottom: 1px solid;
       border-bottom-color: ${(props) => (props.color === 'light' ? `var(--bg-light-border)` : `var(--bg-dark-border)`)};
     }
   }
 
-  .stack {
+  .directory {
     flex-basis: 24%;
     
     @media (max-width: 833px) {
@@ -46,11 +46,11 @@ const StyledGrid = styled.nav`
 `;
 
 const StyledFooterAside = styled.aside`
-  max-width: 980px;
+  max-width: var(--nav-max-width);
   margin: 0 auto;
   padding-top: 15px;
   padding-bottom: 15px;
-  font-size: 13px;
+  font-size: var(--fg-text-size-minor);
   line-height: 2;
   color: ${(props) => (props.color === 'light' ? `var(--fg-light-text-normal)` : `var(--fg-dark-text-normal)`)};
 
@@ -58,9 +58,8 @@ const StyledFooterAside = styled.aside`
     color: ${(props) => (props.color === 'light' ? `var(--fg-light-link)` : `var(--fg-dark-link)`)};
   }
 
-  p + p {
-      color: ${(props) => (props.color === 'light' ? `var(--fg-light-text-minor)` : `var(--fg-dark-text-minor)`)};
-
+  .footer-policies a {
+    color: ${(props) => (props.color === 'light' ? `var(--fg-light-text-minor)` : `var(--fg-dark-text-minor)`)};
   }
 
   .footer-aside-separator {
@@ -81,66 +80,58 @@ function Footer({ color='dark', children }) {
   return (
     <StyledFooterWrapper color={color}>
       <StyledGrid>
-        <Stack color={color} className='stack'>
-          <Stack.Heading>Design Case Studies</Stack.Heading>
-          <Stack.Directory>
-            <Stack.Item role='internal' page={'projects/museum'}>Museum Poster</Stack.Item>
-            <Stack.Item role='internal' page={'projects/rock'}>National Park App</Stack.Item>
-            <Stack.Item role='internal' page={'projects/pomodoro'}>Pomodoro Timer</Stack.Item>
-          </Stack.Directory>
-        </Stack>
-        <Stack color={color} className='stack'>
-          <Stack.Heading>Visual Portflio</Stack.Heading>
-          <Stack.Directory>
-            <Stack.Item role='internal' page={''}>Graphic Design</Stack.Item>
-            <Stack.Item role='internal' page={''}>Photography</Stack.Item>
-            <Stack.Item role='internal' page={''}>Presentations</Stack.Item>
-          </Stack.Directory>
-        </Stack>
-        <Stack color={color} className='stack'>
-          <Stack.Heading>Contact & Help</Stack.Heading>
-          <Stack.Directory>
-            <Stack.Item role='external' page={'https://linkedin.com/in/ntrappe'}>
+        <Directory color={color}>
+          <Directory.Heading>Design Case Studies</Directory.Heading>
+          <Directory.Body>
+            <Directory.Item role='internal' page={'projects/museum'}>Museum Poster</Directory.Item>
+            <Directory.Item role='internal' page={'projects/rock'}>National Park App</Directory.Item>
+            <Directory.Item role='internal' page={'projects/pomodoro'}>Pomodoro Timer</Directory.Item>
+          </Directory.Body>
+        </Directory>
+        <Directory color={color}>
+          <Directory.Heading>Visual Portflio</Directory.Heading>
+          <Directory.Body>
+            <Directory.Item role='internal' page={''}>Graphic Design</Directory.Item>
+            <Directory.Item role='internal' page={''}>Photography</Directory.Item>
+            <Directory.Item role='internal' page={''}>Presentations</Directory.Item>
+          </Directory.Body>
+        </Directory>
+        <Directory color={color}>
+          <Directory.Heading>Contact & Help</Directory.Heading>
+          <Directory.Body>
+            <Directory.Item role='external' page={'https://linkedin.com/in/ntrappe'}>
               Connect with LinkedIn
-            </Stack.Item>
-            <Stack.Item role='external' page={'https://github.com/ntrappe/chaat/issues'}>
+            </Directory.Item>
+            <Directory.Item role='external' page={'https://github.com/ntrappe/chaat/issues'}>
               Report an Issue
-            </Stack.Item>
-            <Stack.Item role='external' page={'mailto:ntrappe@icloud.com'}>
+            </Directory.Item>
+            <Directory.Item role='external' page={'mailto:ntrappe@icloud.com'}>
               Send an Email
-            </Stack.Item>
-          </Stack.Directory>
-        </Stack>
-        <Stack color={color} className='stack'>
-          <Stack.Heading>Inspiration</Stack.Heading>
-          <Stack.Directory>
-            <Stack.Item role='external' page={'https://developer.apple.com/design/'}>
+            </Directory.Item>
+          </Directory.Body>
+        </Directory>
+        <Directory color={color}>
+          <Directory.Heading>Inspiration</Directory.Heading>
+          <Directory.Body>
+            <Directory.Item role='external' page={'https://developer.apple.com/design/'}>
               Apple - Human Interface Guidelines
-            </Stack.Item>
-            <Stack.Item role='external' page={'https://primer.style'}>
+            </Directory.Item>
+            <Directory.Item role='external' page={'https://primer.style'}>
               GitHub - Primer
-            </Stack.Item>
-            <Stack.Item role='external' page={'https://brand.slackhq.com/illustration'}>
+            </Directory.Item>
+            <Directory.Item role='external' page={'https://brand.slackhq.com/illustration'}>
               Slack - Illustration Library
-            </Stack.Item>
-          </Stack.Directory>
-        </Stack>
-     {/* 
-        <Stack color={color} className='stack'>
-          <Stack.Heading>Policies</Stack.Heading>
-          <Stack.ExternalLink page={'https://github.com/ntrappe/chaat/blob/main/COPYRIGHT.md'}>Copyright</Stack.ExternalLink>
-          <Stack.ExternalLink page={'https://github.com/ntrappe/chaat/blob/main/PRIVACY.md'}>Privacy</Stack.ExternalLink>
-        </Stack>
-        <Stack color={color} className='stack'>
-          <Stack.Heading>Inspiration</Stack.Heading>
-          <Stack.ExternalLink page={'https://developer.apple.com/design/'}>Apple</Stack.ExternalLink>
-          <Stack.ExternalLink page={'https://primer.style'}>Primer</Stack.ExternalLink>
-          <Stack.ExternalLink page={'https://brand.slackhq.com/illustration'}>Slack</Stack.ExternalLink>
-        </Stack> */}
+            </Directory.Item>
+          </Directory.Body>
+        </Directory>
       </StyledGrid>
       <StyledFooterAside color={color}>
         <p>Coded in React. Tested in Cypress. View the source code at <a href='https://github.com/ntrappe/chaat'>github.com/ntrappe/chaat</a>.</p>
-        <p>Privacy Policy<span className='footer-aside-separator'>|</span>Copyright Policy</p>
+        <p className='footer-policies'>
+          <a href='https://github.com/ntrappe/chaat/blob/main/PRIVACY.md'>Privacy Policy</a>
+          <span className='footer-aside-separator'>|</span>
+          <a href='https://github.com/ntrappe/chaat/blob/main/COPYRIGHT.md'>Copyright Policy</a>
+        </p>
       </StyledFooterAside>
     </StyledFooterWrapper>
   ) 
