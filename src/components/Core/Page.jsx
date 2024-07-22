@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import GlassHeader from '../GlassHeader/GlassHeader.jsx'
 import Sidebar from '../Sidebar/Sidebar.jsx';
-import ThickFooter from '../Footer/ThickFooter.jsx';
+import Footer from '../../features/Footer.jsx';
 import FloatingAside from './FloatingAside.jsx';
 
 const COLORSCHEME = 'light';
@@ -195,7 +195,7 @@ function Page({ customComponent: SubPage, showAside }) {
       )}
       </MainWrapper>
       {(projectState !== States.HIDDEN && navState !== States.OPEN) && (
-        <ThickFooter $colorScheme={COLORSCHEME} />
+        <Footer color={'light'} />
       )}
     </>
   )

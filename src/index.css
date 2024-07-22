@@ -98,6 +98,11 @@ h4 {
   letter-spacing: -.016em;
 }
 
+video {
+  vertical-align: baseline;
+  content: normal;
+}
+
 html {
   scroll-behavior: smooth;
   margin: 0;
@@ -130,6 +135,32 @@ html {
   --divider-width: 1.5px;
   --min-stack-width: 100px;
   --stack-gap: 25px;
+
+
+  --go-arrow-icon-small: 26px;
+  --go-arrow-icon-large: 34px;
+  --go-arrow-pos-bottom: 20px;
+  --go-arrow-pos-right: 29px;
+  --play-icon-small: 31px; 
+  --play-icon-large: 36px; 
+
+  --preview-min-height: 350px;
+  --preview-content-x-buffer: 28px;
+  --preview-content-y-buffer: 30px;
+  --gallery-items-gap: 30px;
+  --gallery-chevron-icon-size: 30px;
+
+  --preview-width-large: 396px;
+  --preview-width-medium: 330px;
+  --preview-width-small: 300px;
+
+  --preview-video-height-large: 360px;
+  --preview-video-height-medium: 310px;
+  --preview-video-height-small: 280px;
+
+  --gallery-width-large: 3000px;
+  --gallery-width-medium: 2300px;
+  --gallery-width-small: 87.5%;
   
 
   --paper: #f8f8fa;
@@ -150,6 +181,8 @@ html {
   --dark-nav-border: rgba(81,81,84,0.4);
   --light-nav-border: rgba(185,186,187,0.3);
 
+  --fg-text-size-minor: 13px;
+
   --bg-dark-footer: #1d1d1f;
   --bg-dark-border: #525253;
   --fg-dark-text-major: #ededed;
@@ -162,7 +195,7 @@ html {
   --fg-light-text-major: #1e1e1e;
   --fg-light-text-normal: #444445;
   --fg-light-text-minor: #6B6B6C;
-  --fg-light-link: #6043CE;
+  --fg-light-link: #4D35AC;
 
   
   --coral: #ff595b;

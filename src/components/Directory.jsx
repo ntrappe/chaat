@@ -59,6 +59,7 @@ const StyledDirHeading = styled.h3`
 
   // Specific styling for title of the button (drop-down)
   .dir-section-title-button > .dir-section-title {
+    font-weight: 400;
     display: none;
 
     @media (max-width: 833px) {
@@ -97,12 +98,16 @@ const StyledDirBody = styled.ul`
   padding-right: 5px;
   width: 100%;
   list-style: none;
-  color: ${(props) => (props.color === 'dark' ? `var(--fg-dark-text-normal)` : `var(--fg-light-text-normal)`)};
 
   li {
     margin-bottom: .8em;
     pointer-events: auto;
     cursor: pointer;
+    color: ${(props) => (props.color === 'dark' ? `var(--fg-dark-text-normal)` : `var(--fg-light-text-normal)`)};
+  }
+
+  li a {
+    color: inherit;
   }
 
   @media (max-width: 833px) {
