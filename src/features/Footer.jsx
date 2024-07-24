@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Directory from '../components/Directory.jsx';
 
-const StyledFooterWrapper = styled.div`
+const StyledFooterWrapper = styled.footer`
   position: relative;
   margin-botton: 0;
   padding: 0 25px;
@@ -73,13 +73,13 @@ const StyledFooterAside = styled.aside`
 /**
  * Creates an unordered list with text and/or links.
  * @param {String} color Passes along the colorscheme to match
- * @param {*} children Text and/or links passed from parent 
  * @returns unordered list element
  */
-function Footer({ color='dark', children }) {
+function Footer({ color='dark' }) {
+  console.log('got color: '  + color)
   return (
     <StyledFooterWrapper color={color}>
-      <StyledGrid>
+      <StyledGrid color={color}>
         <Directory color={color}>
           <Directory.Heading>Design Case Studies</Directory.Heading>
           <Directory.Body>

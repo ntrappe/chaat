@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { scroller } from 'react-scroll';
 import styled from 'styled-components';
 
-const PREVIEW_WIDTH_L = 411;
+const PREVIEW_WIDTH_L = 425;
 const PREVIEW_WIDTH_M = 360;
 const PREVIEW_WIDTH_S = 330;
 
@@ -42,11 +42,21 @@ const StyledGalleryList = styled.ul`
   display: grid;
   grid-auto-flow: column;
   grid-gap: var(--gallery-items-gap);
+  margin: 0;
+  padding: 0;
   justify-content: start;
   -webkit-flex-pack: start;
   -ms-flex-pack: start;
   width: var(--gallery-viewport-width);    // TODO
   padding-left: 90px;
+  padding-right: 90px;
+
+  @media only screen and (max-width: 1068px) {
+    // padding-left: calc(((100% - var(--gallery-width-medium)) / 2));
+    // padding-right: calc(((100% - var(--gallery-width-small)) / 2));
+    padding-left: 45px;
+    padding-right: 45px;
+  }
 
   .gallery-list-item {
     position: relative;
@@ -63,10 +73,10 @@ const StyledGalleryList = styled.ul`
 const StyledGalleryControls = styled.div`
   .gallery-trigger {
     position: absolute;
-    top: 50%;
+    bottom: 50%;
     border: none;
     border-radius: 50%;
-    background-color: rgb(66,66,69);
+    background-color: #6D6D73;
     opacity: 0.6;
     padding: 10px;    // top right bottom left
     z-index: 3;
@@ -74,7 +84,8 @@ const StyledGalleryControls = styled.div`
     scroll: none;
 
     &:hover {
-      opacity: 0.9;
+      background-color: #91929C;
+      opacity: 0.8;
     }
 
     &:disabled {
@@ -102,6 +113,10 @@ const StyledGalleryControls = styled.div`
     height: var(--gallery-chevron-icon-size);
     align-items: center;        /* vertically center in icon */
     justify-content: center;    /* horizontally center in icon */
+
+    $:hover {
+      opacity: 1;
+    }
   }
 `;
 
@@ -132,7 +147,7 @@ function Gallery({ children }) {
 
   const moveToNext = () => {
     scrollContainerRef.current.scrollBy({
-      left: previewWidth,
+      left: 310,
       behavior: 'smooth'
     });
   }
