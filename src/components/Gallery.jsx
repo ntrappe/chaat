@@ -68,6 +68,10 @@ const StyledGalleryList = styled.ul`
     width: var(--gallery-preview-width);       // TODO
     border-radius: 20px;
   }
+
+  .gallery-list-item .preview {
+    
+  }
 `;
 
 const StyledGalleryControls = styled.div`

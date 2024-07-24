@@ -148,6 +148,8 @@ html {
   --preview-content-x-buffer: 28px;
   --preview-content-y-buffer: 30px;
   --gallery-items-gap: 30px;
+  --gallery-items-gap-normal: 30px;
+  --gallery-items-gap-spacious: 40px;
   --gallery-chevron-icon-size: 30px;
 
   --preview-width-large: 396px;
@@ -158,9 +160,16 @@ html {
   --preview-video-height-medium: 310px;
   --preview-video-height-small: 280px;
 
+  --snippet-width-small: 280px;
+  --snippet-width-large: 306px;
+
   --gallery-width-large: 3000px;
   --gallery-width-medium: 2300px;
   --gallery-width-small: 87.5%;
+
+  --gallery-trigger-width-large: 980px;
+  --gallery-trigger-width-medium: 692px;
+  --gallery-trigger-width-small: 87.5%;
   
 
   --paper: #f8f8fa;
@@ -185,16 +194,20 @@ html {
 
   --bg-dark-footer: #1d1d1f;
   --bg-dark-border: #525253;
+  --fg-dark-text-heading: #ffffff;
   --fg-dark-text-major: #ededed;
   --fg-dark-text-normal: #d2d2d2;
   --fg-dark-text-minor: #9c9c9d;
+  --fg-dark-trigger-fill: #86868b;
   --fg-dark-link: #AEA1FF;
 
   --bg-light-footer: #f5f5f7;
   --bg-light-border: #d3d6d6;
+  --fg-light-text-heading: #000000;
   --fg-light-text-major: #1e1e1e;
   --fg-light-text-normal: #444445;
   --fg-light-text-minor: #6B6B6C;
+  --fg-light-trigger-fill: #838383;
   --fg-light-link: #4D35AC;
 
   
