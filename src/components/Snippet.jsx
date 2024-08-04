@@ -1,21 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-// const StyledSnippetWrapper = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   height: 100%;
-//   width: var(--snippet-width-large);
-//   max-width: var(--snippet-width-large);
-
-//   @media only screen and (max-width: 734px) {
-//     width: var(--snippet-width-small);
-//     max-width: var(--snippet-width-small);
-//   }
-// `;
-
 const StyledSnippetWrapper = styled.li`
-border: 1px solid yellow;
   display: flex;
   flex-direction: column; 
   position: relative;

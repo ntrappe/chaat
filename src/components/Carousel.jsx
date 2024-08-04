@@ -28,7 +28,6 @@ const StyledCarouselWrapper = styled.section`
 `;
 
 const StyledScrollContainer = styled.div`
-  border: 1px solid skyblue;
   display: block;
   overflow: scroll;
   will-change: transform;
@@ -48,7 +47,6 @@ const StyledScrollContainer = styled.div`
 `;
 
 const StyledCarouselTrack = styled.ul`
-  border: 1px solid orange;
   display: grid;
   grid-auto-flow: column;
   margin: 0;
@@ -61,7 +59,7 @@ const StyledCarouselTrack = styled.ul`
   padding-right: calc((100% - var(--carousel-viewport-width)) / 2);
   width: fit-content;     /* Last item in carousel pressed against right edge */
 
-  .snippet::after {
+  .snippet:not(:last-child)::after {
     content: '';
     position: absolute;
     height: 100%;
@@ -69,13 +67,14 @@ const StyledCarouselTrack = styled.ul`
     right: calc(var(--carousel-item-gap-spacious) / -2);
     background-color: white;
     width: 1px;
+
+    @media only screen and (max-width: 734px) {
+      right: calc(var(--carousel-item-gap-narrow) / -2);
+    }
   }
 
   @media only screen and (max-width: 734px) {
     grid-gap: var(--carousel-item-gap-narrow);
-    .snippet::after {
-      right: calc(var(--carousel-item-gap-narrow) / -2);
-    }
   }
 
   @media only screen and (min-width: 735px) {
@@ -94,7 +93,6 @@ const StyledCarouselTrack = styled.ul`
 function Carousel({ children, gap='spacious' }) {
   const scrollRef = useRef(null);
   const trackRef = useRef(null);
-  const [currentItem, setCurrentItem] = useState(0);
   const [itemInFocus, setItemInFocus] = useState(0);
   const [disablePrev, setDisablePrev] = useState(true);
   const [disableNext, setDisableNext] = useState(false);
@@ -160,28 +158,51 @@ function Carousel({ children, gap='spacious' }) {
           behavior: 'smooth'
         });
 
-        setCurrentItem(newItem);
-        setDisablePrev(newItem < 1);
-        setDisableNext(newItem > (numCarouselItems - 1));
+        setItemInFocus(newItem);
       }
     }
   }
 
   const moveBackward = () => {
-    console.log('move backward')
-    let scrollDistance = gap === 'spacious' ? GAP_SPACIOUS : GAP_NARROW;
-
     if (trackRef.current) {
-      // Get the width of the first child element
-      const firstChild = trackRef.current.children[0];
-      scrollDistance += firstChild.offsetWidth;
-    }
+      // Get next child
+      const newItem = itemInFocus - 1;
+      const scrollLeftBy = calculateScrollBy(newItem);
+      console.log(trackRef.current.getBoundingClientRect());
 
-    scrollRef.current.scrollBy({
-      left: -scrollDistance,
-      behavior: 'smooth'
-    });
+      if (scrollLeftBy > 0) {
+        scrollRef.current.scrollBy({
+          left: -scrollLeftBy,
+          behavior: 'smooth'
+        });
+
+        setItemInFocus(newItem);
+      }
+    }
   }
+
+  useEffect(() => {
+    scrollRef.current.addEventListener('scroll', () => {
+      if (trackRef.current) {
+        const carouselItems = trackRef.current.children;
+        const firstChildLeft = carouselItems[0].getBoundingClientRect().left;
+        const lastChildLeft = carouselItems[numCarouselItems - 1].getBoundingClientRect().left;
+        const lastChildRight = lastChildLeft + carouselItems[numCarouselItems - 1].offsetWidth;
+
+        if (firstChildLeft < 0) {
+          setDisablePrev(false);
+        } else if (firstChildLeft < (window.innerWidth / 2)) {
+          setDisablePrev(true);
+        }
+
+        if (lastChildRight > window.innerWidth) {
+          setDisableNext(false);
+        } else if (lastChildRight > (window.innerWidth / 2)) {
+          setDisableNext(true);
+        }
+      }
+    })
+  })
 
   useEffect(() => {
     scrollRef.current.addEventListener('scroll', () => {
@@ -200,17 +221,6 @@ function Carousel({ children, gap='spacious' }) {
       }
     });
   })
-
-  useEffect(() => {
-    if (itemInFocus === 0) {
-      setDisablePrev(true);
-    } else if (itemInFocus === (numCarouselItems - 1)) {
-      setDisableNext(true);
-    } else {
-      setDisablePrev(false);
-      setDisableNext(false);
-    }
-  }, [itemInFocus])
 
   return (
     <StyledCarouselWrapper>
@@ -231,7 +241,6 @@ function Carousel({ children, gap='spacious' }) {
         disablePrev={disablePrev}
         disableNext={disableNext}
       />
-      <p style={{color:'white'}}>item: {currentItem}</p>
       <p style={{color:'cyan'}}>focus: {itemInFocus}</p>
     </StyledCarouselWrapper>
   )

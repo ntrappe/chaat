@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledNavControl = styled.div`
-  border: 1px solid lime;
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
