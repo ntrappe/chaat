@@ -1,10 +1,44 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-const StyledSnippetWrapper = styled.div`
+// const StyledSnippetWrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   height: 100%;
+//   width: var(--snippet-width-large);
+//   max-width: var(--snippet-width-large);
+
+//   @media only screen and (max-width: 734px) {
+//     width: var(--snippet-width-small);
+//     max-width: var(--snippet-width-small);
+//   }
+// `;
+
+const StyledSnippetWrapper = styled.li`
+border: 1px solid yellow;
   display: flex;
-  flex-direction: column;
-  height: 100%;
+  flex-direction: column; 
+  position: relative;
+  z-index: 1;
+  list-style-type: none; 
+ 
+  @media only screen and (max-width: 734px) {
+    width: var(--snippet-width-small);
+    max-width: var(--snippet-width-small);
+    scroll-snap-align: center;
+  }
+
+  @media only screen and (min-width: 735px) and (max-width: 1068px) {
+    width: var(--snippet-width-medium);
+    max-width: var(--snippet-width-medium);
+    scroll-snap-align: start;
+  }
+
+  @media only screen and (min-width: 1069px) {
+    width: var(--snippet-width-large);
+    max-width: var(--snippet-width-large);
+    scroll-snap-align: start;
+  }
 `;
 
 const StyledHeading = styled.h2`
@@ -28,6 +62,7 @@ const StyledDescription = styled.p`
 
 const StyledPrimaryAction = styled.p`
   align-item: flex-end;
+  // margin-top: auto;
   font-size: 17px;
   color: ${(props) => (props.color === 'dark' ? `var(--fg-dark-link)` : `var(--fg-light-link)`)};
 
@@ -41,11 +76,21 @@ const StyledPrimaryAction = styled.p`
   }
 `;
 
-function Snippet({ color='dark', size, children }) {
+// function Snippet({ color='dark', size, children }) {
+//   return (
+//     <StyledSnippetWrapper className='snippet' color={color} size={size}>
+//       {React.Children.map(children, child => {
+//         return React.cloneElement(child, { color });
+//       })}
+//     </StyledSnippetWrapper>
+//   )
+// }
+
+function Snippet({ index, color='dark', divider=true, children}) {
   return (
-    <StyledSnippetWrapper className='snippet' color={color} size={size}>
+    <StyledSnippetWrapper index={index} className='snippet carousel-item' color={color} divider={divider}>
       {React.Children.map(children, child => {
-        return React.cloneElement(child, { color });
+        return React.cloneElement(child, {color});
       })}
     </StyledSnippetWrapper>
   )
