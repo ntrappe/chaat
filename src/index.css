@@ -143,6 +143,9 @@ html {
   --go-arrow-pos-right: 29px;
   --play-icon-small: 31px; 
   --play-icon-large: 36px; 
+  --prev-next-icon-width: 22px;
+  --prev-next-icon-gap: 12px;
+
 
   --preview-min-height: 350px;
   --preview-content-x-buffer: 28px;
@@ -161,15 +164,26 @@ html {
   --preview-video-height-small: 280px;
 
   --snippet-width-small: 280px;
-  --snippet-width-large: 306px;
+  --snippet-width-medium: 306px;
+  --snippet-width-large: 450px;
 
   --gallery-width-large: 3000px;
   --gallery-width-medium: 2300px;
   --gallery-width-small: 87.5%;
 
+  --carousel-width-large: 940px;  /* Align left with site title */
+  --carousel-width-medium: 692px; /* Align with main width */
+  --carousel-width-small: 87.5%;
+
   --gallery-trigger-width-large: 980px;
   --gallery-trigger-width-medium: 692px;
   --gallery-trigger-width-small: 87.5%;
+
+  --gallery-item-gap-narrow: 40px;
+  --gallery-item-gap-spacious: 80px;
+
+  --carousel-item-gap-narrow: 40px;
+  --carousel-item-gap-spacious: 80px;
   
 
   --paper: #f8f8fa;
