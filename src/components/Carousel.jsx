@@ -2,22 +2,27 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import NavControl from './NavControl';
 
+const MOBILE = 734;
+
 const StyledCarouselWrapper = styled.section`
   position: relative;
 
   @media only screen and (max-width: 734px) {
-    --carousel-viewport-width: var(--carousel-width-small);
+    --carousel-viewport-width: var(--viewport-width-small);
     --carousel-item-gap: ${(props) => (props.gap == 'spacious' ? `var(--carousel-item-gap-medium)` : `var(--carousel-item-gap-small)`)};
+    --carousel-preview-width: var(--preview-width-small);
   }
 
   @media only screen and (min-width: 735px) and (max-width: 1068px) {
-    --carousel-viewport-width: var(--carousel-width-medium);
+    --carousel-viewport-width: var(--viewport-width-medium);
     --carousel-item-gap: ${(props) => (props.gap == 'spacious' ? `var(--carousel-item-gap-large)` : `var(--carousel-item-gap-small)`)};
+    --carousel-preview-width: var(--preview-width-medium);
   }  
 
   @media only screen and (min-width: 1069px) {
-    --carousel-viewport-width: var(--carousel-width-large);
+    --carousel-viewport-width: var(--viewport-width-large);
     --carousel-item-gap: ${(props) => (props.gap == 'spacious' ? `var(--carousel-item-gap-large)` : `var(--carousel-item-gap-small)`)};
+    --carousel-preview-width: var(--preview-width-large);
   }
 `;
 
@@ -54,6 +59,10 @@ border: 1px solid white;
   padding-left: calc((100% - var(--carousel-viewport-width)) / 2);
   padding-right: calc((100% - var(--carousel-viewport-width)) / 2);
   width: fit-content;     /* Last item in carousel pressed against right edge */
+   
+  // @media only screen and (min-width: 735px) and (max-width: 1068px) {
+  //   width: 2500px;
+  // }
 
   // Adding a dividing line between snippets
   .snippet:not(:last-child)::after {
@@ -69,6 +78,15 @@ border: 1px solid white;
   .preview {
     overflow: hidden;  /* cut anything that falls outside, no ::after effects */
     position: relative;
+  }
+
+  /* Fill up space after last preview so we can shift it all the way left
+   * during a 'next' button click. Otherwise, it stays flush right. 
+   */
+  .preview:last-child {
+    @media only screen and (min-width: 735px) {
+      margin-right: calc(var(--carousel-viewport-width) - var(--carousel-preview-width));
+    }
   }
 `;
 
@@ -142,6 +160,16 @@ function Carousel({ children, gap='spacious' }) {
     }
   }
 
+  /**
+   * When the carousel track has a scroll, we need to enable/disable the prev and next controls.
+   * 
+   * (A) If the first child is within the visible viewport, prev is disabled. Otherwise, if it has
+   * moved beyond the screen (left), enable it. (B) On mobile, the last child will be flush with the
+   * right side of the screen. So, if it's still beyond the screen (right), next button is
+   * still enabled. If it's fully in the viewport, next is disabled. (C) Not mobile, the last child
+   * will be flush with the left of the screen. Next is only disabled if it's fully in the viewport
+   * AND left of the center of the viewport.
+   */
   useEffect(() => {
     scrollRef.current.addEventListener('scroll', () => {
       if (trackRef.current) {
@@ -150,16 +178,33 @@ function Carousel({ children, gap='spacious' }) {
         const lastChildLeft = carouselItems[numCarouselItems - 1].getBoundingClientRect().left;
         const lastChildRight = lastChildLeft + carouselItems[numCarouselItems - 1].offsetWidth;
 
+        // First child past left side of window --> prev ok
+        // First child still in window --> no prev
         if (firstChildLeft < 0) {
           setDisablePrev(false);
         } else if (firstChildLeft < (window.innerWidth / 2)) {
           setDisablePrev(true);
         }
 
-        if (lastChildRight > window.innerWidth) {
-          setDisableNext(false);
-        } else if (lastChildRight > (window.innerWidth / 2)) {
-          setDisableNext(true);
+        let browserWidth = window.innerWidth;
+        let browserCenter = browserWidth / 2;
+
+        if (browserWidth <= MOBILE) {
+          // [Mobile] Last child past right side of window --> next ok
+          // [Mobile] Last child within viewport --> no next
+          if (lastChildRight > browserWidth) {
+            setDisableNext(false);
+          } else if (lastChildRight > browserCenter) {
+            setDisableNext(true);
+          }
+        } else {
+          // [Not mobile] Last child right of center --> next ok
+          // [Not mobile] Last child left of center --> no next
+          if (lastChildRight < browserCenter) {
+            setDisableNext(true);
+          } else {
+            setDisableNext(false);
+          }
         }
       }
     })

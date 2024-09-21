@@ -166,7 +166,7 @@ html {
   /* Approximations for minimum amount of space around text */
   --preview-height-small: 445px;  
   --preview-height-medium: 500px;
-  --preview-height-medium: 595px;
+  --preview-height-large: 595px;
 
 
   --preview-video-height-large: 370px;
@@ -181,9 +181,9 @@ html {
   --gallery-width-medium: 2300px;
   --gallery-width-small: 87.5%;
 
-  --carousel-width-large: 940px;  /* Align left with site title */
-  --carousel-width-medium: 692px; /* Align with main width */
-  --carousel-width-small: 87.5%;
+  --viewport-width-large: 940px;  /* Align left with site title */
+  --viewport-width-medium: 692px; /* Align with main width */
+  --viewport-width-small: 87.5%;
 
   --carousel-trigger-width-large: 980px;
   --carousel-trigger-width-medium: 692px;

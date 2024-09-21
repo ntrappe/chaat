@@ -10,8 +10,8 @@ import Hand from '../assets/page-icons/hand.png';
 import Palette from '../assets/page-icons/palette.png';
 
 import Footer from '../features/Footer.jsx';
-import ProjectGallery from '../features/ProjectGallery.jsx';
-import ValuesGallery from '../features/ValuesGallery.jsx';
+import ProjectCarousel from '../features/ProjectCarousel.jsx';
+import ValuesCarousel from '../features/ValuesCarousel.jsx';
 import Section from '../components/Section.jsx';
 
 const States = {
@@ -177,11 +177,11 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
         </IntroSection>
         <Section>
           <Section.Heading>Dive into my work.</Section.Heading>
-          <ProjectGallery />
+          <ProjectCarousel />
         </Section>
         <Section color='dark'>
           <Section.Heading>Values that drive design.</Section.Heading>
-          <ValuesGallery />
+          <ValuesCarousel />
         </Section>
       </MainWrapper>
       {/* Only show footer if sidebar isn't open */}

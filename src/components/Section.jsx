@@ -29,19 +29,19 @@ const StyledSection = styled.section`
     @media only screen and (max-width: 734px) {
       font-size: 46px;
       line-height: 1.08;
-      width: var(--carousel-width-small);
+      width: var(--viewport-width-small);
     }
 
     @media only screen and (min-width: 735px) and (max-width: 1068px) {
       font-size: 58px;
       line-height: 1.06;
-      width: var(--carousel-width-medium);
+      width: var(--viewport-width-medium);
     }
 
     @media only screen and (min-width: 1069px) {
       font-size: 72px;
       line-height: 1.055;
-      width: var(--carousel-width-large);
+      width: var(--viewport-width-large);
 
     }
   }
