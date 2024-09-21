@@ -48,7 +48,6 @@ const StyledDescription = styled.p`
 
 const StyledPrimaryAction = styled.p`
   align-item: flex-end;
-  // margin-top: auto;
   font-size: 17px;
   color: ${(props) => (props.color === 'dark' ? `var(--fg-dark-link)` : `var(--fg-light-link)`)};
 
@@ -72,9 +71,9 @@ const StyledPrimaryAction = styled.p`
 //   )
 // }
 
-function Snippet({ index, color='dark', divider=true, children}) {
+function Snippet({ index, color='dark', children}) {
   return (
-    <StyledSnippetWrapper index={index} className='snippet carousel-item' color={color} divider={divider}>
+    <StyledSnippetWrapper index={index} className='snippet carousel-item' color={color}>
       {React.Children.map(children, child => {
         return React.cloneElement(child, {color});
       })}

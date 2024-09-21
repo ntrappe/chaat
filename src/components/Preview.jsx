@@ -1,11 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-const StyledPreviewWrapper = styled.div`
+const StyledPreviewWrapper = styled.li`
   display: flex;
   flex-direction: column;
+  list-style-type: none;
   -webkit-box-orient: vertical;   // Apple extension of layout
   height: 100%;
+  border-radius: var(--preview-border-radius);
+
+  // min height helps keep go-button separated fro text
+
+  @media only screen and (max-width: 734px) {
+    width: var(--preview-width-small);
+    min-height: var(--preview-height-small);
+  }
+
+  @media only screen and (min-width: 735px) and (max-width: 1068px) {
+    width: var(--preview-width-medium);
+    min-height: var(--preview-height-medium);
+  }
+
+  @media only screen and (min-width: 1069px) {
+    width: var(--preview-width-large);
+    min-height: var(--preview-height-large);
+  }
 `;
 
 const StyledContentWrapper = styled.div`
@@ -14,34 +33,38 @@ const StyledContentWrapper = styled.div`
   background-color: ${(props) => (props.$bg)};
 
   .preview-heading {
-    font-size: 40px;
-    line-height: 1.1;
     font-weight: 500;
-    padding: 37px 26px 36px 40px;
     color: ${(props) => (props.color === 'dark' ? `var(--fg-dark-text-major)` : `var(--fg-dark-text-major)`)};
-    
-    @media only screen and (max-width: 1068px) {
-      font-size: 32px;
-      line-height: 1.125;
-      padding: 29px 30px;
-    }
 
     @media only screen and (max-width: 734px) {
       font-size: 28px;
       line-height: 1.14;
       padding: 25px 23px;
     }
+
+    @media only screen and (min-width: 735px) and (max-width: 1068px) {
+      font-size: 32px;
+      line-height: 1.125;
+      padding: 29px 30px;
+    }
+
+    @media only screen and (min-width: 1069px) {
+      font-size: 40px;
+      line-height: 1.1;
+      padding: 37px 26px 36px 40px;
+    }
   }
 
   .preview-trigger {
+    background-color: red;
     position: absolute;
-    bottom: var(--go-arrow-pos-right);
+    bottom: var(--go-arrow-pos-bottom);
     right: var(--go-arrow-pos-right);
     border: none;
-    border-radius: 50%;
+    border-radius: var(--circle-roundness);
     background-color: white;
     opacity: 0.7;
-    padding: 3px;
+    padding: var(--go-arrow-padding);
 
     &:hover {
       opacity: 1;
@@ -67,14 +90,18 @@ const StyledVideoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   -webkit-box-orient: vertical;
-  min-height: var(--preview-video-height-large);    // Video takes up specific space
 
-  @media only screen and (max-width: 1068px) {
+  // Video takes up specific space
+  @media only screen and (max-width: 734px) {
+    min-height: var(--preview-video-height-small);
+  }
+
+  @media only screen and (min-width: 735px) and (max-width: 1068px) {
     min-height: var(--preview-video-height-medium);
   }
 
-  @media only screen and (max-width: 734px) {
-    min-height: var(--preview-video-height-small);
+  @media only screen and (min-width: 1069px) {
+    min-height: var(--preview-video-height-large);
   }
 `;
 
@@ -142,9 +169,9 @@ const StyledPlaybackControl = styled.div`
   }
 `;
 
-function Preview({ variant='default', color='dark', children }) {
+function Preview({ color='dark', index, children }) {
   return (
-    <StyledPreviewWrapper className='preview'>
+    <StyledPreviewWrapper index={index} className='preview carousel-item' color={color}>
       {children}
     </StyledPreviewWrapper>
   )

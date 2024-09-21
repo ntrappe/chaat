@@ -1,29 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import NavControl from './NavControl';
-import Pagination from './Pagination';
-
-const GAP_NARROW = 40;
-const GAP_SPACIOUS = 80;
 
 const StyledCarouselWrapper = styled.section`
   position: relative;
 
   @media only screen and (max-width: 734px) {
-    --gallery-snippet-width: var(--snippet-width-small);
     --carousel-viewport-width: var(--carousel-width-small);
-    --gallery-trigger-width: var(--gallery-trigger-width-small);
+    --carousel-item-gap: ${(props) => (props.gap == 'spacious' ? `var(--carousel-item-gap-medium)` : `var(--carousel-item-gap-small)`)};
   }
 
   @media only screen and (min-width: 735px) and (max-width: 1068px) {
     --carousel-viewport-width: var(--carousel-width-medium);
-    --gallery-trigger-width: var(--gallery-trigger-width-medium);
+    --carousel-item-gap: ${(props) => (props.gap == 'spacious' ? `var(--carousel-item-gap-large)` : `var(--carousel-item-gap-small)`)};
   }  
 
   @media only screen and (min-width: 1069px) {
-    --gallery-snippet-width: var(--snippet-width-large);
     --carousel-viewport-width: var(--carousel-width-large);
-    --gallery-trigger-width: var(--gallery-trigger-width-large);
+    --carousel-item-gap: ${(props) => (props.gap == 'spacious' ? `var(--carousel-item-gap-large)` : `var(--carousel-item-gap-small)`)};
   }
 `;
 
@@ -47,8 +41,10 @@ const StyledScrollContainer = styled.div`
 `;
 
 const StyledCarouselTrack = styled.ul`
+border: 1px solid white;
   display: grid;
   grid-auto-flow: column;
+  grid-gap: var(--carousel-item-gap);
   margin: 0;
   justify-content: start;
   -webkit-flex-pack: start;
@@ -59,35 +55,21 @@ const StyledCarouselTrack = styled.ul`
   padding-right: calc((100% - var(--carousel-viewport-width)) / 2);
   width: fit-content;     /* Last item in carousel pressed against right edge */
 
+  // Adding a dividing line between snippets
   .snippet:not(:last-child)::after {
     content: '';
     position: absolute;
     height: 100%;
     top: 0;
-    right: calc(var(--carousel-item-gap-spacious) / -2);
+    right: calc(var(--carousel-item-gap) / -2);
     background-color: white;
     width: 1px;
-
-    @media only screen and (max-width: 734px) {
-      right: calc(var(--carousel-item-gap-narrow) / -2);
-    }
   }
 
-  @media only screen and (max-width: 734px) {
-    grid-gap: var(--carousel-item-gap-narrow);
-  }
-
-  @media only screen and (min-width: 735px) {
-    grid-gap: var(--carousel-item-gap-spacious);
-  }
-
-  .carousel-track-item .preview {
-    border-radius: 20px;
+  .preview {
     overflow: hidden;  /* cut anything that falls outside, no ::after effects */
-    min-height: var(--preview-min-height);  // TODO 
+    position: relative;
   }
-
-  
 `;
 
 function Carousel({ children, gap='spacious' }) {
@@ -97,27 +79,6 @@ function Carousel({ children, gap='spacious' }) {
   const [disablePrev, setDisablePrev] = useState(true);
   const [disableNext, setDisableNext] = useState(false);
   const numCarouselItems = React.Children.count(children);
-
-  // const moveForward = () => {
-  //   console.log('move forward')
-  //   let scrollDistance = gap === 'spacious' ? GAP_SPACIOUS : GAP_NARROW;
-
-  //   if (trackRef.current) {
-  //     // Get the width of the first child element
-  //     const firstChild = trackRef.current.children[0];
-  //     scrollDistance += firstChild.offsetWidth;
-  //   }
-
-  //   scrollRef.current.scrollBy({
-  //     left: scrollDistance,
-  //     behavior: 'smooth'
-  //   });
-
-  //   const newItem = currentItem + 1;
-  //   setCurrentItem(newItem);
-  //   setDisablePrev(newItem < 1);
-  //   setDisableNext(newItem > 8);
-  // }
 
   const calculateScrollBy = (childIndex) => {
     if (!trackRef.current) {
@@ -223,9 +184,9 @@ function Carousel({ children, gap='spacious' }) {
   })
 
   return (
-    <StyledCarouselWrapper>
-      <StyledScrollContainer className='carousel-container' ref={scrollRef}>
-        <StyledCarouselTrack className='carousel-track' ref={trackRef}>
+    <StyledCarouselWrapper gap={gap}>
+      <StyledScrollContainer className='carousel-container' gap={gap} ref={scrollRef}>
+        <StyledCarouselTrack className='carousel-track' gap={gap} ref={trackRef}>
           {/* Wrap each <Preview> component in a <li> element */}
           {/* {React.Children.map(children, (child, index) => (
             <li className='carousel-track-item' id={'item-' + index}>{child}</li>

@@ -141,6 +141,7 @@ html {
   --go-arrow-icon-large: 34px;
   --go-arrow-pos-bottom: 20px;
   --go-arrow-pos-right: 29px;
+  --go-arrow-padding: 3px;
   --play-icon-small: 31px; 
   --play-icon-large: 36px; 
   --prev-next-icon-width: 22px;
@@ -150,18 +151,27 @@ html {
   --preview-min-height: 350px;
   --preview-content-x-buffer: 28px;
   --preview-content-y-buffer: 30px;
+  --preview-border-radius: 20px;
+
   --gallery-items-gap: 30px;
-  --gallery-items-gap-normal: 30px;
-  --gallery-items-gap-spacious: 40px;
   --gallery-chevron-icon-size: 30px;
+
+  --carousel-item-gap-small: 30px;
+  --carousel-item-gap-medium: 40px;
+  --carousel-item-gap-large: 80px;
 
   --preview-width-large: 396px;
   --preview-width-medium: 330px;
   --preview-width-small: 300px;
+  /* Approximations for minimum amount of space around text */
+  --preview-height-small: 445px;  
+  --preview-height-medium: 500px;
+  --preview-height-medium: 595px;
 
-  --preview-video-height-large: 360px;
-  --preview-video-height-medium: 310px;
-  --preview-video-height-small: 280px;
+
+  --preview-video-height-large: 370px;
+  --preview-video-height-medium: 320px;
+  --preview-video-height-small: 290px;
 
   --snippet-width-small: 280px;
   --snippet-width-medium: 306px;
@@ -175,15 +185,17 @@ html {
   --carousel-width-medium: 692px; /* Align with main width */
   --carousel-width-small: 87.5%;
 
-  --gallery-trigger-width-large: 980px;
-  --gallery-trigger-width-medium: 692px;
-  --gallery-trigger-width-small: 87.5%;
+  --carousel-trigger-width-large: 980px;
+  --carousel-trigger-width-medium: 692px;
+  --carousel-trigger-width-small: 87.5%;
 
   --gallery-item-gap-narrow: 40px;
   --gallery-item-gap-spacious: 80px;
 
   --carousel-item-gap-narrow: 40px;
   --carousel-item-gap-spacious: 80px;
+
+  --circle-roundness: 50%;
   
 
   --paper: #f8f8fa;

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
-import ThickFooter from '../components/Footer/ThickFooter.jsx';
 import Tile from '../components/Core/Tile.jsx';
+import Footer from '../features/Footer.jsx';
 
 const States = {
   EXPANDED: 'expanded',
@@ -99,7 +99,7 @@ function Career({ $navState, $colorScheme, handleNavToggle }) {
         </CareerWrapper> */}
       </MainWrapper>
       {$navState !== States.EXPANDED && (
-        <ThickFooter $colorScheme={$colorScheme} />
+        <Footer color={'light'} />
       )}
     </>
   )

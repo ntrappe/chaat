@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import GlassHeader from '../components/GlassHeader/GlassHeader.jsx';
 import PhotoGrid from '../components/Core/PhotoGrid.jsx';
-import ThickFooter from '../components/Footer/ThickFooter.jsx';
+import Footer from '../features/Footer.jsx';
 
 const States = {
   EXPANDED: 'expanded',
@@ -52,7 +52,7 @@ function Visual({ $navState, $colorScheme, handleNavToggle }) {
       </MainWrapper>
       {/* Only show footer if sidebar isn't open */}
       {($navState !== States.EXPANDED) && (
-        <ThickFooter $colorScheme={$colorScheme} />
+        <Footer color={'light'} />
       )}
     </>
   )
