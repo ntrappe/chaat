@@ -46,7 +46,6 @@ const StyledScrollContainer = styled.div`
 `;
 
 const StyledCarouselTrack = styled.ul`
-border: 1px solid white;
   display: grid;
   grid-auto-flow: column;
   grid-gap: var(--carousel-item-gap);
@@ -247,7 +246,7 @@ function Carousel({ children, gap='spacious' }) {
         disablePrev={disablePrev}
         disableNext={disableNext}
       />
-      <p style={{color:'cyan'}}>focus: {itemInFocus}</p>
+      {/* <p style={{color:'cyan'}}>focus: {itemInFocus}</p> */}
     </StyledCarouselWrapper>
   )
 }

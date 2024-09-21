@@ -139,7 +139,7 @@ html {
 
   --go-arrow-icon-small: 26px;
   --go-arrow-icon-large: 34px;
-  --go-arrow-pos-bottom: 20px;
+  --go-arrow-pos-bottom: 22px;
   --go-arrow-pos-right: 29px;
   --go-arrow-padding: 3px;
   --play-icon-small: 31px; 
@@ -236,6 +236,12 @@ html {
   --fg-light-trigger-fill: #838383;
   --fg-light-link: #4D35AC;
 
+  --fg-size-title-minor: 46px;
+  --fg-size-title-normal: 58px;
+  --fg-size-title-major: 72px;
+  --fg-size-subtitle-minor: 28px;
+  --fg-size-subtitle-normal: 32px;
+  --fg-size-subtitle-major: 40px;
   
   --coral: #ff595b;
   --scarlet: #ce4746;

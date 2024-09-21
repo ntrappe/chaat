@@ -37,19 +37,19 @@ const StyledContentWrapper = styled.div`
     color: ${(props) => (props.color === 'dark' ? `var(--fg-dark-text-major)` : `var(--fg-dark-text-major)`)};
 
     @media only screen and (max-width: 734px) {
-      font-size: 28px;
+      font-size: var(--fg-size-subtitle-minor);
       line-height: 1.14;
       padding: 25px 23px;
     }
 
     @media only screen and (min-width: 735px) and (max-width: 1068px) {
-      font-size: 32px;
+      font-size: var(--fg-size-subtitle-normal);
       line-height: 1.125;
       padding: 29px 30px;
     }
 
     @media only screen and (min-width: 1069px) {
-      font-size: 40px;
+      font-size: var(--fg-size-subtitle-major);
       line-height: 1.1;
       padding: 37px 26px 36px 40px;
     }

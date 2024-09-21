@@ -3,23 +3,24 @@ import styled from 'styled-components';
 
 const StyledSection = styled.section`
   position: relative;
-  border: 1px solid orange;
+  // background-color: pink;
   
-
   @media only screen and (max-width: 734px) {
     padding-top: 100px;
+    padding-bottom: 30px;
   }
 
   @media only screen and (min-width: 735px) and (max-width: 1068px) {
     padding-top: 140px;
+    padding-bottom: 40px;
   }
 
   @media only screen and (min-width: 1069px) {
     padding-top: 170px;
+    padding-bottom: 60px;
   }
 
   .section-heading {
-    border: 1px solid cyan;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 2.5rem;
@@ -27,19 +28,19 @@ const StyledSection = styled.section`
     color: ${(props) => (props.color === 'dark' ? `var(--fg-dark-text-heading)` : `var(--fg-light-text-heading)`)};
     
     @media only screen and (max-width: 734px) {
-      font-size: 46px;
+      font-size: var(--fg-size-title-minor);
       line-height: 1.08;
       width: var(--viewport-width-small);
     }
 
     @media only screen and (min-width: 735px) and (max-width: 1068px) {
-      font-size: 58px;
+      font-size: var(--fg-size-title-normal);
       line-height: 1.06;
       width: var(--viewport-width-medium);
     }
 
     @media only screen and (min-width: 1069px) {
-      font-size: 72px;
+      font-size: var(--fg-size-title-major);
       line-height: 1.055;
       width: var(--viewport-width-large);
 
