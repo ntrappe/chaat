@@ -14,7 +14,7 @@ const StyledGrid = styled.nav`
   flex-wrap: nowrap;
   padding-top: 30px;
   box-sizing: content-box;
-  max-width: 980px;
+  max-width: var(--viewport-max-width-large);
   margin: 0 auto;
   padding-bottom: 10px;
   border-bottom: 1px solid;
@@ -46,10 +46,10 @@ const StyledGrid = styled.nav`
 `;
 
 const StyledFooterAside = styled.aside`
-  max-width: var(--nav-max-width);
   margin: 0 auto;
   padding-top: 15px;
   padding-bottom: 15px;
+  max-width: var(--viewport-max-width-large);
   font-size: var(--fg-text-size-minor);
   line-height: 2;
   color: ${(props) => (props.color === 'light' ? `var(--fg-light-text-normal)` : `var(--fg-dark-text-normal)`)};

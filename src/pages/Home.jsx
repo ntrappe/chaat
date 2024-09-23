@@ -12,7 +12,9 @@ import Palette from '../assets/page-icons/palette.png';
 import Footer from '../features/Footer.jsx';
 import ProjectCarousel from '../features/ProjectCarousel.jsx';
 import ValuesCarousel from '../features/ValuesCarousel.jsx';
+import ServicesCarousel from '../features/ServicesCarousel.jsx';
 import Section from '../components/Section.jsx';
+import TechMosaic from '../features/TechMosaic.jsx';
 
 const States = {
   EXPANDED: 'expanded',
@@ -165,16 +167,14 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
             id="hello"
           />
         </HelloSection>
-        <IntroSection id="intro-section">
-          <IntroText>
-            <h2>Welcome to my Digital Trailhead</h2>
-            <p>I’m a developer navigating the intersections of creativity and 
-            functionality. With a background in neuroscience, computer science, and design, I’m on a 
-            mission to create products that align with what people can do. Hike through this site's 
-            wandering trails filled with case studies, art, and a rare lesson or two. Encounter an 
-            error? Don’t worry, report it <a href='https://github.com/ntrappe/chaat/issues'>here</a> and 
-            consider it a gentle nudge to explore the scenic route. Happy exploring!</p></IntroText>
-        </IntroSection>
+        <Section>
+          <Section.Heading>Tech Stack</Section.Heading>
+          <TechMosaic />
+        </Section>
+        {/* <Section>
+          <Section.Heading>Services</Section.Heading>
+          <ServicesCarousel />
+        </Section> */}
         <Section>
           <Section.Heading>Dive into my work.</Section.Heading>
           <ProjectCarousel />

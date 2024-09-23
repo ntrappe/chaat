@@ -10,12 +10,12 @@ const StyledNavControl = styled.div`
   margin-top: 1.75rem;
   justify-content: flex-end;
 
-  width: ${(props) => (props.width ? props.width : `var(--carousel-trigger-width-large)`)};
+  width: ${(props) => (props.width ? props.width : `var(--viewport-max-width-large)`)};
   @media only screen and (max-width: 1068px) {
-    width: ${(props) => (props.width ? props.width : `var(--carousel-trigger-width-medium)`)};
+    width: ${(props) => (props.width ? props.width : `var(--viewport-width-medium)`)};
   }
   @media only screen and (max-width: 734px) {
-    width: ${(props) => (props.width ? props.width : `var(--carousel-trigger-width-small)`)};
+    width: ${(props) => (props.width ? props.width : `var(--viewport-width-small)`)};
   }
 
   button {

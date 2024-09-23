@@ -63,7 +63,7 @@ const StyledContentWrapper = styled.div`
     border: none;
     border-radius: var(--circle-roundness);
     background-color: white;
-    opacity: 0.7;
+    opacity: var(--go-arrow-opacity);
     padding: var(--go-arrow-padding);
 
     &:hover {
@@ -73,7 +73,7 @@ const StyledContentWrapper = styled.div`
 
   .go-arrow {
     color: black;
-    opacity: 0.7;
+    opacity: var(--go-arrow-opacity);
     width: var(--go-arrow-icon-large);
     height: var(--go-arrow-icon-large);
     align-items: center;        /* vertically center in icon */

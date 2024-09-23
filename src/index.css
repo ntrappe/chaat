@@ -142,10 +142,14 @@ html {
   --go-arrow-pos-bottom: 22px;
   --go-arrow-pos-right: 29px;
   --go-arrow-padding: 3px;
+  --go-arrow-opacity: 0.7;
   --play-icon-small: 31px; 
   --play-icon-large: 36px; 
   --prev-next-icon-width: 22px;
   --prev-next-icon-gap: 12px;
+  --flip-icon-small: 22px;
+  --flip-icon-large: 30px;
+  --flip-icon-padding: 5px;
 
 
   --preview-min-height: 350px;
@@ -168,7 +172,6 @@ html {
   --preview-height-medium: 500px;
   --preview-height-large: 595px;
 
-
   --preview-video-height-large: 370px;
   --preview-video-height-medium: 320px;
   --preview-video-height-small: 290px;
@@ -177,6 +180,17 @@ html {
   --snippet-width-medium: 306px;
   --snippet-width-large: 450px;
 
+  --card-width-large: 522px;
+  --card-width-medium: 435px;
+  --card-width-small: 300px;
+  --card-height-large: 338px;
+  --card-height-medium: 282px;
+  --card-height-small: 340px;
+
+  --card-controls-x-buffer: 18px;
+  --card-controls-y-buffer: 20px;
+
+
   --gallery-width-large: 3000px;
   --gallery-width-medium: 2300px;
   --gallery-width-small: 87.5%;
@@ -184,16 +198,21 @@ html {
   --viewport-width-large: 940px;  /* Align left with site title */
   --viewport-width-medium: 692px; /* Align with main width */
   --viewport-width-small: 87.5%;
-
-  --carousel-trigger-width-large: 980px;
-  --carousel-trigger-width-medium: 692px;
-  --carousel-trigger-width-small: 87.5%;
+  --viewport-max-width-large: 980px;
 
   --gallery-item-gap-narrow: 40px;
   --gallery-item-gap-spacious: 80px;
 
   --carousel-item-gap-narrow: 40px;
   --carousel-item-gap-spacious: 80px;
+
+  --tile-size-small: 65px;
+  --tile-size-medium: 80px;
+  --tile-size-large: 100px;
+
+  --mosaic-gap-small: 12px;
+  --mosaic-gap-medium: 17px;
+  --mosiac-gap-large: 23px;
 
   --circle-roundness: 50%;
   
