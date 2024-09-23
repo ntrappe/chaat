@@ -22,18 +22,41 @@ const StyledTileWrapper = styled.li`
   }
 `;
 
+const StyledTileControls = styled.span`
+`;
+
 function Tile({ color, bg='grey', children }) {
+  const tileRef = useRef(null);
+
+  const change = () => {
+    window.dispatchEvent(new Event('tile expanded'));
+
+    if (tileRef.current) {
+      const currSize = tileRef.current.getBoundingClientRect().width;
+      const currPadding = window.innerWidth < 735 ? 12 : 20;
+      tileRef.current.style.backgroundColor = 'cyan';
+      tileRef.current.style.gridColumn = 'span 2';
+      tileRef.current.style.gridRow = 'span 2';
+      tileRef.current.style.borderRadius = '14px';
+      // Multiply the current size by 2 and set the new width and height in pixels
+      tileRef.current.style.width = `${currSize * 2 + currPadding}px`;
+      tileRef.current.style.height = `${currSize * 2 + currPadding}px`;
+    }
+  }
+
   return (
-    <StyledTileWrapper className='tile' bg={bg}>
+    <StyledTileWrapper className='tile' bg={bg} ref={tileRef} onClick={() => change()}>
       {React.Children.map(children, (child) => {
         return React.cloneElement(child, color, bg);
       })}
+      <StyledTileControls className='tile-controls'>
+        x
+      </StyledTileControls>
     </StyledTileWrapper>
   )
 }
 
 function Icon({ color, bg, children }) {
-
 }
 
 function Description({ color, children }) {

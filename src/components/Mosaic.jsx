@@ -28,13 +28,10 @@ const StyledMosaicWrapper = styled.section`
 `;
 
 const StyledGrid = styled.div`
-border: 1px solid turquoise;
-
   display: grid;
   width: fit-content;
   max-width: 100%;
   grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-  
   margin: 0 auto;
 
   @media only screen and (max-width: 734px) {
@@ -42,7 +39,7 @@ border: 1px solid turquoise;
   }
 
   @media only screen and (min-width: 735px) and (max-width: 1068px) {
-    gap: var(--mosaic-gap-medium);
+    gap: var(--mosiac-gap-large);
   }
 
   @media only screen and (min-width: 1069px) {
@@ -67,8 +64,9 @@ function Mosaic({ color, children }) {
     }
   }
 
+  setGridTemplate();
   // Fill up grid on load and resize by calc size of children
-  ['load', 'resize'].forEach(event => window.addEventListener(event, setGridTemplate));
+  ['load', 'tile expanded', 'resize'].forEach(event => window.addEventListener(event, setGridTemplate));
 
   return (
     <StyledMosaicWrapper className='mosaic'>
