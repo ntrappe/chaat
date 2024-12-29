@@ -40,7 +40,6 @@ const StyledAutoPlayControl = styled.div`
     width: inherit;
     height: inherit;
   }
-
 `;
 
 /**
@@ -51,14 +50,6 @@ const StyledAutoPlayControl = styled.div`
  */
 function AutoPlayControl({ color='dark', width=null, triggerPause, triggerPlay }) {
   const [paused, setPaused] = useState(false);
-
-  // const dispatchPlayEvent = () => {
-  //   window.dispatchEvent(new Event('autoplay play'));
-  // };
-
-  // const dispatchPauseEvent = () => {
-  //   window.dispatchEvent(new Event('autoplay pause'));
-  // }
 
   return (
     <StyledAutoPlayControl className='autoplay-control' color={color} width={width}>
@@ -71,21 +62,19 @@ function AutoPlayControl({ color='dark', width=null, triggerPause, triggerPlay }
         }}
       >
         {paused && (
-          <svg height='40' viewBox='0 0 40 40' width='40' xmlns='http://www.w3.org/2000/svg' className='play-icon'>
-            <g fill='none' fillRule='evenodd'>
-              <circle cx='20' cy='20' fill='#86868b' r='20'></circle>
-              <path d='m0 12.348v-10.687c0-1.089.657-1.661 1.471-1.661.449 0 .731.075 1.127.318l8.713 5.132c.772.455 1.189.825 1.189 1.544 0 .72-.417 1.09-1.189 1.545l-8.713 5.132c-.396.243-.678.318-1.127.318-.814 0-1.471-.551-1.471-1.641' fill='#fff' transform='translate(15 13.0055)'></path>
-            </g>
+          <svg width='36' height='36' viewBox='0 0 36 36' xmlns='http://www.w3.org/2000/svg' className='play-icon'>
+            <circle fill='var(--circle-fill, none)' stroke='var(--circle-stroke, #86868b)' stroke-width='2' cx='18' cy='18' r='17'></circle>
+            <path fill='var(--icon-fill, #86868b)' d='m14.563 24.61 10.099-6.032c.688-.403.681-1.33 0-1.745l-10.099-6.055c-.695-.41-1.588-.084-1.588.684v12.46c0 .76.85 1.13 1.588.689Z'></path>
           </svg>
         )}
         {!paused && (
-          <svg height='40' viewBox='0 0 40 40' width='40' xmlns='http://www.w3.org/2000/svg' className='pause-icon'>
-            <g fill='none' fillRule='evenodd'>
-              <circle cx='20' cy='20' fill='#86868b' r='20'></circle>
-              <g fill='#fff' transform='translate(13.75 13)'>
-                <path d='m3 14h-1.5c-.828 0-1.5-.672-1.5-1.5v-11c0-.828.672-1.5 1.5-1.5h1.5c.828 0 1.5.672 1.5 1.5v11c0 .828-.672 1.5-1.5 1.5'></path>
-                <path d='m11 14h-1.5c-.828 0-1.5-.672-1.5-1.5v-11c0-.828.672-1.5 1.5-1.5h1.5c.828 0 1.5.672 1.5 1.5v11c0 .828-.672 1.5-1.5 1.5'></path>
+          <svg width='36' height='36' viewBox='0 0 36 36' xmlns='http://www.w3.org/2000/svg' className='pause-icon'>
+            <g fill='var(--icon-fill, none)' stroke='var(--icon-stroke, #86868b)' stroke-width='2' stroke-linecap='round'>
+              <g stroke-width='2.3'>
+                <path d='M14.8 11.75 v11.9'></path>
+                <path d='M21.1 11.75 v11.9'></path>
               </g>
+              <circle fill='var(--circle-fill, none)' stroke='var(--circle-stroke, #86868b)' cx='18' cy='18' r='17'></circle>
             </g>
           </svg>
         )}      
