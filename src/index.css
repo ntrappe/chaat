@@ -145,6 +145,8 @@ html {
   --go-arrow-opacity: 0.7;
   --play-icon-small: 31px; 
   --play-icon-large: 36px; 
+  --autoplay-icon-small: 35px;
+  --autoplay-icon-large: 40px;
   --prev-next-icon-width: 22px;
   --prev-next-icon-gap: 12px;
   --flip-icon-small: 22px;
@@ -205,6 +207,14 @@ html {
 
   --carousel-item-gap-narrow: 40px;
   --carousel-item-gap-spacious: 80px;
+
+  --marquee-width-small: 300px;
+  --marquee-height-small: 200px;
+  --marquee-width-medium: 420px;
+  --marquee-height-medium: 280px;
+  --marquee-width-large: 500px;
+  --marquee-height-large: 312px;
+  
 
   --tile-size-small: 65px;
   --tile-size-medium: 80px;

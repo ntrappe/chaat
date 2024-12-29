@@ -12,9 +12,10 @@ import Palette from '../assets/page-icons/palette.png';
 import Footer from '../features/Footer.jsx';
 import ProjectCarousel from '../features/ProjectCarousel.jsx';
 import ValuesCarousel from '../features/ValuesCarousel.jsx';
-import ServicesCarousel from '../features/ServicesCarousel.jsx';
+import GraphicsCarousel from '../features/GraphicsCarousel.jsx';
+// import ServicesCarousel from '../features/ServicesCarousel.jsx';
 import Section from '../components/Section.jsx';
-import TechMosaic from '../features/TechMosaic.jsx';
+// import TechMosaic from '../features/TechMosaic.jsx';
 
 const States = {
   EXPANDED: 'expanded',
@@ -167,9 +168,11 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
             id="hello"
           />
         </HelloSection>
+        <Section id='hero-section'>
+        </Section>
         <Section>
-          <Section.Heading>Tech Stack</Section.Heading>
-          <TechMosaic />
+          <Section.Heading>Visuals that bring ideas to life.</Section.Heading>
+          <GraphicsCarousel />
         </Section>
         {/* <Section>
           <Section.Heading>Services</Section.Heading>
@@ -178,6 +181,9 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
         <Section>
           <Section.Heading>Dive into my work.</Section.Heading>
           <ProjectCarousel />
+        </Section>
+        <Section>
+          <Section.Heading>See through my lens.</Section.Heading>
         </Section>
         <Section color='dark'>
           <Section.Heading>Values that drive design.</Section.Heading>
