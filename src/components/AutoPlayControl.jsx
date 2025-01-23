@@ -63,14 +63,14 @@ function AutoPlayControl({ color='dark', width=null, triggerPause, triggerPlay }
       >
         {paused && (
           <svg width='36' height='36' viewBox='0 0 36 36' xmlns='http://www.w3.org/2000/svg' className='play-icon'>
-            <circle fill='var(--circle-fill, none)' stroke='var(--circle-stroke, #86868b)' stroke-width='2' cx='18' cy='18' r='17'></circle>
+            <circle fill='var(--circle-fill, none)' stroke='var(--circle-stroke, #86868b)' strokeWidth='2' cx='18' cy='18' r='17'></circle>
             <path fill='var(--icon-fill, #86868b)' d='m14.563 24.61 10.099-6.032c.688-.403.681-1.33 0-1.745l-10.099-6.055c-.695-.41-1.588-.084-1.588.684v12.46c0 .76.85 1.13 1.588.689Z'></path>
           </svg>
         )}
         {!paused && (
           <svg width='36' height='36' viewBox='0 0 36 36' xmlns='http://www.w3.org/2000/svg' className='pause-icon'>
-            <g fill='var(--icon-fill, none)' stroke='var(--icon-stroke, #86868b)' stroke-width='2' stroke-linecap='round'>
-              <g stroke-width='2.3'>
+            <g fill='var(--icon-fill, none)' stroke='var(--icon-stroke, #86868b)' strokeWidth='2' strokeLinecap='round'>
+              <g strokeWidth='2.3'>
                 <path d='M14.8 11.75 v11.9'></path>
                 <path d='M21.1 11.75 v11.9'></path>
               </g>

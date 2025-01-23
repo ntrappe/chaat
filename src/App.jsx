@@ -16,11 +16,13 @@ import Page from './components/Core/Page.jsx';
 import MinimalPage from './components/Core/MinimalPage.jsx';
 import ProjectGrid from './components/Core/ProjectGrid.jsx';
 
+import Landing from './pages/Landing.jsx';
+
 export default function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path='/' element={<MinimalPage customComponent={Home} $colorScheme={'dark'} />} />
+        <Route path='/' element={<Landing/>} />
         <Route path='/projects' element={<Page customComponent={ProjectGrid} showAside={false} />} />
         <Route path='/projects/pomodoro' element={<Page customComponent={Pomodoro} showAside={true} />} />
         <Route path='/projects/museum' element={<Page customComponent={Museum} showAside={true} />} />

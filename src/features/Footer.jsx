@@ -76,7 +76,6 @@ const StyledFooterAside = styled.aside`
  * @returns unordered list element
  */
 function Footer({ color='dark' }) {
-  console.log('got color: '  + color)
   return (
     <StyledFooterWrapper color={color}>
       <StyledGrid color={color}>

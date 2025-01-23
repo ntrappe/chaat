@@ -15,6 +15,7 @@ import ValuesCarousel from '../features/ValuesCarousel.jsx';
 import GraphicsCarousel from '../features/GraphicsCarousel.jsx';
 // import ServicesCarousel from '../features/ServicesCarousel.jsx';
 import Section from '../components/Section.jsx';
+import GlassNav from '../components/GlassNav/GlassNav.jsx';
 // import TechMosaic from '../features/TechMosaic.jsx';
 
 const States = {
@@ -153,7 +154,7 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
 
   return (
     <>
-      <GlassHeader 
+      {/* <GlassHeader 
         $colorScheme={$colorScheme} 
         $showSideBar={false} 
         bubbleUpSidebar={() => console.log('no sidebar')}
@@ -161,7 +162,17 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
       />
       {$navState === States.EXPANDED && (
         <DarkOverlay />
-      )}
+      )} */}
+      <GlassNav>
+        <GlassNav.Title>Hello World</GlassNav.Title>
+        <GlassNav.Menu>
+          <GlassNav.Menu.Item>Overview</GlassNav.Menu.Item>
+          <GlassNav.Menu.Item>Features</GlassNav.Menu.Item>
+          <GlassNav.Menu.Item>Control</GlassNav.Menu.Item>
+          <GlassNav.Menu.Item>Transparency Report</GlassNav.Menu.Item>
+          <GlassNav.Menu.Item>Privacy Policy</GlassNav.Menu.Item>
+        </GlassNav.Menu>
+      </GlassNav>
       <MainWrapper $navState={$navState}>
         <HelloSection id="hello-section" style={{ height: helloHeight }}>
           <Hello 
@@ -189,6 +200,7 @@ function Home({ $navState, $colorScheme, handleNavToggle }) {
           <Section.Heading>Values that drive design.</Section.Heading>
           <ValuesCarousel />
         </Section>
+        <div style={{height:'5em'}}></div>
       </MainWrapper>
       {/* Only show footer if sidebar isn't open */}
       {$navState !== States.EXPANDED && (

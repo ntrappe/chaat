@@ -43,7 +43,7 @@ ol, ul {
 
 a, li {
   text-decoration: none;
-  color: #999999;
+  color: inherit;
 }
 
 li {
@@ -119,12 +119,24 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
+  /* Important Globals */
+  --mobile-viewport-width: 833px;
+  --viewport-width-large: 940px;  /* Align left with site title */
+  --viewport-width-medium: 692px; /* Align with main width */
+  --viewport-width-small: 87.5%;
+  --viewport-max-width-large: 980px;
+
   --nav-height: 2.75rem;
   --bg-height-big: 640px;
   --bg-height-med: 510px;
   --bg-height-small: 350px;
-  --nav-height: 2.75rem;
-  --mobile-width: 767px;
+
+  --nav-height-medium: 2.75rem;
+  --nav-height-large: 52px; /* Good for fixed layout, fixed size */
+  --nav-height-small: 48px;
+  --nav-width-min: 320px;
+  --nav-dropdown-height: 19rem;
+  
   --proj-sect-gap: 20px;
   --max-main-width: 930px;
   --nav-max-width: 960px;
@@ -146,7 +158,7 @@ html {
   --play-icon-small: 31px; 
   --play-icon-large: 36px; 
   --autoplay-icon-small: 35px;
-  --autoplay-icon-large: 40px;
+  --autoplay-icon-large: 36px;
   --prev-next-icon-width: 22px;
   --prev-next-icon-gap: 12px;
   --flip-icon-small: 22px;
@@ -197,11 +209,6 @@ html {
   --gallery-width-medium: 2300px;
   --gallery-width-small: 87.5%;
 
-  --viewport-width-large: 940px;  /* Align left with site title */
-  --viewport-width-medium: 692px; /* Align with main width */
-  --viewport-width-small: 87.5%;
-  --viewport-max-width-large: 980px;
-
   --gallery-item-gap-narrow: 40px;
   --gallery-item-gap-spacious: 80px;
 
@@ -241,6 +248,8 @@ html {
   
   --obsidian-glassy: rgba(13,13,13,0.6);
   --white-glassy: rgba(255,255,255,0.6);
+  --obsidian-thick-glassy: rgba(13,13,13,0.95);
+  --white-thick-glassy: rgba(255,255,255,0.95);
   --dark-nav-border: rgba(81,81,84,0.4);
   --light-nav-border: rgba(185,186,187,0.3);
 
@@ -254,6 +263,7 @@ html {
   --fg-dark-text-minor: #9c9c9d;
   --fg-dark-trigger-fill: #86868b;
   --fg-dark-link: #AEA1FF;
+  --fg-dark-icon: #fff;
 
   --bg-light-footer: #f5f5f7;
   --bg-light-border: #d3d6d6;
@@ -263,6 +273,9 @@ html {
   --fg-light-text-minor: #6B6B6C;
   --fg-light-trigger-fill: #838383;
   --fg-light-link: #4D35AC;
+  --fg-light-icon: #1D1D1F;
+
+  --bg-shadow: rgba(51,51,51,.4);
 
   --fg-size-title-minor: 46px;
   --fg-size-title-normal: 58px;

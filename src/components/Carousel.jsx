@@ -4,7 +4,7 @@ import NavControl from './NavControl';
 
 const MOBILE = 734;
 
-const StyledCarouselWrapper = styled.section`
+const StyledCarouselWrapper = styled.div`
   position: relative;
 
   @media only screen and (max-width: 734px) {

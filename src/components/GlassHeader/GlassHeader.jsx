@@ -22,6 +22,7 @@ const Arrow = {
 }
 
 const NavHeader = styled.header`
+  border: 1px solid cyan;
   display: flex;
   position: sticky;
   top: 0;
@@ -37,6 +38,7 @@ const NavHeader = styled.header`
 `;
 
 const NavWrapper = styled.div`
+  border: 1px solid limegreen;
   position: absolute;
   top: 0;
   left: 0;
@@ -47,6 +49,7 @@ const NavWrapper = styled.div`
 `;
 
 const NavBackground = styled.div`
+  border: 1px solid #2CBFEF;
   position: absolute;
   left: 0;
   width: 100%;
@@ -90,6 +93,7 @@ const NavBackground = styled.div`
 `;
 
 const NavContent = styled.div`
+  border: 1px solid red;
   display: flex;
   padding: 0 1.3rem;
   max-width: var(--nav-max-width);

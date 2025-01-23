@@ -8,6 +8,7 @@ const Arrow = {
 }
 
 const NavActionsWrapper = styled.div`
+  border: 1px solid navy;
   display: flex;
   justify-content: flex-end;
   align-items: center;
