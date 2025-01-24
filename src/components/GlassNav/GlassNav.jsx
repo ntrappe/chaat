@@ -1,10 +1,16 @@
-// Based on header from developer.apple.com/design/human-interface-guidelines/designing-for-games
+/**
+ * @fileoverview GlassNav component file. Renders a responsive, scroll-locking
+ * navigation bar with optional dark/light color scheme. Based on 
+ * developer.apple.com/design/human-interface-guidelines/designing-for-games.
+ */
+
 import React, { useState, useEffect, useRef } from 'react';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import styled from 'styled-components';
-import debounce from 'lodash.debounce';
 import NavTitle from './GlassNavTitle';
 import NavMenu from './GlassNavMenu';
 import NavAction from './GlassNavAction';
+import NavPre from './GlassNavPre';
 
 const NavWrapper = styled.nav`
   display: flex;
@@ -18,6 +24,9 @@ const NavWrapper = styled.nav`
 
   @media only screen and (max-width: 833px) {
     height: var(--nav-height-small);
+    position: fixed;
+    top: 0;
+    left: 0;
   }
 `;
 
@@ -107,20 +116,35 @@ const NavContainer = styled.div`
   }
 `;
 
-const NavPre = styled.div`
-  border: 1px solid green;
-
-  display: flex;
-  overflow: hidden;
-`;
-
-
+/**
+ * GlassNav component.
+ * Renders a responsive navigation bar with optional color scheme and scroll locking.
+ *
+ * @function GlassNav
+ * @param {React.ReactNode} props.children - Child components (NavTitle, NavMenu, etc.).
+ * @param {string} [props.color='dark'] - Color variant for the nav (e.g., dark or light).
+ * @returns {JSX.Element} The rendered GlassNav component.
+ */
 function GlassNav({ children, color='dark' }) {
-  // Initial state for isOpen based on current window width
+  /**
+   * State representing whether the nav is open. Defaults to open if viewport > 833.
+   * @type {[boolean, Function]}
+   */  
   const [isOpen, setIsOpen] = useState(window.innerWidth > 833);
-  // Keep track of previous viewport width
+  /**
+   * Tracks previous viewport width for detecting transitions between mobile and wide.
+   * @type {[number, Function]}
+   */
   const [prevWidth, setPrevWidth] = useState(window.innerWidth);
+  /**
+   * A ref to the nav container for body-scroll-lock.
+   * @type {React.MutableRefObject<null|HTMLElement>}
+   */
+  const navRef = useRef(null);
 
+  /**
+   * Handles viewport resizes, toggling `isOpen` based on crossing 833px threshold.
+   */
   useEffect(() => {
     const handleResize = () => {
       const currentWidth = window.innerWidth;
@@ -149,9 +173,20 @@ function GlassNav({ children, color='dark' }) {
     return () => window.removeEventListener('resize', handleResize);
   }, [prevWidth]); // Track viewport changes
 
+  /**
+   * Listens for custom events ("glass nav open" / "glass nav close") to toggle `isOpen`
+   * and uses body-scroll-lock to freeze/unfreeze background scrolling when in mobile mode.
+   */
   useEffect(() => {
-    const mobileNavOpened = () => setIsOpen(true);
-    const mobileNavClosed = () => setIsOpen(false);
+    const mobileNavOpened = () => {
+      setIsOpen(true);
+      if (navRef.current) disableBodyScroll(navRef.current);
+    }
+
+    const mobileNavClosed = () => {
+      setIsOpen(false);
+      if (navRef.current) enableBodyScroll(navRef.current);
+    }
 
     window.addEventListener('glass nav open', mobileNavOpened);
     window.addEventListener('glass nav close', mobileNavClosed);
@@ -159,22 +194,22 @@ function GlassNav({ children, color='dark' }) {
     return () => {
       window.removeEventListener('glass nav open', mobileNavOpened);
       window.removeEventListener('glass nav close', mobileNavClosed);
+      clearAllBodyScrollLocks();
     }
-  }, [])
+  }, []);
 
-  
   return (
     <NavWrapper 
       className='glass-nav'
       color={color}  
       aria-expanded={isOpen}
       role='navigation'
+      ref={navRef}
     >
       <NavContainer className='glass-nav-container' color={color} data-open={isOpen}>
         <div className='nav-background' color={color} data-open={isOpen}/>
         <div className={'nav-overlay' + (isOpen ? ' open' : '')}/>
         <div className='nav-content' color={color}>
-          <NavPre className='nav-pre-title'></NavPre>
           {React.Children.map(children, (child) => {
             return React.cloneElement(child, { isOpen, color })
           })}
@@ -185,8 +220,16 @@ function GlassNav({ children, color='dark' }) {
   )
 }
 
-
+/**
+ * Attach sub-components for convenient usage like:
+ * <GlassNav>
+ *   <GlassNav.Pre />
+ *   <GlassNav.Title />
+ *   <GlassNav.Menu />
+ * </GlassNav>
+ */
 GlassNav.Title = NavTitle;
 GlassNav.Menu = NavMenu;
+GlassNav.Pre = NavPre;
 
 export default GlassNav;

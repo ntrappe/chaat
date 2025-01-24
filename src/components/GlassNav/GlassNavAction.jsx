@@ -1,3 +1,9 @@
+/**
+ * @fileoverview GlassNavAction component file. Renders a responsible toggle to
+ * open or close the nav. Based on 
+ * developer.apple.com/design/human-interface-guidelines/designing-for-games.
+ */
+
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import debounce from 'lodash.debounce';
@@ -61,9 +67,25 @@ const NavActionWrapper = styled.div`
   }
 `;
 
+/**
+ * GlassNavAction component.
+ * Renders a responsive button to toggle the nav opened and closed.
+ *
+ * @function GlassNavAction
+ * @param {string} props.color - Color variant for the nav (e.g., dark or light).
+ * @param {boolean} props.isOpen - Whether the nav is open or not.
+ * @returns {JSX.Element} The rendered GlassNavAction component.
+ */
 function GlassNavAction({ color, isOpen }) {
+  /**
+   * State representing whether the viewport is compact/mobile or not.
+   * @type {[boolean, Function]}
+   */  
   const [isMobile, setIsMobile] = useState(window.innerWidth < 834);  
   
+  /**
+   * Handles viewport resizes to update `isMobile`.
+   */
   useEffect(() => {
     const handleResize = debounce(() => {
       setIsMobile(window.innerWidth <= 833);
@@ -76,7 +98,13 @@ function GlassNavAction({ color, isOpen }) {
     };
   }, [isMobile]); // Track viewport changes
 
+  /**
+   * Fires an event to open the nav.
+   */
   const triggerNavOpen = () => window.dispatchEvent(new Event('glass nav open'));
+  /**
+   * Fires an event to close the nav.
+   */
   const triggerNavClose = () => window.dispatchEvent(new Event('glass nav close'));
 
   return (

@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+/**
+ * @fileoverview GlassNavTitle component file. Renders a title. Based on 
+ * developer.apple.com/design/human-interface-guidelines/designing-for-games.
+ */
+
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -21,6 +26,7 @@ const NavTitleWrapper = styled.h2`
     padding-top: 0;
     height: var(--nav-height-small);
     width: 90%;
+    margin: 0;
   }
 
   a {
@@ -31,16 +37,27 @@ const NavTitleWrapper = styled.h2`
       opacity: 1;
     }
   }
-
 `;
 
-function GlassNavTitle({ children, color, link }) {
-
-  const notifyPageSwitch = () => window.dispatchEvent(new Event('switch web page'));
+/**
+ * GlassNavTitle component.
+ * Renders a title.
+ *
+ * @function GlassNavTitle
+ * @param {React.ReactNode} props.children - Name of site (e.g., 'Hello World')
+ * @param {string} props.color - Color variant for the nav (e.g., dark or light).
+ * @param {string} props.link - Link for the site (e.g., '/'). 
+ * @returns {JSX.Element} The rendered GlassNavMenu component.
+ */
+function GlassNavTitle({ children, color, link='/' }) {
+  /**
+   * Fires an event to close the nav.
+   */
+  const triggerNavClose = () => window.dispatchEvent(new Event('glass nav close'));
 
   return (
     <NavTitleWrapper className='nav-title' color={color}>
-      <Link to={link} onClick={notifyPageSwitch}>{children}</Link>
+      <Link to={`${link}`} onClick={() => triggerNavClose()}>{children}</Link>
     </NavTitleWrapper>
   )
 }

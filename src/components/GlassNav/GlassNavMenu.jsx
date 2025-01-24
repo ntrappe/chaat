@@ -1,6 +1,12 @@
-import React, { useEffect, useState } from 'react';
+/**
+ * @fileoverview GlassNavMenu component file. Renders a responsive menu with a list
+ * of subpages. Based on 
+ * developer.apple.com/design/human-interface-guidelines/designing-for-games.
+ */
+
+import React from 'react';
 import styled from 'styled-components';
-import NavMenu from '../GlassHeader/NavMenu';
+import { Link } from 'react-router-dom';
 
 const NavMenuWrapper = styled.div`
   display: flex;
@@ -74,11 +80,24 @@ const NavMenuWrapper = styled.div`
         border-color: ${(props) => (props['data-color'] === 'dark' ? `var(--bg-dark-border)` : `var(--bg-light-border)`)};
       }
     }
+
+    a, a:hover, a:visited {
+      color: inherit;
+    }
   }
 `;
 
-const GlassNavMenu = ({ children, isOpen, color }) => {
-
+/**
+ * GlassNavMenu component.
+ * Renders a list of subpages.
+ *
+ * @function GlassNavMenu
+ * @param {React.ReactNode} props.children - Child components (NavTitle, NavMenu, etc.).
+ * @param {string} props.color - Color variant for the nav (e.g., dark or light).
+ * @param {boolean} props.isOpen - Whether the nav is open or not.
+ * @returns {JSX.Element} The rendered GlassNavMenu component.
+ */
+const GlassNavMenu = ({ children, color, isOpen }) => {
   return (
     <NavMenuWrapper 
       className='nav-menu' 
@@ -97,9 +116,27 @@ const GlassNavMenu = ({ children, isOpen, color }) => {
   );
 };
 
+/**
+ * GlassNavItem component.
+ * Renders a single list item representing a subpage.
+ *
+ * @function GlassNavItem
+ * @param {React.ReactNode} props.children - Name of subpage (e.g., 'Home')
+ * @param {string} props.color - Color variant for the nav (e.g., dark or light).
+ * @param {boolean} props.isOpen - Whether the nav is open or not.
+ * @param {string} props.link - Link for the subpage (e.g., 'Home'). 
+ * @returns {JSX.Element} The rendered GlassNavMenu component.
+ */
 const GlassNavItem = ({ children, color, isOpen, link }) => {
+  /**
+   * Fires an event to close the nav.
+   */
+  const triggerNavClose = () => window.dispatchEvent(new Event('glass nav close'));
+
   return (
-    <li className='nav-menu-item' data-open={isOpen} color={color}>{children}</li>
+    <li className='nav-menu-item' data-open={isOpen} color={color}>
+      <Link to={`/${link}`} onClick={() => triggerNavClose()}>{children}</Link>
+    </li>
   );
 };
 
