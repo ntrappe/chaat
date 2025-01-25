@@ -12,17 +12,49 @@ function Landing({ }) {
     <Page color='dark'>
       <Page.Header>
         <GlassNav>
-          <GlassNav.Title>Hello World</GlassNav.Title>
+          <GlassNav.Pre sidebar={true}></GlassNav.Pre>
+          <GlassNav.Title>Nicole Trappe</GlassNav.Title>
           <GlassNav.Menu>
-            <GlassNav.Menu.Item>Overview</GlassNav.Menu.Item>
-            <GlassNav.Menu.Item>Features</GlassNav.Menu.Item>
-            <GlassNav.Menu.Item>Control</GlassNav.Menu.Item>
-            <GlassNav.Menu.Item>Transparency Report</GlassNav.Menu.Item>
-            <GlassNav.Menu.Item>Privacy Policy</GlassNav.Menu.Item>
+            <GlassNav.Menu.Item>About</GlassNav.Menu.Item>
+            <GlassNav.Menu.Item>Projects</GlassNav.Menu.Item>
+            <GlassNav.Menu.Item>Photography</GlassNav.Menu.Item>
+            <GlassNav.Menu.Item>Art</GlassNav.Menu.Item>
+            {/* <GlassNav.Menu.Item>Adventures</GlassNav.Menu.Item> */}
           </GlassNav.Menu>
         </GlassNav>
       </Page.Header>
       <Page.Main>
+        <Section id='hero-section' color='dark'>
+          <Section.DynamicHeading words={['Designing ', 'Building ', 'Creating ', 'Exploring ']}>
+            with people in mind.
+          </Section.DynamicHeading>
+          <Section.Subheading>
+            I’m a full-stack developer bridging neuroscience, engineering, and design to create 
+            technology that solves human problems.
+          </Section.Subheading>
+          <Section.Badges>
+            <Section.Badges.Badge>
+              <Section.Badges.Badge.Caption>Over</Section.Badges.Badge.Caption>
+              <Section.Badges.Badge.Value>2.5</Section.Badges.Badge.Value>
+              <Section.Badges.Badge.Caption>years in industry</Section.Badges.Badge.Caption>
+            </Section.Badges.Badge>
+            <Section.Badges.Badge>
+              <Section.Badges.Badge.Caption>Up to</Section.Badges.Badge.Caption>
+              <Section.Badges.Badge.Value>7.0</Section.Badges.Badge.Value>
+              <Section.Badges.Badge.Caption>programming languages</Section.Badges.Badge.Caption>
+            </Section.Badges.Badge>
+            <Section.Badges.Badge>
+              <Section.Badges.Badge.Caption>Over</Section.Badges.Badge.Caption>
+              <Section.Badges.Badge.Value>10.0</Section.Badges.Badge.Value>
+              <Section.Badges.Badge.Caption>projects in design & eng</Section.Badges.Badge.Caption>
+            </Section.Badges.Badge>
+            <Section.Badges.Badge>
+              <Section.Badges.Badge.Caption>Up to</Section.Badges.Badge.Caption>
+              <Section.Badges.Badge.Value>48.3</Section.Badges.Badge.Value>
+              <Section.Badges.Badge.Caption>miles hiked this year</Section.Badges.Badge.Caption>
+            </Section.Badges.Badge>
+          </Section.Badges>
+        </Section>
         <Section>
           <Section.Heading>Visuals that bring ideas to life.</Section.Heading>
           <GraphicsCarousel />

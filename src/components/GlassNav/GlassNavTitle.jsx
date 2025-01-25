@@ -13,7 +13,7 @@ const NavTitleWrapper = styled.h2`
   white-space: nowrap;
   margin: 0 auto;
   padding: 0;
-  color: ${(props) => (props.color === 'dark' ? `var(--fg-dark-text-major)` : `var(--fg-light-text-major)`)};
+  color: ${(props) => (props.color === 'dark' ? `var(--fg-dark-text-heading)` : `var(--fg-light-text-heading)`)};
   opacity: 0.8;
   line-height: 1.2;
   font-family: 'SF Pro';
@@ -29,13 +29,14 @@ const NavTitleWrapper = styled.h2`
     margin: 0;
   }
 
-  a {
-    color: inherit;
-    transition: color 0.5s cubic-bezier(0.28, 0.11, 0.32, 1);
+  &:hover {
+    opacity: 1;
+  }
 
-    &:hover {
-      opacity: 1;
-    }
+  a. a:hover {
+    color: inherit;
+    opacity: inherit;
+    transition: color 0.5s cubic-bezier(0.28, 0.11, 0.32, 1);
   }
 `;
 

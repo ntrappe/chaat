@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 
 const MainWrapper = styled.main`
@@ -43,28 +43,37 @@ function Page({ children, color='dark' }) {
     //   root.style.overflow = 'auto';
     // }
 
-  useEffect(() => {
-    const freezeDisplay = () => {
-      const currentOffset = window.scrollY;
-      body.style.position = 'fixed';
-      body.style.top = `-${currentOffset}px`;
-      body.style.overflow = 'hidden scroll';
-      // body.style.width = '100%';
-    }
+  // useLayoutEffect(() => {
+  //   let savedOffset = 0;
 
-    const unfreezeDisplay = () => {
-      body.style.position = 'static';
-      body.style.overflow = 'auto';
-    }
+  //   // Pins the body in place and preserves viewport position
+  //   const freezeDisplay = () => {
+  //     savedOffset = window.scrollY;
+  //     body.style.overflow = 'hidden scroll';
+  //     body.style.position = 'fixed';
+  //     body.style.top = `-${savedOffset}px`;
+  //   }
 
-    window.addEventListener('glass nav open', freezeDisplay);
-    window.addEventListener('glass nav close', unfreezeDisplay);
+  //   // Resets body while preserving viewport position
+  //   const unfreezeDisplay = () => {
+  //     requestAnimationFrame(() => {
+  //       window.scrollTo(0, savedOffset);
+  //       // Force reflow so the browser applies the scroll instantly
+  //       document.body.getBoundingClientRect();
+  //       body.style.position = '';
+  //       body.style.top = '';
+  //       body.style.overflow = '';
+  //     });
+  //   }
 
-    return () => {
-      window.removeEventListener('glass nav open', freezeDisplay);
-      window.removeEventListener('glass nav close', unfreezeDisplay);
-    }
-  }, [])
+  //   window.addEventListener('glass nav open', freezeDisplay);
+  //   window.addEventListener('glass nav close', unfreezeDisplay);
+
+  //   return () => {
+  //     window.removeEventListener('glass nav open', freezeDisplay);
+  //     window.removeEventListener('glass nav close', unfreezeDisplay);
+  //   }
+  // }, []);
 
   // Clone each direct child of <Page> and pass color
   const processedChildren = React.Children.map(children, (child) => {

@@ -35,7 +35,7 @@ const NavPreWrapper = styled.div`
   }
 
   .sidenav-toggle:hover .sidenav-icon {
-    background: ${(props) => (props.color === 'dark' ? `var(--bg-dark-footer)` : `var(--bg-light-footer)`)};
+    background: ${(props) => (props.color === 'dark' ? `var(--bg-dark-icon-fill)` : `var(--bg-light-icon-fill)`)};
   }
 
   .menu-icon {
@@ -44,6 +44,11 @@ const NavPreWrapper = styled.div`
     fill: currentColor;
     width: 20px;
     height: 20px;
+    opacity: 0.8;
+  }
+
+  .sidenav-toggle:hover .menu-icon {
+    opacity: 1;
   }
 
   .sidenav-separator {

@@ -262,6 +262,7 @@ html {
   --fg-dark-text-normal: #d2d2d2;
   --fg-dark-text-minor: #9c9c9d;
   --fg-dark-trigger-fill: #86868b;
+  --bg-dark-icon-fill: rgb(51, 51, 54);
   --fg-dark-link: #AEA1FF;
   --fg-dark-icon: #fff;
 
@@ -272,6 +273,7 @@ html {
   --fg-light-text-normal: #444445;
   --fg-light-text-minor: #6B6B6C;
   --fg-light-trigger-fill: #838383;
+  --bg-light-icon-fill: rgb(232, 232, 237);
   --fg-light-link: #4D35AC;
   --fg-light-icon: #1D1D1F;
 
