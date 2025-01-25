@@ -69,7 +69,7 @@ const NavPreWrapper = styled.div`
  * @param {string} [props.color='dark'] - Color variant for the nav (e.g., dark or light).
  * @returns {JSX.Element} The rendered GlassNavPre component.
  */
-function GlassNavPre({ sidenav=true, color }) {
+function GlassNavPre({ sidenav, color }) {
   /**
    * Dispatches event for a click on the sidenav toggle button.
    */

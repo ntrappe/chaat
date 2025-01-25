@@ -3,23 +3,35 @@ import styled from 'styled-components';
 
 const StyledSection = styled.section`
   position: relative;
-  
+
   @media only screen and (max-width: 734px) {
     padding-top: 100px;
     padding-bottom: 30px;
+
+    &:first-child {
+      padding-top: 83px;
+    }
   }
 
   @media only screen and (min-width: 735px) and (max-width: 1068px) {
     padding-top: 140px;
     padding-bottom: 40px;
+
+    &:first-child {
+      padding-top: 116px;
+    }
   }
 
   @media only screen and (min-width: 1069px) {
     padding-top: 170px;
     padding-bottom: 60px;
+
+    &:first-child {
+      padding-top: 141px;
+    }
   }
 
-  h1, h2, h3, .badges-container {
+  h1, h2, h3, .badges-container, .photo-grid {
     margin-left: auto;
     margin-right: auto;
 

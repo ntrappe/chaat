@@ -9,7 +9,7 @@ import GraphicsCarousel from '../features/GraphicsCarousel';
 
 function Landing({ }) {
   return (
-    <Page color='dark'>
+    <Page id='home-page' color='dark'>
       <Page.Header>
         <GlassNav>
           <GlassNav.Pre sidebar={true}></GlassNav.Pre>
@@ -17,7 +17,7 @@ function Landing({ }) {
           <GlassNav.Menu>
             <GlassNav.Menu.Item>About</GlassNav.Menu.Item>
             <GlassNav.Menu.Item>Projects</GlassNav.Menu.Item>
-            <GlassNav.Menu.Item>Photography</GlassNav.Menu.Item>
+            <GlassNav.Menu.Item link={'photography'}>Photography</GlassNav.Menu.Item>
             <GlassNav.Menu.Item>Art</GlassNav.Menu.Item>
             {/* <GlassNav.Menu.Item>Adventures</GlassNav.Menu.Item> */}
           </GlassNav.Menu>

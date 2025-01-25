@@ -67,7 +67,7 @@ const NavMenuWrapper = styled.div`
     cursor: pointer;
 
     &:hover {
-      color: ${(props) => (props['data-color'] ? 'var(--fg-dark-link)' : 'var(--fg-light-link)')};
+      color: ${(props) => (props['data-color'] === 'dark' ? 'var(--fg-dark-link)' : 'var(--fg-light-link)')};
     }
 
     @media only screen and (max-width: 833px) {
@@ -132,7 +132,7 @@ const GlassNavItem = ({ children, color, isOpen, link }) => {
    * Fires an event to close the nav.
    */
   const triggerNavClose = () => window.dispatchEvent(new Event('glass nav close'));
-
+  console.log('@navitem color', color);
   return (
     <li className='nav-menu-item' data-open={isOpen} color={color}>
       <Link to={`/${link}`} onClick={() => triggerNavClose()}>{children}</Link>

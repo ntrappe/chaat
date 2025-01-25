@@ -50,7 +50,7 @@ const NavTitleWrapper = styled.h2`
  * @param {string} props.link - Link for the site (e.g., '/'). 
  * @returns {JSX.Element} The rendered GlassNavMenu component.
  */
-function GlassNavTitle({ children, color, link='/' }) {
+function GlassNavTitle({ children, color, link='' }) {
   /**
    * Fires an event to close the nav.
    */
@@ -58,7 +58,7 @@ function GlassNavTitle({ children, color, link='/' }) {
 
   return (
     <NavTitleWrapper className='nav-title' color={color}>
-      <Link to={`${link}`} onClick={() => triggerNavClose()}>{children}</Link>
+      <Link to={`/${link}`} onClick={() => triggerNavClose()}>{children}</Link>
     </NavTitleWrapper>
   )
 }
